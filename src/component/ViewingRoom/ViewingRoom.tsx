@@ -57,7 +57,7 @@ export default function ViewingRoom({ src, brightness = 1 }: { src: string, brig
             <img
               src={src}
               alt="ViewingRoomImage"
-              style={{ width: size[0], height: size[1], filter: `brightness(${brightness * 0.7})` }}
+              style={{ width: size[0], height: size[1], filter: `brightness(${brightness * 0.8})` }}
               className="image"
             />
           </div>

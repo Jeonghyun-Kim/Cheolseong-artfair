@@ -19,8 +19,15 @@ export default function App({ idx }: { idx?: number }) {
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    console.log(list[0]);
+    const storedIndex = sessionStorage.getItem('INDEX');
+    if (storedIndex) {
+      setIndex(Number(storedIndex));
+    }
   }, []);
+
+  React.useEffect(() => {
+    sessionStorage.setItem('INDEX', String(index));
+  }, [index]);
 
   const handleLeft = () => {
     if (index !== MIN_INDEX) {

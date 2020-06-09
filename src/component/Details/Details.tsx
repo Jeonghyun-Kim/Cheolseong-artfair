@@ -63,7 +63,7 @@ export default function Details({ idx }: { idx: number }) {
         <Button size="small" color="primary">
           Share
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" href="https://forms.gle/NLBHc8GgPDwZrPwK7" target="_blank">
           Contact
         </Button>
       </CardActions>
