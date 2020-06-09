@@ -14,7 +14,7 @@ export default function AppRouter() {
     <Router>
       <Switch>
         <Route path='/comments' component={CommentScreen} />
-        <Route path='/viewing-room/:id' component={ViewingRoomScreen} />
+        {/* <Route path='/viewing-room/:id' component={ViewingRoomScreen} /> */}
         <Route path='/viewing-room' component={ViewingRoomScreen} />
         <Route path='*'>
           <Redirect to='/viewing-room' />

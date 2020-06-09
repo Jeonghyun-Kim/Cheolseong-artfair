@@ -27,15 +27,12 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
 
 
   React.useEffect(() => {
-    let storedIndex: string | null = null;
-    if (match?.params.id === undefined) {
-      storedIndex = sessionStorage.getItem('INDEX');
-      if (storedIndex) {
-        setIndex(Number(storedIndex));
-      }
+    const storedIndex = sessionStorage.getItem('INDEX');
+    if (storedIndex) {
+      setIndex(Number(storedIndex));
     }
     setLoading(false);
-  }, [match]);
+  }, []);
 
   const handleLeft = () => {
     if (index !== MIN_INDEX) {
