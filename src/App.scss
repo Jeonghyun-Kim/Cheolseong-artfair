@@ -1,4 +1,5 @@
 $delay: 0.7s ease !global;
+$iconColor: azure !global;
 
 .App {
   height: 100%;
@@ -24,5 +25,19 @@ $delay: 0.7s ease !global;
   position: absolute;
   right: 30px;
   bottom: 30px;
-  color: azure;
+  color: $iconColor;
+}
+
+#arrowLeft {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+#arrowRight {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
 }

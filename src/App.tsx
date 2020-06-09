@@ -6,7 +6,6 @@ import IconButton from '@material-ui/core/IconButton';
 
 import './App.scss';
 
-import useWindowSize from './component/useWindowSize';
 import ViewingRoom from './component/ViewingRoom/ViewingRoom';
 import Details from './component/Details/Details';
 
@@ -16,7 +15,7 @@ const MIN_INDEX = 0;
 const MAX_INDEX = 193;
 
 export default function App() {
-  const [index, setIndex] = React.useState<number>(MIN_INDEX + 1);
+  const [index, setIndex] = React.useState<number>(MIN_INDEX);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
 
   React.useEffect(() => {
@@ -53,6 +52,12 @@ export default function App() {
       >
         <Details idx={index} />
       </div>
+      <IconButton id="arrowLeft" onClick={handleLeft} disabled={index === MIN_INDEX} style={{ color: index === MIN_INDEX ? '#444' : 'azure' }}>
+        <ArrowBackIosIcon fontSize="large" />
+      </IconButton>
+      <IconButton id="arrowRight" onClick={handleRight} disabled={index === MAX_INDEX} style={{ color: index === MAX_INDEX ? '#444' : 'azure' }}>
+        <ArrowForwardIosIcon fontSize="large" />
+      </IconButton>
       <IconButton id="moreIcon" onClick={toggleDetail}>
         <AssignmentIcon fontSize="large" />
       </IconButton>
