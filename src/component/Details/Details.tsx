@@ -4,6 +4,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 import './Details.scss';
 import list from '../../filenames';
@@ -20,6 +22,7 @@ interface Information {
 
 export default function Details({ idx }: { idx: number }) {
   const [isSmall, setSmall] = React.useState<boolean>(false);
+  const [alert, setAlert] = React.useState<string | null>(null);
   const [innerWidth, innerHeight] = useWindowSize();
 
   React.useEffect(() => {
@@ -28,6 +31,11 @@ export default function Details({ idx }: { idx: number }) {
 
   const information: Information = informations[idx];
   const fileName = list[idx];
+
+  const handleAlert = () => {
+    setAlert('주소가 클립보드에 복사되었습니다.');
+    setTimeout(() => setAlert(null), 3000);
+  };
 
   return (
     <Card className="cardRoot" style={{ width: Math.min(innerWidth * 3 / 4, 520), top: isSmall ? 'calc(50% - 35px)' : '50%' }}>
@@ -49,20 +57,36 @@ export default function Details({ idx }: { idx: number }) {
         <Typography align="right" variant="body2" color="textSecondary" component="p">
           Oil on Canvas
         </Typography>
-        <Typography align="right" variant="body1" color="textSecondary" component="p" id="price">
-          {information.price === 'sold out'
-            ? (
-              'SOLD OUT'
-            ) : (
-              `${information.price} 만원`
-            )}
-        </Typography>
+        <Grid container justify="space-between">
+          <Grid item xs>
+            <Typography align="center" variant="body1" color="textSecondary" component="p">
+              {alert && (
+                alert
+              )}
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="body1" color="textSecondary" component="p" id="price">
+              {information.price === 'sold out'
+                ? (
+                  'SOLD OUT'
+                ) : (
+                  `${information.price} 만원`
+                )}
+            </Typography>
+          </Grid>
+        </Grid>
       </CardContent>
       <CardActions>
         <div className="grow" />
-        <Button size="small" color="primary">
-          Share
-        </Button>
+        <CopyToClipboard
+          text={`https://kay.airygall.com/viewing-room/${idx}`}
+          onCopy={handleAlert}
+        >
+          <Button size="small" color="primary">
+            Share
+          </Button>
+        </CopyToClipboard>
         <Button size="small" color="primary" href="https://forms.gle/NLBHc8GgPDwZrPwK7" target="_blank">
           Contact
         </Button>
