@@ -4,28 +4,38 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import IconButton from '@material-ui/core/IconButton';
 
-import './App.scss';
+import './ViewingRoomScreen.scss';
 
-import ViewingRoom from './component/ViewingRoom/ViewingRoom';
-import Details from './component/Details/Details';
+import ViewingRoom from './ViewingRoom/ViewingRoom';
+import Details from './Details/Details';
 
-import list from './filenames';
+import list from '../filenames';
 
 const MIN_INDEX = 0;
 const MAX_INDEX = 193;
 
-export default function App({ idx }: { idx?: number }) {
-  const [index, setIndex] = React.useState<number>(idx || MIN_INDEX);
+interface Match {
+  params: {
+    id: number;
+  };
+}
+
+export default function ViewingRoomScreen({ match }: { match?: Match }) {
+  const [index, setIndex] = React.useState<number>(match?.params.id || MIN_INDEX);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [isLoading, setLoading] = React.useState<boolean>(true);
 
+
   React.useEffect(() => {
-    const storedIndex = sessionStorage.getItem('INDEX');
-    if (storedIndex) {
-      setIndex(Number(storedIndex));
-      setLoading(false);
+    let storedIndex: string | null = null;
+    if (match?.params.id === undefined) {
+      storedIndex = sessionStorage.getItem('INDEX');
+      if (storedIndex) {
+        setIndex(Number(storedIndex));
+      }
     }
-  }, []);
+    setLoading(false);
+  }, [match]);
 
   const handleLeft = () => {
     if (index !== MIN_INDEX) {
