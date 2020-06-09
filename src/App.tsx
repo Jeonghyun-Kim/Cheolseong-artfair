@@ -17,26 +17,26 @@ const MAX_INDEX = 193;
 export default function App({ idx }: { idx?: number }) {
   const [index, setIndex] = React.useState<number>(idx || MIN_INDEX);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
+  const [isLoading, setLoading] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     const storedIndex = sessionStorage.getItem('INDEX');
     if (storedIndex) {
       setIndex(Number(storedIndex));
+      setLoading(false);
     }
   }, []);
 
-  React.useEffect(() => {
-    sessionStorage.setItem('INDEX', String(index));
-  }, [index]);
-
   const handleLeft = () => {
     if (index !== MIN_INDEX) {
+      sessionStorage.setItem('INDEX', String(index - 1));
       setIndex(index - 1);
     }
   };
 
   const handleRight = () => {
     if (index !== MAX_INDEX) {
+      sessionStorage.setItem('INDEX', String(index + 1));
       setIndex(index + 1);
     }
   };
@@ -45,14 +45,23 @@ export default function App({ idx }: { idx?: number }) {
     setOnDetail(!onDetail);
   }
 
+  const turnOffDetail = () => {
+    if (onDetail) {
+      setOnDetail(false);
+    }
+  }
+
   return (
     <div className="App">
-      <div
-        style={{ filter: `brightness(${onDetail ? 0.8 : 1}) blur(${onDetail ? 10 : 0}px)` }}
-        className="viewingRoom"
-      >
-        <ViewingRoom src={`${process.env.PUBLIC_URL}/images/${list[index]}.jpg`} />
-      </div>
+      {!isLoading && (
+        <div
+          style={{ filter: `brightness(${onDetail ? 0.8 : 1}) blur(${onDetail ? 10 : 0}px)` }}
+          className="viewingRoom"
+          onClick={turnOffDetail}
+        >
+          <ViewingRoom src={`${process.env.PUBLIC_URL}/images/${list[index]}.jpg`} />
+        </div>
+      )}
       <div
         style={{ opacity: onDetail ? 1 : 0 }}
         className="detailScreen"
