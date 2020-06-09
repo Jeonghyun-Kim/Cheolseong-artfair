@@ -1,5 +1,28 @@
+$delay: 0.7s ease !global;
+
 .App {
   height: 100%;
   max-width: 1600px;
   margin: 0 auto;
+  position: relative;
+}
+
+.viewingRoom {
+  width: 100%;
+  height: 100%;
+  transition: $delay;
+  z-index: 0;
+}
+
+.detailScreen {
+  max-width: 520px;
+  transition: $delay;
+  z-index: 100;
+}
+
+#moreIcon {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  color: azure;
 }

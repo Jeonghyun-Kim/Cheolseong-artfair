@@ -3,23 +3,13 @@ import Grid from '@material-ui/core/Grid';
 
 import './ViewingRoom.scss';
 
-const useWindowSize = () => {
-  const [size, setSize] = React.useState([0, 0]);
-  React.useLayoutEffect(() => {
-    const updateSize = () => {
-      setSize([window.innerWidth, window.innerHeight]);
-    };
-    window.addEventListener('resize', updateSize);
-    updateSize();
-    return () => window.removeEventListener('resize', updateSize);
-  }, []);
-  return size;
-};
+import useWindowSize from '../useWindowSize';
 
 export default function ViewingRoom({ src, brightness = 1 }: { src: string, brightness?: number }) {
   const [imgDimension, setImgDimension] = React.useState<number[]>([]);
   const [size, setSize] = React.useState<number[]>([0, 0]);
   const [containerDimension, setContainerDimension] = React.useState<number[]>([]);
+  
   const [innerWidth, innerHeight] = useWindowSize();
 
   React.useEffect(() => {

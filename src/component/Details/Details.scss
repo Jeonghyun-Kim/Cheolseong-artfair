@@ -1,0 +1,21 @@
+.cardRoot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  max-width: 520px;
+}
+
+.cardImage {
+  width: 100%;
+  max-width: 100%;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+#price {
+  margin-top: 5px
+}
