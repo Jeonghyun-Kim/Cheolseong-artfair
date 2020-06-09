@@ -1,15 +1,23 @@
 .cardRoot {
   position: absolute;
-  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
   max-width: 520px;
 }
 
+.imgBackgroud {
+  background-color: #eee;
+  // background-color: white;
+  // background-blend-mode: darken;
+}
+
 .cardImage {
-  width: 100%;
+  display: block;
   max-width: 100%;
+  margin: 0 auto;
+  border: #ddd solid;
+  border-width: 0 1px 1px 1px;
 }
 
 .grow {

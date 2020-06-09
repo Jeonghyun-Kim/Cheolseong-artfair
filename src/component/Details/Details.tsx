@@ -9,6 +9,10 @@ import './Details.scss';
 import list from '../../filenames';
 import informations from './info.json';
 
+import useWindowSize from '../useWindowSize';
+
+import ViewingRoom from '../ViewingRoom/ViewingRoom';
+
 interface Information {
   id: number;
   year: number;
@@ -16,17 +20,27 @@ interface Information {
   size: string;
 }
 
-export default function Details({ idx, width }: { idx: number, width: number }) {
+export default function Details({ idx }: { idx: number }) {
+  const [isSmall, setSmall] = React.useState<boolean>(false);
+  const [innerWidth, innerHeight] = useWindowSize();
+
+  React.useEffect(() => {
+    setSmall(innerWidth < 600);
+  }, [innerWidth]);
+
   const information: Information = informations[idx];
   const fileName = list[idx];
 
   return (
-    <Card className="cardRoot" style={{ width: width }}>
-      <img
-        alt={`Decorum ${information.year} - ${information.id}`}
-        src={`${process.env.PUBLIC_URL}/images/${fileName}.jpg`}
-        className="cardImage"
-      />
+    <Card className="cardRoot" style={{ width: Math.min(innerWidth * 3 / 4, 520), top: isSmall ? 'calc(50% - 35px)' : '50%' }}>
+      <div className="imgBackgroud">
+        <img
+          alt={`Decorum ${information.year} - ${information.id}`}
+          src={`${process.env.PUBLIC_URL}/images/${fileName}.jpg`}
+          className="cardImage"
+          style={{ maxHeight: isSmall ? innerHeight - 300 : innerHeight - 370 }}
+        />
+      </div>
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
           Decorum {information.year} - {information.id}

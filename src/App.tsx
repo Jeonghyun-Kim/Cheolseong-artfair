@@ -19,8 +19,6 @@ export default function App() {
   const [index, setIndex] = React.useState<number>(MIN_INDEX + 1);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
 
-  const [innerWidth] = useWindowSize();
-
   React.useEffect(() => {
     console.log(list[0]);
   }, []);
@@ -53,7 +51,7 @@ export default function App() {
         style={{ opacity: onDetail ? 1 : 0 }}
         className="detailScreen"
       >
-        <Details idx={index} width={Math.min(innerWidth * 3 / 4, 520)} />
+        <Details idx={index} />
       </div>
       <IconButton id="moreIcon" onClick={toggleDetail}>
         <AssignmentIcon fontSize="large" />
