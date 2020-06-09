@@ -14,8 +14,8 @@ import list from './filenames';
 const MIN_INDEX = 0;
 const MAX_INDEX = 193;
 
-export default function App() {
-  const [index, setIndex] = React.useState<number>(MIN_INDEX);
+export default function App({ idx }: { idx?: number }) {
+  const [index, setIndex] = React.useState<number>(idx || MIN_INDEX);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
 
   React.useEffect(() => {

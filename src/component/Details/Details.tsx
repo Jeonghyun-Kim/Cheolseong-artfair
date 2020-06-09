@@ -11,8 +11,6 @@ import informations from './info.json';
 
 import useWindowSize from '../useWindowSize';
 
-import ViewingRoom from '../ViewingRoom/ViewingRoom';
-
 interface Information {
   id: number;
   year: number;
