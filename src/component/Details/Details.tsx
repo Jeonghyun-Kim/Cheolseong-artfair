@@ -13,6 +13,8 @@ import informations from './info.json';
 
 import useWindowSize from '../useWindowSize';
 
+const STORAGE_URL = 'https://d3jjllifozvlym.cloudfront.net';
+
 interface Information {
   id: number;
   year: number;
@@ -38,11 +40,11 @@ export default function Details({ idx }: { idx: number }) {
   };
 
   return (
-    <Card className="cardRoot" style={{ width: Math.min(innerWidth * 3 / 4, 520), top: isSmall ? 'calc(50% - 35px)' : '50%' }}>
+    <Card className="cardRoot" style={{ width: Math.min(innerWidth * (3 / 4), 520), top: isSmall ? 'calc(50% - 35px)' : '50%' }}>
       <div className="imgBackgroud">
         <img
           alt={`Decorum ${information.year} - ${information.id}`}
-          src={`${process.env.PUBLIC_URL}/images/${fileName}.jpg`}
+          src={`${STORAGE_URL}/${fileName}.jpg`}
           className="cardImage"
           style={{ maxHeight: isSmall ? innerHeight - 300 : innerHeight - 370 }}
         />

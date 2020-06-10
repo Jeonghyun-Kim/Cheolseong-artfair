@@ -32,6 +32,9 @@
     ],
     "parserOptions": {
       "project": "./tsconfig.json"
+    },
+    "rules": {
+      "react/jsx-one-expression-per-line": 0
     }
   },
   "browserslist": {
