@@ -1,0 +1,45 @@
+$delay: 0.7s ease !global;
+$iconColor: azure !global;
+
+.Root {
+  height: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.welcomeGuide {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: whitesmoke;
+}
+
+.viewingRoom {
+  width: 100%;
+  height: 100%;
+  transition: $delay;
+  z-index: 0;
+}
+
+#moreIcon {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  color: $iconColor;
+}
+
+#arrowLeft {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+#arrowRight {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
