@@ -3,6 +3,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import IconButton from '@material-ui/core/IconButton';
+import { useHistory, RouteComponentProps } from 'react-router-dom';
 
 import './ViewingRoomScreen.scss';
 
@@ -16,34 +17,27 @@ const STORAGE_URL_SM = 'https://d1mqeykb8ywbm3.cloudfront.net';
 const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
 
 const MIN_INDEX = 0;
-const MAX_INDEX = 193;
+const MAX_INDEX = 199;
 
-interface Match {
-  params: {
-    id: number;
-  };
+interface ViewingRoomProps extends RouteComponentProps<{ idx: string }> {
 }
 
-export default function ViewingRoomScreen({ match }: { match?: Match }) {
-  const [index, setIndex] = React.useState<number>(match?.params.id || MIN_INDEX);
+export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
+  const [index, setIndex] = React.useState<number>(MIN_INDEX);
   const [imgSrc, setImgSrc] = React.useState<string | null>(null);
   const [loaded, setLoaded] = React.useState<number[]>([]);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [isLoading, setLoading] = React.useState<boolean>(true);
 
+  const history = useHistory();
+
+  React.useEffect(() => {
+    setIndex(Number(match.params.idx));
+  }, [match.params.idx, setIndex]);
+
   const preLoad = React.useCallback((idx: number) => {
     if (imgSrc) {
       const batchSize = 2;
-      // switch (imgSrc) {
-      //   case STORAGE_URL_SM:
-      //     batchSize = 4;
-      //     break;
-      //   case STORAGE_URL_XS:
-      //     batchSize = 8;
-      //     break;
-      //   default:
-      //     break;
-      // }
       for (let k = Math.max(MIN_INDEX, idx - batchSize);
         k <= Math.min(MAX_INDEX, idx + batchSize);
         k += 1) {
@@ -65,13 +59,6 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
   });
 
   React.useEffect(() => {
-    const storedIndex = sessionStorage.getItem('INDEX');
-    if (storedIndex) {
-      setIndex(Number(storedIndex));
-    }
-  }, []);
-
-  React.useEffect(() => {
     if (window.innerWidth > 960) {
       setImgSrc(STORAGE_URL_MD);
     } else if (window.innerWidth > 600) {
@@ -85,17 +72,15 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
 
   const handleLeft = React.useCallback(() => {
     if (index !== MIN_INDEX) {
-      sessionStorage.setItem('INDEX', String(index - 1));
-      setIndex(index - 1);
+      history.push(`/viewing-room/${index - 1}`);
     }
-  }, [index]);
+  }, [index, history]);
 
   const handleRight = React.useCallback(() => {
     if (index !== MAX_INDEX) {
-      sessionStorage.setItem('INDEX', String(index + 1));
-      setIndex(index + 1);
+      history.push(`/viewing-room/${index + 1}`);
     }
-  }, [index]);
+  }, [index, history]);
 
   const toggleDetail = () => {
     setOnDetail(!onDetail);
