@@ -61,7 +61,7 @@ export default function Details({ idx }: { idx: number }) {
         </Typography>
         <Grid container justify="space-between">
           <Grid item xs>
-            <Typography align="center" variant="body1" color="textSecondary" component="p">
+            <Typography variant="body1" color="textSecondary" component="p">
               {alert && (
                 alert
               )}
