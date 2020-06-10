@@ -27,16 +27,6 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [isLoading, setLoading] = React.useState<boolean>(true);
 
-  React.useEffect(() => {
-    const prevImage = new Image();
-    const currentImage = new Image();
-    const nextImage = new Image();
-
-    prevImage.src = `${STORAGE_URL}/${list[index !== MIN_INDEX ? index - 1 : MIN_INDEX]}.jpg`;
-    currentImage.src = `${STORAGE_URL}/${list[index]}.jpg`;
-    nextImage.src = `${STORAGE_URL}/${list[index !== MAX_INDEX ? index + 1 : MAX_INDEX]}.jpg`;
-  }, [index]);
-
   const ref = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
@@ -52,6 +42,16 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
     }
     setLoading(false);
   }, []);
+
+  React.useEffect(() => {
+    const prevImage = new Image();
+    const currentImage = new Image();
+    const nextImage = new Image();
+
+    prevImage.src = `${STORAGE_URL}/${list[index !== MIN_INDEX ? index - 1 : MIN_INDEX]}.jpg`;
+    currentImage.src = `${STORAGE_URL}/${list[index]}.jpg`;
+    nextImage.src = `${STORAGE_URL}/${list[index !== MAX_INDEX ? index + 1 : MAX_INDEX]}.jpg`;
+  }, [index]);
 
   const handleLeft = React.useCallback(() => {
     if (index !== MIN_INDEX) {
