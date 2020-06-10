@@ -26,9 +26,35 @@ interface Match {
 
 export default function ViewingRoomScreen({ match }: { match?: Match }) {
   const [index, setIndex] = React.useState<number>(match?.params.id || MIN_INDEX);
-  const [imgSrc, setImgSrc] = React.useState<string>('');
+  const [imgSrc, setImgSrc] = React.useState<string | null>(null);
+  const [loaded, setLoaded] = React.useState<number[]>([]);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [isLoading, setLoading] = React.useState<boolean>(true);
+
+  const preLoad = React.useCallback((idx: number) => {
+    if (imgSrc) {
+      let batchSize = 2;
+      switch (imgSrc) {
+        case STORAGE_URL_SM:
+          batchSize = 4;
+          break;
+        case STORAGE_URL_XS:
+          batchSize = 8;
+          break;
+        default:
+          break;
+      }
+      for (let k = Math.max(MIN_INDEX, idx - batchSize);
+        k <= Math.min(MAX_INDEX, idx + batchSize);
+        k += 1) {
+        if (!loaded.includes(k)) {
+          const img = new Image();
+          img.src = `${imgSrc}/${list[k]}.jpg`;
+          setLoaded((oldArray) => [...oldArray, k]);
+        }
+      }
+    }
+  }, [imgSrc, loaded]);
 
   const ref = React.useRef<HTMLDivElement | null>(null);
 
@@ -48,13 +74,14 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
 
   React.useEffect(() => {
     if (window.innerWidth > 960) {
-      setImgSrc(`${STORAGE_URL_MD}/${list[index]}.jpg`);
+      setImgSrc(STORAGE_URL_MD);
     } else if (window.innerWidth > 600) {
-      setImgSrc(`${STORAGE_URL_SM}/${list[index]}.jpg`);
+      setImgSrc(STORAGE_URL_SM);
     } else {
-      setImgSrc(`${STORAGE_URL_XS}/${list[index]}.jpg`);
+      setImgSrc(STORAGE_URL_XS);
     }
-  }, [index]);
+    preLoad(index);
+  }, [index, preLoad]);
 
   const handleLeft = React.useCallback(() => {
     if (index !== MIN_INDEX) {
@@ -111,14 +138,14 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
           onClick={turnOffDetail}
           onKeyDown={handleKeydown}
         >
-          <ViewingRoom src={imgSrc} brightness={0.9} />
+          <ViewingRoom src={`${imgSrc}/${list[index]}.jpg`} brightness={0.9} />
         </div>
       )}
       <div
         style={{ opacity: onDetail ? 1 : 0 }}
         className="detailScreen"
       >
-        <Details idx={index} src={imgSrc} />
+        <Details idx={index} src={`${imgSrc}/${list[index]}.jpg`} />
       </div>
       <IconButton id="arrowLeft" onClick={handleLeft} disabled={index === MIN_INDEX} style={{ color: index === MIN_INDEX ? '#444' : 'azure' }}>
         <ArrowBackIosIcon fontSize="large" />

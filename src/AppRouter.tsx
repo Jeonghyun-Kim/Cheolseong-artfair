@@ -13,11 +13,11 @@ export default function AppRouter() {
   return (
     <Router>
       <Switch>
-        <Route path='/comments' component={CommentScreen} />
+        <Route path="/comments" component={CommentScreen} />
         {/* <Route path='/viewing-room/:id' component={ViewingRoomScreen} /> */}
-        <Route path='/viewing-room' component={ViewingRoomScreen} />
-        <Route path='*'>
-          <Redirect to='/viewing-room' />
+        <Route path="/viewing-room" component={ViewingRoomScreen} />
+        <Route path="*">
+          <Redirect to="/viewing-room" />
         </Route>
       </Switch>
     </Router>
