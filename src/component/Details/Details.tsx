@@ -8,14 +8,9 @@ import Grid from '@material-ui/core/Grid';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 import './Details.scss';
-import list from '../../filenames';
 import informations from './info.json';
 
 import useWindowSize from '../useWindowSize';
-
-const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
-const STORAGE_URL_SM = 'https://d1mqeykb8ywbm3.cloudfront.net';
-const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
 
 interface Information {
   id: number;
@@ -24,7 +19,7 @@ interface Information {
   size: string;
 }
 
-export default function Details({ idx }: { idx: number }) {
+export default function Details({ idx, src }: { idx: number, src: string }) {
   const [isSmall, setSmall] = React.useState<boolean>(false);
   const [alert, setAlert] = React.useState<string | null>(null);
   const [innerWidth, innerHeight] = useWindowSize();
@@ -34,7 +29,6 @@ export default function Details({ idx }: { idx: number }) {
   }, [innerWidth]);
 
   const information: Information = informations[idx];
-  const fileName = list[idx];
 
   const handleAlert = () => {
     setAlert('주소가 클립보드에 복사되었습니다.');
@@ -46,7 +40,7 @@ export default function Details({ idx }: { idx: number }) {
       <div className="imgBackgroud">
         <img
           alt={`Decorum ${information.year} - ${information.id}`}
-          src={`${STORAGE_URL_MD}/${fileName}.jpg`}
+          src={src}
           className="cardImage"
           style={{ maxHeight: isSmall ? innerHeight - 300 : innerHeight - 370 }}
         />

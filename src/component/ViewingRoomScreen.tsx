@@ -26,6 +26,7 @@ interface Match {
 
 export default function ViewingRoomScreen({ match }: { match?: Match }) {
   const [index, setIndex] = React.useState<number>(match?.params.id || MIN_INDEX);
+  const [imgSrc, setImgSrc] = React.useState<string>('');
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [isLoading, setLoading] = React.useState<boolean>(true);
 
@@ -44,6 +45,16 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
     }
     setLoading(false);
   }, []);
+
+  React.useEffect(() => {
+    if (window.innerWidth > 960) {
+      setImgSrc(`${STORAGE_URL_MD}/${list[index]}.jpg`);
+    } else if (window.innerWidth > 600) {
+      setImgSrc(`${STORAGE_URL_SM}/${list[index]}.jpg`);
+    } else {
+      setImgSrc(`${STORAGE_URL_XS}/${list[index]}.jpg`);
+    }
+  }, [index]);
 
   const handleLeft = React.useCallback(() => {
     if (index !== MIN_INDEX) {
@@ -100,14 +111,14 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
           onClick={turnOffDetail}
           onKeyDown={handleKeydown}
         >
-          <ViewingRoom src={`${STORAGE_URL_MD}/${list[index]}.jpg`} brightness={0.9} />
+          <ViewingRoom src={imgSrc} brightness={0.9} />
         </div>
       )}
       <div
         style={{ opacity: onDetail ? 1 : 0 }}
         className="detailScreen"
       >
-        <Details idx={index} />
+        <Details idx={index} src={imgSrc} />
       </div>
       <IconButton id="arrowLeft" onClick={handleLeft} disabled={index === MIN_INDEX} style={{ color: index === MIN_INDEX ? '#444' : 'azure' }}>
         <ArrowBackIosIcon fontSize="large" />
