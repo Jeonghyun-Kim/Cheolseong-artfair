@@ -6,8 +6,8 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import CommentScreen from './component/CommentScreen';
-import ViewingRoomScreen from './component/ViewingRoomScreen';
+import CommentScreen from './component/CommentScreen/CommentScreen';
+import ViewingRoomScreen from './component/ViewingRoomScreen/ViewingRoomScreen';
 
 export default function AppRouter() {
   return (

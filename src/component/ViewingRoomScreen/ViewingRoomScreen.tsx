@@ -7,10 +7,10 @@ import { useHistory, RouteComponentProps } from 'react-router-dom';
 
 import './ViewingRoomScreen.scss';
 
-import ViewingRoom from './ViewingRoom/ViewingRoom';
-import Details from './Details/Details';
+import ViewingRoom from '../ViewingRoom/ViewingRoom';
+import Details from '../Details/Details';
 
-import list from '../filenames';
+import list from '../../filenames';
 
 const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
 const STORAGE_URL_SM = 'https://d1mqeykb8ywbm3.cloudfront.net';
