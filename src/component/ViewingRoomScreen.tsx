@@ -25,6 +25,14 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [isLoading, setLoading] = React.useState<boolean>(true);
 
+  const ref = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    if (ref.current) {
+      ref.current.focus();
+    }
+  });
+
   React.useEffect(() => {
     const storedIndex = sessionStorage.getItem('INDEX');
     if (storedIndex) {
@@ -57,13 +65,33 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
     }
   };
 
+  const handleKeydown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    switch (event.keyCode) {
+      case 27:
+        turnOffDetail();
+        break;
+      case 37:
+        handleLeft();
+        break;
+      case 39:
+        handleRight();
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="App">
       {!isLoading && (
         <div
+          ref={ref}
+          tabIndex={0}
+          role="button"
           style={{ filter: `brightness(${onDetail ? 0.8 : 1}) blur(${onDetail ? 10 : 0}px)` }}
           className="viewingRoom"
           onClick={turnOffDetail}
+          onKeyDown={handleKeydown}
         >
           <ViewingRoom src={`${process.env.PUBLIC_URL}/images/${list[index]}.jpg`} brightness={0.8} />
         </div>
