@@ -14,7 +14,6 @@ export default function ViewingRoom({ src, brightness = 1 }: { src: string, brig
   const [innerWidth, innerHeight] = useWindowSize();
 
   React.useEffect(() => {
-    setLoading(true);
     const img = new Image();
     img.onload = () => {
       setImgDimension([img.width, img.height, img.width / img.height]);

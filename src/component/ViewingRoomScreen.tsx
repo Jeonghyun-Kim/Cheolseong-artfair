@@ -33,17 +33,17 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
 
   const preLoad = React.useCallback((idx: number) => {
     if (imgSrc) {
-      let batchSize = 2;
-      switch (imgSrc) {
-        case STORAGE_URL_SM:
-          batchSize = 4;
-          break;
-        case STORAGE_URL_XS:
-          batchSize = 8;
-          break;
-        default:
-          break;
-      }
+      const batchSize = 2;
+      // switch (imgSrc) {
+      //   case STORAGE_URL_SM:
+      //     batchSize = 4;
+      //     break;
+      //   case STORAGE_URL_XS:
+      //     batchSize = 8;
+      //     break;
+      //   default:
+      //     break;
+      // }
       for (let k = Math.max(MIN_INDEX, idx - batchSize);
         k <= Math.min(MAX_INDEX, idx + batchSize);
         k += 1) {
