@@ -45,11 +45,11 @@ export default function ViewingRoom({ src, brightness = 1 }: { src: string, brig
         <Grid item className="heightGrid" />
         <Grid container item xs className="widthContainer">
           <div className="imageContainer">
-            {imgDimension[2] > 1
+            {imgDimension[2] > 1.5
               ? (
                 <>
-                  <img src={`${process.env.PUBLIC_URL}/lantern.png`} alt="lantern" className="lantern" style={{ height: size[1], left: 0, transform: 'translate(0%, -50%)' }} />
-                  <img src={`${process.env.PUBLIC_URL}/lantern.png`} alt="lantern" className="lantern" style={{ height: size[1], right: 0, transform: 'translate(0%, -50%)' }} />
+                  <img src={`${process.env.PUBLIC_URL}/lantern.png`} alt="lantern" className="lantern" style={{ height: size[1], left: '20%', transform: 'translate(0%, -50%)' }} />
+                  <img src={`${process.env.PUBLIC_URL}/lantern.png`} alt="lantern" className="lantern" style={{ height: size[1], right: '20%', transform: 'translate(0%, -50%)' }} />
                 </>
               ) : (
                 <img src={`${process.env.PUBLIC_URL}/lantern.png`} alt="lantern" className="lantern" style={{ height: size[1], left: '50%', transform: 'translate(-50%, -50%)' }} />

@@ -70,6 +70,9 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
       case 27:
         turnOffDetail();
         break;
+      case 32:
+        toggleDetail();
+        break;
       case 37:
         handleLeft();
         break;
