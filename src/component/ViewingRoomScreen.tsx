@@ -25,7 +25,6 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [isLoading, setLoading] = React.useState<boolean>(true);
 
-
   React.useEffect(() => {
     const storedIndex = sessionStorage.getItem('INDEX');
     if (storedIndex) {
@@ -34,29 +33,29 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
     setLoading(false);
   }, []);
 
-  const handleLeft = () => {
+  const handleLeft = React.useCallback(() => {
     if (index !== MIN_INDEX) {
       sessionStorage.setItem('INDEX', String(index - 1));
       setIndex(index - 1);
     }
-  };
+  }, [index]);
 
-  const handleRight = () => {
+  const handleRight = React.useCallback(() => {
     if (index !== MAX_INDEX) {
       sessionStorage.setItem('INDEX', String(index + 1));
       setIndex(index + 1);
     }
-  };
+  }, [index]);
 
   const toggleDetail = () => {
     setOnDetail(!onDetail);
-  }
+  };
 
   const turnOffDetail = () => {
     if (onDetail) {
       setOnDetail(false);
     }
-  }
+  };
 
   return (
     <div className="App">
@@ -66,7 +65,7 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
           className="viewingRoom"
           onClick={turnOffDetail}
         >
-          <ViewingRoom src={`${process.env.PUBLIC_URL}/images/${list[index]}.jpg`} />
+          <ViewingRoom src={`${process.env.PUBLIC_URL}/images/${list[index]}.jpg`} brightness={0.8} />
         </div>
       )}
       <div
