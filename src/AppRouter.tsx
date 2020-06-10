@@ -15,9 +15,8 @@ export default function AppRouter() {
       <Switch>
         <Route path="/comments" component={CommentScreen} />
         <Route path="/viewing-room/:idx" component={ViewingRoomScreen} />
-        <Route path="/viewing-room" component={ViewingRoomScreen} />
         <Route path="*">
-          <Redirect to="/viewing-room" />
+          <Redirect to="/viewing-room/0" />
         </Route>
       </Switch>
     </Router>
