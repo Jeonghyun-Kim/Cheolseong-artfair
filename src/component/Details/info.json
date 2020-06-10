@@ -153,7 +153,7 @@
     "price": 300,
     "year": 2007,
     "id": 16,
-    "size": ""
+    "size": "53x65.1cm"
   },
   {
     "price": 450,
@@ -1086,22 +1086,22 @@
     "size": "80x116.7cm"
   },
   {
-    "price": "sold out",
-    "year": 2019,
-    "id": 1,
-    "size": "30x30cm"
-  },
-  {
     "price": 500,
     "year": 2019,
-    "id": 2,
+    "id": 1,
     "size": "72.7x116.7cm"
   },
   {
-    "price": 300,
+    "price": 250,
+    "year": 2019,
+    "id": 2,
+    "size": "50x65cm"
+  },
+  {
+    "price": 240,
     "year": 2019,
     "id": 3,
-    "size": "53x72.7cm"
+    "size": "33.3x83cm"
   },
   {
     "price": 500,
@@ -1110,57 +1110,57 @@
     "size": "80x116.7cm"
   },
   {
-    "price": 500,
-    "year": 2019,
-    "id": 5,
-    "size": "72.7x116.7cm"
-  },
-  {
     "price": 300,
     "year": 2019,
-    "id": 6,
-    "size": "50x72.7cm"
-  },
-  {
-    "price": 250,
-    "year": 2019,
-    "id": 7,
-    "size": "50x65cm"
-  },
-  {
-    "price": 240,
-    "year": 2019,
-    "id": 10,
-    "size": "33.3x83cm"
+    "id": 5,
+    "size": "53x72.7cm"
   },
   {
     "price": "sold out",
     "year": 2019,
+    "id": 6,
+    "size": "40x40cm"
+  },
+  {
+    "price": "sold out",
+    "year": 2019,
+    "id": 7,
+    "size": "30x30cm"
+  },
+  {
+    "price": 300,
+    "year": 2019,
+    "id": 8,
+    "size": "50x72.7cm"
+  },
+  {
+    "price": 120,
+    "year": 2019,
+    "id": 9,
+    "size": "40x40cm"
+  },
+  {
+    "price": 500,
+    "year": 2019,
     "id": 11,
-    "size": "35x35cm"
+    "size": "72.7x116.7cm"
   },
   {
     "price": "sold out",
     "year": 2019,
     "id": 12,
-    "size": "40x40cm"
+    "size": "35x35cm"
   },
   {
-    "price": 120,
+    "price": 200,
     "year": 2019,
     "id": 13,
-    "size": "40x40cm"
+    "size": "72.7x72.7cm"
   },
   {
     "price": 160,
     "year": 2019,
     "id": 14,
     "size": "28.5x59.5cm"
-  },
-  {
-    "price": 200,
-    "year": 2019,
-    "id": 15,
-    "size": "72.7x72.7cm"
   }
 ]

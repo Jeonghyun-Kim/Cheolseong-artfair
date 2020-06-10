@@ -25,6 +25,16 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [isLoading, setLoading] = React.useState<boolean>(true);
 
+  React.useEffect(() => {
+    const prevImage = new Image();
+    const currentImage = new Image();
+    const nextImage = new Image();
+
+    prevImage.src = `${process.env.PUBLIC_URL}/images/${list[index !== MIN_INDEX ? index - 1 : MIN_INDEX]}.jpg`;
+    currentImage.src = `${process.env.PUBLIC_URL}/images/${list[index]}.jpg`;
+    nextImage.src = `${process.env.PUBLIC_URL}/images/${list[index !== MAX_INDEX ? index + 1 : MAX_INDEX]}.jpg`;
+  }, [index]);
+
   const ref = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
@@ -96,7 +106,7 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
           onClick={turnOffDetail}
           onKeyDown={handleKeydown}
         >
-          <ViewingRoom src={`${process.env.PUBLIC_URL}/images/${list[index]}.jpg`} brightness={0.8} />
+          <ViewingRoom src={`https://d3jjllifozvlym.cloudfront.net/${list[index]}.jpg`} brightness={0.8} />
         </div>
       )}
       <div
