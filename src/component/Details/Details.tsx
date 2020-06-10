@@ -82,7 +82,7 @@ export default function Details({ idx }: { idx: number }) {
       <CardActions>
         <div className="grow" />
         <CopyToClipboard
-          text={`https://kay.airygall.com/viewing-room/${idx}`}
+          text="https://kay.airygall.com/viewing-room"
           onCopy={handleAlert}
         >
           <Button size="small" color="primary">
