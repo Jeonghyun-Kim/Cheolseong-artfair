@@ -108,7 +108,7 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
           onClick={turnOffDetail}
           onKeyDown={handleKeydown}
         >
-          <ViewingRoom src={`${STORAGE_URL}/${list[index]}.jpg`} brightness={0.8} />
+          <ViewingRoom src={`${STORAGE_URL}/${list[index]}.jpg`} brightness={0.9} />
         </div>
       )}
       <div
