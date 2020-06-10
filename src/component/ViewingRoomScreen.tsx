@@ -11,7 +11,9 @@ import Details from './Details/Details';
 
 import list from '../filenames';
 
-const STORAGE_URL = 'https://d3jjllifozvlym.cloudfront.net';
+const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
+const STORAGE_URL_SM = 'https://d1mqeykb8ywbm3.cloudfront.net';
+const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
 
 const MIN_INDEX = 0;
 const MAX_INDEX = 193;
@@ -42,16 +44,6 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
     }
     setLoading(false);
   }, []);
-
-  React.useEffect(() => {
-    const prevImage = new Image();
-    const currentImage = new Image();
-    const nextImage = new Image();
-
-    prevImage.src = `${STORAGE_URL}/${list[index !== MIN_INDEX ? index - 1 : MIN_INDEX]}.jpg`;
-    currentImage.src = `${STORAGE_URL}/${list[index]}.jpg`;
-    nextImage.src = `${STORAGE_URL}/${list[index !== MAX_INDEX ? index + 1 : MAX_INDEX]}.jpg`;
-  }, [index]);
 
   const handleLeft = React.useCallback(() => {
     if (index !== MIN_INDEX) {
@@ -108,7 +100,7 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
           onClick={turnOffDetail}
           onKeyDown={handleKeydown}
         >
-          <ViewingRoom src={`${STORAGE_URL}/${list[index]}.jpg`} brightness={0.9} />
+          <ViewingRoom src={`${STORAGE_URL_MD}/${list[index]}.jpg`} brightness={0.9} />
         </div>
       )}
       <div

@@ -13,7 +13,9 @@ import informations from './info.json';
 
 import useWindowSize from '../useWindowSize';
 
-const STORAGE_URL = 'https://d3jjllifozvlym.cloudfront.net';
+const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
+const STORAGE_URL_SM = 'https://d1mqeykb8ywbm3.cloudfront.net';
+const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
 
 interface Information {
   id: number;
@@ -44,7 +46,7 @@ export default function Details({ idx }: { idx: number }) {
       <div className="imgBackgroud">
         <img
           alt={`Decorum ${information.year} - ${information.id}`}
-          src={`${STORAGE_URL}/${fileName}.jpg`}
+          src={`${STORAGE_URL_MD}/${fileName}.jpg`}
           className="cardImage"
           style={{ maxHeight: isSmall ? innerHeight - 300 : innerHeight - 370 }}
         />
