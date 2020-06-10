@@ -69,7 +69,6 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
     if (storedIndex) {
       setIndex(Number(storedIndex));
     }
-    setLoading(false);
   }, []);
 
   React.useEffect(() => {
@@ -80,6 +79,7 @@ export default function ViewingRoomScreen({ match }: { match?: Match }) {
     } else {
       setImgSrc(STORAGE_URL_XS);
     }
+    setLoading(false);
     preLoad(index);
   }, [index, preLoad]);
 
