@@ -57,11 +57,38 @@ export default function ViewingRoom({ src, brightness = 1 }: { src: string, brig
               {imgDimension[2] > 1.5
                 ? (
                   <>
-                    <img src={`${process.env.PUBLIC_URL}/lantern.png`} alt="lantern" className="lantern" style={{ height: size[1], left: '20%', transform: 'translate(0%, -50%)' }} />
-                    <img src={`${process.env.PUBLIC_URL}/lantern.png`} alt="lantern" className="lantern" style={{ height: size[1], right: '20%', transform: 'translate(0%, -50%)' }} />
+                    <img
+                      src={`${process.env.PUBLIC_URL}/lantern.png`}
+                      alt="lantern"
+                      className="lantern"
+                      style={{
+                        width: size[0] / 2,
+                        height: size[1],
+                        left: '25%',
+                        transform: 'translate(0%, -50%)',
+                      }}
+                    />
+                    <img
+                      src={`${process.env.PUBLIC_URL}/lantern.png`}
+                      alt="lantern"
+                      className="lantern"
+                      style={{
+                        width: size[0] / 2,
+                        height: size[1],
+                        right: '25%',
+                        transform: 'translate(0%, -50%)',
+                      }}
+                    />
                   </>
                 ) : (
-                  <img src={`${process.env.PUBLIC_URL}/lantern.png`} alt="lantern" className="lantern" style={{ height: size[1], left: '50%', transform: 'translate(-50%, -50%)' }} />
+                  <img
+                    src={`${process.env.PUBLIC_URL}/lantern.png`}
+                    alt="lantern"
+                    className="lantern"
+                    style={{
+                      width: size[0], height: size[1], left: '50%', transform: 'translate(-50%, -50%)',
+                    }}
+                  />
                 )}
             </div>
           )}
