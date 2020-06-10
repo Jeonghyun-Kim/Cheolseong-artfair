@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import Brightness1Icon from '@material-ui/icons/Brightness1';
 
 import './Details.scss';
 import informations from './info.json';
@@ -76,6 +77,9 @@ export default function Details({ idx, src }: { idx: number, src: string }) {
         </Grid>
       </CardContent>
       <CardActions>
+        {information.price === 'sold out' && (
+          <Brightness1Icon fontSize="small" id="soldOutIcon" />
+        )}
         <div className="grow" />
         <CopyToClipboard
           text="https://kay.airygall.com/viewing-room"
