@@ -2,6 +2,7 @@ import React from 'react';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import { useHistory, RouteComponentProps } from 'react-router-dom';
 
@@ -73,12 +74,14 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   const handleLeft = React.useCallback(() => {
     if (index !== MIN_INDEX) {
       history.push(`/viewing-room/${index - 1}`);
+      setOnDetail(false);
     }
   }, [index, history]);
 
   const handleRight = React.useCallback(() => {
     if (index !== MAX_INDEX) {
       history.push(`/viewing-room/${index + 1}`);
+      setOnDetail(false);
     }
   }, [index, history]);
 
@@ -86,16 +89,10 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
     setOnDetail(!onDetail);
   };
 
-  const turnOffDetail = () => {
-    if (onDetail) {
-      setOnDetail(false);
-    }
-  };
-
   const handleKeydown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     switch (event.keyCode) {
       case 27:
-        turnOffDetail();
+        setOnDetail(false);
         break;
       case 32:
         toggleDetail();
@@ -120,7 +117,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
           role="button"
           style={{ filter: `brightness(${onDetail ? 0.8 : 1}) blur(${onDetail ? 10 : 0}px)` }}
           className="viewingRoom"
-          onClick={turnOffDetail}
+          onClick={() => setOnDetail(false)}
           onKeyDown={handleKeydown}
         >
           <ViewingRoom src={`${imgSrc}/${list[index]}.jpg`} brightness={0.9} />
@@ -155,6 +152,13 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         onClick={toggleDetail}
       >
         <AssignmentIcon fontSize="large" />
+      </IconButton>
+      <IconButton
+        id="closeIcon"
+        onClick={() => setOnDetail(false)}
+        style={{ opacity: onDetail ? 1 : 0 }}
+      >
+        <CloseIcon fontSize="large" />
       </IconButton>
     </div>
   );
