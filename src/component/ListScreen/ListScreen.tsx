@@ -14,7 +14,16 @@ import './ListScreen.scss';
 
 import ConfigContext from '../../ConfigContext';
 
+import info from '../../info.json';
+
 const ItemList = React.lazy(() => import('../ItemList/ItemList'));
+
+interface Information {
+  year: number;
+  id: number;
+  size: string;
+  price: number | string;
+}
 
 interface MyConfigInterface {
   yearRange: [number, number];
@@ -60,6 +69,27 @@ export default function ListScreen() {
     setYearRange(config.yearRange);
     setPriceRange(config.priceRange);
     setOnSaleOnly(config.onSaleOnly);
+
+    const map: number[] = [];
+    info.forEach((item: Information, idx: number) => {
+      if (item.year < config.yearRange[0] || item.year > config.yearRange[1]) {
+        return;
+      }
+      if (item.price === 'sold out') {
+        if (!config.onSaleOnly) {
+          map.push(idx);
+        }
+        return;
+      }
+      if (Number(item.price) < config.priceRange[0] * 50
+        || Number(item.price) > config.priceRange[1] * 50) {
+        return;
+      }
+      map.push(idx);
+    });
+
+    sessionStorage.setItem('@idxMap', JSON.stringify(map));
+    setIdxMap(map);
   };
 
   const handleScrollToTop = () => {
@@ -81,7 +111,7 @@ export default function ListScreen() {
         <UpIcon fontSize="large" />
       </IconButton>
       {/* Filter Menu Button */}
-      {!(JSON.stringify(yearRange) === '[2004,2020]' && JSON.stringify(priceRange) === '[0,33]' && onSaleOnly) && (
+      {!(JSON.stringify(yearRange) === '[2004,2020]' && JSON.stringify(priceRange) === '[0,33]' && !onSaleOnly) && (
         <Brightness1Icon fontSize="small" id="badge" />
       )}
       <IconButton
