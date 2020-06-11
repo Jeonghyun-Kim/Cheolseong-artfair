@@ -14,35 +14,59 @@ import ConfigContext from '../../ConfigContext';
 
 const ItemList = React.lazy(() => import('../ItemList/ItemList'));
 
+interface MyConfigInterface {
+  yearRange: [number, number];
+  priceRange: [number, number];
+  onSaleOnly: boolean;
+}
+
+const defaultConfig = {
+  yearRange: [2004, 2020] as [number, number],
+  priceRange: [0, 33] as [number, number],
+  onSaleOnly: false,
+};
+
 export default function ListScreen() {
-  const {
-    yearRange,
-    setYearRange,
-    priceRange,
-    setPriceRange,
-  } = React.useContext(ConfigContext);
-  const [tpYearRange, setTpYearRange] = React.useState<[number, number]>(yearRange);
-  const [tpPriceRange, setTpPriceRange] = React.useState<[number, number]>(priceRange);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [indexMap, setIndexMap] = React.useState<number[]>(
-    (new Array(200)).fill(undefined).map((_, idx) => idx),
+  const { idxMap, setIdxMap } = React.useContext(ConfigContext);
+  const [yearRange, setYearRange] = React.useState<[number, number]>([2004, 2020]);
+  const [priceRange, setPriceRange] = React.useState<[number, number]>([0, 33]);
+  const [onSaleOnly, setOnSaleOnly] = React.useState<boolean>(
+    Boolean(sessionStorage.getItem('@onSaleOnly')),
   );
+  const [config, setConfig] = React.useState<MyConfigInterface>(defaultConfig);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  React.useEffect(() => {
+    const storedYearRange = sessionStorage.getItem('@yearRange');
+    const storedPriceRange = sessionStorage.getItem('@priceRange');
+    const storedOnSaleOnly = sessionStorage.getItem('@onSaleOnly');
+    if (storedYearRange && storedPriceRange) {
+      setYearRange(JSON.parse(storedYearRange));
+      setPriceRange(JSON.parse(storedPriceRange));
+      setOnSaleOnly(Boolean(storedOnSaleOnly));
+      setConfig({
+        yearRange: JSON.parse(storedYearRange),
+        priceRange: JSON.parse(storedPriceRange),
+        onSaleOnly: Boolean(storedOnSaleOnly),
+      });
+    }
+  }, []);
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    sessionStorage.setItem('@yearMin', String(tpYearRange[0]));
-    sessionStorage.setItem('@yearMax', String(tpYearRange[1]));
-    sessionStorage.setItem('@priceMin', String(tpPriceRange[0]));
-    sessionStorage.setItem('@priceMax', String(tpPriceRange[1]));
-    setYearRange(tpYearRange);
-    setPriceRange(tpPriceRange);
+    sessionStorage.setItem('@yearRange', JSON.stringify(config.yearRange));
+    sessionStorage.setItem('@priceRange', JSON.stringify(config.priceRange));
+    sessionStorage.setItem('@onSaleOnly', JSON.stringify(config.onSaleOnly));
+    setYearRange(config.yearRange);
+    setPriceRange(config.priceRange);
+    setOnSaleOnly(config.onSaleOnly);
   };
 
   return (
     <div className="listRoot">
       <div className="listContainer">
         <React.Suspense fallback={<>Loading</>}>
-          <ItemList indexMap={indexMap} />
+          <ItemList indexMap={idxMap} />
         </React.Suspense>
       </div>
       {!(JSON.stringify(yearRange) === '[2004,2020]' && JSON.stringify(priceRange) === '[0,33]') && (
@@ -68,11 +92,15 @@ export default function ListScreen() {
         <div id="sliderContainer">
           <Typography variant="body2">연도</Typography>
           <Slider
-            value={tpYearRange}
+            value={config.yearRange}
             min={2004}
             max={2020}
             onChange={(_e, newValue) => {
-              setTpYearRange(newValue as [number, number]);
+              setConfig({
+                yearRange: newValue as [number, number],
+                priceRange: config.priceRange,
+                onSaleOnly: config.onSaleOnly,
+              });
             }}
             valueLabelDisplay="auto"
             aria-labelledby="yearRangeSlider"
@@ -80,25 +108,31 @@ export default function ListScreen() {
           />
           <Grid container>
             <Grid item>
-              {tpYearRange[0]}년
+              {config.yearRange[0]}년
             </Grid>
             <Grid item xs>
               <Typography align="center">~</Typography>
             </Grid>
             <Grid item>
-              {tpYearRange[1]}년
+              {config.yearRange[1]}년
             </Grid>
           </Grid>
         </div>
+        <div id="divider" />
+        <div id="divider" />
         <div id="sliderContainer">
           <Typography variant="body2">가격</Typography>
           <Slider
-            value={tpPriceRange}
+            value={config.priceRange}
             min={0}
             max={33}
             scale={(x) => 50 * x}
             onChange={(_e, newValue) => {
-              setTpPriceRange(newValue as [number, number]);
+              setConfig({
+                yearRange: config.yearRange,
+                priceRange: newValue as [number, number],
+                onSaleOnly: config.onSaleOnly,
+              });
             }}
             valueLabelDisplay="auto"
             aria-labelledby="priceRangeSlider"
@@ -106,13 +140,13 @@ export default function ListScreen() {
           />
           <Grid container>
             <Grid item>
-              {tpPriceRange[0] ? `${tpPriceRange[0] * 50}만원` : '0원'}
+              {config.priceRange[0] ? `${config.priceRange[0] * 50}만원` : '0원'}
             </Grid>
             <Grid item xs>
               <Typography align="center">~</Typography>
             </Grid>
             <Grid item>
-              {tpPriceRange[1] * 50}만원
+              {config.priceRange[1] * 50}만원
             </Grid>
           </Grid>
         </div>

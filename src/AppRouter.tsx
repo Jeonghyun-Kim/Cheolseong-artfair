@@ -13,30 +13,22 @@ import ListScreen from './component/ListScreen/ListScreen';
 
 import ConfigContext from './ConfigContext';
 
-const storageArray = ['@yearMin', '@yearMax', '@priceMin', '@priceMax'];
-
 export default function AppRouter() {
-  const [yearRange, setYearRange] = React.useState<[number, number]>([2004, 2020]);
-  const [priceRange, setPriceRange] = React.useState<[number, number]>([0, 33]);
+  const [idxMap, setIdxMap] = React.useState<number[]>(
+    (new Array(200)).fill(undefined).map((_, idx) => idx),
+  );
 
   React.useEffect(() => {
-    if (sessionStorage.getItem(storageArray[0])) {
-      setYearRange([Number(sessionStorage.getItem(storageArray[0])),
-        Number(sessionStorage.getItem(storageArray[1]))]);
-    }
-
-    if (sessionStorage.getItem(storageArray[2])) {
-      setPriceRange([Number(sessionStorage.getItem(storageArray[2])),
-        Number(sessionStorage.getItem(storageArray[3]))]);
+    const storedIdx = sessionStorage.getItem('@idxMap');
+    if (storedIdx) {
+      setIdxMap(JSON.parse(storedIdx));
     }
   }, []);
 
   return (
     <Router>
       <ConfigContext.Provider
-        value={{
-          yearRange, priceRange, setYearRange, setPriceRange,
-        }}
+        value={{ idxMap, setIdxMap }}
       >
         <Switch>
           <Route exact path="/intro" component={HomeScreen} />

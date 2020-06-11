@@ -3,6 +3,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import CloseIcon from '@material-ui/icons/Close';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
 import { useHistory, RouteComponentProps } from 'react-router-dom';
 

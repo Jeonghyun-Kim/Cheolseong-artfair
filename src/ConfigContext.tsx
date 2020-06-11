@@ -1,17 +1,13 @@
 import React from 'react';
 
 export interface Settings {
-  yearRange: [number, number];
-  priceRange: [number, number];
-  setYearRange: React.Dispatch<[number, number]>;
-  setPriceRange: React.Dispatch<[number, number]>;
+  idxMap: number[];
+  setIdxMap: React.Dispatch<number[]>;
 }
 
 export const defaultSettings: Settings = {
-  yearRange: [2004, 2020],
-  priceRange: [0, 33],
-  setYearRange: () => [2004, 2020],
-  setPriceRange: () => [0, 33],
+  idxMap: (new Array(200)).fill(undefined).map((_, idx) => idx),
+  setIdxMap: () => (new Array(200)).fill(undefined).map((_, idx) => idx),
 };
 
 const ConfigContext = React.createContext<Settings>(defaultSettings);

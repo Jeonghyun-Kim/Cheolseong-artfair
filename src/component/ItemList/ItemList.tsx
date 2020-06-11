@@ -5,14 +5,12 @@ import { useHistory } from 'react-router-dom';
 import './ItemList.scss';
 
 import list from '../../filenames';
-import ConfigContext from '../../ConfigContext';
 
 const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
 const marginWidth = 20;
 const marginHeight = 30;
 
 export default function ItemList({ indexMap }: { indexMap: number[] }) {
-  const { yearRange, priceRange } = React.useContext(ConfigContext);
   const ref = React.useRef<HTMLDivElement>(null);
   const [size, setSize] = React.useState<number | null>(null);
 
