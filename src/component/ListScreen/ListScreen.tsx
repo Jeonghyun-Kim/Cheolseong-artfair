@@ -67,6 +67,11 @@ export default function ListScreen() {
     sessionStorage.setItem('@scrollY', '0');
   };
 
+  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    sessionStorage.setItem('@scrollY', '0');
+    setAnchorEl(event.currentTarget);
+  };
+
   const handleMenuClose = () => {
     sessionStorage.setItem('@yearRange', JSON.stringify(config.yearRange));
     sessionStorage.setItem('@priceRange', JSON.stringify(config.priceRange));
@@ -136,7 +141,7 @@ export default function ListScreen() {
         id="sortIcon"
         aria-controls="sort-menu"
         aria-haspopup="true"
-        onClick={(e) => setAnchorEl(e.currentTarget)}
+        onClick={handleMenuOpen}
       >
         <div className="iconContainer">
           <SortIcon fontSize="large" />

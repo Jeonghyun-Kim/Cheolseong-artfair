@@ -23,7 +23,7 @@ interface ViewingRoomProps extends RouteComponentProps<{ idx: string }> {}
 
 export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   const { idxMap } = React.useContext(ConfigContext);
-  const MAX_INDEX = idxMap.length;
+  const MAX_INDEX = idxMap.length - 1;
   const [index, setIndex] = React.useState<number>(0);
   const [imgSrc, setImgSrc] = React.useState<string | null>(null);
   const [loaded, setLoaded] = React.useState<number[]>([]);
