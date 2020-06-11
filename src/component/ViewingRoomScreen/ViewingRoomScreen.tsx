@@ -95,7 +95,11 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   const handleKeydown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     switch (event.keyCode) {
       case 27:
-        setOnDetail(false);
+        if (onDetail) {
+          setOnDetail(false);
+        } else {
+          history.push('/list');
+        }
         break;
       case 32:
         toggleDetail();
