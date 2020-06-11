@@ -2,6 +2,8 @@ $delay: 0.7s ease !global;
 $iconColor: azure !global;
 
 .App {
+  display: flex;
+  justify-content: center;
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -15,6 +17,8 @@ $iconColor: azure !global;
   height: 100%;
   transition: $delay;
   z-index: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .detailScreen {

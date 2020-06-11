@@ -11,7 +11,6 @@ import SortIcon from '@material-ui/icons/Sort';
 import './ListScreen.scss';
 
 import ConfigContext from '../../ConfigContext';
-import useWindowSize from '../useWindowSize';
 
 const ItemList = React.lazy(() => import('../ItemList/ItemList'));
 
@@ -28,8 +27,6 @@ export default function ListScreen() {
   const [indexMap, setIndexMap] = React.useState<number[]>(
     (new Array(200)).fill(undefined).map((_, idx) => idx),
   );
-
-  const [innerWidth] = useWindowSize();
 
   const handleMenuClose = () => {
     setAnchorEl(null);

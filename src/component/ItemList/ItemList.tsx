@@ -36,7 +36,7 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
   return (
     <div ref={ref} className="itemContainer">
       {size && indexMap.map((value) => (
-        <div style={{ width: size, height: size }} className="imageBlock">
+        <div key={value} style={{ width: size, height: size }} className="imageBlock">
           <img
             src={`${STORAGE_URL_XS}/${list[value]}.jpg`}
             alt={`${list[value]}`}

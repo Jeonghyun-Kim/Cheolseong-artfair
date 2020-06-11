@@ -30,12 +30,11 @@ export default function HomeScreen() {
   }, [timeLeft]);
 
   return (
-    <div className="Root">
+    <div className="App">
       <Typography variant={innerWidth > 600 ? 'h5' : 'h6'} align="center" className="welcomeGuide">
         온라인 아트페어에 오신것을 환영합니다.
       </Typography>
       <div
-        // style={{ filter: `brightness(${onDetail ? 0.8 : 1}) blur(${onDetail ? 10 : 0}px)` }}
         className="viewingRoom"
       >
         <ViewingRoom src={`${STORAGE_URL_MD}/2020_1.jpg`} brightness={0.9} />
