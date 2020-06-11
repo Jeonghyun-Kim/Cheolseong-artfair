@@ -16,6 +16,15 @@ $iconColor: azure !global;
   color: whitesmoke;
 }
 
+.timer {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: whitesmoke;
+}
+
+
 .viewingRoom {
   width: 100%;
   height: 100%;

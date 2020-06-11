@@ -26,9 +26,12 @@ export default function AppRouter() {
         >
           <Route exact path="/" component={HomeScreen} />
           <Route path="/comments" component={CommentScreen} />
-          <Route path="/viewing-room/:idx" component={ViewingRoomScreen} />
-          <Route path="*">
+          <Route path="/viewing-room/">
             <Redirect to="/viewing-room/0" />
+          </Route>
+          <Route path="/viewing-room/:idx" component={ViewingRoomScreen} />
+          <Route path="/*">
+            404 Not Found
           </Route>
         </ConfigContext.Provider>
       </Switch>
