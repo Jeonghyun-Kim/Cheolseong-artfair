@@ -136,7 +136,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         style={{ opacity: onDetail ? 1 : 0 }}
         className="detailScreen"
       >
-        <Details idx={index} src={`${imgSrc}/${list[idxMap[index]]}.jpg`} />
+        <Details idx={idxMap[index]} src={`${imgSrc}/${list[idxMap[index]]}.jpg`} />
       </div>
       <IconButton
         id="arrowLeft"

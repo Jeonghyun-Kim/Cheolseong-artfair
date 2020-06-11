@@ -87,7 +87,6 @@ export default function ListScreen() {
       }
       map.push(idx);
     });
-
     sessionStorage.setItem('@idxMap', JSON.stringify(map));
     setIdxMap(map);
   };
@@ -182,6 +181,7 @@ export default function ListScreen() {
             min={0}
             max={33}
             scale={(x) => 50 * x}
+            disabled={!config.onSaleOnly}
             onChange={(_e, newValue) => setConfig({
               ...config,
               priceRange: newValue as [number, number],
