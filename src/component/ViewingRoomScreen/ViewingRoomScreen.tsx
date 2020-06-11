@@ -64,9 +64,9 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   });
 
   React.useEffect(() => {
-    if (window.innerWidth > 960) {
+    if (window.innerWidth > 800) {
       setImgSrc(STORAGE_URL_MD);
-    } else if (window.innerWidth > 600) {
+    } else if (window.innerWidth > 400) {
       setImgSrc(STORAGE_URL_SM);
     } else {
       setImgSrc(STORAGE_URL_XS);
