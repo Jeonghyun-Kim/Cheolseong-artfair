@@ -128,7 +128,7 @@ export default function ListScreen() {
         <UpIcon fontSize="large" />
       </IconButton>
       {/* Filter Menu Button */}
-      {!(JSON.stringify(yearRange) === '[2004,2020]' && JSON.stringify(priceRange) === '[0,33]' && !onSaleOnly) && (
+      {!(JSON.stringify(yearRange) === '[2004,2020]' && !onSaleOnly) && (
         <Brightness1Icon fontSize="small" id="badge" />
       )}
       <IconButton

@@ -37,6 +37,7 @@ $iconColor: azure !global;
   right: 15px;
   top: 10px;
   color: $iconColor;
+  z-index: 99;
 }
 
 #upIcon {
@@ -47,6 +48,7 @@ $iconColor: azure !global;
   color: $iconColor;
   border-radius: 100px;
   background-color: #827385;
+  z-index: 99;
 }
 
 #badge {
