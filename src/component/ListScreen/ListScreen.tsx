@@ -49,6 +49,7 @@ export default function ListScreen() {
     const storedYearRange = sessionStorage.getItem('@yearRange');
     const storedPriceRange = sessionStorage.getItem('@priceRange');
     const storedOnSaleOnly = sessionStorage.getItem('@onSaleOnly');
+
     if (storedYearRange && storedPriceRange && storedOnSaleOnly) {
       setYearRange(JSON.parse(storedYearRange));
       setPriceRange(JSON.parse(storedPriceRange));
@@ -60,6 +61,10 @@ export default function ListScreen() {
       });
     }
   }, []);
+
+  const handleScrollToTop = () => {
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+  };
 
   const handleMenuClose = () => {
     sessionStorage.setItem('@yearRange', JSON.stringify(config.yearRange));
@@ -94,8 +99,16 @@ export default function ListScreen() {
     setIdxMap(map);
   }, [yearRange, priceRange, onSaleOnly, setIdxMap]);
 
-  const handleScrollToTop = () => {
-    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+  const ScrollRestoration = () => {
+    React.useEffect(() => {
+      const storedScrollY = sessionStorage.getItem('@scrollY');
+
+      if (storedScrollY) {
+        window.scroll({ top: JSON.parse(storedScrollY), left: 0 });
+      }
+    }, []);
+
+    return <></>;
   };
 
   return (
@@ -103,6 +116,7 @@ export default function ListScreen() {
       <div className="listContainer">
         <React.Suspense fallback={<>Loading</>}>
           <ItemList indexMap={idxMap} />
+          <ScrollRestoration />
         </React.Suspense>
       </div>
       {/* Scroll To Top Icon */}

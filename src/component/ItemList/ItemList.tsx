@@ -31,6 +31,7 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
   }, [ref]);
 
   const handleMove = (value: number) => {
+    sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
     history.push(`/viewing-room/${value}`);
   };
 
@@ -51,7 +52,11 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
               src={`${STORAGE_URL_XS}/${list[value]}.jpg`}
               alt={`${list[value]}`}
               onClick={() => handleMove(value)}
-              onKeyDown={() => handleMove(value)}
+              onKeyDown={(e) => {
+                if (e.keyCode === 13) {
+                  handleMove(value);
+                }
+              }}
               className="listImage"
             />
           </div>
