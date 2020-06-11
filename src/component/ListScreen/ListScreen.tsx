@@ -114,6 +114,7 @@ export default function ListScreen() {
 
   return (
     <div className="listRoot">
+      <Typography id="paitingNumber" className="unselectable">작품 개수: {idxMap.length}개</Typography>
       <div className="listContainer">
         <React.Suspense fallback={<>Loading</>}>
           <ItemList indexMap={idxMap} />
@@ -145,6 +146,7 @@ export default function ListScreen() {
       {/* Filter Menu Popup */}
       <Popover
         id="sort-menu"
+        className="unselectable"
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
