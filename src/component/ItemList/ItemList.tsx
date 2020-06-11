@@ -8,7 +8,8 @@ import list from '../../filenames';
 import ConfigContext from '../../ConfigContext';
 
 const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
-const marginImage = 20;
+const marginWidth = 20;
+const marginHeight = 30;
 
 export default function ItemList({ indexMap }: { indexMap: number[] }) {
   const { yearRange, priceRange } = React.useContext(ConfigContext);
@@ -40,9 +41,9 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
         <div
           key={value}
           style={{
-            width: size - 2 * marginImage,
-            height: size - 2 * marginImage,
-            margin: marginImage,
+            width: size - 2 * marginWidth,
+            height: size - 2 * marginWidth,
+            margin: `${marginHeight}px ${marginWidth}px`,
           }}
           className="imageBlock"
         >
