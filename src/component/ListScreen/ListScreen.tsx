@@ -11,6 +11,7 @@ import SortIcon from '@material-ui/icons/Sort';
 import './ListScreen.scss';
 
 import ConfigContext from '../../ConfigContext';
+import useWindowSize from '../useWindowSize';
 
 const ItemList = React.lazy(() => import('../ItemList/ItemList'));
 
@@ -24,6 +25,11 @@ export default function ListScreen() {
   const [tpYearRange, setTpYearRange] = React.useState<[number, number]>(yearRange);
   const [tpPriceRange, setTpPriceRange] = React.useState<[number, number]>(priceRange);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [indexMap, setIndexMap] = React.useState<number[]>(
+    (new Array(200)).fill(undefined).map((_, idx) => idx),
+  );
+
+  const [innerWidth] = useWindowSize();
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -39,7 +45,7 @@ export default function ListScreen() {
     <div className="listRoot">
       <div className="container">
         <React.Suspense fallback={<>Loading</>}>
-          <ItemList />
+          <ItemList indexMap={indexMap} />
         </React.Suspense>
       </div>
       {!(JSON.stringify(yearRange) === '[2004,2020]' && JSON.stringify(priceRange) === '[0,33]') && (

@@ -7,12 +7,14 @@ $iconColor: azure !global;
   background-image: url('/wallpaper.jpg');
   background-repeat: repeat;
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .container {
   width: 100%;
-  max-width: 1600px;
-  padding: 100px 0;
+  max-width: 1500px;
+  padding: 100px 50px;
 }
 
 .iconContainer {
