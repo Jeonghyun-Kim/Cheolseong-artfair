@@ -33,8 +33,8 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   const history = useHistory();
 
   React.useEffect(() => {
-    setIndex(Number(match.params.idx));
-  }, [match.params.idx, setIndex]);
+    setIndex(idxMap.findIndex((element: number) => element === Number(match.params.idx)));
+  }, [idxMap, match.params.idx, setIndex]);
 
   const preLoad = React.useCallback((idx: number) => {
     if (imgSrc) {
