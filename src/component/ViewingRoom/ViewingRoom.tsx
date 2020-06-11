@@ -41,7 +41,7 @@ export default function ViewingRoom({ src, brightness = 1 }: { src: string, brig
   }, [containerDimension, imgDimension]);
 
   return (
-    <Grid container className="container">
+    <Grid container className="viewingRoomContainer">
       <Grid item xs={2} sm={3} xl={4} />
       <Grid container direction="column" item xs={8} sm={6} xl={4} id="max-height">
         <Grid item className="heightGrid" />

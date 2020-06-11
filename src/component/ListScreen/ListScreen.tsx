@@ -40,7 +40,7 @@ export default function ListScreen() {
 
   return (
     <div className="listRoot">
-      <div className="container">
+      <div className="listContainer">
         <React.Suspense fallback={<>Loading</>}>
           <ItemList indexMap={indexMap} />
         </React.Suspense>

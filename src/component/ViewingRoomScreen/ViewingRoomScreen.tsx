@@ -132,13 +132,28 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       >
         <Details idx={index} src={`${imgSrc}/${list[index]}.jpg`} />
       </div>
-      <IconButton id="arrowLeft" onClick={handleLeft} disabled={index === MIN_INDEX} style={{ color: index === MIN_INDEX ? '#444' : 'azure' }}>
+      <IconButton
+        id="arrowLeft"
+        onClick={handleLeft}
+        disabled={index === MIN_INDEX}
+        style={{
+          color: index === MIN_INDEX ? '#444' : 'azure',
+        }}
+      >
         <ArrowBackIosIcon fontSize="large" />
       </IconButton>
-      <IconButton id="arrowRight" onClick={handleRight} disabled={index === MAX_INDEX} style={{ color: index === MAX_INDEX ? '#444' : 'azure' }}>
+      <IconButton
+        id="arrowRight"
+        onClick={handleRight}
+        disabled={index === MAX_INDEX}
+        style={{ color: index === MAX_INDEX ? '#444' : 'azure' }}
+      >
         <ArrowForwardIosIcon fontSize="large" />
       </IconButton>
-      <IconButton id="moreIcon" onClick={toggleDetail}>
+      <IconButton
+        id="moreIcon"
+        onClick={toggleDetail}
+      >
         <AssignmentIcon fontSize="large" />
       </IconButton>
     </div>

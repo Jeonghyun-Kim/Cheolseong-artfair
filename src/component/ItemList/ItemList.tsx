@@ -21,9 +21,9 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
   React.useEffect(() => {
     if (ref.current) {
       const width = ref.current.clientWidth;
-      if (width > 800) {
+      if (width > 1000) {
         setSize(width / 3);
-      } else if (width > 400) {
+      } else if (width > 500) {
         setSize(width / 2);
       } else {
         setSize(width);
