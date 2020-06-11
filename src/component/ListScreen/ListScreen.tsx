@@ -105,6 +105,7 @@ export default function ListScreen() {
 
       if (storedScrollY) {
         window.scroll({ top: JSON.parse(storedScrollY), left: 0 });
+        sessionStorage.setItem('@scrollY', '0');
       }
     }, []);
 
@@ -116,8 +117,8 @@ export default function ListScreen() {
       <div className="listContainer">
         <React.Suspense fallback={<>Loading</>}>
           <ItemList indexMap={idxMap} />
-          <ScrollRestoration />
         </React.Suspense>
+        <ScrollRestoration />
       </div>
       {/* Scroll To Top Icon */}
       <IconButton
@@ -174,7 +175,9 @@ export default function ListScreen() {
             </Grid>
           </Grid>
         </div>
-        <div id="divider" />
+        <div>
+          <div id="divider" />
+        </div>
         <Grid container id="checkBoxContainer">
           <Grid item xs container direction="column" justify="center">
             <Typography variant="h6" id="onSaleText">판매 중인 작품만</Typography>
