@@ -64,6 +64,7 @@ export default function ListScreen() {
 
   const handleScrollToTop = () => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    sessionStorage.setItem('@scrollY', '0');
   };
 
   const handleMenuClose = () => {
@@ -105,7 +106,6 @@ export default function ListScreen() {
 
       if (storedScrollY) {
         window.scroll({ top: JSON.parse(storedScrollY), left: 0 });
-        sessionStorage.setItem('@scrollY', '0');
       }
     }, []);
 
