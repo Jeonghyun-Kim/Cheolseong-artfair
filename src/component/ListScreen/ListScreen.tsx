@@ -81,8 +81,8 @@ export default function ListScreen() {
         }
         return;
       }
-      if (Number(item.price) < config.priceRange[0] * 50
-        || Number(item.price) > config.priceRange[1] * 50) {
+      if (onSaleOnly && (Number(item.price) < config.priceRange[0] * 50
+        || Number(item.price) > config.priceRange[1] * 50)) {
         return;
       }
       map.push(idx);
