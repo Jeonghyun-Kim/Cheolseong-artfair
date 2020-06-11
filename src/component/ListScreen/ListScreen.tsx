@@ -160,7 +160,7 @@ export default function ListScreen() {
         </div>
         <div id="divider" />
         <Grid container id="checkBoxContainer">
-          <Grid item xs container alignContent="center">
+          <Grid item xs container direction="column" justify="center">
             <Typography variant="h6" id="onSaleText">판매 중인 작품만</Typography>
           </Grid>
           <Grid item>
