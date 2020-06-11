@@ -11,6 +11,7 @@ import './ViewingRoomScreen.scss';
 
 import ViewingRoom from '../ViewingRoom/ViewingRoom';
 import Details from '../Details/Details';
+import ConfigContext from '../../ConfigContext';
 
 import list from '../../filenames';
 
@@ -18,13 +19,12 @@ const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
 const STORAGE_URL_SM = 'https://d1mqeykb8ywbm3.cloudfront.net';
 const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
 
-const MIN_INDEX = 0;
-const MAX_INDEX = 199;
-
 interface ViewingRoomProps extends RouteComponentProps<{ idx: string }> {}
 
 export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
-  const [index, setIndex] = React.useState<number>(MIN_INDEX);
+  const { idxMap } = React.useContext(ConfigContext);
+  const MAX_INDEX = idxMap.length;
+  const [index, setIndex] = React.useState<number>(0);
   const [imgSrc, setImgSrc] = React.useState<string | null>(null);
   const [loaded, setLoaded] = React.useState<number[]>([]);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
@@ -39,17 +39,21 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   const preLoad = React.useCallback((idx: number) => {
     if (imgSrc) {
       const batchSize = 2;
-      for (let k = Math.max(MIN_INDEX, idx - batchSize);
+      for (let k = Math.max(0, idx - batchSize);
         k <= Math.min(MAX_INDEX, idx + batchSize);
         k += 1) {
         if (!loaded.includes(k)) {
           const img = new Image();
-          img.src = `${imgSrc}/${list[k]}.jpg`;
+          img.src = `${imgSrc}/${list[idxMap[k]]}.jpg`;
           setLoaded((oldArray) => [...oldArray, k]);
         }
       }
     }
-  }, [imgSrc, loaded]);
+  }, [idxMap, MAX_INDEX, imgSrc, loaded]);
+
+  React.useEffect(() => {
+    preLoad(index);
+  });
 
   const ref = React.useRef<HTMLDivElement | null>(null);
 
@@ -68,22 +72,21 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       setImgSrc(STORAGE_URL_XS);
     }
     setLoading(false);
-    preLoad(index);
-  }, [index, preLoad]);
+  }, [index]);
 
   const handleLeft = React.useCallback(() => {
-    if (index !== MIN_INDEX) {
-      history.push(`/viewing-room/${index - 1}`);
+    if (index !== 0) {
+      history.push(`/viewing-room/${idxMap[index - 1]}`);
       setOnDetail(false);
     }
-  }, [index, history]);
+  }, [idxMap, index, history]);
 
   const handleRight = React.useCallback(() => {
     if (index !== MAX_INDEX) {
-      history.push(`/viewing-room/${index + 1}`);
+      history.push(`/viewing-room/${idxMap[index + 1]}`);
       setOnDetail(false);
     }
-  }, [index, history]);
+  }, [idxMap, MAX_INDEX, index, history]);
 
   const toggleDetail = () => {
     setOnDetail(!onDetail);
@@ -126,21 +129,21 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
           >
             <ArrowBackIcon fontSize="large" />
           </IconButton>
-          <ViewingRoom src={`${imgSrc}/${list[index]}.jpg`} brightness={0.9} />
+          <ViewingRoom src={`${imgSrc}/${list[idxMap[index]]}.jpg`} brightness={0.9} />
         </div>
       )}
       <div
         style={{ opacity: onDetail ? 1 : 0 }}
         className="detailScreen"
       >
-        <Details idx={index} src={`${imgSrc}/${list[index]}.jpg`} />
+        <Details idx={index} src={`${imgSrc}/${list[idxMap[index]]}.jpg`} />
       </div>
       <IconButton
         id="arrowLeft"
         onClick={handleLeft}
-        disabled={index === MIN_INDEX}
+        disabled={index === 0}
         style={{
-          color: index === MIN_INDEX ? '#444' : 'azure',
+          color: index === 0 ? '#444' : 'azure',
         }}
       >
         <ArrowBackIosIcon fontSize="large" />
