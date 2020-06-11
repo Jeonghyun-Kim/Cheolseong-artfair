@@ -122,7 +122,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         >
           <IconButton
             id="backIcon"
-            onClick={() => history.goBack()}
+            onClick={() => history.push('/list')}
           >
             <ArrowBackIcon fontSize="large" />
           </IconButton>

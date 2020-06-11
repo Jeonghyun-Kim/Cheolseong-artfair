@@ -87,7 +87,7 @@ export default function Details({ idx, src }: { idx: number, src: string }) {
             )}
             <div className="grow" />
             <CopyToClipboard
-              text="https://kay.airygall.com/viewing-room"
+              text={`https://kay.airygall.com/viewing-room/${idx}`}
               onCopy={handleAlert}
             >
               <Button size="small" color="primary">
