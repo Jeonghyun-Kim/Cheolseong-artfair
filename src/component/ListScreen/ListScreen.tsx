@@ -62,34 +62,37 @@ export default function ListScreen() {
   }, []);
 
   const handleMenuClose = () => {
-    setAnchorEl(null);
     sessionStorage.setItem('@yearRange', JSON.stringify(config.yearRange));
     sessionStorage.setItem('@priceRange', JSON.stringify(config.priceRange));
     sessionStorage.setItem('@onSaleOnly', JSON.stringify(config.onSaleOnly));
     setYearRange(config.yearRange);
     setPriceRange(config.priceRange);
     setOnSaleOnly(config.onSaleOnly);
+    setAnchorEl(null);
+  };
 
+  React.useEffect(() => {
     const map: number[] = [];
     info.forEach((item: Information, idx: number) => {
-      if (item.year < config.yearRange[0] || item.year > config.yearRange[1]) {
+      if (item.year < yearRange[0] || item.year > yearRange[1]) {
         return;
       }
       if (item.price === 'sold out') {
-        if (!config.onSaleOnly) {
+        if (!onSaleOnly) {
           map.push(idx);
         }
         return;
       }
-      if (onSaleOnly && (Number(item.price) < config.priceRange[0] * 50
-        || Number(item.price) > config.priceRange[1] * 50)) {
+      if (onSaleOnly && (Number(item.price) < priceRange[0] * 50
+        || Number(item.price) > priceRange[1] * 50)) {
         return;
       }
       map.push(idx);
     });
+
     sessionStorage.setItem('@idxMap', JSON.stringify(map));
     setIdxMap(map);
-  };
+  }, [yearRange, priceRange, onSaleOnly, setIdxMap]);
 
   const handleScrollToTop = () => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
