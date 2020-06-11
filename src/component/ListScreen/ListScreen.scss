@@ -41,6 +41,16 @@ $iconColor: azure !global;
   color: $iconColor;
 }
 
+#upIcon {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  color: $iconColor;
+  border-radius: 100px;
+  background-color: #827385;
+}
+
 #badge {
   position: absolute;
   right: 14px;

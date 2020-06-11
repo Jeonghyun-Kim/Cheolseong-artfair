@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
 import SortIcon from '@material-ui/icons/Sort';
+import UpIcon from '@material-ui/icons/ArrowUpward';
 // import SearchIcon from '@material-ui/icons/Search';
 
 import './ListScreen.scss';
@@ -62,6 +63,10 @@ export default function ListScreen() {
     setOnSaleOnly(config.onSaleOnly);
   };
 
+  const handleScrollToTop = () => {
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="listRoot">
       <div className="listContainer">
@@ -69,6 +74,14 @@ export default function ListScreen() {
           <ItemList indexMap={idxMap} />
         </React.Suspense>
       </div>
+      {/* Scroll To Top Icon */}
+      <IconButton
+        id="upIcon"
+        onClick={() => handleScrollToTop()}
+      >
+        <UpIcon fontSize="large" />
+      </IconButton>
+      {/* Filter Menu Button */}
       {!(JSON.stringify(yearRange) === '[2004,2020]' && JSON.stringify(priceRange) === '[0,33]') && (
         <Brightness1Icon fontSize="small" id="badge" />
       )}
@@ -83,6 +96,7 @@ export default function ListScreen() {
           <div className="iconTitle">Filter</div>
         </div>
       </IconButton>
+      {/* Filter Menu Popup */}
       <Popover
         id="sort-menu"
         anchorEl={anchorEl}

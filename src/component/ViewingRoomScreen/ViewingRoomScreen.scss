@@ -42,6 +42,14 @@ $iconColor: azure !global;
   transition: $delay;
 }
 
+#backIcon {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  color: $iconColor;
+}
+
+
 #arrowLeft {
   position: absolute;
   left: 0;

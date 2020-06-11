@@ -21,8 +21,7 @@ const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
 const MIN_INDEX = 0;
 const MAX_INDEX = 199;
 
-interface ViewingRoomProps extends RouteComponentProps<{ idx: string }> {
-}
+interface ViewingRoomProps extends RouteComponentProps<{ idx: string }> {}
 
 export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   const [index, setIndex] = React.useState<number>(MIN_INDEX);
@@ -121,6 +120,12 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
           onClick={() => setOnDetail(false)}
           onKeyDown={handleKeydown}
         >
+          <IconButton
+            id="backIcon"
+            onClick={() => history.goBack()}
+          >
+            <ArrowBackIcon fontSize="large" />
+          </IconButton>
           <ViewingRoom src={`${imgSrc}/${list[index]}.jpg`} brightness={0.9} />
         </div>
       )}
