@@ -11,6 +11,11 @@ $iconColor: azure !global;
   justify-content: center;
 }
 
+#onSaleText {
+  font-size: medium;
+  margin-left: 20px;
+}
+
 .listContainer {
   width: 100%;
   max-width: 1500px;
@@ -26,13 +31,6 @@ $iconColor: azure !global;
     text-align: center;
   }
 }
-
-// #searchIcon {
-//   position: absolute;
-//   right: 15px;
-//   top: 10px;
-//   color: $iconColor;
-// }
 
 #sortIcon {
   position: absolute;

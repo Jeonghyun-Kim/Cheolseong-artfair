@@ -2,6 +2,7 @@ import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import Popover from '@material-ui/core/Popover';
 import Slider from '@material-ui/core/Slider';
+import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
@@ -31,9 +32,7 @@ export default function ListScreen() {
   const { idxMap, setIdxMap } = React.useContext(ConfigContext);
   const [yearRange, setYearRange] = React.useState<[number, number]>([2004, 2020]);
   const [priceRange, setPriceRange] = React.useState<[number, number]>([0, 33]);
-  const [onSaleOnly, setOnSaleOnly] = React.useState<boolean>(
-    Boolean(sessionStorage.getItem('@onSaleOnly')),
-  );
+  const [onSaleOnly, setOnSaleOnly] = React.useState<boolean>(false);
   const [config, setConfig] = React.useState<MyConfigInterface>(defaultConfig);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -41,14 +40,14 @@ export default function ListScreen() {
     const storedYearRange = sessionStorage.getItem('@yearRange');
     const storedPriceRange = sessionStorage.getItem('@priceRange');
     const storedOnSaleOnly = sessionStorage.getItem('@onSaleOnly');
-    if (storedYearRange && storedPriceRange) {
+    if (storedYearRange && storedPriceRange && storedOnSaleOnly) {
       setYearRange(JSON.parse(storedYearRange));
       setPriceRange(JSON.parse(storedPriceRange));
-      setOnSaleOnly(Boolean(storedOnSaleOnly));
+      setOnSaleOnly(JSON.parse(storedOnSaleOnly));
       setConfig({
         yearRange: JSON.parse(storedYearRange),
         priceRange: JSON.parse(storedPriceRange),
-        onSaleOnly: Boolean(storedOnSaleOnly),
+        onSaleOnly: JSON.parse(storedOnSaleOnly),
       });
     }
   }, []);
@@ -82,7 +81,7 @@ export default function ListScreen() {
         <UpIcon fontSize="large" />
       </IconButton>
       {/* Filter Menu Button */}
-      {!(JSON.stringify(yearRange) === '[2004,2020]' && JSON.stringify(priceRange) === '[0,33]') && (
+      {!(JSON.stringify(yearRange) === '[2004,2020]' && JSON.stringify(priceRange) === '[0,33]' && onSaleOnly) && (
         <Brightness1Icon fontSize="small" id="badge" />
       )}
       <IconButton
@@ -109,13 +108,10 @@ export default function ListScreen() {
             value={config.yearRange}
             min={2004}
             max={2020}
-            onChange={(_e, newValue) => {
-              setConfig({
-                yearRange: newValue as [number, number],
-                priceRange: config.priceRange,
-                onSaleOnly: config.onSaleOnly,
-              });
-            }}
+            onChange={(_e, newValue) => setConfig({
+              ...config,
+              yearRange: newValue as [number, number],
+            })}
             valueLabelDisplay="auto"
             aria-labelledby="yearRangeSlider"
             getAriaValueText={(value) => `${value}년`}
@@ -133,6 +129,21 @@ export default function ListScreen() {
           </Grid>
         </div>
         <div id="divider" />
+        <Grid container id="checkBoxContainer">
+          <Grid item xs container alignContent="center">
+            <Typography variant="h6" id="onSaleText">판매 중인 작품만</Typography>
+          </Grid>
+          <Grid item>
+            <Checkbox
+              checked={config.onSaleOnly}
+              color="primary"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfig({
+                ...config,
+                onSaleOnly: e.target.checked,
+              })}
+            />
+          </Grid>
+        </Grid>
         <div id="divider" />
         <div id="sliderContainer">
           <Typography variant="body2">가격</Typography>
@@ -141,13 +152,10 @@ export default function ListScreen() {
             min={0}
             max={33}
             scale={(x) => 50 * x}
-            onChange={(_e, newValue) => {
-              setConfig({
-                yearRange: config.yearRange,
-                priceRange: newValue as [number, number],
-                onSaleOnly: config.onSaleOnly,
-              });
-            }}
+            onChange={(_e, newValue) => setConfig({
+              ...config,
+              priceRange: newValue as [number, number],
+            })}
             valueLabelDisplay="auto"
             aria-labelledby="priceRangeSlider"
             getAriaValueText={(value) => `${value}만원`}
