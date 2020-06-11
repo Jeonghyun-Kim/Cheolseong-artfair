@@ -26,7 +26,9 @@ export default function HomeScreen() {
   }, []);
 
   React.useEffect(() => {
-    setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+    if (timeLeft > 0) {
+      setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+    }
   }, [timeLeft]);
 
   return (

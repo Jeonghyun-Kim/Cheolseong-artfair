@@ -39,7 +39,7 @@ export default function AppRouter() {
         }}
       >
         <Switch>
-          <Route exact path="/" component={HomeScreen} />
+          <Route exact path="/intro" component={HomeScreen} />
           <Route path="/list" component={ListScreen} />
           <Route path="/comments" component={CommentScreen} />
           <Route path="/viewing-room/:idx" component={ViewingRoomScreen} />
@@ -47,7 +47,7 @@ export default function AppRouter() {
             <Redirect to="/viewing-room/0" />
           </Route>
           <Route path="/*">
-            404 Not Found
+            <Redirect to="/list" />
           </Route>
         </Switch>
       </ConfigContext.Provider>
