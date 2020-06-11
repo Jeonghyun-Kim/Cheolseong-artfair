@@ -1,0 +1,57 @@
+$delay: 0.7s ease !global;
+$iconColor: azure !global;
+
+.listRoot {
+  width: 100%;
+  min-height: 100%;
+  background-image: url('/wallpaper.jpg');
+  background-repeat: repeat;
+  position: relative;
+}
+
+.container {
+  width: 100%;
+  max-width: 1600px;
+  padding: 100px 0;
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: column;
+  
+  .iconTitle {
+    font-size: 13px;
+    text-align: center;
+  }
+}
+
+// #searchIcon {
+//   position: absolute;
+//   right: 15px;
+//   top: 10px;
+//   color: $iconColor;
+// }
+
+#sortIcon {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  color: $iconColor;
+}
+
+#badge {
+  position: absolute;
+  right: 14px;
+  top: 16px;
+  color: #aa0000;
+}
+
+#sliderContainer {
+  border: none !important;
+  min-width: 200px;
+  margin: 10px 20px;
+}
+
+span.PrivateValueLabel-label-5 {
+  font-size: 13px !important;
+}

@@ -42,8 +42,8 @@ export default function ViewingRoom({ src, brightness = 1 }: { src: string, brig
 
   return (
     <Grid container className="container">
-      <Grid item xs={2} sm={3} />
-      <Grid container direction="column" item xs={8} sm={6} id="max-height">
+      <Grid item xs={2} sm={3} xl={4} />
+      <Grid container direction="column" item xs={8} sm={6} xl={4} id="max-height">
         <Grid item className="heightGrid" />
         <Grid container item xs className="widthContainer">
           {!isLoading && (
@@ -95,7 +95,7 @@ export default function ViewingRoom({ src, brightness = 1 }: { src: string, brig
         </Grid>
         <Grid item className="heightGrid" />
       </Grid>
-      <Grid item xs={2} sm={3} />
+      <Grid item xs={2} sm={3} xl={4} />
     </Grid>
   );
 }

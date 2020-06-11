@@ -7,11 +7,11 @@ export interface Settings {
   setPriceRange: React.Dispatch<[number, number]>;
 }
 
-const defaultSettings: Settings = {
+export const defaultSettings: Settings = {
   yearRange: [2004, 2020],
-  priceRange: [0, 1650],
+  priceRange: [0, 33],
   setYearRange: () => [2004, 2020],
-  setPriceRange: () => [0, 1650],
+  setPriceRange: () => [0, 33],
 };
 
 const ConfigContext = React.createContext<Settings>(defaultSettings);
