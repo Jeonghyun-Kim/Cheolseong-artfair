@@ -10,7 +10,7 @@ import list from '../../filenames';
 import useWindowSize from '../useWindowSize';
 
 const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
-const imageSize = 450;
+const imageSize = 350;
 
 export default function ItemList({ indexMap }: { indexMap: number[] }) {
   const [innerWidth] = useWindowSize();

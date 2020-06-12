@@ -137,7 +137,10 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         </div>
       )}
       <div
-        style={{ opacity: onDetail ? 1 : 0 }}
+        style={{
+          opacity: onDetail ? 1 : 0,
+          zIndex: onDetail ? 100 : -1,
+        }}
         className="detailScreen"
       >
         <Details idx={idxMap[index]} src={`${imgSrc}/${list[idxMap[index]]}.jpg`} />
