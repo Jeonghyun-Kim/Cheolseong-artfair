@@ -9,6 +9,7 @@ $iconColor: azure !global;
   position: relative;
   display: flex;
   justify-content: center;
+  overflow-x: hidden;
 }
 
 .unselectable {
