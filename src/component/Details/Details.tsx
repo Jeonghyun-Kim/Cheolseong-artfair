@@ -42,7 +42,7 @@ export default function Details({ idx, src }: { idx: number, src: string }) {
           Decorum {info[idx].year} - {info[idx].id}
         </Typography>
         <Typography align="right" variant="body2" color="textSecondary" component="p">
-          {info[idx].width}x{info[idx].height}cm
+          {info[idx].height}x{info[idx].width}cm
         </Typography>
         <Typography align="right" variant="body2" color="textSecondary" component="p">
           Oil on Canvas
