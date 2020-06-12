@@ -13,7 +13,7 @@ import ViewingRoom from '../ViewingRoom/ViewingRoom';
 import Details from '../Details/Details';
 import ConfigContext from '../../ConfigContext';
 
-import list from '../../filenames';
+import info from '../../info.json';
 
 const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
 const STORAGE_URL_SM = 'https://d1mqeykb8ywbm3.cloudfront.net';
@@ -44,7 +44,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         k += 1) {
         if (!loaded.includes(k)) {
           const img = new Image();
-          img.src = `${imgSrc}/${list[idxMap[k]]}.jpg`;
+          img.src = `${imgSrc}/${info[idxMap[k]].src}`;
           setLoaded((oldArray) => [...oldArray, k]);
         }
       }
@@ -133,7 +133,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
           >
             <ArrowBackIcon fontSize="large" />
           </IconButton>
-          <ViewingRoom src={`${imgSrc}/${list[idxMap[index]]}.jpg`} brightness={0.9} />
+          <ViewingRoom src={`${imgSrc}/${info[idxMap[index]].src}`} brightness={0.9} />
         </div>
       )}
       <div
@@ -143,7 +143,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         }}
         className="detailScreen"
       >
-        <Details idx={idxMap[index]} src={`${imgSrc}/${list[idxMap[index]]}.jpg`} />
+        <Details idx={idxMap[index]} src={`${imgSrc}/${info[idxMap[index]].src}`} />
       </div>
       <IconButton
         id="arrowLeft"

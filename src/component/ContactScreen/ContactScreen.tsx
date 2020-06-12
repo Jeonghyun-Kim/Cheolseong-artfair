@@ -11,9 +11,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
 
 import './ContactScreen.scss';
-
-import list from '../../filenames';
-import info from '../../info2.json';
+import info from '../../info.json';
 
 import useWindowSize from '../useWindowSize';
 import ViewingRoom from '../ViewingRoom/ViewingRoom';
@@ -33,7 +31,7 @@ export default function ContactScreen({ match }: ContactProps) {
     img.onload = () => {
       setSize([img.width, img.height, img.width / img.height]);
     };
-    img.src = `${STORAGE_URL_MD}/${list[Number(match.params.idx)]}.jpg`;
+    img.src = `${STORAGE_URL_MD}/${info[Number(match.params.idx)].src}`;
   }, [match.params.idx]);
 
   // React.useEffect(() => {
@@ -55,7 +53,7 @@ export default function ContactScreen({ match }: ContactProps) {
               {size && size[2] < 1.5 && (
                 <img
                   alt="Decorum"
-                  src={`${STORAGE_URL_MD}/${list[Number(match.params.idx)]}.jpg`}
+                  src={`${STORAGE_URL_MD}/${info[Number(match.params.idx)].src}`}
                   className="contactCardImage"
                 />
               )}
@@ -64,7 +62,7 @@ export default function ContactScreen({ match }: ContactProps) {
               {size && size[2] >= 1.5 && (
                 <img
                   alt="Decorum"
-                  src={`${STORAGE_URL_MD}/${list[Number(match.params.idx)]}.jpg`}
+                  src={`${STORAGE_URL_MD}/${info[Number(match.params.idx)].src}`}
                   className="contactCardImage"
                   style={{ maxHeight: innerHeight / 5 }}
                 />

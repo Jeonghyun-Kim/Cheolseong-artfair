@@ -5,8 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import './ItemList.scss';
 
-import list from '../../filenames';
-import info from '../../info2.json';
+import info from '../../info.json';
 
 import useWindowSize from '../useWindowSize';
 
@@ -46,8 +45,8 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
               >
                 <img
                   key={value}
-                  src={`${STORAGE_URL_XS}/${list[value]}.jpg`}
-                  alt={`${list[value]}`}
+                  src={`${STORAGE_URL_XS}/${info[value].src}`}
+                  alt={`${info[value].src.split('.')[0]}`}
                   onClick={() => handleMove(value)}
                   onKeyDown={(e) => {
                     if (e.keyCode === 13) {

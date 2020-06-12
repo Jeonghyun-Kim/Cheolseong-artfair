@@ -9,7 +9,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
 
 import './Details.scss';
-import info from '../../info2.json';
+import info from '../../info.json';
 
 import useWindowSize from '../useWindowSize';
 
