@@ -35,7 +35,9 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
             <div style={{ display: 'inline' }}>
               <div
                 style={{
-                  width: Math.min(ratio > breakRatio ? imageSize * 2 + margin[0] * 2 : imageSize, innerWidth - 120),
+                  width: Math.min(ratio > breakRatio
+                    ? imageSize * 2 + margin[0] * 2
+                    : imageSize, innerWidth - 120),
                   // TODO: 100????
                   // eslint-disable-next-line no-nested-ternary
                   height: isSmall ? 'auto' : imageSize,
