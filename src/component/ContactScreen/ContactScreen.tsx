@@ -13,7 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import './ContactScreen.scss';
 
 import list from '../../filenames';
-import info from '../../info.json';
+import info from '../../info2.json';
 
 import useWindowSize from '../useWindowSize';
 import ViewingRoom from '../ViewingRoom/ViewingRoom';
