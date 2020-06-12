@@ -29,18 +29,17 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
     <div className="itemContainer unselectable">
       <LazyLoad height={400}>
         {indexMap.map((value) => {
+          const isSingleLine = innerWidth - 150 < (imageSize + margin[0]) * 2;
+          const size = isSingleLine ? innerWidth - margin[0] * 2 : imageSize;
           const ratio = info[value].width / info[value].height;
-          const isSmall = innerWidth < imageSize + 150 + margin[0] * 2;
-          const size = isSmall ? innerWidth - margin[0] * 2 : imageSize;
           return (
             <div style={{ display: 'inline' }}>
               <div
                 style={{
-                  width: (ratio > breakRatio && !isSmall)
-                    ? Math.min((size + margin[0]) * 2, innerWidth - margin[0] * 2)
-                    : size,
+                  maxWidth: Math.min(innerWidth - margin[0] * 2, isSingleLine ? imageSize : 9999),
+                  width: ratio > breakRatio ? (size + margin[0]) * 2 : size,
                   // TODO: 100????
-                  height: innerWidth < size * 2 + 150 + margin[0] * 2 ? 'auto' : size,
+                  height: isSingleLine ? 'auto' : size,
                   margin: `${margin[0]}px ${margin[1]}px`,
                 }}
                 className="imageBlock"
