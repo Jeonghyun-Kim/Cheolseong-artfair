@@ -14,7 +14,7 @@ import './ListScreen.scss';
 
 import ConfigContext from '../../ConfigContext';
 
-import info from '../../info.json';
+import info from '../../info2.json';
 
 // const ItemList = React.lazy(() => import('../ItemList/ItemList'));
 import ItemList from '../ItemList/ItemList';
@@ -22,7 +22,8 @@ import ItemList from '../ItemList/ItemList';
 interface Information {
   year: number;
   id: number;
-  size: string;
+  width: number;
+  height: number;
   price: number | string;
 }
 
