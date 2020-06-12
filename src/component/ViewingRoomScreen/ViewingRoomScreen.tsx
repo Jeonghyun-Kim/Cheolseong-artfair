@@ -9,7 +9,8 @@ import { useHistory, RouteComponentProps } from 'react-router-dom';
 
 import './ViewingRoomScreen.scss';
 
-import ViewingRoom from '../ViewingRoom/ViewingRoom';
+// import ViewingRoom from '../ViewingRoom/ViewingRoom';
+import ViewingRoom from '../ViewingRoom2/ViewingRoom2';
 import Details from '../Details/Details';
 import ConfigContext from '../../ConfigContext';
 
@@ -133,7 +134,8 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
           >
             <ArrowBackIcon fontSize="large" />
           </IconButton>
-          <ViewingRoom src={`${imgSrc}/${info[idxMap[index]].src}`} brightness={0.9} />
+          {/* <ViewingRoom src={`${imgSrc}/${info[idxMap[index]].src}`} brightness={0.9} /> */}
+          <ViewingRoom idx={idxMap[index + 1]} />
         </div>
       )}
       <div
