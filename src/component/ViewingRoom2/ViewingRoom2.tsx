@@ -5,12 +5,11 @@ import info from '../../info.json';
 
 import useWindowSize from '../useWindowSize';
 
-const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
+// const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
 
-const widthBreakPoint = 1500;
-
-export default function ViewingRoom({ idx }: { idx: number }) {
+export default function ViewingRoom({ idx, src }: { idx: number, src: string }) {
   const [isLandscape, setLandscape] = React.useState<boolean | null>(null);
+  const [maxSize, setMaxSize] = React.useState<string[]>(['calc(80% - 120px)', 'calc(80% - 200px)']);
   const refContainer = React.useRef<HTMLDivElement | null>(null);
 
   const [innerWidth, innerHeight] = useWindowSize();
@@ -22,21 +21,33 @@ export default function ViewingRoom({ idx }: { idx: number }) {
     setLandscape(imageRatio > windowRatio);
   }, [idx, innerWidth, innerHeight]);
 
+  React.useEffect(() => {
+    if (innerWidth < 500) {
+      setMaxSize(['calc(100% - 120px)', 'calc(100% - 200px)']);
+    } else if (innerWidth < 1000) {
+      setMaxSize(['calc(90% - 120px)', 'calc(90% - 200px)']);
+    } else {
+      setMaxSize(['calc(80% - 120px)', 'calc(80% - 200px)']);
+    }
+  }, [innerWidth]);
+
   return (
     <div ref={refContainer} className="viewingRoomRootContainer unselectable">
       <div
         style={{
-          width: innerWidth > widthBreakPoint ? '70%' : 'calc(100% - 300px)',
-          height: innerWidth > widthBreakPoint ? '70%' : 'calc(100% - 300px)',
+          width: maxSize[0],
+          height: maxSize[1],
         }}
         className="maximumContainer"
       >
-        <img
-          alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
-          src={`${STORAGE_URL_MD}/${info[idx].src}`}
-          width={isLandscape ? '100%' : 'auto'}
-          height={isLandscape ? 'auto' : '100%'}
-        />
+        {isLandscape !== null && (
+          <img
+            alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
+            src={src}
+            width={isLandscape ? '100%' : 'auto'}
+            height={isLandscape ? 'auto' : '100%'}
+          />
+        )}
       </div>
     </div>
   );

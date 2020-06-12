@@ -27,7 +27,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   const MAX_INDEX = idxMap.length - 1;
   const [index, setIndex] = React.useState<number>(0);
   const [imgSrc, setImgSrc] = React.useState<string | null>(null);
-  const [loaded, setLoaded] = React.useState<number[]>([]);
+  // const [loaded, setLoaded] = React.useState<number[]>([]);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [isLoading, setLoading] = React.useState<boolean>(true);
 
@@ -37,24 +37,24 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
     setIndex(idxMap.findIndex((element: number) => element === Number(match.params.idx)));
   }, [idxMap, match.params.idx, setIndex]);
 
-  const preLoad = React.useCallback((idx: number) => {
-    if (imgSrc) {
-      const batchSize = 2;
-      for (let k = Math.max(0, idx - batchSize);
-        k <= Math.min(MAX_INDEX, idx + batchSize);
-        k += 1) {
-        if (!loaded.includes(k)) {
-          const img = new Image();
-          img.src = `${imgSrc}/${info[idxMap[k]].src}`;
-          setLoaded((oldArray) => [...oldArray, k]);
-        }
-      }
-    }
-  }, [idxMap, MAX_INDEX, imgSrc, loaded]);
+  // const preLoad = React.useCallback((idx: number) => {
+  //   if (imgSrc) {
+  //     const batchSize = 2;
+  //     for (let k = Math.max(0, idx - batchSize);
+  //       k <= Math.min(MAX_INDEX, idx + batchSize);
+  //       k += 1) {
+  //       if (!loaded.includes(k)) {
+  //         const img = new Image();
+  //         img.src = `${imgSrc}/${info[idxMap[k]].src}`;
+  //         setLoaded((oldArray) => [...oldArray, k]);
+  //       }
+  //     }
+  //   }
+  // }, [idxMap, MAX_INDEX, imgSrc, loaded]);
 
-  React.useEffect(() => {
-    preLoad(index);
-  });
+  // React.useEffect(() => {
+  //   preLoad(index);
+  // });
 
   const ref = React.useRef<HTMLDivElement | null>(null);
 
@@ -135,7 +135,9 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
             <ArrowBackIcon fontSize="large" />
           </IconButton>
           {/* <ViewingRoom src={`${imgSrc}/${info[idxMap[index]].src}`} brightness={0.9} /> */}
-          <ViewingRoom idx={idxMap[index + 1]} />
+          {imgSrc && (
+            <ViewingRoom idx={idxMap[index]} src={`${imgSrc}/${info[idxMap[index]].src}`} />
+          )}
         </div>
       )}
       <div
