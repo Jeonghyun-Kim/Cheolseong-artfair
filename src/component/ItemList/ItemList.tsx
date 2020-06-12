@@ -30,17 +30,17 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
       <LazyLoad height={400}>
         {indexMap.map((value) => {
           const ratio = info[value].width / info[value].height;
-          const isSmall = innerWidth < imageSize + 120 + margin[0] * 2;
+          const isSmall = innerWidth < imageSize + 150 + margin[0] * 2;
+          const size = isSmall ? innerWidth - margin[0] * 2 : imageSize;
           return (
             <div style={{ display: 'inline' }}>
               <div
                 style={{
-                  width: Math.min(ratio > breakRatio
-                    ? imageSize * 2 + margin[0] * 2
-                    : imageSize, innerWidth - 120),
+                  width: (ratio > breakRatio && !isSmall)
+                    ? Math.min((size + margin[0]) * 2, innerWidth - margin[0] * 2)
+                    : size,
                   // TODO: 100????
-                  // eslint-disable-next-line no-nested-ternary
-                  height: isSmall ? 'auto' : imageSize,
+                  height: innerWidth < size * 2 + 150 + margin[0] * 2 ? 'auto' : size,
                   margin: `${margin[0]}px ${margin[1]}px`,
                 }}
                 className="imageBlock"
