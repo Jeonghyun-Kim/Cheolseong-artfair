@@ -10,6 +10,7 @@ import CommentScreen from './component/CommentScreen/CommentScreen';
 import ViewingRoomScreen from './component/ViewingRoomScreen/ViewingRoomScreen';
 import HomeScreen from './component/HomeScreen/HomeScreen';
 import ListScreen from './component/ListScreen/ListScreen';
+import ContactScreen from './component/ContactScreen/ContactScreen';
 
 import ConfigContext from './ConfigContext';
 
@@ -34,6 +35,7 @@ export default function AppRouter() {
           <Route exact path="/intro" component={HomeScreen} />
           <Route path="/list" component={ListScreen} />
           <Route path="/comments" component={CommentScreen} />
+          <Route path="/contact/:idx" component={ContactScreen} />
           <Route path="/viewing-room/:idx" component={ViewingRoomScreen} />
           <Route path="/viewing-room">
             <Redirect to="/viewing-room/0" />
