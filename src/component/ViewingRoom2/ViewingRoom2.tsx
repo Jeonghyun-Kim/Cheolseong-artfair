@@ -25,9 +25,9 @@ export default function ViewingRoom({ idx, src }: { idx: number, src: string }) 
     if (innerWidth < 500) {
       setMaxSize(['calc(100% - 120px)', 'calc(100% - 200px)']);
     } else if (innerWidth < 1500) {
-      setMaxSize(['calc(75% - 120px)', 'calc(75% - 200px)']);
+      setMaxSize(['calc(75% - 120px)', 'calc(100% - 300px)']);
     } else {
-      setMaxSize(['calc(60% - 120px)', 'calc(60% - 200px)']);
+      setMaxSize(['calc(60% - 120px)', 'calc(100% - 400px)']);
     }
   }, [innerWidth]);
 
