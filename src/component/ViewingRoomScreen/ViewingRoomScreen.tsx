@@ -176,6 +176,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       <IconButton
         id="closeIcon"
         onClick={() => setOnDetail(false)}
+        disabled={!onDetail}
         style={{ opacity: onDetail ? 1 : 0 }}
       >
         <CloseIcon fontSize="large" />

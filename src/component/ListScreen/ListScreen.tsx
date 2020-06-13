@@ -25,7 +25,7 @@ const YEAR_MAX = 2020;
 
 const PRICE_UNIT = 50;
 const PRICE_MIN = 0 / PRICE_UNIT;
-const PRICE_MAX = 1650 / PRICE_UNIT;
+const PRICE_MAX = 1800 / PRICE_UNIT;
 
 interface Information {
   year: number;
@@ -128,13 +128,65 @@ export default function ListScreen() {
       map.push(idx);
     });
 
-    // const compare
+    const getSign = (value: number) => {
+      if (value > 0) {
+        return 1;
+      }
+      if (value === 0) {
+        return 0;
+      }
+      return -1;
+    };
 
-    // map.sort();
+    const compareYearUp = (a: number, b: number) => getSign(info[a].year - info[b].year);
+    const comparePrice = {
+      up: (a: number, b: number) => {
+        if (info[a].price === 'sold out') {
+          if (info[b].price === 'sold out') {
+            return 0;
+          }
+          return 1;
+        }
+        if (info[b].price === 'sold out') {
+          return -1;
+        }
+        return getSign(Number(info[a].price) - Number(info[b].price));
+      },
+
+      down: (a: number, b: number) => {
+        if (info[a].price === 'sold out') {
+          if (info[b].price === 'sold out') {
+            return 0;
+          }
+          return 1;
+        }
+        if (info[b].price === 'sold out') {
+          return -1;
+        }
+        return getSign(Number(info[b].price) - Number(info[a].price));
+      },
+    };
+
+    switch (storedSortConfig.useSort) {
+      case 'year':
+        if (!storedSortConfig.yearSort) {
+          map.sort(compareYearUp);
+        }
+        break;
+      case 'price':
+        if (storedSortConfig.priceSort) {
+          map.sort(comparePrice.down);
+        } else {
+          map.sort(comparePrice.up);
+        }
+        break;
+      default:
+        break;
+    }
 
     sessionStorage.setItem('@idxMap', JSON.stringify(map));
     setIdxMap(map);
-  }, [storedConfig, setIdxMap]);
+  }, [storedSortConfig, storedConfig, setIdxMap]);
 
   const ScrollRestoration = () => {
     React.useEffect(() => {
