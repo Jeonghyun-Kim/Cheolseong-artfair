@@ -11,7 +11,7 @@ import useWindowSize from '../useWindowSize';
 
 const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
 const imageSize = 350;
-const margin = [40, 30];
+const margin = [30, 80];
 const breakRatio = 1.5;
 
 export default function ItemList({ indexMap }: { indexMap: number[] }) {
@@ -38,7 +38,7 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
                   style={{
                     width: Math.min(innerWidth - 100, imageSize),
                     height: 'auto',
-                    margin: `${margin[0]}px ${margin[1] / 2}px`,
+                    margin: `${margin[1] / 2}px ${margin[0] / 2}px`,
                   }}
                 >
                   <img
@@ -63,7 +63,7 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
                     maxWidth: innerWidth - 100,
                     width: imageRatio > breakRatio ? (imageSize + margin[0]) * 2 : imageSize,
                     height: imageSize,
-                    margin: `${margin[0]}px ${margin[1]}px`,
+                    margin: `${margin[1]}px ${margin[0]}px`,
                   }}
                   className="imageBlock"
                 >
