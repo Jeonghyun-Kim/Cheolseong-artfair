@@ -40,7 +40,6 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
                     height: 'auto',
                     margin: `${margin[0]}px ${margin[1] / 2}px`,
                   }}
-                  className="imageBlock"
                 >
                   <img
                     src={`${STORAGE_URL_XS}/${info[value].src}`}
@@ -51,6 +50,10 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
                       if (e.keyCode === 13) {
                         handleMove(value);
                       }
+                    }}
+                    style={{
+                      boxShadow: '1px 7px 10px 0px rgba(0, 0, 0, 1)',
+                      borderRadius: info[value].src === '2013_5.gif' ? 999 : 2,
                     }}
                   />
                 </div>
@@ -77,6 +80,7 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
                         }
                       }}
                       className="listImage"
+                      style={{ borderRadius: info[value].src === '2013_5.gif' ? 999 : 2 }}
                     />
                   ) : (
                     <img
@@ -91,6 +95,7 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
                         }
                       }}
                       className="listImage"
+                      style={{ borderRadius: info[value].src === '2013_5.gif' ? 999 : 2 }}
                     />
                   )}
                 </div>

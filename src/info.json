@@ -9,14 +9,6 @@
   },
   {
     "year": 2020,
-    "id": 2,
-    "width": 15.2,
-    "height": 35,
-    "price": 60,
-    "src": "2020_2.jpg"
-  },
-  {
-    "year": 2020,
     "id": 3,
     "width": 35,
     "height": 15,
@@ -38,6 +30,14 @@
     "height": 130,
     "price": 1200,
     "src": "2020_5.jpg"
+  },
+  {
+    "year": 2020,
+    "id": 6,
+    "width": 15.2,
+    "height": 35,
+    "price": 60,
+    "src": "2020_6.jpg"
   },
   {
     "year": 2019,
@@ -957,7 +957,7 @@
     "width": 50,
     "height": 50,
     "price": "sold out",
-    "src": "2013_5.jpg"
+    "src": "2013_5.gif"
   },
   {
     "year": 2013,

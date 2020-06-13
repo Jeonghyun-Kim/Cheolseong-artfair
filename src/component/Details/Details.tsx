@@ -41,7 +41,10 @@ export default function Details({ idx, src }: { idx: number, src: string }) {
           alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
           src={src}
           className="cardImage"
-          style={{ maxHeight: isSmall ? innerHeight - 370 : innerHeight - 440 }}
+          style={{
+            maxHeight: isSmall ? innerHeight - 370 : innerHeight - 440,
+            borderRadius: info[idx].src === '2013_5.gif' ? 999 : 2,
+          }}
         />
       </div>
       <CardContent>

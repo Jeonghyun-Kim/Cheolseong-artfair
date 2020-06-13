@@ -104,6 +104,7 @@ export default function ViewingRoom({ idx, src }: { idx: number, src: string }) 
               width={isLandscape[0] ? '100%' : 'auto'}
               height={isLandscape[0] ? 'auto' : '100%'}
               className="painting"
+              style={{ borderRadius: info[idx].src === '2013_5.gif' ? 999 : 2 }}
             />
           </>
         )}
