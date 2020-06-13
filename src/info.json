@@ -396,7 +396,7 @@
     "id": 11,
     "width": 40,
     "height": 40,
-    "price": "sold out",
+    "price": 140,
     "src": "2017_11.jpg"
   },
   {
@@ -958,14 +958,6 @@
     "height": 50,
     "price": "sold out",
     "src": "2013_5.gif"
-  },
-  {
-    "year": 2013,
-    "id": 6,
-    "width": 130,
-    "height": 97,
-    "price": 900,
-    "src": "2013_6.jpg"
   },
   {
     "year": 2013,
