@@ -3,18 +3,18 @@ $iconColor: azure !global;
 
 .welcomeGuide {
   position: absolute;
-  top: 70px;
   left: 50%;
   transform: translateX(-50%);
   color: whitesmoke;
+  width: 80%;
 }
 
-.timer {
+#spinnerIcon {
   position: absolute;
-  bottom: 70px;
   left: 50%;
+  bottom: 70px;
+  color: $iconColor;
   transform: translateX(-50%);
-  color: whitesmoke;
 }
 
 #moreIcon {

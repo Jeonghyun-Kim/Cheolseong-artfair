@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 
 import './HomeScreen.scss';
 
-import ViewingRoom from '../ViewingRoom/ViewingRoom';
+import ViewingRoom from '../ViewingRoom2/ViewingRoom2';
 import useWindowSize from '../useWindowSize';
 
 const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
@@ -16,8 +16,9 @@ const REWRITE_URL = 'https://www.notion.so/3f9ecec2a1d940c1b001a22b973b0794?v=b6
 const timer = 5;
 
 export default function HomeScreen() {
+  const [welcomeText, setWelcomeText] = React.useState<string[]>(['온라인 아트페어에 오신것을 환영합니다.']);
+  const [top, setTop] = React.useState<string[]>(['10%', '']);
   const [innerWidth] = useWindowSize();
-  const [timeLeft, setTimeLeft] = React.useState<number>(timer);
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -26,24 +27,46 @@ export default function HomeScreen() {
   }, []);
 
   React.useEffect(() => {
-    if (timeLeft > 0) {
-      setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+    if (innerWidth > 1000) {
+      setTop(['10%', '']);
+      setWelcomeText(['온라인 아트페어에 오신것을 환영합니다.']);
+    } else {
+      setTop(['calc(10% - 30px)', 'calc(10% + 35px)']);
+      setWelcomeText(['온라인 아트페어에', '오신것을 환영합니다.']);
     }
-  }, [timeLeft]);
+  }, [innerWidth]);
 
   return (
     <div className="App">
-      <Typography variant={innerWidth > 600 ? 'h5' : 'h6'} align="center" className="welcomeGuide">
-        온라인 아트페어에 오신것을 환영합니다.
+      <Typography
+        variant={innerWidth > 600 ? 'h3' : 'h4'}
+        align="center"
+        className="welcomeGuide"
+        style={{ top: top[0] }}
+      >
+        {welcomeText[0]}
       </Typography>
+      {welcomeText[1] && (
+        <Typography
+          variant={innerWidth > 600 ? 'h3' : 'h4'}
+          align="center"
+          className="welcomeGuide"
+          style={{ top: top[1] }}
+        >
+          {welcomeText[1]}
+        </Typography>
+      )}
       <div
         className="viewingRoom"
       >
-        <ViewingRoom src={`${STORAGE_URL_MD}/2020_1.jpg`} brightness={0.9} />
+        <ViewingRoom idx={0} src={`${STORAGE_URL_MD}/2020_1.jpg`} />
       </div>
-      <Typography variant={innerWidth > 600 ? 'h5' : 'h6'} align="center" className="timer">
-        {timeLeft}초 후 이동합니다.
-      </Typography>
+      <img
+        alt="spinner"
+        src={`${process.env.PUBLIC_URL}/Spinner.svg`}
+        id="spinnerIcon"
+        width="100px"
+      />
       <IconButton id="arrowLeft" style={{ color: '#444' }}>
         <ArrowBackIosIcon fontSize="large" />
       </IconButton>
