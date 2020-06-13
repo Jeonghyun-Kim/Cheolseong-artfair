@@ -29,14 +29,18 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
     if (items.length === indexMap.length) {
       setHasMore(false);
     }
-  }, [items.length, indexMap.length]);
+  }, [items, indexMap]);
 
   React.useEffect(() => {
-    const storedItems = sessionStorage.getItem('@items');
-    if (storedItems) {
-      setItems(JSON.parse(storedItems));
-    }
-  }, []);
+    setItems(indexMap.slice(0, Math.min(NUM_PAGE, indexMap.length) - 1));
+  }, [indexMap]);
+
+  // React.useEffect(() => {
+  //   const storedItems = sessionStorage.getItem('@items');
+  //   if (storedItems) {
+  //     setItems(JSON.parse(storedItems));
+  //   }
+  // }, []);
 
   const handleMove = (value: number) => {
     sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
@@ -55,7 +59,7 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
           indexMap.slice(items.length, Math.min(items.length + NUM_PAGE, indexMap.length)),
         ),
       );
-      sessionStorage.setItem('@items', JSON.stringify(items));
+      // sessionStorage.setItem('@items', JSON.stringify(items));
     }, 2000);
   };
 
