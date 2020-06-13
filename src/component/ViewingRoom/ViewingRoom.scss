@@ -38,3 +38,10 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+#loadingIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
