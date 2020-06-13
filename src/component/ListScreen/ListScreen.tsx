@@ -63,7 +63,10 @@ export default function ListScreen() {
   const { idxMap, setIdxMap } = React.useContext(ConfigContext);
   const [storedConfig, setStoredConfig] = React.useState<MyConfigInterface>(defaultConfig);
   const [config, setConfig] = React.useState<MyConfigInterface>(defaultConfig);
-  const [storedSortConfig, setStoredSortConfig] = React.useState<MySortInterface>(defaultSortConfig);
+  const [
+    storedSortConfig,
+    setStoredSortConfig,
+  ] = React.useState<MySortInterface>(defaultSortConfig);
   const [sortConfig, setSortConfig] = React.useState<MySortInterface>(defaultSortConfig);
   const [filterAnchorEl, setFilterAnchorEl] = React.useState<null | HTMLElement>(null);
   const [sortAnchorEl, setSortAnchorEl] = React.useState<null | HTMLElement>(null);
