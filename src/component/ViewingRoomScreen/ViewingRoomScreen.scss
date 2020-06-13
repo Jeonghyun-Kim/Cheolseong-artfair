@@ -1,5 +1,5 @@
 $delay: 0.7s ease !global;
-$iconColor: azure !global;
+$iconColor: rgba(149, 148, 160, 0.664) !global;
 
 .App {
   display: flex;
@@ -37,7 +37,6 @@ $iconColor: azure !global;
   position: absolute;
   right: 30px;
   bottom: 30px;
-  color: $iconColor;
 }
 
 #closeIcon {
