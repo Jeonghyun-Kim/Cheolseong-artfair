@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
-import LazyLoad from 'react-lazyload';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useHistory } from 'react-router-dom';
 
@@ -62,110 +61,111 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
 
   return (
     <div className="itemContainer unselectable">
-      <LazyLoad height={400}>
-        <InfiniteScroll
-          dataLength={items.length}
-          next={getMoreData}
-          hasMore={hasMore}
-          loader={(
+      <InfiniteScroll
+        dataLength={items.length}
+        next={getMoreData}
+        hasMore={hasMore}
+        loader={(
+          <div
+            style={{ width: '100%', height: '150px', position: 'relative' }}
+          >
             <img
               alt="spinner"
               src={`${process.env.PUBLIC_URL}/Spinner.svg`}
-              id="spinnerIcon"
+              id="loadingIcon"
               width="100px"
-              style={{ marginTop: '50px' }}
             />
-          )}
-          // endMessage={(
-          //   <div
-          //     id="endLoading"
-          //     style={{
-          //       width: Math.min(innerWidth - 100, imageSize),
-          //       height: Math.min(innerWidth - 100, imageSize),
-          //     }}
-          //   >
-          //     <h3>Finish</h3>
-          //   </div>
-          // )}
-        >
-          {items.map((value) => {
-            const isSingleLine = innerWidth - 150 < (imageSize + margin[0]) * 2;
-            const imageRatio = info[value].width / info[value].height;
+          </div>
+        )}
+        // endMessage={(
+        //   <div
+        //     id="endLoading"
+        //     style={{
+        //       width: Math.min(innerWidth - 100, imageSize),
+        //       height: Math.min(innerWidth - 100, imageSize),
+        //     }}
+        //   >
+        //     <h3>Finish</h3>
+        //   </div>
+        // )}
+      >
+        {items.map((value) => {
+          const isSingleLine = innerWidth - 150 < (imageSize + margin[0]) * 2;
+          const imageRatio = info[value].width / info[value].height;
 
-            return (
-              <div id="mapping" key={value}>
-                {isSingleLine ? (
-                  <div
-                    style={{
-                      width: Math.min(innerWidth - 100, imageSize),
-                      height: 'auto',
-                      margin: `${margin[1] / 2}px ${margin[0] / 2}px`,
+          return (
+            <div id="mapping" key={value}>
+              {isSingleLine ? (
+                <div
+                  style={{
+                    width: Math.min(innerWidth - 100, imageSize),
+                    height: 'auto',
+                    margin: `${margin[1] / 2}px ${margin[0] / 2}px`,
+                  }}
+                >
+                  <img
+                    src={`${STORAGE_URL_XS}/${info[value].src}`}
+                    alt={`${info[value].src.split('.')[0]}`}
+                    width="100%"
+                    onClick={() => handleMove(value)}
+                    onKeyDown={(e) => {
+                      if (e.keyCode === 13) {
+                        handleMove(value);
+                      }
                     }}
-                  >
+                    style={{
+                      boxShadow: '1px 7px 10px 0px rgba(0, 0, 0, 1)',
+                      borderRadius: info[value].src === '2013_5.gif' ? 999 : 2,
+                    }}
+                  />
+                </div>
+              ) : (
+                <div
+                  style={{
+                    maxWidth: innerWidth - 100,
+                    width: imageRatio > breakRatio ? (imageSize + margin[0]) * 2 : imageSize,
+                    height: imageSize,
+                    margin: `${margin[1]}px ${margin[0]}px`,
+                  }}
+                  className="imageBlock"
+                >
+                  {imageRatio > breakRatio ? (
                     <img
                       src={`${STORAGE_URL_XS}/${info[value].src}`}
                       alt={`${info[value].src.split('.')[0]}`}
-                      width="100%"
+                      width={imageRatio > 2 ? '100%' : 'auto'}
+                      height={imageRatio > 2 ? 'auto' : '100%'}
                       onClick={() => handleMove(value)}
                       onKeyDown={(e) => {
                         if (e.keyCode === 13) {
                           handleMove(value);
                         }
                       }}
-                      style={{
-                        boxShadow: '1px 7px 10px 0px rgba(0, 0, 0, 1)',
-                        borderRadius: info[value].src === '2013_5.gif' ? 999 : 2,
-                      }}
+                      className="listImage"
+                      style={{ borderRadius: info[value].src === '2013_5.gif' ? 999 : 2 }}
                     />
-                  </div>
-                ) : (
-                  <div
-                    style={{
-                      maxWidth: innerWidth - 100,
-                      width: imageRatio > breakRatio ? (imageSize + margin[0]) * 2 : imageSize,
-                      height: imageSize,
-                      margin: `${margin[1]}px ${margin[0]}px`,
-                    }}
-                    className="imageBlock"
-                  >
-                    {imageRatio > breakRatio ? (
-                      <img
-                        src={`${STORAGE_URL_XS}/${info[value].src}`}
-                        alt={`${info[value].src.split('.')[0]}`}
-                        width={imageRatio > 2 ? '100%' : 'auto'}
-                        height={imageRatio > 2 ? 'auto' : '100%'}
-                        onClick={() => handleMove(value)}
-                        onKeyDown={(e) => {
-                          if (e.keyCode === 13) {
-                            handleMove(value);
-                          }
-                        }}
-                        className="listImage"
-                        style={{ borderRadius: info[value].src === '2013_5.gif' ? 999 : 2 }}
-                      />
-                    ) : (
-                      <img
-                        src={`${STORAGE_URL_XS}/${info[value].src}`}
-                        alt={`${info[value].src.split('.')[0]}`}
-                        width={imageRatio > 1 ? '100%' : 'auto'}
-                        height={imageRatio > 1 ? 'auto' : '100%'}
-                        onClick={() => handleMove(value)}
-                        onKeyDown={(e) => {
-                          if (e.keyCode === 13) {
-                            handleMove(value);
-                          }
-                        }}
-                        className="listImage"
-                        style={{ borderRadius: info[value].src === '2013_5.gif' ? 999 : 2 }}
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </InfiniteScroll>
-      </LazyLoad>
+                  ) : (
+                    <img
+                      src={`${STORAGE_URL_XS}/${info[value].src}`}
+                      alt={`${info[value].src.split('.')[0]}`}
+                      width={imageRatio > 1 ? '100%' : 'auto'}
+                      height={imageRatio > 1 ? 'auto' : '100%'}
+                      onClick={() => handleMove(value)}
+                      onKeyDown={(e) => {
+                        if (e.keyCode === 13) {
+                          handleMove(value);
+                        }
+                      }}
+                      className="listImage"
+                      style={{ borderRadius: info[value].src === '2013_5.gif' ? 999 : 2 }}
+                    />
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </InfiniteScroll>
     </div>
   );
 }

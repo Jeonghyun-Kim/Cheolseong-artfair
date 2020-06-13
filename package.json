@@ -20,7 +20,6 @@
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
     "react-infinite-scroll-component": "^5.0.5",
-    "react-lazyload": "^2.6.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "typescript": "^3.7.5"
@@ -58,7 +57,6 @@
   "devDependencies": {
     "@types/react-copy-to-clipboard": "^4.3.0",
     "@types/react-infinite-scroll-component": "^4.2.5",
-    "@types/react-lazyload": "^2.6.0",
     "@types/react-router-dom": "^5.1.5",
     "@typescript-eslint/eslint-plugin": "^3.2.0",
     "eslint-config-airbnb-typescript": "^8.0.2",

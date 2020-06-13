@@ -31,13 +31,20 @@
   position: relative;
 }
 
-#endLoading {
-  background-color: rgba($color: #b9b8b8, $alpha: 1.0);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+// #endLoading {
+//   background-color: rgba($color: #b9b8b8, $alpha: 1.0);
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
 
-  h3 {
-    text-align: center;
-  }
+//   h3 {
+//     text-align: center;
+//   }
+// }
+
+#loadingIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
