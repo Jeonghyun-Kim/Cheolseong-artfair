@@ -29,34 +29,75 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
       <LazyLoad height={400}>
         {indexMap.map((value) => {
           const isSingleLine = innerWidth - 150 < (imageSize + margin[0]) * 2;
-          const size = isSingleLine ? innerWidth - margin[0] * 2 : imageSize;
-          const ratio = info[value].width / info[value].height;
+          const imageRatio = info[value].width / info[value].height;
+
           return (
-            <div style={{ display: 'inline' }}>
-              <div
-                style={{
-                  maxWidth: Math.min(innerWidth - margin[0] * 2, isSingleLine ? imageSize : 9999),
-                  width: ratio > breakRatio ? (size + margin[0]) * 2 : size,
-                  // TODO: 100????
-                  height: isSingleLine ? 'auto' : size,
-                  margin: `${margin[0]}px ${margin[1]}px`,
-                }}
-                className="imageBlock"
-              >
-                <img
+            <>
+              {isSingleLine ? (
+                <div
                   key={value}
-                  src={`${STORAGE_URL_XS}/${info[value].src}`}
-                  alt={`${info[value].src.split('.')[0]}`}
-                  onClick={() => handleMove(value)}
-                  onKeyDown={(e) => {
-                    if (e.keyCode === 13) {
-                      handleMove(value);
-                    }
+                  style={{
+                    width: Math.min(innerWidth - 100, imageSize),
+                    height: 'auto',
+                    margin: `${margin[0]}px ${margin[1] / 2}px`,
                   }}
-                  className="listImage"
-                />
-              </div>
-            </div>
+                  className="imageBlock"
+                >
+                  <img
+                    src={`${STORAGE_URL_XS}/${info[value].src}`}
+                    alt={`${info[value].src.split('.')[0]}`}
+                    width="100%"
+                    onClick={() => handleMove(value)}
+                    onKeyDown={(e) => {
+                      if (e.keyCode === 13) {
+                        handleMove(value);
+                      }
+                    }}
+                  />
+                </div>
+              ) : (
+                <div
+                  key={value}
+                  style={{
+                    maxWidth: innerWidth - 100,
+                    width: imageRatio > breakRatio ? (imageSize + margin[0]) * 2 : imageSize,
+                    height: imageSize,
+                    margin: `${margin[0]}px ${margin[1]}px`,
+                  }}
+                  className="imageBlock"
+                >
+                  {imageRatio > breakRatio ? (
+                    <img
+                      src={`${STORAGE_URL_XS}/${info[value].src}`}
+                      alt={`${info[value].src.split('.')[0]}`}
+                      width={imageRatio > 2 ? '100%' : 'auto'}
+                      height={imageRatio > 2 ? 'auto' : '100%'}
+                      onClick={() => handleMove(value)}
+                      onKeyDown={(e) => {
+                        if (e.keyCode === 13) {
+                          handleMove(value);
+                        }
+                      }}
+                      className="listImage"
+                    />
+                  ) : (
+                    <img
+                      src={`${STORAGE_URL_XS}/${info[value].src}`}
+                      alt={`${info[value].src.split('.')[0]}`}
+                      width={imageRatio > 1 ? '100%' : 'auto'}
+                      height={imageRatio > 1 ? 'auto' : '100%'}
+                      onClick={() => handleMove(value)}
+                      onKeyDown={(e) => {
+                        if (e.keyCode === 13) {
+                          handleMove(value);
+                        }
+                      }}
+                      className="listImage"
+                    />
+                  )}
+                </div>
+              )}
+            </>
           );
         })}
       </LazyLoad>
