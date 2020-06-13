@@ -248,7 +248,7 @@ export default function ListScreen() {
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'right',
+          horizontal: 'center',
         }}
       >
         <div id="switchContainer">
