@@ -131,10 +131,10 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
           <IconButton
             id="backIcon"
             onClick={() => history.push('/list')}
+            disabled={onDetail}
           >
             <ArrowBackIcon fontSize="large" />
           </IconButton>
-          {/* <ViewingRoom src={`${imgSrc}/${info[idxMap[index]].src}`} brightness={0.9} /> */}
           {imgSrc && (
             <ViewingRoom idx={idxMap[index]} src={`${imgSrc}/${info[idxMap[index]].src}`} />
           )}
