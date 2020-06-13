@@ -1,6 +1,8 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import Popover from '@material-ui/core/Popover';
+import Switch from '@material-ui/core/Switch';
+import Radio from '@material-ui/core/Radio';
 import Slider from '@material-ui/core/Slider';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
@@ -45,19 +47,39 @@ const defaultConfig = {
   onSaleOnly: false,
 };
 
+interface MySortInterface {
+  yearSort: boolean;
+  priceSort: boolean;
+  useSort: string;
+}
+
+const defaultSortConfig = {
+  yearSort: true,
+  priceSort: false,
+  useSort: 'year',
+};
+
 export default function ListScreen() {
   const { idxMap, setIdxMap } = React.useContext(ConfigContext);
   const [storedConfig, setStoredConfig] = React.useState<MyConfigInterface>(defaultConfig);
   const [config, setConfig] = React.useState<MyConfigInterface>(defaultConfig);
+  const [storedSortConfig, setStoredSortConfig] = React.useState<MySortInterface>(defaultSortConfig);
+  const [sortConfig, setSortConfig] = React.useState<MySortInterface>(defaultSortConfig);
   const [filterAnchorEl, setFilterAnchorEl] = React.useState<null | HTMLElement>(null);
   const [sortAnchorEl, setSortAnchorEl] = React.useState<null | HTMLElement>(null);
 
   React.useEffect(() => {
-    const stored = sessionStorage.getItem('@config');
+    const sessionConfig = sessionStorage.getItem('@config');
+    const sessionSortConfig = sessionStorage.getItem('@sortConfig');
 
-    if (stored) {
-      setStoredConfig(JSON.parse(stored));
-      setConfig(JSON.parse(stored));
+    if (sessionConfig) {
+      setStoredConfig(JSON.parse(sessionConfig));
+      setConfig(JSON.parse(sessionConfig));
+    }
+
+    if (sessionSortConfig) {
+      setStoredSortConfig(JSON.parse(sessionSortConfig));
+      setSortConfig(JSON.parse(sessionSortConfig));
     }
   }, []);
 
@@ -71,6 +93,8 @@ export default function ListScreen() {
   };
 
   const handleSortMenuClose = () => {
+    sessionStorage.setItem('@sortConfig', JSON.stringify(sortConfig));
+    setStoredSortConfig(sortConfig);
     setSortAnchorEl(null);
   };
 
@@ -103,6 +127,10 @@ export default function ListScreen() {
       }
       map.push(idx);
     });
+
+    // const compare
+
+    // map.sort();
 
     sessionStorage.setItem('@idxMap', JSON.stringify(map));
     setIdxMap(map);
@@ -137,6 +165,9 @@ export default function ListScreen() {
         <UpIcon fontSize="large" />
       </IconButton>
       {/* Sort Menu Button */}
+      {!(JSON.stringify(storedSortConfig) === JSON.stringify(defaultSortConfig)) && (
+        <Brightness1Icon fontSize="small" id="sortBadge" />
+      )}
       <IconButton
         id="sortIcon"
         aria-controls="sort-menu"
@@ -157,19 +188,84 @@ export default function ListScreen() {
         onClose={handleSortMenuClose}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'left',
+          horizontal: 'right',
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'left',
+          horizontal: 'right',
         }}
       >
-        <div id="container">
-          <div id="divider" />
+        <div id="switchContainer">
+          <Grid container>
+            <Grid item>
+              <Radio
+                value="year"
+                color="primary"
+                checked={sortConfig.useSort === 'year'}
+                onChange={(e) => setSortConfig({
+                  ...sortConfig,
+                  useSort: e.target.value,
+                  priceSort: defaultSortConfig.priceSort,
+                })}
+              />
+            </Grid>
+            <Grid item style={{ display: 'flex', alignItems: 'center' }}>
+              <Typography align="center" variant="body2">연도 순</Typography>
+            </Grid>
+            <Grid item xs>
+              <Switch
+                color="primary"
+                disabled={!(sortConfig.useSort === 'year')}
+                checked={sortConfig.yearSort}
+                onChange={(e) => setSortConfig({
+                  ...sortConfig,
+                  yearSort: e.target.checked,
+                })}
+              />
+            </Grid>
+            <Grid item style={{ display: 'flex', alignItems: 'center' }}>
+              <Typography align="center" variant="body2">연도 역순</Typography>
+            </Grid>
+          </Grid>
+        </div>
+        <div id="divider" />
+        <div id="switchContainer">
+          <Grid container>
+            <Grid item>
+              <Radio
+                value="price"
+                color="primary"
+                checked={sortConfig.useSort === 'price'}
+                onChange={(e) => setSortConfig({
+                  ...sortConfig,
+                  useSort: e.target.value,
+                  yearSort: defaultSortConfig.yearSort,
+                })}
+              />
+            </Grid>
+            <Grid item style={{ display: 'flex', alignItems: 'center' }}>
+              <Typography align="center" variant="body2">가격 순</Typography>
+            </Grid>
+            <Grid item xs>
+              <Switch
+                color="primary"
+                disabled={!(sortConfig.useSort === 'price')}
+                checked={sortConfig.priceSort}
+                onChange={(e) => setSortConfig({
+                  ...sortConfig,
+                  priceSort: e.target.checked,
+                })}
+              />
+            </Grid>
+            <Grid item style={{ display: 'flex', alignItems: 'center' }}>
+              <Typography align="center" variant="body2">가격 역순</Typography>
+            </Grid>
+          </Grid>
         </div>
       </Popover>
       {/* Filter Menu Button */}
-      {!(JSON.stringify(storedConfig.yearRange) === '[2004,2020]' && !storedConfig.onSaleOnly) && (
+      {!(JSON.stringify(storedConfig.yearRange) === JSON.stringify(defaultConfig.yearRange)
+        && !storedConfig.onSaleOnly) && (
         <Brightness1Icon fontSize="small" id="filterBadge" />
       )}
       <IconButton
