@@ -9,8 +9,7 @@ import { useHistory, RouteComponentProps } from 'react-router-dom';
 
 import './ViewingRoomScreen.scss';
 
-// import ViewingRoom from '../ViewingRoom/ViewingRoom';
-import ViewingRoom from '../ViewingRoom2/ViewingRoom2';
+import ViewingRoom from '../ViewingRoom/ViewingRoom';
 import Details from '../Details/Details';
 import ConfigContext from '../../ConfigContext';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './ViewingRoom2.scss';
+import './ViewingRoom.scss';
 import info from '../../info.json';
 
 import useWindowSize from '../useWindowSize';

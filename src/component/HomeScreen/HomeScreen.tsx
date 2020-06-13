@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 
 import './HomeScreen.scss';
 
-import ViewingRoom from '../ViewingRoom2/ViewingRoom2';
+import ViewingRoom from '../ViewingRoom/ViewingRoom';
 import useWindowSize from '../useWindowSize';
 
 const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
