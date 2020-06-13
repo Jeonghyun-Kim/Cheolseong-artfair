@@ -60,7 +60,7 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
         ),
       );
       // sessionStorage.setItem('@items', JSON.stringify(items));
-    }, 2000);
+    }, 1000);
   };
 
   return (
@@ -69,6 +69,7 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
         dataLength={items.length}
         next={getMoreData}
         hasMore={hasMore}
+        scrollThreshold="300px"
         loader={(
           <div
             style={{ width: '100%', height: '150px', position: 'relative' }}
