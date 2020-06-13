@@ -23,11 +23,11 @@ export default function ViewingRoom({ idx, src }: { idx: number, src: string }) 
 
   React.useEffect(() => {
     if (innerWidth < 500) {
-      setMaxSize(['calc(100% - 120px)', 'calc(100% - 200px)']);
+      setMaxSize(['calc(100% - 120px)', '90%']);
     } else if (innerWidth < 1500) {
-      setMaxSize(['calc(75% - 120px)', 'calc(100% - 300px)']);
+      setMaxSize(['calc(75% - 120px)', '80%']);
     } else {
-      setMaxSize(['calc(60% - 120px)', 'calc(100% - 400px)']);
+      setMaxSize(['calc(60% - 120px)', '70%']);
     }
   }, [innerWidth]);
 
