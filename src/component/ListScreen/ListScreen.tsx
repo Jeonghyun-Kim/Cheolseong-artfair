@@ -6,9 +6,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
-import SortIcon from '@material-ui/icons/Sort';
 import UpIcon from '@material-ui/icons/ArrowUpward';
-// import SearchIcon from '@material-ui/icons/Search';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter, faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
 
 import './ListScreen.scss';
 
@@ -17,7 +17,6 @@ import ConfigContext from '../../ConfigContext';
 import info from '../../info.json';
 
 const ItemList = React.lazy(() => import('../ItemList/ItemList'));
-// import ItemList from '../ItemList/ItemList';
 
 interface Information {
   year: number;
@@ -143,16 +142,27 @@ export default function ListScreen() {
         id="sortIcon"
         aria-controls="sort-menu"
         aria-haspopup="true"
+        onClick={() => {}}
+      >
+        <div className="iconContainer">
+          <FontAwesomeIcon icon={faSortAmountDown} style={{ margin: '10px' }} />
+          <div className="iconTitle">Sort</div>
+        </div>
+      </IconButton>
+      <IconButton
+        id="filterIcon"
+        aria-controls="filter-menu"
+        aria-haspopup="true"
         onClick={handleMenuOpen}
       >
         <div className="iconContainer">
-          <SortIcon fontSize="large" />
+          <FontAwesomeIcon icon={faFilter} style={{ margin: '10px' }} />
           <div className="iconTitle">Filter</div>
         </div>
       </IconButton>
       {/* Filter Menu Popup */}
       <Popover
-        id="sort-menu"
+        id="filter-menu"
         className="unselectable"
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}

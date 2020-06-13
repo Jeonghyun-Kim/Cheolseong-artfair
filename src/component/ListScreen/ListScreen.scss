@@ -51,6 +51,14 @@ $iconColor: azure !global;
 
 #sortIcon {
   position: absolute;
+  right: 80px;
+  top: 10px;
+  color: $iconColor;
+  z-index: 99;
+}
+
+#filterIcon {
+  position: absolute;
   right: 15px;
   top: 10px;
   color: $iconColor;
