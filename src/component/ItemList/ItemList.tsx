@@ -32,10 +32,9 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
           const imageRatio = info[value].width / info[value].height;
 
           return (
-            <>
+            <div key={value}>
               {isSingleLine ? (
                 <div
-                  key={value}
                   style={{
                     width: Math.min(innerWidth - 100, imageSize),
                     height: 'auto',
@@ -57,7 +56,6 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
                 </div>
               ) : (
                 <div
-                  key={value}
                   style={{
                     maxWidth: innerWidth - 100,
                     width: imageRatio > breakRatio ? (imageSize + margin[0]) * 2 : imageSize,
@@ -97,7 +95,7 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
                   )}
                 </div>
               )}
-            </>
+            </div>
           );
         })}
       </LazyLoad>

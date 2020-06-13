@@ -76,27 +76,44 @@ $iconColor: azure !global;
   z-index: 99;
 }
 
-#badge {
+#filterBadge {
   position: absolute;
-  right: 14px;
+  right: 20px;
   top: 16px;
   color: #aa0000;
 }
 
-#sliderContainer {
-  border: none !important;
-  min-width: 200px;
-  margin: 10px 20px;
+#sort-menu {
+  margin-right: 20px;
+
+  #container {
+    border: none !important;
+    width: 90px;
+    margin: 10px 20px;
+  }
+  
+  #divider {
+    border-top: 1px solid #888;
+    margin: 0 10px;
+  }
+}
+
+#filter-menu {
+  #sliderContainer {
+    border: none !important;
+    min-width: 200px;
+    margin: 10px 20px;
+  }
+  
+  #divider {
+    width: 220px;
+    border-top: 1px solid #888;
+    margin: 0 10px;
+  }
 }
 
 span.PrivateValueLabel-label-5 {
   font-size: 13px !important;
-}
-
-#divider {
-  width: 220px;
-  border-top: 1px solid #888;
-  margin: 0 10px;
 }
 
 #applyButtonItem {

@@ -18,6 +18,13 @@ import info from '../../info.json';
 
 const ItemList = React.lazy(() => import('../ItemList/ItemList'));
 
+const YEAR_MIN = 2004;
+const YEAR_MAX = 2020;
+
+const PRICE_UNIT = 50;
+const PRICE_MIN = 0 / PRICE_UNIT;
+const PRICE_MAX = 1650 / PRICE_UNIT;
+
 interface Information {
   year: number;
   id: number;
@@ -33,33 +40,24 @@ interface MyConfigInterface {
 }
 
 const defaultConfig = {
-  yearRange: [2004, 2020] as [number, number],
-  priceRange: [0, 33] as [number, number],
+  yearRange: [YEAR_MIN, YEAR_MAX] as [number, number],
+  priceRange: [PRICE_MIN, PRICE_MAX] as [number, number],
   onSaleOnly: false,
 };
 
 export default function ListScreen() {
   const { idxMap, setIdxMap } = React.useContext(ConfigContext);
-  const [yearRange, setYearRange] = React.useState<[number, number]>([2004, 2020]);
-  const [priceRange, setPriceRange] = React.useState<[number, number]>([0, 33]);
-  const [onSaleOnly, setOnSaleOnly] = React.useState<boolean>(false);
+  const [storedConfig, setStoredConfig] = React.useState<MyConfigInterface>(defaultConfig);
   const [config, setConfig] = React.useState<MyConfigInterface>(defaultConfig);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [filterAnchorEl, setFilterAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [sortAnchorEl, setSortAnchorEl] = React.useState<null | HTMLElement>(null);
 
   React.useEffect(() => {
-    const storedYearRange = sessionStorage.getItem('@yearRange');
-    const storedPriceRange = sessionStorage.getItem('@priceRange');
-    const storedOnSaleOnly = sessionStorage.getItem('@onSaleOnly');
+    const stored = sessionStorage.getItem('@config');
 
-    if (storedYearRange && storedPriceRange && storedOnSaleOnly) {
-      setYearRange(JSON.parse(storedYearRange));
-      setPriceRange(JSON.parse(storedPriceRange));
-      setOnSaleOnly(JSON.parse(storedOnSaleOnly));
-      setConfig({
-        yearRange: JSON.parse(storedYearRange),
-        priceRange: JSON.parse(storedPriceRange),
-        onSaleOnly: JSON.parse(storedOnSaleOnly),
-      });
+    if (stored) {
+      setStoredConfig(JSON.parse(stored));
+      setConfig(JSON.parse(stored));
     }
   }, []);
 
@@ -68,35 +66,39 @@ export default function ListScreen() {
     sessionStorage.setItem('@scrollY', '0');
   };
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    sessionStorage.setItem('@scrollY', '0');
-    setAnchorEl(event.currentTarget);
+  const handleSortMenuOpen = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setSortAnchorEl(event.currentTarget);
   };
 
-  const handleMenuClose = () => {
-    sessionStorage.setItem('@yearRange', JSON.stringify(config.yearRange));
-    sessionStorage.setItem('@priceRange', JSON.stringify(config.priceRange));
-    sessionStorage.setItem('@onSaleOnly', JSON.stringify(config.onSaleOnly));
-    setYearRange(config.yearRange);
-    setPriceRange(config.priceRange);
-    setOnSaleOnly(config.onSaleOnly);
-    setAnchorEl(null);
+  const handleSortMenuClose = () => {
+    setSortAnchorEl(null);
+  };
+
+  const handleFilterMenuOpen = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    sessionStorage.setItem('@scrollY', '0');
+    setFilterAnchorEl(event.currentTarget);
+  };
+
+  const handleFilterMenuClose = () => {
+    sessionStorage.setItem('@config', JSON.stringify(config));
+    setStoredConfig(config);
+    setFilterAnchorEl(null);
   };
 
   React.useEffect(() => {
     const map: number[] = [];
     info.forEach((item: Information, idx: number) => {
-      if (item.year < yearRange[0] || item.year > yearRange[1]) {
+      if (item.year < storedConfig.yearRange[0] || item.year > storedConfig.yearRange[1]) {
         return;
       }
       if (item.price === 'sold out') {
-        if (!onSaleOnly) {
+        if (!storedConfig.onSaleOnly) {
           map.push(idx);
         }
         return;
       }
-      if (onSaleOnly && (Number(item.price) < priceRange[0] * 50
-        || Number(item.price) > priceRange[1] * 50)) {
+      if (storedConfig.onSaleOnly && (Number(item.price) < storedConfig.priceRange[0] * PRICE_UNIT
+        || Number(item.price) > storedConfig.priceRange[1] * PRICE_UNIT)) {
         return;
       }
       map.push(idx);
@@ -104,7 +106,7 @@ export default function ListScreen() {
 
     sessionStorage.setItem('@idxMap', JSON.stringify(map));
     setIdxMap(map);
-  }, [yearRange, priceRange, onSaleOnly, setIdxMap]);
+  }, [storedConfig, setIdxMap]);
 
   const ScrollRestoration = () => {
     React.useEffect(() => {
@@ -134,26 +136,47 @@ export default function ListScreen() {
       >
         <UpIcon fontSize="large" />
       </IconButton>
-      {/* Filter Menu Button */}
-      {!(JSON.stringify(yearRange) === '[2004,2020]' && !onSaleOnly) && (
-        <Brightness1Icon fontSize="small" id="badge" />
-      )}
+      {/* Sort Menu Button */}
       <IconButton
         id="sortIcon"
         aria-controls="sort-menu"
         aria-haspopup="true"
-        onClick={() => {}}
+        onClick={handleSortMenuOpen}
       >
         <div className="iconContainer">
           <FontAwesomeIcon icon={faSortAmountDown} style={{ margin: '10px' }} />
           <div className="iconTitle">Sort</div>
         </div>
       </IconButton>
+      {/* Sort Menu Popup */}
+      <Popover
+        id="sort-menu"
+        className="unselectable"
+        anchorEl={sortAnchorEl}
+        open={Boolean(sortAnchorEl)}
+        onClose={handleSortMenuClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+      >
+        <div id="container">
+          <div id="divider" />
+        </div>
+      </Popover>
+      {/* Filter Menu Button */}
+      {!(JSON.stringify(storedConfig.yearRange) === '[2004,2020]' && !storedConfig.onSaleOnly) && (
+        <Brightness1Icon fontSize="small" id="filterBadge" />
+      )}
       <IconButton
         id="filterIcon"
         aria-controls="filter-menu"
         aria-haspopup="true"
-        onClick={handleMenuOpen}
+        onClick={handleFilterMenuOpen}
       >
         <div className="iconContainer">
           <FontAwesomeIcon icon={faFilter} style={{ margin: '10px' }} />
@@ -164,23 +187,30 @@ export default function ListScreen() {
       <Popover
         id="filter-menu"
         className="unselectable"
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
+        anchorEl={filterAnchorEl}
+        open={Boolean(filterAnchorEl)}
+        onClose={handleFilterMenuClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
       >
         <div id="sliderContainer">
           <Typography variant="body2">연도</Typography>
           <Slider
             value={config.yearRange}
-            min={2004}
-            max={2020}
+            min={YEAR_MIN}
+            max={YEAR_MAX}
             onChange={(_e, newValue) => setConfig({
               ...config,
               yearRange: newValue as [number, number],
             })}
             valueLabelDisplay="auto"
             aria-labelledby="yearRangeSlider"
-            getAriaValueText={(value) => `${value}년`}
           />
           <Grid container>
             <Grid item>
@@ -217,9 +247,9 @@ export default function ListScreen() {
           <Typography variant="body2">가격</Typography>
           <Slider
             value={config.priceRange}
-            min={0}
-            max={33}
-            scale={(x) => 50 * x}
+            min={PRICE_MIN}
+            max={PRICE_MAX}
+            scale={(x) => PRICE_UNIT * x}
             disabled={!config.onSaleOnly}
             onChange={(_e, newValue) => setConfig({
               ...config,
@@ -227,11 +257,10 @@ export default function ListScreen() {
             })}
             valueLabelDisplay="auto"
             aria-labelledby="priceRangeSlider"
-            getAriaValueText={(value) => `${value}만원`}
           />
           <Grid container>
             <Grid item>
-              {config.priceRange[0] ? `${config.priceRange[0] * 50}만원` : '0원'}
+              {config.priceRange[0] ? `${config.priceRange[0] * PRICE_UNIT}만원` : '0원'}
             </Grid>
             <Grid item xs>
               <Typography align="center">~</Typography>
