@@ -91,17 +91,10 @@ $iconColor: azure !global;
 }
 
 #sort-menu {
-  margin-right: 20px;
-
   #switchContainer {
     border: none !important;
-    width: 200px;
+    // width: 200px;
     margin: 10px 20px;
-  }
-  
-  #divider {
-    border-top: 1px solid #888;
-    margin: 0 10px;
   }
 }
 
@@ -111,12 +104,11 @@ $iconColor: azure !global;
     min-width: 200px;
     margin: 10px 20px;
   }
+}
   
-  #divider {
-    width: 220px;
-    border-top: 1px solid #888;
-    margin: 0 10px;
-  }
+#divider {
+  border-top: 1px solid #888;
+  margin: 0 10px;
 }
 
 span.PrivateValueLabel-label-5 {

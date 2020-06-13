@@ -92,6 +92,7 @@ export default function ListScreen() {
   };
 
   const handleSortMenuOpen = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    sessionStorage.setItem('@scrollY', '0');
     setSortAnchorEl(event.currentTarget);
   };
 
