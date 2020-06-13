@@ -28,13 +28,20 @@ export default function Details({ idx, src }: { idx: number, src: string }) {
   };
 
   return (
-    <Card className="cardRoot" style={{ width: Math.min(innerWidth * (3 / 4), 520), top: isSmall ? 'calc(50% - 35px)' : '50%' }}>
+    <Card
+      className="cardRoot"
+      style={{
+        width: Math.min(innerWidth * (3 / 4), 600),
+        maxHeight: innerHeight - 180,
+        top: isSmall ? 'calc(50% - 35px)' : '50%',
+      }}
+    >
       <div className="imgBackgroud">
         <img
           alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
           src={src}
           className="cardImage"
-          style={{ maxHeight: isSmall ? innerHeight - 300 : innerHeight - 370 }}
+          style={{ maxHeight: isSmall ? innerHeight - 370 : innerHeight - 440 }}
         />
       </div>
       <CardContent>
