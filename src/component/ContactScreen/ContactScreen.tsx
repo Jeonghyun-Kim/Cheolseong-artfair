@@ -14,7 +14,7 @@ import './ContactScreen.scss';
 import info from '../../info.json';
 
 import useWindowSize from '../useWindowSize';
-import ViewingRoom from '../ViewingRoom2/ViewingRoom2';
+import ViewingRoom from '../ViewingRoom/ViewingRoom';
 
 const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
 
