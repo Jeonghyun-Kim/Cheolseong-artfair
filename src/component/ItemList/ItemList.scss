@@ -10,16 +10,34 @@
     cursor: pointer;
   }
 }
+.infinite-scroll-component__outerdiv {
+  width: 100%;
+
+  .infinite-scroll-component  {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    justify-content: space-around;
+  }
+}
 
 .itemContainer {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-  justify-content: space-around;
 }
 
 .imageBlock {
   box-sizing: border-box;
   position: relative;
+}
+
+#endLoading {
+  background-color: rgba($color: #b9b8b8, $alpha: 1.0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h3 {
+    text-align: center;
+  }
 }
