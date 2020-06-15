@@ -27,8 +27,6 @@ export default function Details({ idx, src }: { idx: number, src: string }) {
     setTimeout(() => setAlert(null), 3000);
   };
 
-  const isLandscape = info[idx].width > info[idx].height;
-
   return (
     <Card
       className="cardRoot"
@@ -47,8 +45,7 @@ export default function Details({ idx, src }: { idx: number, src: string }) {
             className="cardImage"
             style={{
               borderRadius: info[idx].src === '2013_5.gif' ? 999 : 2,
-              width: isLandscape ? '100%' : 'auto',
-              height: isLandscape ? 'auto' : '100%',
+              maxHeight: '100%',
             }}
           />
         ) : (

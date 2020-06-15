@@ -82,17 +82,6 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
             />
           </div>
         )}
-        // endMessage={(
-        //   <div
-        //     id="endLoading"
-        //     style={{
-        //       width: Math.min(innerWidth - 100, imageSize),
-        //       height: Math.min(innerWidth - 100, imageSize),
-        //     }}
-        //   >
-        //     <h3>Finish</h3>
-        //   </div>
-        // )}
       >
         {items.map((value) => {
           const isSingleLine = innerWidth - 150 < (imageSize + margin[0]) * 2;
