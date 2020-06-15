@@ -31,7 +31,7 @@ export default function Details({ idx, src }: { idx: number, src: string }) {
     <Card
       className="cardRoot"
       style={{
-        width: Math.min(innerWidth * (3 / 4), 800),
+        width: isSmallLandscape ? innerWidth - 200 : 800,
         maxHeight: isSmallLandscape ? innerHeight * (3 / 4) : innerHeight - 180,
         height: isSmallLandscape ? innerHeight / 2 : 'auto',
         flexDirection: isSmallLandscape ? 'row' : 'column',
