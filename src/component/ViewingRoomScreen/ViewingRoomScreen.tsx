@@ -61,7 +61,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
     if (ref.current) {
       ref.current.focus();
     }
-  });
+  }, []);
 
   React.useEffect(() => {
     if (window.innerWidth > 800) {
