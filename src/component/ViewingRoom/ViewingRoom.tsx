@@ -3,15 +3,14 @@ import React from 'react';
 import './ViewingRoom.scss';
 import info from '../../info.json';
 
-import useWindowSize from '../useWindowSize';
-
-export default function ViewingRoom({ idx, src }: { idx: number, src: string }) {
+export default function ViewingRoom({ idx, src, windowSize }:
+{ idx: number, src: string, windowSize: [number, number] }) {
   const [isLandscape, setLandscape] = React.useState<boolean[] | null>(null);
   const [maxSize, setMaxSize] = React.useState<string[]>(['calc(80% - 120px)', 'calc(80% - 200px)']);
   const [lanternOpacities, setLanternOpacities] = React.useState<number[] | null>(null);
   const refContainer = React.useRef<HTMLDivElement | null>(null);
 
-  const [innerWidth, innerHeight] = useWindowSize();
+  const [innerWidth, innerHeight] = windowSize;
   const imageRatio = info[idx].width / info[idx].height;
 
   React.useEffect(() => {

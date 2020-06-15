@@ -11,12 +11,11 @@ import Brightness1Icon from '@material-ui/icons/Brightness1';
 import './Details.scss';
 import info from '../../info.json';
 
-import useWindowSize from '../useWindowSize';
-
-export default function Details({ idx, src }: { idx: number, src: string }) {
+export default function Details({ idx, src, windowSize }:
+{ idx: number, src: string, windowSize: [number, number] }) {
   const [isSmallLandscape, setSmallLandscape] = React.useState<boolean>(false);
   const [alert, setAlert] = React.useState<string | null>(null);
-  const [innerWidth, innerHeight] = useWindowSize();
+  const [innerWidth, innerHeight] = windowSize;
 
   React.useEffect(() => {
     setSmallLandscape(innerWidth < 1000 && innerWidth > innerHeight);
