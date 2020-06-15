@@ -14,86 +14,105 @@ import info from '../../info.json';
 import useWindowSize from '../useWindowSize';
 
 export default function Details({ idx, src }: { idx: number, src: string }) {
-  const [isSmall, setSmall] = React.useState<boolean>(false);
+  const [isSmallLandscape, setSmallLandscape] = React.useState<boolean>(false);
   const [alert, setAlert] = React.useState<string | null>(null);
   const [innerWidth, innerHeight] = useWindowSize();
 
   React.useEffect(() => {
-    setSmall(innerWidth < 600);
-  }, [innerWidth]);
+    setSmallLandscape(innerWidth < 1000 && innerWidth > innerHeight);
+  }, [innerWidth, innerHeight]);
 
   const handleAlert = () => {
     setAlert('주소가 클립보드에 복사되었습니다.');
     setTimeout(() => setAlert(null), 3000);
   };
 
+  const isLandscape = info[idx].width > info[idx].height;
+
   return (
     <Card
       className="cardRoot"
       style={{
-        width: Math.min(innerWidth * (3 / 4), 600),
-        maxHeight: innerHeight - 180,
-        top: isSmall ? 'calc(50% - 35px)' : '50%',
+        width: Math.min(innerWidth * (3 / 4), 800),
+        maxHeight: isSmallLandscape ? innerHeight * (3 / 4) : innerHeight - 180,
+        height: isSmallLandscape ? innerHeight / 2 : 'auto',
+        flexDirection: isSmallLandscape ? 'row' : 'column',
       }}
     >
       <div className="imgBackgroud">
-        <img
-          alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
-          src={src}
-          className="cardImage"
-          style={{
-            maxHeight: isSmall ? innerHeight - 370 : innerHeight - 440,
-            borderRadius: info[idx].src === '2013_5.gif' ? 999 : 2,
-          }}
-        />
-      </div>
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="h2">
-          Decorum {info[idx].year} - {info[idx].id}
-        </Typography>
-        <Typography align="right" variant="body2" color="textSecondary" component="p">
-          {info[idx].height}x{info[idx].width}cm
-        </Typography>
-        <Typography align="right" variant="body2" color="textSecondary" component="p">
-          Oil on Canvas
-        </Typography>
-        <Grid container justify="space-between">
-          <Grid item xs>
-            <Typography variant="body1" color="textSecondary" component="p">
-              {alert && (
-                alert
-              )}
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography variant="body1" color="textSecondary" component="p" id="price">
-              {info[idx].price === 'sold out'
-                ? (
-                  'SOLD OUT'
-                ) : (
-                  `${info[idx].price} 만원`
-                )}
-            </Typography>
-          </Grid>
-        </Grid>
-      </CardContent>
-      <CardActions>
-        {info[idx].price === 'sold out' && (
-          <Brightness1Icon fontSize="small" id="soldOutIcon" />
+        {isSmallLandscape ? (
+          <img
+            alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
+            src={src}
+            className="cardImage"
+            style={{
+              borderRadius: info[idx].src === '2013_5.gif' ? 999 : 2,
+              width: isLandscape ? '100%' : 'auto',
+              height: isLandscape ? 'auto' : '100%',
+            }}
+          />
+        ) : (
+          <img
+            alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
+            src={src}
+            className="cardImage"
+            style={{
+              borderRadius: info[idx].src === '2013_5.gif' ? 999 : 2,
+              maxHeight: innerHeight - 370,
+            }}
+          />
         )}
-        <div className="grow" />
-        <CopyToClipboard
-          text={`https://kay.airygall.com/viewing-room/${idx}`}
-          onCopy={handleAlert}
-        >
-          <Button size="small" color="primary">
-            Share
+      </div>
+      <div className="cardContent">
+        <CardContent style={{ display: 'flex', flexDirection: "column", height: '100%' }}>
+          <Typography gutterBottom variant="h5" component="h2">
+            Decorum {info[idx].year} - {info[idx].id}
+          </Typography>
+          <div style={{ flexGrow: 1 }} />
+          <Typography align="right" variant="body2" color="textSecondary" component="p">
+            {info[idx].height}x{info[idx].width}cm
+          </Typography>
+          <Typography align="right" variant="body2" color="textSecondary" component="p">
+            Oil on Canvas
+          </Typography>
+          <Grid container justify="space-between">
+            <Grid item xs>
+              <Typography variant="body1" color="textSecondary" component="p">
+                {alert && (
+                  alert
+                )}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="body1" color="textSecondary" component="p" id="price">
+                {info[idx].price === 'sold out'
+                  ? (
+                    'SOLD OUT'
+                  ) : (
+                    `${info[idx].price} 만원`
+                  )}
+              </Typography>
+            </Grid>
+          </Grid>
+        </CardContent>
+        <CardActions>
+          {info[idx].price === 'sold out' && (
+            <Brightness1Icon fontSize="small" id="soldOutIcon" />
+          )}
+          <div className="grow" />
+          <CopyToClipboard
+            text={`https://kay.airygall.com/viewing-room/${idx}`}
+            onCopy={handleAlert}
+          >
+            <Button size="small" color="primary">
+              Share
+            </Button>
+          </CopyToClipboard>
+          <Button size="small" color="primary" href="https://forms.gle/NLBHc8GgPDwZrPwK7" target="_blank">
+            Contact
           </Button>
-        </CopyToClipboard>
-        <Button size="small" color="primary" href="https://forms.gle/NLBHc8GgPDwZrPwK7" target="_blank">
-          Contact
-        </Button>
-      </CardActions>
+        </CardActions>
+      </div>
     </Card>
   );
 }

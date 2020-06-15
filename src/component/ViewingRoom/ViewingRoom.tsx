@@ -11,7 +11,6 @@ export default function ViewingRoom({ idx, src }: { idx: number, src: string }) 
   const [isLandscape, setLandscape] = React.useState<boolean[] | null>(null);
   const [maxSize, setMaxSize] = React.useState<string[]>(['calc(80% - 120px)', 'calc(80% - 200px)']);
   const [lanternOpacities, setLanternOpacities] = React.useState<number[] | null>(null);
-  const [isMobile, setMobile] = React.useState<boolean>(false);
   // const [isLoading, setLoading] = React.useState<boolean>(true);
   const refContainer = React.useRef<HTMLDivElement | null>(null);
 
@@ -32,13 +31,10 @@ export default function ViewingRoom({ idx, src }: { idx: number, src: string }) 
   React.useEffect(() => {
     if (innerWidth < 500) {
       setMaxSize(['calc(100% - 120px)', '60%']);
-      setMobile(true);
     } else if (innerWidth < 1500) {
       setMaxSize(['calc(75% - 120px)', '60%']);
-      setMobile(false);
     } else {
       setMaxSize(['calc(60% - 120px)', '60%']);
-      setMobile(false);
     }
   }, [innerWidth]);
 
@@ -66,22 +62,9 @@ export default function ViewingRoom({ idx, src }: { idx: number, src: string }) 
         }}
         className="maximumContainer"
       >
-        {/* {isLoading ? (
-        <div
-          style={{ width: '100%', height: '100%', position: 'relative' }}
-        >
-          <img
-            alt="spinner"
-            src={`${process.env.PUBLIC_URL}/Spinner.svg`}
-            id="loadingIcon"
-            width="100px"
-          />
-        </div>
-        ) : (
-        <> */}
         {isLandscape !== null && lanternOpacities && (
         <>
-          {!isMobile && (isLandscape[1] ? (
+          {isLandscape[1] ? (
             <>
               <img
                 alt="lantern"
@@ -121,7 +104,7 @@ export default function ViewingRoom({ idx, src }: { idx: number, src: string }) 
                 opacity: lanternOpacities[1],
               }}
             />
-          ))}
+          )}
           <img
             alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
             src={src}

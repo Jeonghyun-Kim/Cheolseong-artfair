@@ -1,20 +1,32 @@
 .imgBackgroud {
-  background-color: #eee;
+  background-color: #ddd;
   // background-color: white;
   // background-blend-mode: darken;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .cardRoot {
   max-width: 100%;
   max-height: 100%;
+  display: flex;
+}
+
+.cardContent {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .cardImage {
   display: block;
   max-width: 100%;
   max-height: 100%;
-  margin: 0 auto;
-  border: #ddd solid;
+  margin: auto;
   border-width: 0 1px 1px 1px;
   object-fit: contain;
 }
