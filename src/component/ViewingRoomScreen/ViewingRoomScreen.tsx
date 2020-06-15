@@ -16,8 +16,8 @@ import ConfigContext from '../../ConfigContext';
 import info from '../../info.json';
 
 const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
-const STORAGE_URL_SM = 'https://d1mqeykb8ywbm3.cloudfront.net';
-const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
+// const STORAGE_URL_SM = 'https://d1mqeykb8ywbm3.cloudfront.net';
+// const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
 
 interface ViewingRoomProps extends RouteComponentProps<{ idx: string }> {}
 
@@ -25,34 +25,21 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   const { idxMap } = React.useContext(ConfigContext);
   const MAX_INDEX = idxMap.length - 1;
   const [index, setIndex] = React.useState<number>(0);
-  const [imgSrc, setImgSrc] = React.useState<string | null>(null);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
-  const [isLoading, setLoading] = React.useState<boolean>(true);
 
   const history = useHistory();
+
+  const ref = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
     setIndex(idxMap.findIndex((element: number) => element === Number(match.params.idx)));
   }, [idxMap, match.params.idx, setIndex]);
 
-  const ref = React.useRef<HTMLDivElement | null>(null);
-
   React.useEffect(() => {
     if (ref.current) {
       ref.current.focus();
     }
-  }, [isLoading]);
-
-  React.useEffect(() => {
-    if (window.innerWidth > 800) {
-      setImgSrc(STORAGE_URL_MD);
-    } else if (window.innerWidth > 400) {
-      setImgSrc(STORAGE_URL_SM);
-    } else {
-      setImgSrc(STORAGE_URL_XS);
-    }
-    setLoading(false);
-  }, [index]);
+  }, []);
 
   const handleLeft = React.useCallback(() => {
     if (index !== 0) {
@@ -97,28 +84,24 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
 
   return (
     <div className="App">
-      {!isLoading && (
-        <div
-          ref={ref}
-          tabIndex={0}
-          role="button"
-          style={{ filter: `brightness(${onDetail ? 0.8 : 1}) blur(${onDetail ? 10 : 0}px)` }}
-          className="viewingRoom"
-          onClick={() => setOnDetail(false)}
-          onKeyDown={handleKeydown}
+      <div
+        ref={ref}
+        tabIndex={0}
+        role="button"
+        style={{ filter: `brightness(${onDetail ? 0.8 : 1}) blur(${onDetail ? 10 : 0}px)` }}
+        className="viewingRoom"
+        onClick={() => setOnDetail(false)}
+        onKeyDown={handleKeydown}
+      >
+        <IconButton
+          id="backIcon"
+          onClick={() => history.push('/list')}
+          disabled={onDetail}
         >
-          <IconButton
-            id="backIcon"
-            onClick={() => history.push('/list')}
-            disabled={onDetail}
-          >
-            <ArrowBackIcon fontSize="large" />
-          </IconButton>
-          {imgSrc && (
-            <ViewingRoom idx={idxMap[index]} src={`${imgSrc}/${info[idxMap[index]].src}`} />
-          )}
-        </div>
-      )}
+          <ArrowBackIcon fontSize="large" />
+        </IconButton>
+        <ViewingRoom idx={idxMap[index]} src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`} />
+      </div>
       <div
         style={{
           opacity: onDetail ? 1 : 0,
@@ -126,7 +109,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         }}
         className="detailScreen"
       >
-        <Details idx={idxMap[index]} src={`${imgSrc}/${info[idxMap[index]].src}`} />
+        <Details idx={idxMap[index]} src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`} />
       </div>
       <IconButton
         id="arrowLeft"
