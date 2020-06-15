@@ -5,22 +5,14 @@ import info from '../../info.json';
 
 import useWindowSize from '../useWindowSize';
 
-// const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
-
 export default function ViewingRoom({ idx, src }: { idx: number, src: string }) {
   const [isLandscape, setLandscape] = React.useState<boolean[] | null>(null);
   const [maxSize, setMaxSize] = React.useState<string[]>(['calc(80% - 120px)', 'calc(80% - 200px)']);
   const [lanternOpacities, setLanternOpacities] = React.useState<number[] | null>(null);
-  // const [isLoading, setLoading] = React.useState<boolean>(true);
   const refContainer = React.useRef<HTMLDivElement | null>(null);
 
   const [innerWidth, innerHeight] = useWindowSize();
   const imageRatio = info[idx].width / info[idx].height;
-
-  // React.useEffect(() => {
-  //   setLoading(true);
-  //   setTimeout(() => setLoading(false), 0);
-  // }, [idx]);
 
   React.useEffect(() => {
     const windowRatio = innerWidth / innerHeight;
@@ -48,7 +40,6 @@ export default function ViewingRoom({ idx, src }: { idx: number, src: string }) 
         (containerWidth / lanternHalfWidth) ** 0.5 * 0.8,
         (containerWidth / (lanternHalfWidth * 2)) ** 0.5,
       ]);
-      // setLoading(false);
     }
   }, [imageRatio, isLandscape]);
 
@@ -68,7 +59,7 @@ export default function ViewingRoom({ idx, src }: { idx: number, src: string }) 
             <>
               <img
                 alt="lantern"
-                src={`${process.env.PUBLIC_URL}/lantern (1).png`}
+                src={`${process.env.PUBLIC_URL}/lantern${innerWidth < 1000 ? '_small' : ' (1)'}.png`}
                 width={isLandscape[0] ? '100%' : 'auto'}
                 height={isLandscape[0] ? 'auto' : `${90 * imageRatio}%`}
                 className="lantern half"
@@ -80,7 +71,7 @@ export default function ViewingRoom({ idx, src }: { idx: number, src: string }) 
               />
               <img
                 alt="lantern"
-                src={`${process.env.PUBLIC_URL}/lantern (1).png`}
+                src={`${process.env.PUBLIC_URL}/lantern${innerWidth < 1000 ? '_small' : ' (1)'}.png`}
                 width={isLandscape[0] ? '100%' : 'auto'}
                 height={isLandscape[0] ? 'auto' : `${90 * imageRatio}%`}
                 className="lantern half"
@@ -94,7 +85,7 @@ export default function ViewingRoom({ idx, src }: { idx: number, src: string }) 
           ) : (
             <img
               alt="lantern"
-              src={`${process.env.PUBLIC_URL}/lantern (1).png`}
+              src={`${process.env.PUBLIC_URL}/lantern${innerWidth < 1000 ? '_small' : ' (1)'}.png`}
               width={isLandscape[0] ? '200%' : 'auto'}
               height={isLandscape[0] ? 'auto' : `${180 * imageRatio}%`}
               className="lantern full"
@@ -115,8 +106,6 @@ export default function ViewingRoom({ idx, src }: { idx: number, src: string }) 
           />
         </>
         )}
-        {/* </>
-        )} */}
       </div>
     </div>
   );
