@@ -16,24 +16,3 @@ $iconColor: azure !global;
   color: $iconColor;
   transform: translateX(-50%);
 }
-
-#moreIcon {
-  position: absolute;
-  right: 30px;
-  bottom: 30px;
-  color: $iconColor;
-}
-
-#arrowLeft {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translate(0, -50%);
-}
-
-#arrowRight {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translate(0, -50%);
-}

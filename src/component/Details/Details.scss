@@ -1,4 +1,4 @@
-.imgBackgroud {
+.imgBackground {
   background-color: #ddd;
   // background-color: white;
   // background-blend-mode: darken;
@@ -24,7 +24,9 @@
 }
 
 .cardImage {
+  margin: auto;
   max-width: 100%;
+  max-height: 100%;
   border-width: 0 1px 1px 1px;
   object-fit: contain;
 }

@@ -13,12 +13,10 @@ import info from '../../info.json';
 
 export default function Details({ idx, src, windowSize }:
 { idx: number, src: string, windowSize: [number, number] }) {
-  const [isSmallLandscape, setSmallLandscape] = React.useState<boolean>(false);
   const [alert, setAlert] = React.useState<string | null>(null);
   const [innerWidth, innerHeight] = windowSize;
 
   React.useEffect(() => {
-    setSmallLandscape(innerWidth < 1000 && innerWidth > innerHeight);
   }, [innerWidth, innerHeight]);
 
   const handleAlert = () => {
@@ -30,14 +28,13 @@ export default function Details({ idx, src, windowSize }:
     <Card
       className="cardRoot"
       style={{
-        width: isSmallLandscape ? innerWidth - 200 : 800,
-        maxHeight: isSmallLandscape ? innerHeight * (3 / 4) : innerHeight - 180,
-        height: isSmallLandscape ? innerHeight / 2 : 'auto',
-        flexDirection: isSmallLandscape ? 'row' : 'column',
+        width: Math.min(innerWidth - 100, 800),
+        height: innerHeight < 500 ? innerHeight - 100 : 'auto',
+        flexDirection: (innerWidth < 1000) && (innerHeight < 700) && (innerWidth > innerHeight) ? 'row' : 'column',
       }}
     >
-      <div className="imgBackgroud">
-        {isSmallLandscape ? (
+      <div className="imgBackground">
+        {(innerWidth < 1000) && (innerHeight < 700) && (innerWidth > innerHeight) ? (
           <img
             alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
             src={src}
@@ -61,8 +58,8 @@ export default function Details({ idx, src, windowSize }:
       </div>
       <div className="cardContent">
         <CardContent style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-          <Typography gutterBottom variant="h5" component="h2">
-            Decorum {info[idx].year} - {info[idx].id}
+          <Typography variant="h5">
+            Decorum <span style={{ fontSize: 18, float: 'right' }}>{info[idx].year} - {info[idx].id}</span>
           </Typography>
           <div className="grow" />
           <Typography align="right" variant="body2" color="textSecondary" component="p">

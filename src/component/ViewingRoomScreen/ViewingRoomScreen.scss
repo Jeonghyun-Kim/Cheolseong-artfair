@@ -1,5 +1,7 @@
 $delay: 0.7s ease !global;
 $iconColor: rgba(149, 148, 160, 0.664) !global;
+$iconMargin: 30px !global;
+$iconMarginSmall: 5px !global;
 
 .App {
   display: flex;
@@ -35,14 +37,23 @@ $iconColor: rgba(149, 148, 160, 0.664) !global;
 
 #moreIcon {
   position: absolute;
-  right: 30px;
-  bottom: 30px;
+  right: $iconMargin;
+  bottom: $iconMargin;
+  @media (max-width: 700px) {
+    right: $iconMarginSmall;
+    bottom: $iconMarginSmall;
+  }
+  color: $iconColor;
 }
 
 #closeIcon {
   position: absolute;
-  right: 30px;
-  top: 30px;
+  right: $iconMargin;
+  top: $iconMargin;
+  @media (max-width: 700px) {
+    right: $iconMarginSmall;
+    top: $iconMarginSmall;
+  }
   color: $iconColor;
   transition: $delay;
 }
