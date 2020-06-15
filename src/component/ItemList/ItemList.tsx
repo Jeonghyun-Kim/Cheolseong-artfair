@@ -35,12 +35,12 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
     setItems(indexMap.slice(0, Math.min(NUM_PAGE, indexMap.length) - 1));
   }, [indexMap]);
 
-  // React.useEffect(() => {
-  //   const storedItems = sessionStorage.getItem('@items');
-  //   if (storedItems) {
-  //     setItems(JSON.parse(storedItems));
-  //   }
-  // }, []);
+  React.useEffect(() => {
+    const storedItems = sessionStorage.getItem('@items');
+    if (storedItems) {
+      setItems(JSON.parse(storedItems));
+    }
+  }, []);
 
   const handleMove = (value: number) => {
     sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
@@ -59,7 +59,7 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
           indexMap.slice(items.length, Math.min(items.length + NUM_PAGE, indexMap.length)),
         ),
       );
-      // sessionStorage.setItem('@items', JSON.stringify(items));
+      sessionStorage.setItem('@items', JSON.stringify(items));
     }, 1000);
   };
 
@@ -69,7 +69,7 @@ export default function ItemList({ indexMap }: { indexMap: number[] }) {
         dataLength={items.length}
         next={getMoreData}
         hasMore={hasMore}
-        scrollThreshold="300px"
+        scrollThreshold="400px"
         loader={(
           <div
             style={{ width: '100%', height: '150px', position: 'relative' }}
