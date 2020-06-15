@@ -68,7 +68,7 @@ export default function Details({ idx, src }: { idx: number, src: string }) {
           <Typography gutterBottom variant="h5" component="h2">
             Decorum {info[idx].year} - {info[idx].id}
           </Typography>
-          <div style={{ flexGrow: 1 }} />
+          <div className="grow" />
           <Typography align="right" variant="body2" color="textSecondary" component="p">
             {info[idx].height}x{info[idx].width}cm
           </Typography>
