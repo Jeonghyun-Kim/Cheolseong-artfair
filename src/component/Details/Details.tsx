@@ -64,7 +64,7 @@ export default function Details({ idx, src }: { idx: number, src: string }) {
         )}
       </div>
       <div className="cardContent">
-        <CardContent style={{ display: 'flex', flexDirection: "column", height: '100%' }}>
+        <CardContent style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
           <Typography gutterBottom variant="h5" component="h2">
             Decorum {info[idx].year} - {info[idx].id}
           </Typography>
