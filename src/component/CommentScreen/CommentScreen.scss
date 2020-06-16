@@ -1,0 +1,26 @@
+.commentRoot {
+  width: 100%;
+  min-height: 100%;
+  background-image: url('/wallpaper.jpg');
+  background-repeat: repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+.commentContainer {
+  max-width: 800px;
+  margin: 50px 30px;
+  position: relative;
+}
+
+.alert {
+  display: block;
+  padding: 10px 20px !important;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 0);
+  transition: 1s ease;
+}
