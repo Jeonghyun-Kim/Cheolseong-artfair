@@ -70,13 +70,6 @@ $breakpoint: 700px;
   max-width: 1500px !important;
 }
 
-svg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 .mobileMenuItem {
   width: 60%;
   display: flex;
@@ -101,6 +94,10 @@ svg {
 
     svg {
       font-size: x-large;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 
@@ -140,6 +137,10 @@ svg {
 
     svg {
       font-size: 4em;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 
