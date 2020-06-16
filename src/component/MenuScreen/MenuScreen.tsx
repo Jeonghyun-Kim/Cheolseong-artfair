@@ -1,9 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faYoutube } from '@fortawesome/free-brands-svg-icons'
-import { faEdit, faImage } from '@fortawesome/free-regular-svg-icons'
-import { faUsers, faLandmark } from '@fortawesome/free-solid-svg-icons'
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faEdit, faImage } from '@fortawesome/free-regular-svg-icons';
+import { faUsers, faLandmark } from '@fortawesome/free-solid-svg-icons';
 
 import './MenuScreen.scss';
 
