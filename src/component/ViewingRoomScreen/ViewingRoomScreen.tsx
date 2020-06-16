@@ -109,16 +109,30 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
     },
     move: (clientX: number) => {
       if (motionState.beingTouched) {
-        const touchX = clientX;
-        const deltaX = touchX - motionState.touchStartX;
+        const deltaX = clientX - motionState.touchStartX;
+        let moveTo: string | null = null;
         if (deltaX < -swipeThreshold) {
-          setTimeout(() => {
-            handleRight();
-          }, 250);
+          moveTo = 'right';
         } else if (deltaX > swipeThreshold) {
-          setTimeout(() => {
-            handleLeft();
-          }, 250);
+          moveTo = 'left';
+        } else {
+          moveTo = 'null';
+        }
+        switch (moveTo) {
+          case 'right':
+            setTimeout(() => {
+              setMotionState(defaultMotionState);
+              handleRight();
+            }, 0);
+            break;
+          case 'left':
+            setTimeout(() => {
+              setMotionState(defaultMotionState);
+              handleLeft();
+            }, 0);
+            break;
+          default:
+            break;
         }
       }
     },
