@@ -44,68 +44,87 @@ export default function ViewingRoom({ idx, src, windowSize }:
 
   return (
     <div className="viewingRoomRootContainer unselectable">
-      <div
-        ref={refContainer}
-        style={{
-          width: maxSize[0],
-          height: maxSize[1],
-        }}
-        className="maximumContainer"
-      >
-        {isLandscape !== null && lanternOpacities && (
+      {innerWidth < 700 && innerWidth < innerHeight ? (
         <>
-          {isLandscape[1] ? (
-            <>
-              <img
-                alt="lantern"
-                src={`${process.env.PUBLIC_URL}/lantern${innerWidth < 1000 ? '_small' : ' (1)'}.png`}
-                width={isLandscape[0] ? '100%' : 'auto'}
-                height={isLandscape[0] ? 'auto' : `${90 * imageRatio}%`}
-                className="lantern half"
-                style={{
-                  left: '25%',
-                  transform: 'translate(0%, -50%)',
-                  opacity: lanternOpacities[0],
-                }}
-              />
-              <img
-                alt="lantern"
-                src={`${process.env.PUBLIC_URL}/lantern${innerWidth < 1000 ? '_small' : ' (1)'}.png`}
-                width={isLandscape[0] ? '100%' : 'auto'}
-                height={isLandscape[0] ? 'auto' : `${90 * imageRatio}%`}
-                className="lantern half"
-                style={{
-                  right: '25%',
-                  transform: 'translate(0%, -50%)',
-                  opacity: lanternOpacities[0],
-                }}
-              />
-            </>
-          ) : (
-            <img
-              alt="lantern"
-              src={`${process.env.PUBLIC_URL}/lantern${innerWidth < 1000 ? '_small' : ' (1)'}.png`}
-              width={isLandscape[0] ? '200%' : 'auto'}
-              height={isLandscape[0] ? 'auto' : `${180 * imageRatio}%`}
-              className="lantern full"
-              style={{
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                opacity: lanternOpacities[1],
-              }}
-            />
-          )}
+          <img
+            alt="lantern"
+            src={`${process.env.PUBLIC_URL}/lantern${innerWidth < 1000 ? '_small' : ' (1)'}.png`}
+            height={innerHeight}
+            className="lanternPortrait"
+          />
           <img
             alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
             src={src}
-            width={isLandscape[0] ? '100%' : 'auto'}
-            height={isLandscape[0] ? 'auto' : '100%'}
-            className="painting"
+            className="imagePortrait"
             style={{ borderRadius: info[idx].src === '2013_5.gif' ? 999 : 2 }}
           />
         </>
-        )}
-      </div>
+      ) : (
+        <>
+          <div
+            ref={refContainer}
+            style={{
+              width: maxSize[0],
+              height: maxSize[1],
+            }}
+            className="maximumContainer"
+          >
+            {isLandscape !== null && lanternOpacities && (
+            <>
+              {isLandscape[1] ? (
+                <>
+                  <img
+                    alt="lantern"
+                    src={`${process.env.PUBLIC_URL}/lantern${innerWidth < 1000 ? '_small' : ' (1)'}.png`}
+                    width={isLandscape[0] ? '100%' : 'auto'}
+                    height={isLandscape[0] ? 'auto' : `${90 * imageRatio}%`}
+                    className="lantern half"
+                    style={{
+                      left: '25%',
+                      transform: 'translate(0%, -50%)',
+                      opacity: lanternOpacities[0],
+                    }}
+                  />
+                  <img
+                    alt="lantern"
+                    src={`${process.env.PUBLIC_URL}/lantern${innerWidth < 1000 ? '_small' : ' (1)'}.png`}
+                    width={isLandscape[0] ? '100%' : 'auto'}
+                    height={isLandscape[0] ? 'auto' : `${90 * imageRatio}%`}
+                    className="lantern half"
+                    style={{
+                      right: '25%',
+                      transform: 'translate(0%, -50%)',
+                      opacity: lanternOpacities[0],
+                    }}
+                  />
+                </>
+              ) : (
+                <img
+                  alt="lantern"
+                  src={`${process.env.PUBLIC_URL}/lantern${innerWidth < 1000 ? '_small' : ' (1)'}.png`}
+                  width={isLandscape[0] ? '200%' : 'auto'}
+                  height={isLandscape[0] ? 'auto' : `${180 * imageRatio}%`}
+                  className="lantern full"
+                  style={{
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    opacity: lanternOpacities[1],
+                  }}
+                />
+              )}
+              <img
+                alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
+                src={src}
+                width={isLandscape[0] ? '100%' : 'auto'}
+                height={isLandscape[0] ? 'auto' : '100%'}
+                className="painting"
+                style={{ borderRadius: info[idx].src === '2013_5.gif' ? 999 : 2 }}
+              />
+            </>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }
