@@ -22,7 +22,7 @@ export default function HomeScreen() {
     <div className="App">
       <div className="introTitle">
         <h3>국내 최초 온라인 아트페어</h3>
-        <h3>&#39;작가를 찾아서&#39;에 오신 것을 환영합니다.</h3>
+        <h3>&#39;작가를 찾아서&#39;에 오신 것을 환영합니다.</h3>
       </div>
       {innerWidth < 700 ? (
         <img

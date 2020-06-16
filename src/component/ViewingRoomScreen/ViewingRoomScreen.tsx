@@ -153,7 +153,9 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       }
     },
     touchMove: (event: React.TouchEvent<HTMLDivElement>) => {
-      handleMotion.move(event.targetTouches[0].clientX);
+      if (event.touches.length === 1) {
+        handleMotion.move(event.targetTouches[0].clientX);
+      }
     },
     touchEnd: () => {
       handleMotion.end();
