@@ -60,17 +60,25 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
 
   const handleLeft = React.useCallback(() => {
     if (index !== 0) {
-      history.push(`/viewing-room/${idxMap[index - 1]}`);
-      setOnDetail(false);
+      if (onDetail) {
+        setOnDetail(false);
+        setTimeout(() => history.push(`/viewing-room/${idxMap[index - 1]}`), 700);
+      } else {
+        setTimeout(() => history.push(`/viewing-room/${idxMap[index - 1]}`), 10);
+      }
     }
-  }, [idxMap, index, history]);
+  }, [idxMap, index, history, onDetail]);
 
   const handleRight = React.useCallback(() => {
     if (index !== MAX_INDEX) {
-      history.push(`/viewing-room/${idxMap[index + 1]}`);
-      setOnDetail(false);
+      if (onDetail) {
+        setOnDetail(false);
+        setTimeout(() => history.push(`/viewing-room/${idxMap[index + 1]}`), 700);
+      } else {
+        setTimeout(() => history.push(`/viewing-room/${idxMap[index + 1]}`), 10);
+      }
     }
-  }, [idxMap, MAX_INDEX, index, history]);
+  }, [idxMap, MAX_INDEX, index, history, onDetail]);
 
   const toggleDetail = () => {
     setOnDetail(!onDetail);
