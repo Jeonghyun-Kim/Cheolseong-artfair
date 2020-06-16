@@ -18,6 +18,8 @@ import ConfigContext from '../../ConfigContext';
 
 import info from '../../info.json';
 
+import useWindowSize from '../useWindowSize';
+
 const ItemList = React.lazy(() => import('../ItemList/ItemList'));
 
 const YEAR_MIN = 2004;
@@ -70,6 +72,8 @@ export default function ListScreen() {
   const [sortConfig, setSortConfig] = React.useState<MySortInterface>(defaultSortConfig);
   const [filterAnchorEl, setFilterAnchorEl] = React.useState<null | HTMLElement>(null);
   const [sortAnchorEl, setSortAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const [innerWidth, innerHeight] = useWindowSize();
 
   React.useEffect(() => {
     const sessionConfig = sessionStorage.getItem('@config');
@@ -209,7 +213,7 @@ export default function ListScreen() {
       <Typography id="paitingNumber" className="unselectable">작품 개수: {idxMap.length}개</Typography>
       <div className="listContainer">
         <React.Suspense fallback={<>Loading</>}>
-          <ItemList indexMap={idxMap} />
+          <ItemList indexMap={idxMap} windowSize={[innerWidth, innerHeight]} />
         </React.Suspense>
         <ScrollRestoration />
       </div>
@@ -218,7 +222,7 @@ export default function ListScreen() {
         id="upIcon"
         onClick={() => handleScrollToTop()}
       >
-        <UpIcon fontSize="large" />
+        <UpIcon fontSize="small" />
       </IconButton>
       {/* Sort Menu Button */}
       {!(JSON.stringify(storedSortConfig) === JSON.stringify(defaultSortConfig)) && (
@@ -231,8 +235,12 @@ export default function ListScreen() {
         onClick={handleSortMenuOpen}
       >
         <div className="iconContainer">
-          <FontAwesomeIcon icon={faSortAmountDown} style={{ margin: '10px' }} />
-          <div className="iconTitle">Sort</div>
+          <FontAwesomeIcon
+            icon={faSortAmountDown}
+            size={innerWidth < 1000 ? 'xs' : '1x'}
+            style={{ margin: innerWidth < 1000 ? '5px' : '10px' }}
+          />
+          <div className="iconTitle">정렬</div>
         </div>
       </IconButton>
       {/* Sort Menu Popup */}
@@ -331,8 +339,12 @@ export default function ListScreen() {
         onClick={handleFilterMenuOpen}
       >
         <div className="iconContainer">
-          <FontAwesomeIcon icon={faFilter} style={{ margin: '10px' }} />
-          <div className="iconTitle">Filter</div>
+          <FontAwesomeIcon
+            icon={faFilter}
+            size={innerWidth < 1000 ? 'xs' : '1x'}
+            style={{ margin: innerWidth < 1000 ? '5px' : '10px' }}
+          />
+          <div className="iconTitle">검색</div>
         </div>
       </IconButton>
       {/* Filter Menu Popup */}

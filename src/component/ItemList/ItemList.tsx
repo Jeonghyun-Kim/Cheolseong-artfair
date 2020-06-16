@@ -7,8 +7,6 @@ import './ItemList.scss';
 
 import info from '../../info.json';
 
-import useWindowSize from '../useWindowSize';
-
 const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
 const imageSize = 350;
 const margin = [30, 80];
@@ -16,12 +14,13 @@ const breakRatio = 1.5;
 
 const NUM_PAGE = 20;
 
-export default function ItemList({ indexMap }: { indexMap: number[] }) {
+export default function ItemList({ indexMap, windowSize }:
+{ indexMap: number[], windowSize: [number, number] }) {
   const [items, setItems] = React.useState<number[]>(
     indexMap.slice(0, Math.min(NUM_PAGE, indexMap.length) - 1),
   );
   const [hasMore, setHasMore] = React.useState<boolean>(NUM_PAGE < indexMap.length);
-  const [innerWidth] = useWindowSize();
+  const [innerWidth] = windowSize;
 
   const history = useHistory();
 
