@@ -152,7 +152,9 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   const handleSwipe = {
     touchStart: (event: React.TouchEvent<HTMLDivElement>) => {
       event.preventDefault();
-      handleMotion.start(event.targetTouches[0].clientX);
+      if (event.touches.length === 1) {
+        handleMotion.start(event.targetTouches[0].clientX);
+      }
     },
     touchMove: (event: React.TouchEvent<HTMLDivElement>) => {
       handleMotion.move(event.targetTouches[0].clientX);
