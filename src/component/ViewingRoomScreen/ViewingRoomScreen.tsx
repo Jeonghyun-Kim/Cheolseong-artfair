@@ -128,7 +128,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         onClick={handleLeft}
         disabled={index === 0}
         style={{
-          color: index === 0 ? '#444' : 'azure',
+          color: index === 0 ? '#222' : 'rgba(149, 148, 160, 0.664)',
         }}
       >
         <ArrowBackIosIcon fontSize="large" />
@@ -137,7 +137,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         id="arrowRight"
         onClick={handleRight}
         disabled={index === MAX_INDEX}
-        style={{ color: index === MAX_INDEX ? '#444' : 'azure' }}
+        style={{ color: index === MAX_INDEX ? '#222' : 'rgba(149, 148, 160, 0.664)' }}
       >
         <ArrowForwardIosIcon fontSize="large" />
       </IconButton>
