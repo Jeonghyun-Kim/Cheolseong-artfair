@@ -18,9 +18,6 @@ export default function Details({ idx, src }:
   const [alert, setAlert] = React.useState<string | null>(null);
   const [innerWidth, innerHeight] = useWindowSize();
 
-  React.useEffect(() => {
-  }, [innerWidth, innerHeight]);
-
   const handleAlert = () => {
     setAlert('주소가 클립보드에 복사되었습니다.');
     setTimeout(() => setAlert(null), 3000);
