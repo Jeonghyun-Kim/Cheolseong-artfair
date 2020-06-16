@@ -54,15 +54,6 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
     }
   }, []);
 
-  React.useEffect(() => {
-    const handleRefresh = () => {
-      setTimeout(() => history.go(0), 0);
-    };
-    window.addEventListener('orientationchange', handleRefresh);
-
-    return window.removeEventListener('orientationchange', handleRefresh);
-  }, [history]);
-
   const handleLeft = React.useCallback(() => {
     if (index !== 0) {
       if (onDetail) {
