@@ -10,14 +10,15 @@
 
   .lanternPortrait {
     position: absolute;
-    top: '10%';
-    left: '50%';
-    transform: 'translate(-50%, 0)';
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
     opacity: 0.7;
   }
 
   .imagePortrait {
     position: absolute;
+    top: 26.6%;
     max-width: 75vw;
     max-height: 50vh;
     width: 75vw;
