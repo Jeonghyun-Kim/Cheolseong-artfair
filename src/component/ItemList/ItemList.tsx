@@ -99,7 +99,8 @@ export default function ItemList({ indexMap, windowSize }:
                   <img
                     src={`${STORAGE_URL_XS}/${info[value].src}`}
                     alt={`${info[value].src.split('.')[0]}`}
-                    width="100%"
+                    width={imageRatio < 1 ? 'auto' : '100%'}
+                    height={imageRatio < 1 ? Math.min(innerWidth - 100, imageSize) : 'auto'}
                     onClick={() => handleMove(value)}
                     onKeyDown={(e) => {
                       if (e.keyCode === 13) {
@@ -109,6 +110,8 @@ export default function ItemList({ indexMap, windowSize }:
                     style={{
                       boxShadow: '1px 7px 10px 0px rgba(0, 0, 0, 1)',
                       borderRadius: info[value].src === '2013_5.gif' ? 999 : 2,
+                      display: 'block',
+                      margin: 'auto',
                     }}
                   />
                 </div>
