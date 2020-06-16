@@ -115,8 +115,6 @@ export default function ViewingRoom({ idx, src, windowSize }:
               <img
                 alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
                 src={src}
-                width={isLandscape[0] ? '100%' : 'auto'}
-                height={isLandscape[0] ? 'auto' : '100%'}
                 className="painting"
                 style={{ borderRadius: info[idx].src === '2013_5.gif' ? 999 : 2 }}
               />
