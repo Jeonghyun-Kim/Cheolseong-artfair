@@ -18,7 +18,7 @@ const timer = 1.5;
 export default function HomeScreen() {
   const [welcomeText, setWelcomeText] = React.useState<string[]>(['온라인 아트페어에 오신것을 환영합니다.']);
   const [top, setTop] = React.useState<string[]>(['10%', '']);
-  const [innerWidth, innerHeight] = useWindowSize();
+  const [innerWidth] = useWindowSize();
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -62,7 +62,6 @@ export default function HomeScreen() {
         <ViewingRoom
           idx={0}
           src={`${STORAGE_URL_MD}/2020_1.jpg`}
-          windowSize={[innerWidth, innerHeight]}
         />
       </div>
       <img

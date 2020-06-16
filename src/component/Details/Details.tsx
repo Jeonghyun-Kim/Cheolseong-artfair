@@ -11,10 +11,12 @@ import Brightness1Icon from '@material-ui/icons/Brightness1';
 import './Details.scss';
 import info from '../../info.json';
 
-export default function Details({ idx, src, windowSize }:
-{ idx: number, src: string, windowSize: [number, number] }) {
+import useWindowSize from '../useWindowSize';
+
+export default function Details({ idx, src }:
+{ idx: number, src: string }) {
   const [alert, setAlert] = React.useState<string | null>(null);
-  const [innerWidth, innerHeight] = windowSize;
+  const [innerWidth, innerHeight] = useWindowSize();
 
   React.useEffect(() => {
   }, [innerWidth, innerHeight]);

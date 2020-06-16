@@ -13,8 +13,6 @@ import ViewingRoom from '../ViewingRoom/ViewingRoom';
 import Details from '../Details/Details';
 import ConfigContext from '../../ConfigContext';
 
-import useWindowSize from '../useWindowSize';
-
 import info from '../../info.json';
 
 const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
@@ -43,8 +41,6 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   const [motionState, setMotionState] = React.useState<MotionState>(defaultMotionState);
 
   const history = useHistory();
-  const [innerWidth, innerHeight] = useWindowSize();
-  // const [innerWidth, innerHeight] = [window.innerWidth, window.innerHeight];
 
   const ref = React.useRef<HTMLDivElement | null>(null);
 
@@ -199,7 +195,6 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         <ViewingRoom
           idx={idxMap[index]}
           src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
-          windowSize={[innerWidth, innerHeight]}
         />
       </div>
       <div
@@ -212,7 +207,6 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         <Details
           idx={idxMap[index]}
           src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
-          windowSize={[innerWidth, innerHeight]}
         />
       </div>
       <IconButton
