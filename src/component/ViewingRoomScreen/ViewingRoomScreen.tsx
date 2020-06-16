@@ -21,6 +21,18 @@ const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
 // const STORAGE_URL_SM = 'https://d1mqeykb8ywbm3.cloudfront.net';
 // const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
 
+interface MotionState {
+  touchStartX: number;
+  beingTouched: boolean;
+}
+
+const defaultMotionState = {
+  touchStartX: 0,
+  beingTouched: false,
+};
+
+const swipeThreshold = 100;
+
 interface ViewingRoomProps extends RouteComponentProps<{ idx: string }> {}
 
 export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
@@ -28,6 +40,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   const MAX_INDEX = idxMap.length - 1;
   const [index, setIndex] = React.useState<number>(0);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
+  const [motionState, setMotionState] = React.useState<MotionState>(defaultMotionState);
 
   const history = useHistory();
   const [innerWidth, innerHeight] = useWindowSize();
@@ -86,16 +99,62 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
     }
   };
 
+  const handleMotion = {
+    start: (clientX: number) => {
+      setMotionState({
+        ...motionState,
+        touchStartX: clientX,
+        beingTouched: true,
+      });
+    },
+    move: (clientX: number) => {
+      if (motionState.beingTouched) {
+        const touchX = clientX;
+        const deltaX = touchX - motionState.touchStartX;
+        if (deltaX < -swipeThreshold) {
+          setTimeout(() => {
+            handleRight();
+          }, 250);
+        } else if (deltaX > swipeThreshold) {
+          setTimeout(() => {
+            handleLeft();
+          }, 250);
+        }
+      }
+    },
+    end: () => {
+      setMotionState(defaultMotionState);
+    },
+  };
+
+  const handleSwipe = {
+    touchStart: (event: React.TouchEvent<HTMLDivElement>) => {
+      event.preventDefault();
+      handleMotion.start(event.targetTouches[0].clientX);
+    },
+    touchMove: (event: React.TouchEvent<HTMLDivElement>) => {
+      handleMotion.move(event.targetTouches[0].clientX);
+    },
+    touchEnd: () => {
+      handleMotion.end();
+    },
+  };
+
   return (
     <div className="App">
       <div
         ref={ref}
         tabIndex={0}
         role="button"
-        style={{ filter: `brightness(${onDetail ? 0.8 : 1}) blur(${onDetail ? 10 : 0}px)` }}
+        style={{
+          filter: `brightness(${onDetail ? 0.8 : 1}) blur(${onDetail ? 10 : 0}px)`,
+        }}
         className="viewingRoom"
         onClick={() => setOnDetail(false)}
         onKeyDown={handleKeydown}
+        onTouchStart={handleSwipe.touchStart}
+        onTouchMove={handleSwipe.touchMove}
+        onTouchEnd={() => handleSwipe.touchEnd}
       >
         <IconButton
           id="backIcon"
