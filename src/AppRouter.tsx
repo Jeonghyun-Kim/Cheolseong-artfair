@@ -8,8 +8,9 @@ import {
 
 import CommentScreen from './component/CommentScreen/CommentScreen';
 import ViewingRoomScreen from './component/ViewingRoomScreen/ViewingRoomScreen';
-import HomeScreen from './component/HomeScreen/HomeScreen';
+import IntroScreen from './component/IntroScreen/IntroScreen';
 import ListScreen from './component/ListScreen/ListScreen';
+import MenuScreen from './component/MenuScreen/MenuScreen';
 // import ContactScreen from './component/ContactScreen/ContactScreen';
 
 import ConfigContext from './ConfigContext';
@@ -32,7 +33,8 @@ export default function AppRouter() {
         value={{ idxMap, setIdxMap }}
       >
         <Switch>
-          <Route exact path="/intro" component={HomeScreen} />
+          <Route exact path="/menu" component={MenuScreen} />
+          <Route path="/intro" component={IntroScreen} />
           <Route path="/list" component={ListScreen} />
           <Route path="/comments" component={CommentScreen} />
           {/* <Route path="/contact/:idx" component={ContactScreen} /> */}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './HomeScreen.scss';
+import './IntroScreen.scss';
 
 import useWindowSize from '../useWindowSize';
 
@@ -9,7 +9,7 @@ const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
 
 // const timer = 1.5;
 
-export default function HomeScreen() {
+export default function IntroScreen() {
   const [innerWidth] = useWindowSize();
 
   // React.useEffect(() => {
