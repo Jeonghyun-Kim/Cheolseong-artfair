@@ -17,10 +17,11 @@
 
 .alert {
   display: block;
+  width: 60%;
   padding: 10px 20px !important;
   position: absolute;
   left: 50%;
-  top: 0;
+  top: -5%;
   transform: translate(-50%, 0);
   transition: 1s ease;
 }

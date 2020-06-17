@@ -7,10 +7,10 @@ import {
 } from 'react-router-dom';
 
 import CommentScreen from './component/CommentScreen/CommentScreen';
-import ViewingRoomScreen from './component/ViewingRoomScreen/ViewingRoomScreen';
+// import ViewingRoomScreen from './component/ViewingRoomScreen/ViewingRoomScreen';
 import IntroScreen from './component/IntroScreen/IntroScreen';
-import ListScreen from './component/ListScreen/ListScreen';
-import MenuScreen from './component/MenuScreen/MenuScreen';
+// import ListScreen from './component/ListScreen/ListScreen';
+// import MenuScreen from './component/MenuScreen/MenuScreen';
 // import ContactScreen from './component/ContactScreen/ContactScreen';
 
 import ConfigContext from './ConfigContext';
@@ -33,17 +33,17 @@ export default function AppRouter() {
         value={{ idxMap, setIdxMap }}
       >
         <Switch>
-          <Route exact path="/menu" component={MenuScreen} />
-          <Route path="/intro" component={IntroScreen} />
-          <Route path="/list" component={ListScreen} />
+          {/* <Route exact path="/menu" component={MenuScreen} /> */}
+          <Route exact path="/" component={IntroScreen} />
+          {/* <Route path="/list" component={ListScreen} /> */}
           <Route path="/comments" component={CommentScreen} />
           {/* <Route path="/contact/:idx" component={ContactScreen} /> */}
-          <Route path="/viewing-room/:idx" component={ViewingRoomScreen} />
-          <Route path="/viewing-room">
+          {/* <Route path="/viewing-room/:idx" component={ViewingRoomScreen} /> */}
+          {/* <Route path="/viewing-room">
             <Redirect to="/viewing-room/0" />
-          </Route>
+          </Route> */}
           <Route path="/*">
-            <Redirect to="/list" />
+            <Redirect to="/" />
           </Route>
         </Switch>
       </ConfigContext.Provider>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 // import AppBar from '@material-ui/core/AppBar';
 // import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
@@ -11,7 +11,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+// import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {
   createStyles, fade, Theme, makeStyles,
 } from '@material-ui/core/styles';
@@ -23,7 +23,9 @@ import KeyIcon from '@material-ui/icons/VpnKeyOutlined';
 import './CommentScreen.scss';
 
 const SERVER_URL = 'https://api.airygall.com';
-// const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+// const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@
+// "]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]
+// {1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 class Comment {
   constructor(name: string, content: string) {
@@ -388,7 +390,7 @@ export default function CommentScreen() {
   const [isLoading, setLoading] = React.useState<boolean>(true);
   const classes = useStyles();
 
-  const history = useHistory();
+  // const history = useHistory();
 
   const fetchData = () => {
     setLoading(true);
@@ -519,14 +521,13 @@ export default function CommentScreen() {
         </AppBar>
       </div> */}
 
-      <IconButton
+      {/* <IconButton
         id="backIcon"
         onClick={() => history.push('/list')}
       >
         <ArrowBackIcon fontSize="large" />
-      </IconButton>
+      </IconButton> */}
       <div className="commentContainer">
-        {res && (
         <Paper
           className={`${classes.resPaper} alert`}
           style={{
@@ -537,21 +538,8 @@ export default function CommentScreen() {
             {res}
           </Typography>
         </Paper>
-        )}
         <Paper className={classes.commentList}>
           <List dense>
-            {isLoading ? (
-              <Typography>Loading...</Typography>
-            ) : (
-              comments.map((comment) => (
-                <CommentItem
-                  comment={comment}
-                  setAlert={setRes}
-                  onRefresh={fetchData}
-                  key={comment.id}
-                />
-              ))
-            )}
             <ListItem className={classes.topMargin}>
               <form className={classes.grow}>
                 <Grid container className={classes.bottomMargin}>
@@ -602,6 +590,17 @@ export default function CommentScreen() {
                 </Grid>
               </form>
             </ListItem>
+            {isLoading ? (
+              <Typography>Loading...</Typography>
+            ) : (
+              comments.map((comment) => (
+                <CommentItem
+                  comment={comment}
+                  setAlert={setRes}
+                  onRefresh={fetchData}
+                  key={comment.id}
+                />
+              )))}
           </List>
         </Paper>
       </div>
