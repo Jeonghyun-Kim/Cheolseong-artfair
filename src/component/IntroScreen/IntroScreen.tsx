@@ -5,7 +5,7 @@ import './IntroScreen.scss';
 import useWindowSize from '../useWindowSize';
 
 const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
-const REWRITE_URL = 'https://www.notion.so/3f9ecec2a1d940c1b001a22b973b0794?v=b6dd3ece14c44efd9ec9b0a90fee226e';
+const REWRITE_URL = 'https://www.notion.so/Decorum-d5fd16bf040d42fdbf6f7a4a569bd2df';
 
 const timer = 2;
 
