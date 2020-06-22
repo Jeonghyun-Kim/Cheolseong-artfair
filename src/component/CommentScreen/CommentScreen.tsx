@@ -23,7 +23,6 @@ import KeyIcon from '@material-ui/icons/VpnKeyOutlined';
 import './CommentScreen.scss';
 
 const SERVER_URL = 'https://api.airygall.com';
-// const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 class Comment {
   constructor(name: string, content: string) {
@@ -541,18 +540,6 @@ export default function CommentScreen() {
         )}
         <Paper className={classes.commentList}>
           <List dense>
-            {isLoading ? (
-              <Typography>Loading...</Typography>
-            ) : (
-              comments.map((comment) => (
-                <CommentItem
-                  comment={comment}
-                  setAlert={setRes}
-                  onRefresh={fetchData}
-                  key={comment.id}
-                />
-              ))
-            )}
             <ListItem className={classes.topMargin}>
               <form className={classes.grow}>
                 <Grid container className={classes.bottomMargin}>
@@ -603,6 +590,18 @@ export default function CommentScreen() {
                 </Grid>
               </form>
             </ListItem>
+            {isLoading ? (
+              <Typography>Loading...</Typography>
+            ) : (
+              comments.map((comment) => (
+                <CommentItem
+                  comment={comment}
+                  setAlert={setRes}
+                  onRefresh={fetchData}
+                  key={comment.id}
+                />
+              ))
+            )}
           </List>
         </Paper>
       </div>
