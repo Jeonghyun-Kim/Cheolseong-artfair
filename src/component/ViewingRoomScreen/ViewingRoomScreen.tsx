@@ -66,7 +66,6 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       } else {
         setTimeout(() => history.push(`/viewing-room/${idxMap[index - 1]}`), 10);
       }
-      focusSet();
     }
   }, [idxMap, index, history, onDetail]);
 
@@ -78,7 +77,6 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       } else {
         setTimeout(() => history.push(`/viewing-room/${idxMap[index + 1]}`), 10);
       }
-      focusSet();
     }
   }, [idxMap, MAX_INDEX, index, history, onDetail]);
 

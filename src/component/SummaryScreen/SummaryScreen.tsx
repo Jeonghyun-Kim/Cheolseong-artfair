@@ -59,7 +59,6 @@ export default function SummaryScreen() {
       } else {
         setTimeout(() => setIndex(index - 1), 10);
       }
-      focusSet();
     }
   }, [index, onDetail]);
 
@@ -71,7 +70,6 @@ export default function SummaryScreen() {
       } else {
         setTimeout(() => setIndex(index + 1), 10);
       }
-      focusSet();
     }
   }, [MAX_INDEX, index, onDetail]);
 
