@@ -50,10 +50,11 @@ $breakpoint: 700px;
   position: absolute;
   width: 100%;
   height: 70%;
-  bottom: 30%;
-  transform: translate(0, 50%);
+  top: 50%;
+  transform: translate(0, -50%);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
@@ -61,7 +62,8 @@ $breakpoint: 700px;
   position: absolute;
   width: 90%;
   height: 70%;
-  top: 25%;
+  top: 50%;
+  transform: translate(0, -50%);
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -121,13 +123,14 @@ $breakpoint: 700px;
   flex-wrap: nowrap;
   box-sizing: border-box;
   transition: 0.5s ease;
+  align-items: center;
 
   &:hover {
-    opacity: 0.6;
+    // opacity: 0.6;
     cursor: pointer;
 
-    width: 250px;
-    height: 350px;
+    width: 260px;
+    height: 360px;
   }
 
   .menuIcon {
@@ -158,11 +161,11 @@ $breakpoint: 700px;
   }
 
   .content {
-    max-width: 100%;
+    max-width: 200px;
     flex-grow: 1;
     flex-basis: 0;
     font-size: .9rem;
-    padding: 0 16%;
+    padding: 0 20px;
     box-sizing: border-box;
     text-align: center;
     display: flex;

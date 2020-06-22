@@ -12,6 +12,7 @@ import IntroScreen from './component/IntroScreen/IntroScreen';
 import ListScreen from './component/ListScreen/ListScreen';
 import MenuScreen from './component/MenuScreen/MenuScreen';
 // import ContactScreen from './component/ContactScreen/ContactScreen';
+import SummaryScreen from './component/SummaryScreen/SummaryScreen';
 
 import ConfigContext from './ConfigContext';
 
@@ -34,6 +35,7 @@ export default function AppRouter() {
       >
         <Switch>
           <Route exact path="/menu" component={MenuScreen} />
+          <Route path="/summary" component={SummaryScreen} />
           <Route path="/intro" component={IntroScreen} />
           <Route path="/list" component={ListScreen} />
           <Route path="/comments" component={CommentScreen} />

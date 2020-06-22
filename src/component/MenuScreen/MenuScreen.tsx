@@ -17,11 +17,11 @@ export default function MenuScreen() {
 
   return (
     <>
-      <div className="bgImage" />
+      {/* <div className="bgImage" /> */}
       <div className="App menuRoot unselectable">
-        <div className="menuTitle">
+        {/* <div className="menuTitle">
           <h2>Decorum{innerWidth < 1000 ? <br /> : ' - '}신, 인간, 자연의 어울림</h2>
-        </div>
+        </div> */}
         {innerWidth < 1000 ? (
           <div className="mobileMenuContainer">
             <div
