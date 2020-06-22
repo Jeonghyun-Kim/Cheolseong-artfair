@@ -34,8 +34,8 @@ export default function AppRouter() {
         value={{ idxMap, setIdxMap }}
       >
         <Switch>
-          <Route exact path="/menu" component={MenuScreen} />
-          <Route path="/summary" component={SummaryScreen} />
+          <Route exact path="/" component={SummaryScreen} />
+          <Route path="/menu" component={MenuScreen} />
           <Route path="/intro" component={IntroScreen} />
           <Route path="/list" component={ListScreen} />
           <Route path="/comments" component={CommentScreen} />

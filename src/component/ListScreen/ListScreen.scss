@@ -12,6 +12,10 @@ $iconColor: azure !global;
   overflow-x: hidden;
 }
 
+.fixed {
+  position: fixed !important;
+}
+
 .unselectable {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -23,8 +27,9 @@ $iconColor: azure !global;
 
 #paitingNumber {
   position: absolute;
-  left: 30px;
+  left: 50%;
   top: 40px;
+  transform: translate(-50%, 0);
   color: $iconColor;
 }
 

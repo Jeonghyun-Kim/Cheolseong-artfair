@@ -41,10 +41,14 @@ export default function SummaryScreen() {
 
   const ref = React.useRef<HTMLDivElement | null>(null);
 
-  React.useEffect(() => {
+  const focusSet = () => {
     if (ref.current) {
       ref.current.focus();
     }
+  };
+
+  React.useEffect(() => {
+    focusSet();
   }, []);
 
   const handleLeft = React.useCallback(() => {
@@ -55,6 +59,7 @@ export default function SummaryScreen() {
       } else {
         setTimeout(() => setIndex(index - 1), 10);
       }
+      focusSet();
     }
   }, [index, onDetail]);
 
@@ -66,6 +71,7 @@ export default function SummaryScreen() {
       } else {
         setTimeout(() => setIndex(index + 1), 10);
       }
+      focusSet();
     }
   }, [MAX_INDEX, index, onDetail]);
 

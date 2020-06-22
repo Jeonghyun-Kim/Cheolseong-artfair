@@ -48,10 +48,14 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
     setIndex(idxMap.findIndex((element: number) => element === Number(match.params.idx)));
   }, [idxMap, match.params.idx, setIndex]);
 
-  React.useEffect(() => {
+  const focusSet = () => {
     if (ref.current) {
       ref.current.focus();
     }
+  };
+
+  React.useEffect(() => {
+    focusSet();
   }, []);
 
   const handleLeft = React.useCallback(() => {
@@ -62,6 +66,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       } else {
         setTimeout(() => history.push(`/viewing-room/${idxMap[index - 1]}`), 10);
       }
+      focusSet();
     }
   }, [idxMap, index, history, onDetail]);
 
@@ -73,6 +78,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       } else {
         setTimeout(() => history.push(`/viewing-room/${idxMap[index + 1]}`), 10);
       }
+      focusSet();
     }
   }, [idxMap, MAX_INDEX, index, history, onDetail]);
 

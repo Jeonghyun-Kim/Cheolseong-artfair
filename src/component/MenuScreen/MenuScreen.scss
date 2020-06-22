@@ -10,7 +10,7 @@ $breakpoint: 700px;
   position: absolute;
   top: 0;
   left: 0;
-  filter: blur(8px);
+  // filter: blur(8px);
   background-image: url('/wallpaper.jpg');
   background-repeat: repeat;
   width: 100%;
@@ -131,6 +131,8 @@ $breakpoint: 700px;
 
     width: 260px;
     height: 360px;
+
+    margin-bottom: 50px;
   }
 
   .menuIcon {

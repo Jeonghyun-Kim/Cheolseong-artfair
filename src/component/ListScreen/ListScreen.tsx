@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import Popover from '@material-ui/core/Popover';
 import Switch from '@material-ui/core/Switch';
@@ -9,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
 import UpIcon from '@material-ui/icons/ArrowUpward';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter, faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -74,6 +76,7 @@ export default function ListScreen() {
   const [sortAnchorEl, setSortAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const [innerWidth, innerHeight] = useWindowSize();
+  const history = useHistory();
 
   React.useEffect(() => {
     const sessionConfig = sessionStorage.getItem('@config');
@@ -217,6 +220,13 @@ export default function ListScreen() {
         </React.Suspense>
         <ScrollRestoration />
       </div>
+      <IconButton
+        id="backIcon"
+        className="fixed"
+        onClick={() => history.push('/menu')}
+      >
+        <ArrowBackIcon fontSize="large" />
+      </IconButton>
       {/* Scroll To Top Icon */}
       <IconButton
         id="upIcon"

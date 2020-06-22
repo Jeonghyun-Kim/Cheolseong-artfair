@@ -521,7 +521,8 @@ export default function CommentScreen() {
 
       <IconButton
         id="backIcon"
-        onClick={() => history.push('/list')}
+        className="fixed"
+        onClick={() => history.push('/menu')}
       >
         <ArrowBackIcon fontSize="large" />
       </IconButton>
