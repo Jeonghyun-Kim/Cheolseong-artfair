@@ -11,9 +11,9 @@
 
   .lanternPortrait {
     position: absolute;
-    top: 10%;
+    top: 0;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -20%);
     opacity: 0.7;
 
     z-index: 4;
@@ -21,9 +21,11 @@
 
   .imagePortrait {
     position: absolute;
-    top: 26.6%;
-    max-width: 75vw;
-    max-height: 50vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% - 30px));
+    max-width: 95%;
+    max-height: 60%;
     width: auto;
     height: auto;
     object-fit: contain;

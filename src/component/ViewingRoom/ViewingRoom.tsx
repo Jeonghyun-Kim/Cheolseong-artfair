@@ -23,7 +23,7 @@ export default function ViewingRoom({ idx, src }:
 
   React.useEffect(() => {
     if (innerWidth < 700) {
-      setMaxSize(['calc(100% - 80px)', '60%']);
+      setMaxSize(['calc(100% - 40px)', '60%']);
     // } else if (innerWidth < 1500) {
     //   setMaxSize(['calc(75% - 120px)', '60%']);
     } else {
