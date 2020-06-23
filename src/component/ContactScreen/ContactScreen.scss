@@ -18,7 +18,9 @@
     overflow-y: auto;
 
     @media (max-width: 600px) {
+      min-height: 0;
       flex-direction: column;
+      height: fit-content;
       max-height: calc(100% - 100px);
     }
   }
