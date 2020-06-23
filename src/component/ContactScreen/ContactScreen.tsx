@@ -68,7 +68,7 @@ export default function ContactScreen({ match }: ContactProps) {
         if (response.ok) {
           setAlert('성공적으로 등록되었습니다. 입력하신 이메일/휴대전화로 연락 드릴게요.');
         } else {
-          setAlert('데이터베이스 에러. 전화 문의 바랍니다.');
+          setAlert('데이터베이스 에러. 전화 문의 바랍니다. 010-6317-1498');
         }
       }).catch(() => setAlert('네트워크 연결 상태를 확인하세요.'));
     } else {
