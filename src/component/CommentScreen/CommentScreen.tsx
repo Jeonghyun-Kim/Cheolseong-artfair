@@ -219,7 +219,7 @@ const CommentItem = ({ comment, setAlert, onRefresh }: {
     <>
       <ListItem className={classes.commentItem}>
         <Grid container spacing={1}>
-          <Grid item container direction="column" justify="space-between" xs={10} className={classes.contentBox}>
+          <Grid item container direction="column" justify="space-between" xs={9} className={classes.contentBox}>
             <Grid item>
               <Typography variant="subtitle1">{comment.content}</Typography>
             </Grid>
@@ -227,7 +227,7 @@ const CommentItem = ({ comment, setAlert, onRefresh }: {
               <Typography variant="caption">{comment.createdAt}</Typography>
             </Grid>
           </Grid>
-          <Grid item container xs={2} direction="column" justify="space-between">
+          <Grid item container xs={3} direction="column" justify="space-between">
             <Grid item>
               <Typography variant="subtitle2" className={classes.name}>{comment.name}</Typography>
             </Grid>
