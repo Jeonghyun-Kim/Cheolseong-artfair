@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -101,8 +102,10 @@ export default function Details({ idx, src }:
               Share
             </Button>
           </CopyToClipboard>
-          <Button size="small" color="primary" href={`${DEFINES.DOMAIN}/contact/${idx}`} target="_blank">
-            Contact
+          <Button size="small" color="primary">
+            <Link to={`/contact/${idx}`} target="_blank" className="buttonLink">
+              Contact
+            </Link>
           </Button>
         </CardActions>
       </div>
