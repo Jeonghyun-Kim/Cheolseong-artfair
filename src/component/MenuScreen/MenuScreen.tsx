@@ -82,7 +82,7 @@ export default function MenuScreen() {
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
-                <FontAwesomeIcon icon={faImage} />
+                <FontAwesomeIcon icon={faEdit} />
               </div>
               <div className="title">
                 {menus[3].title}
@@ -98,7 +98,7 @@ export default function MenuScreen() {
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
-                <FontAwesomeIcon icon={faEdit} />
+                <FontAwesomeIcon icon={faImage} />
               </div>
               <div className="title">
                 {menus[4].title}
@@ -184,12 +184,15 @@ export default function MenuScreen() {
               tabIndex={0}
               className="desktopMenuItem"
               onClick={() => {
-                setTimeout(() => history.go(0), 0);
+                window.open(
+                  'https://gformanalytics.com/form.php?ga_id=UA-168932005-1](https://www.googletagmanager.com/gtag/js?id=UA-168932005-1)&form_id=1FAIpQLSe71tn0suGW1SYIujzi5oJdTQsJp1nbCKK7RtvxIJgDAyNv1g',
+                  '_blank',
+                );
               }}
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
-                <FontAwesomeIcon icon={faImage} />
+                <FontAwesomeIcon icon={faEdit} />
               </div>
               <div className="title">
                 {menus[3].title.split('\n').map((line, idx) => (
@@ -213,7 +216,7 @@ export default function MenuScreen() {
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
-                <FontAwesomeIcon icon={faEdit} />
+                <FontAwesomeIcon icon={faImage} />
               </div>
               <div className="title">
                 {menus[4].title.split('\n').map((line, idx) => (
