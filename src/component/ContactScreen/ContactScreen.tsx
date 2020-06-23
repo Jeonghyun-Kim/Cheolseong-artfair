@@ -1,8 +1,10 @@
 import React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, useHistory } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import IconButton from '@material-ui/core/IconButton';
 
 import './ContactScreen.scss';
 
@@ -18,6 +20,8 @@ export default function ContactScreen({ match }: ContactProps) {
   const [phone, setPhone] = React.useState<string>('');
   const [content, setContent] = React.useState<string>('');
   const [alert, setAlert] = React.useState<string>('');
+
+  const history = useHistory();
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement | MouseEvent>) => {
     e.preventDefault();
@@ -52,6 +56,13 @@ export default function ContactScreen({ match }: ContactProps) {
 
   return (
     <div className="App">
+      <IconButton
+        id="backIcon"
+        className="fixed"
+        onClick={() => history.push('/menu')}
+      >
+        <ArrowBackIcon fontSize="large" />
+      </IconButton>
       <div className="contactContainer">
         <Paper variant="elevation" className="contactPaper">
           <form>
