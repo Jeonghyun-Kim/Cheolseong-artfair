@@ -14,8 +14,9 @@
   .contactPaper {
     width: 100%;
     display: flex;
-    min-height: calc(min(400px, 90%));
+    min-height: fit-content;
     overflow-y: auto;
+    max-height: 90%;
 
     @media (max-width: 600px) {
       min-height: 0;
