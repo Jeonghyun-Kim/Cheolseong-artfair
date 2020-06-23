@@ -99,12 +99,12 @@ export default function Details({ idx, src }:
             onCopy={handleAlert}
           >
             <Button size="small" color="primary">
-              Share
+              공유
             </Button>
           </CopyToClipboard>
           <Button size="small" color="primary">
             <Link to={`/contact/${idx}`} className="buttonLink">
-              Contact
+              작품문의
             </Link>
           </Button>
         </CardActions>
