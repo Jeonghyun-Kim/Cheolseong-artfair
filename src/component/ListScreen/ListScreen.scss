@@ -32,6 +32,10 @@ $iconColor: azure !global;
   top: 40px;
   transform: translate(-50%, 0);
   color: $iconColor;
+
+  @media (max-width: 600px) {
+    top: 20px;
+  }
 }
 
 #onSaleText {
@@ -61,6 +65,11 @@ $iconColor: azure !global;
   top: 10px;
   color: $iconColor;
   z-index: 99;
+
+  @media (max-width: 600px) {
+    right: 40px;
+    top: 5px;
+  }
 }
 
 #filterIcon {
@@ -69,6 +78,11 @@ $iconColor: azure !global;
   top: 10px;
   color: $iconColor;
   z-index: 99;
+
+  @media (max-width: 600px) {
+    right: 5px;
+    top: 5px;
+  }
 }
 
 #upIcon {
@@ -80,6 +94,12 @@ $iconColor: azure !global;
   border-radius: 100px;
   background-color: #827385;
   z-index: 99;
+
+  @media (max-width: 600px) {
+    bottom: 15px;
+    right: 15px;
+    padding: 5px;
+  }
 }
 
 #sortBadge {

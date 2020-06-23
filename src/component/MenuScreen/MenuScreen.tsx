@@ -77,7 +77,10 @@ export default function MenuScreen() {
               tabIndex={0}
               className="mobileMenuItem"
               onClick={() => {
-                setTimeout(() => history.go(0), 0);
+                window.open(
+                  'https://gformanalytics.com/form.php?ga_id=UA-168932005-1](https://www.googletagmanager.com/gtag/js?id=UA-168932005-1)&form_id=1FAIpQLSe71tn0suGW1SYIujzi5oJdTQsJp1nbCKK7RtvxIJgDAyNv1g',
+                  '_blank',
+                );
               }}
               onKeyDown={() => {}}
             >
