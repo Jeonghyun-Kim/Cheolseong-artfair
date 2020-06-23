@@ -115,7 +115,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     backgroundColor: 'white',
   },
   commentList: {
-    marginTop: '10ch',
+    // marginTop: '10ch',
   },
   commentItem: {
     borderBottom: 'solid 1px #eee',
