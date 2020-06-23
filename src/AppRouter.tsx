@@ -11,7 +11,7 @@ import ViewingRoomScreen from './component/ViewingRoomScreen/ViewingRoomScreen';
 import IntroScreen from './component/IntroScreen/IntroScreen';
 import ListScreen from './component/ListScreen/ListScreen';
 import MenuScreen from './component/MenuScreen/MenuScreen';
-// import ContactScreen from './component/ContactScreen/ContactScreen';
+import ContactScreen from './component/ContactScreen/ContactScreen';
 import SummaryScreen from './component/SummaryScreen/SummaryScreen';
 
 import ConfigContext from './ConfigContext';
@@ -39,13 +39,13 @@ export default function AppRouter() {
           <Route path="/intro" component={IntroScreen} />
           <Route path="/list" component={ListScreen} />
           <Route path="/comments" component={CommentScreen} />
-          {/* <Route path="/contact/:idx" component={ContactScreen} /> */}
+          <Route path="/contact/:idx" component={ContactScreen} />
           <Route path="/viewing-room/:idx" component={ViewingRoomScreen} />
           <Route path="/viewing-room">
             <Redirect to="/viewing-room/0" />
           </Route>
           <Route path="/*">
-            <Redirect to="/list" />
+            <Redirect to="/" />
           </Route>
         </Switch>
       </ConfigContext.Provider>

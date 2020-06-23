@@ -10,6 +10,7 @@ import Brightness1Icon from '@material-ui/icons/Brightness1';
 
 import './Details.scss';
 import info from '../../info.json';
+import DEFINES from '../../defines';
 
 import useWindowSize from '../useWindowSize';
 
@@ -93,14 +94,14 @@ export default function Details({ idx, src }:
           )}
           <div className="grow" />
           <CopyToClipboard
-            text={`https://kay.airygall.com/viewing-room/${idx}`}
+            text={`${DEFINES.DOMAIN}/viewing-room/${idx}`}
             onCopy={handleAlert}
           >
             <Button size="small" color="primary">
               Share
             </Button>
           </CopyToClipboard>
-          <Button size="small" color="primary" href="https://forms.gle/NLBHc8GgPDwZrPwK7" target="_blank">
+          <Button size="small" color="primary" href={`${DEFINES.DOMAIN}/contact/${idx}`} target="_blank">
             Contact
           </Button>
         </CardActions>
