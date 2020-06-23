@@ -103,7 +103,7 @@ export default function Details({ idx, src }:
             </Button>
           </CopyToClipboard>
           <Button size="small" color="primary">
-            <Link to={`/contact/${idx}`} target="_blank" className="buttonLink">
+            <Link to={`/contact/${idx}`} className="buttonLink">
               Contact
             </Link>
           </Button>

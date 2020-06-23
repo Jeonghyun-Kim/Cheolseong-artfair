@@ -1,12 +1,108 @@
 .contactContainer {
-  max-width: 1200px;
-  min-width: 50%;
+  width: 90%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  transform: translate(0, 60px);
+
+  @media (min-width: 601px) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: calc(min(90%, 900px));
+  }
 
   .contactPaper {
     width: 100%;
-    padding: calc(min(50px, 10%));
+    display: flex;
+    min-height: calc(min(400px, 90%));
+    overflow-y: auto;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      height: calc(100% - 100px);
+    }
+  }
+
+  #infoSection {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-around;
+    background-color: rgba($color: #faf7f2ad, $alpha: 0.9);
+
+    .image {
+      justify-content: center;
+      align-items: center;
+
+      img {
+        display: flex;
+        margin: auto;
+      }
+    }
+
+    .title {
+      padding-left: 30px;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100px;
+
+      border: 1px solid rgba($color: #dadada, $alpha: 1.0);
+    }
+
+    #divider {
+      margin: 30px 10px;
+      border-top: 1px solid rgba($color: #c7c7c7a1, $alpha: 1.0) !important;
+    }
+
+    .textInput {
+      margin-bottom: 18px;
+    }
+  }
+
+  #contentSection {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+
+    #helperText {
+      margin-bottom: 15px;
+      font-size: 1.5em;
+      font-weight: bolder;
+
+      @media (max-width: 600px) {
+        font-size: 1em;
+      }
+    }
+
+    .content {
+      .MuiOutlinedInput-root {
+        @media (min-width: 601px) {
+          min-height: 250px !important;
+          align-items: flex-start !important;
+        }
+      }
+    }
+
+    #alert {
+      text-align: right;
+      color: rgba($color: #e40d0d, $alpha: 1.0);
+    }
+
+    .submit {
+      margin-top: 20px;
+
+      button {
+        display: block;
+        width: 100%;
+        background-color: rgba($color: #000000, $alpha: 1.0);
+        color: white;
+        font-size: 15px;
+        padding: 10px;
+        border: none;
+      }
+    }
   }
 }

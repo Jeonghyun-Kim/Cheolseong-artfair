@@ -6,8 +6,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import { useHistory } from 'react-router-dom';
 
-import './SummaryScreen.scss';
-
 import ViewingRoom from '../ViewingRoom/ViewingRoom';
 import Details from '../Details/Details';
 import MenuScreen from '../MenuScreen/MenuScreen';
@@ -49,6 +47,10 @@ export default function SummaryScreen() {
 
   React.useEffect(() => {
     focusSet();
+    const exIndex = sessionStorage.getItem('@index');
+    if (exIndex) {
+      setIndex(JSON.parse(exIndex));
+    }
   }, []);
 
   const handleLeft = React.useCallback(() => {
@@ -59,6 +61,7 @@ export default function SummaryScreen() {
       } else {
         setTimeout(() => setIndex(index - 1), 10);
       }
+      sessionStorage.setItem('@index', JSON.stringify(index - 1));
     }
   }, [index, onDetail]);
 
@@ -70,12 +73,14 @@ export default function SummaryScreen() {
       } else {
         setTimeout(() => setIndex(index + 1), 10);
       }
+      sessionStorage.setItem('@index', JSON.stringify(index + 1));
     }
   }, [MAX_INDEX, index, onDetail]);
 
   const toggleDetail = () => {
     if (index !== 0 && index !== MAX_INDEX) {
       setOnDetail(!onDetail);
+      sessionStorage.setItem('@index', JSON.stringify(index));
     }
   };
 
