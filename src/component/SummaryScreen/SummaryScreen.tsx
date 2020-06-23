@@ -225,20 +225,12 @@ export default function SummaryScreen() {
         <ArrowForwardIosIcon fontSize="large" />
       </IconButton>
       {index !== 0 && index !== MAX_INDEX && (
-        <div
-          style={{
-            opacity: onDetail ? 1 : 0,
-            zIndex: onDetail ? 100 : -1,
-          }}
-          className="detailScreen"
+        <IconButton
+          id="moreIcon"
+          onClick={toggleDetail}
         >
-          <IconButton
-            id="moreIcon"
-            onClick={toggleDetail}
-          >
-            <AssignmentIcon fontSize="large" />
-          </IconButton>
-        </div>
+          <AssignmentIcon fontSize="large" />
+        </IconButton>
       )}
       <IconButton
         id="closeIcon"
