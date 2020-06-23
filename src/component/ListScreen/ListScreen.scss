@@ -47,6 +47,10 @@ $iconColor: azure !global;
   width: 100%;
   max-width: 1700px;
   padding: 100px 50px;
+
+  @media (max-width: 600px) {
+    padding: 50px 0px;
+  }
 }
 
 .iconContainer {

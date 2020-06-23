@@ -88,7 +88,7 @@ export default function ContactScreen({ match }: ContactProps) {
       <div className="contactContainer">
         <Paper variant="elevation" className="contactPaper">
           <Grid item xs={12} sm={6} md={5} id="infoSection">
-            <Grid container>
+            <Grid container className="imageBox">
               <Grid item xs={5} className="image">
                 <img
                   alt="paintingImage"
