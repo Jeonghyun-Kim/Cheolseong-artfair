@@ -81,7 +81,7 @@ export default function ContactScreen({ match }: ContactProps) {
       <IconButton
         id="backIcon"
         className="fixed"
-        onClick={() => history.push('/')}
+        onClick={() => history.goBack()}
       >
         <ArrowBackIcon fontSize="large" />
       </IconButton>
