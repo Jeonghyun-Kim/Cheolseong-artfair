@@ -36,6 +36,7 @@
     flex-direction: column;
     // justify-content: space-around;
     background-color: rgba($color: #faf7f2ad, $alpha: 0.9);
+    border-radius: inherit;
     min-height: fit-content;
 
     .imageBox {
