@@ -19,7 +19,7 @@
 
     @media (max-width: 600px) {
       flex-direction: column;
-      height: calc(100% - 100px);
+      max-height: calc(100% - 100px);
     }
   }
 
@@ -42,6 +42,13 @@
 
     .title {
       padding-left: 30px;
+
+      .caption {
+        padding-top: 10px;
+        p {
+          font-size: 12px;
+        }
+      }
     }
 
     img {
@@ -71,6 +78,10 @@
       margin-bottom: 15px;
       font-size: 1.5em;
       font-weight: bolder;
+
+      &.poster {
+        font-size: 1.2em !important;
+      }
 
       @media (max-width: 600px) {
         font-size: 1em;

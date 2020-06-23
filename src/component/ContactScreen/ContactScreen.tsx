@@ -98,6 +98,12 @@ export default function ContactScreen({ match }: ContactProps) {
               <Grid item xs={7} className="title">
                 <Typography variant="h5">Decorum</Typography>
                 <Typography variant="body1">{info[idx].year} - {info[idx].id}</Typography>
+                <div className="caption">
+                  <Typography variant="body2">{info[idx].width}x{info[idx].height}cm</Typography>
+                  <Typography variant="body2">
+                    {info[idx].price === 'sold out' ? 'SOLD OUT' : `${info[idx].price}만원`}
+                  </Typography>
+                </div>
               </Grid>
             </Grid>
             <div id="divider" />

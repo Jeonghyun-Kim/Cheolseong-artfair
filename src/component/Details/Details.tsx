@@ -109,7 +109,7 @@ export default function Details({ idx, src }:
           </Button>
           <Button size="small" color="primary">
             <Link to={`/poster/${idx}`} className="buttonLink">
-              출력본구매
+              출력본문의
             </Link>
           </Button>
         </CardActions>
