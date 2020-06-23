@@ -12,6 +12,7 @@ import IntroScreen from './component/IntroScreen/IntroScreen';
 import ListScreen from './component/ListScreen/ListScreen';
 import ContactScreen from './component/ContactScreen/ContactScreen';
 import SummaryScreen from './component/SummaryScreen/SummaryScreen';
+import PosterContactScreen from './component/PosterContactScreen/PosterContactScreen';
 
 import ConfigContext from './ConfigContext';
 
@@ -37,6 +38,7 @@ export default function AppRouter() {
           <Route path="/intro" component={IntroScreen} />
           <Route path="/list" component={ListScreen} />
           <Route path="/comments" component={CommentScreen} />
+          <Route path="/poster/:idx" component={PosterContactScreen} />
           <Route path="/contact/:idx" component={ContactScreen} />
           <Route path="/viewing-room/:idx" component={ViewingRoomScreen} />
           <Route path="/viewing-room">

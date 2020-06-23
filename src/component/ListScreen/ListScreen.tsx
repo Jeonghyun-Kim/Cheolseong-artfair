@@ -223,7 +223,7 @@ export default function ListScreen() {
       <IconButton
         id="backIcon"
         className="fixed"
-        onClick={() => history.goBack()}
+        onClick={() => history.push('/')}
       >
         <ArrowBackIcon fontSize="large" />
       </IconButton>

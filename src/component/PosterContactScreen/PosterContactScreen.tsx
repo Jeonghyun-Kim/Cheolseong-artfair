@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 
-import './ContactScreen.scss';
+import './PosterContactScreen.scss';
 
 import info from '../../info.json';
 import DEFINES from '../../defines';
@@ -20,7 +20,7 @@ const API_URL = 'https://api.airygall.com';
 
 interface ContactProps extends RouteComponentProps<{ idx: string }> {}
 
-export default function ContactScreen({ match }: ContactProps) {
+export default function PosterContactScreen({ match }: ContactProps) {
   const [name, setName] = React.useState<string>('');
   const [email, setEmail] = React.useState<string>('');
   const [phone, setPhone] = React.useState<string>('');
@@ -81,7 +81,7 @@ export default function ContactScreen({ match }: ContactProps) {
       <IconButton
         id="backIcon"
         className="fixed"
-        onClick={() => history.push('/')}
+        onClick={() => history.goBack()}
       >
         <ArrowBackIcon fontSize="large" />
       </IconButton>

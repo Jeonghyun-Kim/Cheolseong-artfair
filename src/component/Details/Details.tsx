@@ -107,6 +107,11 @@ export default function Details({ idx, src }:
               작품문의
             </Link>
           </Button>
+          <Button size="small" color="primary">
+            <Link to={`/poster/${idx}`} className="buttonLink">
+              출력본구매
+            </Link>
+          </Button>
         </CardActions>
       </div>
     </Card>
