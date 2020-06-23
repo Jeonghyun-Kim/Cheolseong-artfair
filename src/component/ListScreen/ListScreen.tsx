@@ -235,9 +235,6 @@ export default function ListScreen() {
         <UpIcon fontSize="small" />
       </IconButton>
       {/* Sort Menu Button */}
-      {!(JSON.stringify(storedSortConfig) === JSON.stringify(defaultSortConfig)) && (
-        <Brightness1Icon fontSize="small" id="sortBadge" />
-      )}
       <IconButton
         id="sortIcon"
         aria-controls="sort-menu"
@@ -251,6 +248,11 @@ export default function ListScreen() {
             style={{ margin: innerWidth < 1000 ? '5px' : '10px' }}
           />
           <div className="iconTitle">정렬</div>
+        </div>
+        <div className="badgeContainer">
+          {!(JSON.stringify(storedSortConfig) === JSON.stringify(defaultSortConfig)) && (
+            <Brightness1Icon fontSize="small" id="sortBadge" />
+          )}
         </div>
       </IconButton>
       {/* Sort Menu Popup */}
@@ -338,10 +340,6 @@ export default function ListScreen() {
         </div>
       </Popover>
       {/* Filter Menu Button */}
-      {!(JSON.stringify(storedConfig.yearRange) === JSON.stringify(defaultConfig.yearRange)
-        && !storedConfig.onSaleOnly) && (
-        <Brightness1Icon fontSize="small" id="filterBadge" />
-      )}
       <IconButton
         id="filterIcon"
         aria-controls="filter-menu"
@@ -355,6 +353,12 @@ export default function ListScreen() {
             style={{ margin: innerWidth < 1000 ? '5px' : '10px' }}
           />
           <div className="iconTitle">검색</div>
+        </div>
+        <div className="badgeContainer">
+          {!(JSON.stringify(storedConfig.yearRange) === JSON.stringify(defaultConfig.yearRange)
+            && !storedConfig.onSaleOnly) && (
+            <Brightness1Icon fontSize="small" id="filterBadge" />
+          )}
         </div>
       </IconButton>
       {/* Filter Menu Popup */}

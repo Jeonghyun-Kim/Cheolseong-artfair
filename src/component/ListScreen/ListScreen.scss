@@ -63,6 +63,23 @@ $iconColor: azure !global;
   }
 }
 
+.badgeContainer {
+  position: relative;
+
+  svg {
+    position: absolute;
+    right: -5px;
+    top: -30px;
+    color: rgba($color: #cc1717, $alpha: 0.9);
+
+    circle {
+      @media (max-width: 600px) {
+        r: 8px;
+      }
+    }
+  }
+}
+
 #sortIcon {
   position: absolute;
   right: 80px;
@@ -106,19 +123,19 @@ $iconColor: azure !global;
   }
 }
 
-#sortBadge {
-  position: absolute;
-  right: 85px;
-  top: 16px;
-  color: #aa0000;
-}
+// #sortBadge {
+//   position: absolute;
+//   right: 85px;
+//   top: 16px;
+//   color: #aa0000;
+// }
 
-#filterBadge {
-  position: absolute;
-  right: 20px;
-  top: 16px;
-  color: #aa0000;
-}
+// #filterBadge {
+//   position: absolute;
+//   right: 20px;
+//   top: 16px;
+//   color: #aa0000;
+// }
 
 #sort-menu {
   #switchContainer {
