@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 
 import './ContactScreen.scss';
@@ -23,6 +24,7 @@ export default function ContactScreen({ match }: ContactProps) {
   const [email, setEmail] = React.useState<string>('');
   const [phone, setPhone] = React.useState<string>('');
   const [content, setContent] = React.useState<string>('');
+  const [subscription, setSubscription] = React.useState<boolean>(true);
   const [alert, setAlert] = React.useState<string>('');
 
   const history = useHistory();
@@ -40,7 +42,7 @@ export default function ContactScreen({ match }: ContactProps) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          index: match.params.idx, name, email, phone, content,
+          index: match.params.idx, name, email, phone, content, subscription,
         }),
       }).then(async (response) => {
         if (response.ok) {
@@ -77,7 +79,7 @@ export default function ContactScreen({ match }: ContactProps) {
               <Grid item xs={5} className="image">
                 <img
                   alt="paintingImage"
-                  src={`${DEFINES.STORAGE_URL_SM}/${info[idx].year}_${info[idx].id}.jpg`}
+                  src={`${DEFINES.STORAGE_URL_XS}/${info[idx].year}_${info[idx].id}.jpg`}
                 />
               </Grid>
               <Grid item xs={7} className="title">
@@ -137,6 +139,16 @@ export default function ContactScreen({ match }: ContactProps) {
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                 />
+              </div>
+              <div className="subscriptionCheckbox">
+                <Checkbox
+                  color="default"
+                  checked={subscription}
+                  onChange={(e) => {
+                    setSubscription(e.target.checked);
+                  }}
+                />
+                <span>onDisplay의 다른 전시 소식을 받아볼래요.</span>
               </div>
               <div id="alert">
                 {alert}

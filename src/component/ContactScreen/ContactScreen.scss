@@ -86,14 +86,27 @@
       }
     }
 
+    .subscriptionCheckbox {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+
+      span {
+        font-size: 0.8em;
+      }
+    }
+
     #alert {
+      margin-bottom: 15px;
       text-align: right;
       color: rgba($color: #e40d0d, $alpha: 1.0);
+
+      @media (max-width: 600px) {
+        text-align: left;
+      }
     }
 
     .submit {
-      margin-top: 20px;
-
       button {
         display: block;
         width: 100%;
