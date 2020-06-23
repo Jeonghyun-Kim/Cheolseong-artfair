@@ -14,7 +14,8 @@ import './ContactScreen.scss';
 import info from '../../info.json';
 import DEFINES from '../../defines';
 
-// const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const PHONE_REGEX = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/;
 const API_URL = 'https://api.airygall.com';
 
 interface ContactProps extends RouteComponentProps<{ idx: string }> {}
@@ -33,9 +34,28 @@ export default function ContactScreen({ match }: ContactProps) {
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement | MouseEvent>) => {
     e.preventDefault();
-    // TODO: validation
 
     if (name && email && content) {
+      if (!EMAIL_REGEX.test(email)) {
+        setAlert('이메일 주소가 올바르지 않습니다.');
+        return;
+      }
+      if (!PHONE_REGEX.test(phone)) {
+        setAlert('휴대폰 번호가 올바르지 않습니다.');
+        return;
+      }
+      if (name.length < 2) {
+        setAlert('이름은 2글자 이상 입력해주세요.');
+        return;
+      }
+      if (content.length < 3) {
+        setAlert('내용은 3글자 이상 입력해주세요.');
+        return;
+      }
+      if (phone.length > 10) {
+        setAlert('휴대폰 번호가 올바르지 않습니다.');
+        return;
+      }
       fetch(`${API_URL}/contact`, {
         method: 'POST',
         headers: {
@@ -48,20 +68,13 @@ export default function ContactScreen({ match }: ContactProps) {
         if (response.ok) {
           setAlert('성공적으로 등록되었습니다. 입력하신 이메일/휴대전화로 연락 드릴게요.');
         } else {
-          // TODO:
-          setAlert('에러에러');
+          setAlert('데이터베이스 에러. 전화 문의 바랍니다.');
         }
       }).catch(() => setAlert('네트워크 연결 상태를 확인하세요.'));
-      // .finally(() => setTimeout(() => setAlert(''), 3000));
     } else {
       setAlert('필수 입력칸을 모두 채워주세요!');
-      // setTimeout(() => setAlert(''), 3000);
     }
   };
-
-  // React.useEffect(() => {
-  //   setSmall(innerWidth < 600);
-  // }, [innerWidth]);
 
   return (
     <div className="App contactRoot">
@@ -89,7 +102,7 @@ export default function ContactScreen({ match }: ContactProps) {
             </Grid>
             <div id="divider" />
             <div className="textInput">
-              <div>이름</div>
+              <div>이름 *</div>
               <TextField
                 placeholder="필수"
                 variant="standard"
@@ -100,7 +113,7 @@ export default function ContactScreen({ match }: ContactProps) {
               />
             </div>
             <div className="textInput">
-              <div>이메일</div>
+              <div>이메일 *</div>
               <TextField
                 placeholder="필수"
                 variant="standard"
@@ -113,7 +126,7 @@ export default function ContactScreen({ match }: ContactProps) {
             <div className="textInput">
               <div>휴대전화</div>
               <TextField
-                placeholder="선택"
+                placeholder="(예: 01012345678)"
                 variant="standard"
                 color="primary"
                 fullWidth
