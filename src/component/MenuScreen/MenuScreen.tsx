@@ -2,10 +2,13 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { faEdit, faImage } from '@fortawesome/free-regular-svg-icons';
+import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faUsers, faLandmark } from '@fortawesome/free-solid-svg-icons';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import SvgIcon from '@material-ui/core/SvgIcon';
+
+import { ReactComponent as LogoIcon } from './logo_icon.svg';
 
 import './MenuScreen.scss';
 
@@ -130,7 +133,7 @@ export default function MenuScreen() {
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
-                <FontAwesomeIcon icon={faImage} />
+                <SvgIcon component={LogoIcon} viewBox="0 0 233 233" />
               </div>
               <div className="title">
                 {menus[4].title}
@@ -246,7 +249,7 @@ export default function MenuScreen() {
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
-                <FontAwesomeIcon icon={faImage} />
+                <SvgIcon component={LogoIcon} viewBox="0 0 233 233" />
               </div>
               <div className="title">
                 {menus[4].title.split('\n').map((line, idx) => (
