@@ -10,7 +10,7 @@ import Details from '../Details/Details';
 import MenuScreen from '../MenuScreen/MenuScreen';
 import IntroScreen from '../IntroScreen/IntroScreen';
 
-import info from './summaryInfo.json';
+import info from '../../info.json';
 
 const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
 
@@ -33,7 +33,7 @@ const defaultMotionState = {
 const swipeThreshold = 100;
 
 export default function SummaryScreen() {
-  const MAX_INDEX = info.length + 1;
+  const MAX_INDEX = idxMap.length - 1;
   const [index, setIndex] = React.useState<number>(0);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [motionState, setMotionState] = React.useState<MotionState>(defaultMotionState);
@@ -198,7 +198,7 @@ export default function SummaryScreen() {
         ) : (
           <ViewingRoom
             idx={idxMap[index]}
-            src={`${STORAGE_URL_MD}/${info[index - 1].src}`}
+            src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
           />
         )}
       </div>
@@ -212,7 +212,7 @@ export default function SummaryScreen() {
         >
           <Details
             idx={idxMap[index]}
-            src={`${STORAGE_URL_MD}/${info[index - 1].src}`}
+            src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
           />
         </div>
       )}
