@@ -1,0 +1,91 @@
+.aboutPaper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+  min-height: 500px;
+
+  @media (max-width: 600px) {
+    min-height: 80vh;
+  }
+
+  .logoImage {
+    margin-top: 20px;
+    width: 40%;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .explanation {
+    width: 80%;
+
+    p {
+      font-size: 1.3rem;
+      line-height: 2;
+    }
+  }
+
+  #title {
+    font-weight: bold;
+  }
+
+  .contactUs {
+    display: flex;
+
+    #section1 {
+      width: 60px;
+    }
+  }
+
+  .subLogoImages {
+    margin: 15px 0;
+    width: 40%;
+    display: flex;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
+
+    #subLogoImage1 {
+      width: 60%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 10px;
+
+      @media (max-width: 600px) {
+        width: 80%;
+        padding: 10px 10px;
+      }
+
+      img {
+        display: flex;
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    #subLogoImage2 {
+      width: 40%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 10px;
+
+      @media (max-width: 600px) {
+        width: 80%;
+        padding: 10px 10px;
+      }
+
+      img {
+        display: flex;
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

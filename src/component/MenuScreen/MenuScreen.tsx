@@ -4,24 +4,54 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faEdit, faImage } from '@fortawesome/free-regular-svg-icons';
 import { faUsers, faLandmark } from '@fortawesome/free-solid-svg-icons';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 import './MenuScreen.scss';
 
 import menus from './menus.json';
 
+import About from '../About/About';
 import useWindowSize from '../useWindowSize';
 
 export default function MenuScreen() {
+  const [onAbout, setOnAbout] = React.useState<boolean>(false);
   const [innerWidth] = useWindowSize();
   const history = useHistory();
 
+  const toggleAbout = () => {
+    setOnAbout(!onAbout);
+  };
+
   return (
     <>
-      <div className="bgImage" />
-      <div className="App menuRoot unselectable">
-        {/* <div className="menuTitle">
-          <h2>Decorum{innerWidth < 1000 ? <br /> : ' - '}신, 인간, 자연의 어울림</h2>
-        </div> */}
+      <div
+        id="aboutDiv"
+        className="unselectable"
+        style={{
+          opacity: onAbout ? 1 : 0,
+          zIndex: onAbout ? 10 : -1,
+        }}
+      >
+        <About />
+        <IconButton
+          id="close"
+          onClick={() => setOnAbout(false)}
+          disabled={!onAbout}
+          style={{
+            opacity: onAbout ? 1 : 0,
+            zIndex: onAbout ? 5 : -1,
+          }}
+        >
+          <CloseIcon fontSize="large" />
+        </IconButton>
+      </div>
+      <div
+        className="App menuRoot unselectable"
+        style={{
+          filter: `blur(${onAbout ? 10 : 0}px)`,
+        }}
+      >
         {innerWidth < 1000 ? (
           <div className="mobileMenuContainer">
             <div
@@ -95,9 +125,7 @@ export default function MenuScreen() {
               role="button"
               tabIndex={0}
               className="mobileMenuItem"
-              onClick={() => {
-                setTimeout(() => history.go(0), 0);
-              }}
+              onClick={() => toggleAbout()}
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
@@ -213,9 +241,7 @@ export default function MenuScreen() {
               role="button"
               tabIndex={0}
               className="desktopMenuItem"
-              onClick={() => {
-                setTimeout(() => history.go(0), 0);
-              }}
+              onClick={() => toggleAbout()}
               onKeyDown={() => {}}
             >
               <div className="menuIcon">

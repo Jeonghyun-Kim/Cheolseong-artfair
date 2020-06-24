@@ -10,12 +10,9 @@
 
 .contactContainer {
   width: 90%;
+  max-width: 900px;
   height: fit-content;
   padding: 60px 0;
-
-  @media (min-width: 601px) {
-    max-width: calc(min(90%, 900px));
-  }
 
   .contactPaper {
     width: 100%;

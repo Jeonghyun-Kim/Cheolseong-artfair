@@ -1,9 +1,38 @@
 $menuColor: #f9f9f9;
 $breakpoint: 700px;
 
+#aboutDiv {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: flex;
+  width: fit-content;
+  min-height: fit-content;
+  width: 90%;
+  max-width: 900px;
+  transition: 1s ease;
+  margin: 60px 0;
+
+  @media (min-width: 601px) and (min-height: 601px) {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  #close {
+    position: absolute; 
+    right: 0;
+    top: -60px;
+    color: rgba(149, 148, 160, 0.664);
+    transition: 1s ease;
+  }
+}
+
 .menuRoot {
-  background-image: none !important;
   overflow-y: auto;
+  transition: 1s ease;
 }
 
 .bgImage {

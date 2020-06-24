@@ -32,15 +32,3 @@ $iconMarginSmall: 5px !global;
   }
   color: $iconColor;
 }
-
-#closeIcon {
-  position: absolute;
-  right: $iconMargin;
-  top: $iconMargin;
-  @media (max-width: 700px) {
-    right: $iconMarginSmall;
-    top: $iconMarginSmall;
-  }
-  color: $iconColor;
-  transition: $delay;
-}
