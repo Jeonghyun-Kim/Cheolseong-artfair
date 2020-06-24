@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import UpIcon from '@material-ui/icons/ArrowUpward';
 import {
   createStyles, fade, Theme, makeStyles,
 } from '@material-ui/core/styles';
@@ -477,10 +478,20 @@ export default function CommentScreen() {
     }
   };
 
+  const handleScrollToTop = () => {
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+  };
+
   return (
     <div
       className="commentRoot"
     >
+      <IconButton
+        id="upIcon"
+        onClick={() => handleScrollToTop()}
+      >
+        <UpIcon fontSize="small" />
+      </IconButton>
       {/* <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
