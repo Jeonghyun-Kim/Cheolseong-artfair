@@ -20,14 +20,14 @@ interface MotionState {
   touchStartX: number;
   moved: boolean;
   beingTouched: boolean;
-  // moveTo: string;
+  moveTo: string;
 }
 
 const defaultMotionState = {
   touchStartX: 0,
   moved: false,
   beingTouched: false,
-  // moveTo: 'null',
+  moveTo: 'null',
 };
 
 const swipeThreshold = 100;
@@ -108,7 +108,6 @@ export default function SummaryScreen() {
 
   const handleMotion = {
     start: (clientX: number) => {
-      // console.log('touch start');
       setMotionState({
         ...motionState,
         touchStartX: clientX,
@@ -119,37 +118,50 @@ export default function SummaryScreen() {
       if (motionState.beingTouched) {
         const deltaX = clientX - motionState.touchStartX;
         if (deltaX < -swipeThreshold) {
-          setMotionState(defaultMotionState);
-          handleRight();
+          setMotionState({
+            ...motionState,
+            moveTo: 'right',
+          });
         } else if (deltaX > swipeThreshold) {
-          setMotionState(defaultMotionState);
-          handleLeft();
+          setMotionState({
+            ...motionState,
+            moveTo: 'left',
+          });
         } else {
           setMotionState({
             ...motionState,
+            moveTo: 'null',
             moved: true,
           });
         }
       }
     },
     end: () => {
-      // console.log('touch end');
-      // if (motionState.beingTouched && !motionState.moved) {
-      //   handleRight();
-      // }
+      if (motionState.beingTouched && !motionState.moved && !onDetail) {
+        handleRight();
+      } else if (motionState.beingTouched && motionState.moved) {
+        switch (motionState.moveTo) {
+          case 'right':
+            handleRight();
+            break;
+          case 'left':
+            handleLeft();
+            break;
+          default:
+            break;
+        }
+      }
       setMotionState(defaultMotionState);
     },
   };
 
   const handleSwipe = {
-    touchStart: (event: TouchEvent) => {
-      event.preventDefault();
+    touchStart: (event: React.TouchEvent<HTMLDivElement>) => {
       if (event.touches.length === 1) {
         handleMotion.start(event.targetTouches[0].clientX);
       }
     },
-    touchMove: (event: TouchEvent) => {
-      event.preventDefault();
+    touchMove: (event: React.TouchEvent<HTMLDivElement>) => {
       if (event.touches.length === 1) {
         handleMotion.move(event.targetTouches[0].clientX);
       }
@@ -158,18 +170,6 @@ export default function SummaryScreen() {
       handleMotion.end();
     },
   };
-
-  React.useEffect(() => {
-    window.addEventListener('touchstart', handleSwipe.touchStart, { passive: false });
-    window.addEventListener('touchmove', handleSwipe.touchMove, { passive: false });
-    window.addEventListener('touchend', handleSwipe.touchEnd, { passive: false });
-
-    return () => {
-      window.removeEventListener('touchstart', handleSwipe.touchStart);
-      window.removeEventListener('touchmove', handleSwipe.touchMove);
-      window.removeEventListener('touchend', () => handleSwipe.touchEnd());
-    };
-  }, [handleSwipe]);
 
   return (
     <div className="App">
@@ -183,6 +183,9 @@ export default function SummaryScreen() {
         className="viewingRoom"
         onClick={() => setOnDetail(false)}
         onKeyDown={handleKeydown}
+        onTouchStart={handleSwipe.touchStart}
+        onTouchMove={handleSwipe.touchMove}
+        onTouchEnd={() => handleSwipe.touchEnd()}
       >
         {(index === 0 || index === MAX_INDEX) ? (
           <>

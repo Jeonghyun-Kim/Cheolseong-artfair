@@ -21,12 +21,16 @@ const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
 
 interface MotionState {
   touchStartX: number;
+  moved: boolean;
   beingTouched: boolean;
+  moveTo: string;
 }
 
 const defaultMotionState = {
   touchStartX: 0,
+  moved: false,
   beingTouched: false,
+  moveTo: 'null',
 };
 
 const swipeThreshold = 100;
@@ -118,40 +122,46 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
     move: (clientX: number) => {
       if (motionState.beingTouched) {
         const deltaX = clientX - motionState.touchStartX;
-        let moveTo: string | null = null;
         if (deltaX < -swipeThreshold) {
-          moveTo = 'right';
+          setMotionState({
+            ...motionState,
+            moveTo: 'right',
+          });
         } else if (deltaX > swipeThreshold) {
-          moveTo = 'left';
+          setMotionState({
+            ...motionState,
+            moveTo: 'left',
+          });
         } else {
-          moveTo = 'null';
+          setMotionState({
+            ...motionState,
+            moveTo: 'null',
+            moved: true,
+          });
         }
-        switch (moveTo) {
+      }
+    },
+    end: () => {
+      if (motionState.beingTouched && !motionState.moved && !onDetail) {
+        handleRight();
+      } else if (motionState.beingTouched && motionState.moved) {
+        switch (motionState.moveTo) {
           case 'right':
-            setTimeout(() => {
-              setMotionState(defaultMotionState);
-              handleRight();
-            }, 0);
+            handleRight();
             break;
           case 'left':
-            setTimeout(() => {
-              setMotionState(defaultMotionState);
-              handleLeft();
-            }, 0);
+            handleLeft();
             break;
           default:
             break;
         }
       }
-    },
-    end: () => {
       setMotionState(defaultMotionState);
     },
   };
 
   const handleSwipe = {
     touchStart: (event: React.TouchEvent<HTMLDivElement>) => {
-      event.preventDefault();
       if (event.touches.length === 1) {
         handleMotion.start(event.targetTouches[0].clientX);
       }
@@ -168,6 +178,13 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
 
   return (
     <div className="App">
+      <IconButton
+        id="backIcon"
+        onClick={() => history.push('/list')}
+        disabled={onDetail}
+      >
+        <ArrowBackIcon fontSize="large" />
+      </IconButton>
       <div
         ref={ref}
         tabIndex={0}
@@ -180,15 +197,8 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         onKeyDown={handleKeydown}
         onTouchStart={handleSwipe.touchStart}
         onTouchMove={handleSwipe.touchMove}
-        onTouchEnd={() => handleSwipe.touchEnd}
+        onTouchEnd={() => handleSwipe.touchEnd()}
       >
-        <IconButton
-          id="backIcon"
-          onClick={() => history.push('/list')}
-          disabled={onDetail}
-        >
-          <ArrowBackIcon fontSize="large" />
-        </IconButton>
         <ViewingRoom
           idx={idxMap[index]}
           src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
