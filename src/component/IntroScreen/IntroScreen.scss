@@ -7,7 +7,7 @@ $iconColor: azure !global;
   justify-content: space-around;
   align-items: center;
   z-index: 10;
-  max-height: 80%;
+  max-height: 100%;
 
   max-width: 1000px;
 
@@ -15,16 +15,31 @@ $iconColor: azure !global;
     max-width: 100%;
   }
 
-  .decorum {
-    width: 80%;
+  .title {
+    width: 45%;
   }
 
-  .title {
+  .decorum {
     width: 90%;
   }
 
-  .date {
+  .footer {
+    position: absolute;
+    bottom: 30px;
     width: 50%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .date {
+      width: 100%;
+    }
+
+    .logo {
+      width: 80%;
+    }
   }
 }
 

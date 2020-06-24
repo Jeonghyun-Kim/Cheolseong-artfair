@@ -35,10 +35,18 @@ export default function IntroScreen() {
           />
         </div>
         <div id="spacing200" />
-        <div className="date">
+        <div className="footer">
+          <div className="date">
+            <img
+              alt="introDate"
+              src={`${process.env.PUBLIC_URL}/letters/date.png`}
+            />
+          </div>
+          <div id="spacing20" />
           <img
-            alt="introDate"
-            src={`${process.env.PUBLIC_URL}/letters/date.png`}
+            alt="logo_letter"
+            className="logo"
+            src={`${process.env.PUBLIC_URL}/letters/logo_letter.png`}
           />
         </div>
       </div>
