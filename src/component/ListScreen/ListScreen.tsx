@@ -286,9 +286,10 @@ export default function ListScreen() {
               />
             </Grid>
             <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography align="center" variant="body2">연도 순</Typography>
+              <Typography align="center" variant="body2">최신순</Typography>
             </Grid>
-            <Grid item xs>
+            <Grid item xs />
+            <Grid item>
               <Switch
                 color="primary"
                 disabled={!(sortConfig.useSort === 'year')}
@@ -299,8 +300,9 @@ export default function ListScreen() {
                 })}
               />
             </Grid>
+            <Grid item xs />
             <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography align="center" variant="body2">연도 역순</Typography>
+              <Typography align="center" variant="body2">오래된순</Typography>
             </Grid>
           </Grid>
         </div>
@@ -320,9 +322,10 @@ export default function ListScreen() {
               />
             </Grid>
             <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography align="center" variant="body2">가격 순</Typography>
+              <Typography align="center" variant="body2">낮은가격순</Typography>
             </Grid>
-            <Grid item xs>
+            <Grid item xs />
+            <Grid item>
               <Switch
                 color="primary"
                 disabled={!(sortConfig.useSort === 'price')}
@@ -333,8 +336,9 @@ export default function ListScreen() {
                 })}
               />
             </Grid>
+            <Grid item xs />
             <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography align="center" variant="body2">가격 역순</Typography>
+              <Typography align="center" variant="body2">높은가격순</Typography>
             </Grid>
           </Grid>
         </div>

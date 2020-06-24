@@ -13,6 +13,12 @@ $iconColor: azure !global;
   overflow-y: auto;
 }
 
+.listHeader {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+}
+
 .fixed {
   position: fixed !important;
 }
@@ -140,7 +146,7 @@ $iconColor: azure !global;
 #sort-menu {
   #switchContainer {
     border: none !important;
-    // width: 200px;
+    min-width: 200px;
     margin: 10px 20px;
   }
 }
