@@ -19,12 +19,13 @@ export default function MenuScreen() {
   const [innerWidth] = useWindowSize();
   const history = useHistory();
 
-  const toggleAbout = () => {
-    setOnAbout(!onAbout);
-  };
-
   return (
-    <>
+    <div
+      className="menuScreenRoot"
+      style={{
+        overflowY: onAbout ? 'auto' : 'hidden',
+      }}
+    >
       <div
         id="aboutDiv"
         className="unselectable"
@@ -125,7 +126,7 @@ export default function MenuScreen() {
               role="button"
               tabIndex={0}
               className="mobileMenuItem"
-              onClick={() => toggleAbout()}
+              onClick={() => setOnAbout(true)}
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
@@ -241,7 +242,7 @@ export default function MenuScreen() {
               role="button"
               tabIndex={0}
               className="desktopMenuItem"
-              onClick={() => toggleAbout()}
+              onClick={() => setOnAbout(true)}
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
@@ -262,6 +263,6 @@ export default function MenuScreen() {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

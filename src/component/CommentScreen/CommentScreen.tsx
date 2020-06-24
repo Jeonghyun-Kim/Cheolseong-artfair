@@ -219,14 +219,6 @@ const CommentItem = ({ comment, setAlert, onRefresh }: {
     <>
       <ListItem className={classes.commentItem}>
         <Grid container spacing={1}>
-          <Grid item container direction="column" justify="space-between" xs={9} className={classes.contentBox}>
-            <Grid item>
-              <Typography variant="subtitle1">{comment.content}</Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="caption">{comment.createdAt}</Typography>
-            </Grid>
-          </Grid>
           <Grid item container xs={3} direction="column" justify="space-between">
             <Grid item>
               <Typography variant="subtitle2" className={classes.name}>{comment.name}</Typography>
@@ -242,6 +234,14 @@ const CommentItem = ({ comment, setAlert, onRefresh }: {
                   <DeleteIcon />
                 </IconButton>
               </Grid>
+            </Grid>
+          </Grid>
+          <Grid item container direction="column" justify="space-between" xs={9} className={classes.contentBox}>
+            <Grid item>
+              <Typography variant="subtitle1">{comment.content}</Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="caption">{comment.createdAt}</Typography>
             </Grid>
           </Grid>
         </Grid>
@@ -376,6 +376,7 @@ const CommentEditor = ({ comment, setAlert, onRefresh }: {
     </ListItem>
   );
 };
+
 
 export default function CommentScreen() {
   const [name, setName] = React.useState<string>('');
@@ -520,7 +521,7 @@ export default function CommentScreen() {
 
       <IconButton
         id="backIcon"
-        className="fixed"
+        className="backButton"
         onClick={() => history.push('/')}
       >
         <ArrowBackIcon fontSize="large" />
@@ -540,7 +541,7 @@ export default function CommentScreen() {
         )}
         <Paper className={classes.commentList}>
           <List dense>
-            <ListItem className={classes.topMargin}>
+            <ListItem className={`${classes.topMargin} insertSection`}>
               <form className={classes.grow}>
                 <Grid container className={classes.bottomMargin}>
                   <Grid item xs={12} sm={4} md>
@@ -571,7 +572,7 @@ export default function CommentScreen() {
                   placeholder="감상평을 남겨주세요!"
                   multiline
                   fullWidth
-                  variant="standard"
+                  variant="outlined"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                 />

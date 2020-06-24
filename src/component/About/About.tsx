@@ -24,11 +24,11 @@ export default function About() {
           코로나 사태로 인해 예정되었던 전시가 취소되었거나 온라인 전시에 관심있는 작가와 갤러리의 자유로운 문의를 바랍니다.
         </Typography>
       </div>
-      <div>
+      <div className="contactUs">
         <Typography id="title">
           Contact Us for Online Exhibition
         </Typography>
-        <div className="contactUs">
+        <div className="info">
           <br />
           <div id="section1">
             <Typography id="content">

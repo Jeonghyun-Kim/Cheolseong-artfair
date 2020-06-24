@@ -45,29 +45,31 @@ $iconMarginSmall: 5px !global;
 
 #arrowLeft {
   position: absolute;
-  z-index: 99;
+  z-index: 1;
   @media (min-width: 701px) {
     left: 0;
     top: 50%;
     transform: translate(0, -50%);
   }
   @media (max-width: 700px) {
-    left: 30%;
-    bottom: 10px;
+    // left: 30%;
+    // bottom: 10px;
+    display: none;
   }
 }
 
 #arrowRight {
   position: absolute;
-  z-index: 99;
+  z-index: 1;
   @media (min-width: 701px) {
     right: 0;
     top: 50%;
     transform: translate(0, -50%);
   }
   @media (max-width: 700px) {
-    right: 30%;
-    bottom: 10px;
+    // right: 30%;
+    // bottom: 10px;
+    display: none;
   }
 }
 

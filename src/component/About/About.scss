@@ -8,7 +8,7 @@
   min-height: 500px;
 
   @media (max-width: 600px) {
-    min-height: 80vh;
+    min-height: 620px;
   }
 
   .logoImage {
@@ -17,6 +17,7 @@
     img {
       width: 100%;
       height: auto;
+      object-fit: contain;
     }
   }
 
@@ -26,25 +27,38 @@
     p {
       font-size: 1.3rem;
       line-height: 2;
+
+      @media (max-width: 600px) {
+        font-size: 1rem;
+        line-height: 1.5;
+      }
     }
   }
 
-  #title {
-    font-weight: bold;
-  }
-
   .contactUs {
-    display: flex;
+    #title {
+      font-weight: bold;
+    }
+  
+    .info {
+      display: flex;
+  
+      #section1 {
+        width: 60px;
+      }
+    }
 
-    #section1 {
-      width: 60px;
+    @media (max-width: 600px) {
+      p {
+        font-size: 0.9rem;
+      }
     }
   }
 
   .subLogoImages {
-    margin: 15px 0;
     width: 40%;
     display: flex;
+    margin-bottom: 15px;
 
     @media (max-width: 600px) {
       flex-direction: column;

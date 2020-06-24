@@ -8,11 +8,27 @@
   justify-content: center;
   overflow-x: hidden;
   overflow-y: auto;
+  @media (max-width: 600px) {
+    h6, span {
+      font-size: 0.85rem;
+    }
+  }
+
+  .backButton {
+    @media (min-width: 601px) {
+      position: fixed !important;
+    }
+  }
+}
+
+.insertSection {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px !important;
 }
 
 .commentContainer {
   max-width: 800px;
-  margin: 50px 30px;
+  margin: 80px 30px;
   position: relative;
 }
 

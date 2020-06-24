@@ -213,6 +213,7 @@ export default function SummaryScreen() {
       )}
       <IconButton
         id="arrowLeft"
+        className="fixed"
         onClick={handleLeft}
         disabled={index === 0}
         style={{
@@ -223,6 +224,7 @@ export default function SummaryScreen() {
       </IconButton>
       <IconButton
         id="arrowRight"
+        className="fixed"
         onClick={handleRight}
         disabled={index === MAX_INDEX}
         style={{ color: index === MAX_INDEX ? '#222' : 'rgba(149, 148, 160, 0.664)' }}
