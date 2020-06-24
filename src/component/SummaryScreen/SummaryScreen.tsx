@@ -4,7 +4,6 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
-import { useHistory } from 'react-router-dom';
 
 import ViewingRoom from '../ViewingRoom/ViewingRoom';
 import Details from '../Details/Details';
@@ -34,8 +33,6 @@ export default function SummaryScreen() {
   const [index, setIndex] = React.useState<number>(0);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [motionState, setMotionState] = React.useState<MotionState>(defaultMotionState);
-
-  const history = useHistory();
 
   const ref = React.useRef<HTMLDivElement | null>(null);
 
