@@ -12,6 +12,18 @@ $iconMarginSmall: 5px !global;
   justify-content: center;
 }
 
+.alertFirstLast {
+  padding: 5px 15px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  transition: 0.5s ease-out;
+  color: white;
+  background-color: rgba($color: #313131, $alpha: 0.7);
+  border-radius: 10px;
+}
+
 .detailScreen {
   max-width: 520px;
   transition: $delay;

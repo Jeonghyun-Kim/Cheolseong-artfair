@@ -33,6 +33,11 @@ const defaultMotionState = {
   moveTo: 'null',
 };
 
+const defaultFlag = {
+  first: false,
+  last: false,
+};
+
 const swipeThreshold = 100;
 
 interface ViewingRoomProps extends RouteComponentProps<{ idx: string }> {}
@@ -43,6 +48,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   const [index, setIndex] = React.useState<number>(0);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [motionState, setMotionState] = React.useState<MotionState>(defaultMotionState);
+  const [flag, setFlag] = React.useState<{ first: boolean, last: boolean }>(defaultFlag);
 
   const history = useHistory();
 
@@ -70,8 +76,14 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       } else {
         setTimeout(() => history.push(`/viewing-room/${idxMap[index - 1]}`), 10);
       }
+    } else {
+      setFlag({
+        ...flag,
+        first: true,
+      });
+      setTimeout(() => setFlag(defaultFlag), 1500);
     }
-  }, [idxMap, index, history, onDetail]);
+  }, [idxMap, index, history, onDetail, flag]);
 
   const handleRight = React.useCallback(() => {
     if (index !== MAX_INDEX) {
@@ -81,8 +93,14 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       } else {
         setTimeout(() => history.push(`/viewing-room/${idxMap[index + 1]}`), 10);
       }
+    } else {
+      setFlag({
+        ...flag,
+        last: true,
+      });
+      setTimeout(() => setFlag(defaultFlag), 1500);
     }
-  }, [idxMap, MAX_INDEX, index, history, onDetail]);
+  }, [idxMap, MAX_INDEX, index, history, onDetail, flag]);
 
   const toggleDetail = () => {
     setOnDetail(!onDetail);
@@ -112,14 +130,14 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   };
 
   const handleMotion = {
-    start: (clientX: number) => {
+    start: React.useCallback((clientX: number) => {
       setMotionState({
         ...motionState,
         touchStartX: clientX,
         beingTouched: true,
       });
-    },
-    move: (clientX: number) => {
+    }, [motionState]),
+    move: React.useCallback((clientX: number) => {
       if (motionState.beingTouched) {
         const deltaX = clientX - motionState.touchStartX;
         if (deltaX < -swipeThreshold) {
@@ -140,8 +158,8 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
           });
         }
       }
-    },
-    end: () => {
+    }, [motionState]),
+    end: React.useCallback(() => {
       if (motionState.beingTouched && !motionState.moved && !onDetail) {
         handleRight();
       } else if (motionState.beingTouched && motionState.moved) {
@@ -157,7 +175,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         }
       }
       setMotionState(defaultMotionState);
-    },
+    }, [motionState, handleLeft, handleRight, onDetail]),
   };
 
   const handleSwipe = {
@@ -178,6 +196,24 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
 
   return (
     <div className="App">
+      <div
+        className="alertFirstLast"
+        style={{
+          opacity: flag.first ? 1 : 0,
+          zIndex: flag.first ? 90 : -1,
+        }}
+      >
+        <p>첫번째 그림입니다.</p>
+      </div>
+      <div
+        className="alertFirstLast"
+        style={{
+          opacity: flag.last ? 1 : 0,
+          zIndex: flag.last ? 90 : -1,
+        }}
+      >
+        <p>마지막 그림입니다.</p>
+      </div>
       <IconButton
         id="backIcon"
         onClick={() => history.push('/list')}
