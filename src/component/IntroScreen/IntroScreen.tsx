@@ -20,7 +20,7 @@ export default function IntroScreen() {
   // }, []);
 
   return (
-    <div className="App introApp">
+    <div className="App introApp unselectable">
       <div className="introLetters">
         <div className="title">
           <img
