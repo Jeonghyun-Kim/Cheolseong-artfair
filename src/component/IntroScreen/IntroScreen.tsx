@@ -21,34 +21,32 @@ export default function IntroScreen() {
 
   return (
     <div className="App introApp">
-      <div
-        className="introTitle"
-      >
-        {innerWidth < 700 ? (
-          <img
-            alt="introTitle"
-            src={`${process.env.PUBLIC_URL}/letters/m_title.png`}
-          />
-        ) : (
+      <div className="introLetters">
+        <div className="title">
           <img
             alt="introTitle"
             src={`${process.env.PUBLIC_URL}/letters/title.png`}
           />
-        )}
-      </div>
-      <div className="introContent">
-        {innerWidth < 700 ? (
+        </div>
+        <div className="decorum">
           <img
-            alt="introContent"
-            src={`${process.env.PUBLIC_URL}/letters/m_contents.png`}
+            alt="introDecorum"
+            src={`${process.env.PUBLIC_URL}/letters/decorum.png`}
           />
-        ) : (
+        </div>
+        <div id="spacing200" />
+        <div className="date">
           <img
-            alt="introContent"
-            src={`${process.env.PUBLIC_URL}/letters/contents.png`}
+            alt="introDate"
+            src={`${process.env.PUBLIC_URL}/letters/date.png`}
           />
-        )}
+        </div>
       </div>
+      <img
+        alt="lantern"
+        src={`${process.env.PUBLIC_URL}/lantern (1).png`}
+        className="introLantern"
+      />
       {innerWidth < 700 ? (
         <img
           alt="Decorum 2020-6"
@@ -56,18 +54,11 @@ export default function IntroScreen() {
           className="introImage mobile"
         />
       ) : (
-        <>
-          <img
-            alt="lantern"
-            src={`${process.env.PUBLIC_URL}/lantern (1).png`}
-            className="introLantern"
-          />
-          <img
-            alt="Decorum 2016-12"
-            src={`${STORAGE_URL_MD}/2016_12.jpg`}
-            className="introImage desktop"
-          />
-        </>
+        <img
+          alt="Decorum 2016-12"
+          src={`${STORAGE_URL_MD}/2016_12.jpg`}
+          className="introImage desktop"
+        />
       )}
       {/* <img
         alt="spinner"
