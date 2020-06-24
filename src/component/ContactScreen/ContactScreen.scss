@@ -1,17 +1,19 @@
 .contactRoot {
   overflow-y: auto;
+  min-height: 550px !important;
+
+  @media (min-width: 601px) and (min-height: 601px) {
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .contactContainer {
   width: 90%;
-  display: flex;
-  transform: translate(0, 60px);
+  height: fit-content;
+  padding: 60px 0;
 
   @media (min-width: 601px) {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     max-width: calc(min(90%, 900px));
   }
 
@@ -19,7 +21,6 @@
     width: 100%;
     display: flex;
     min-height: fit-content;
-    margin-bottom: 15px;
     // max-height: 90%;
 
     @media (max-width: 600px) {

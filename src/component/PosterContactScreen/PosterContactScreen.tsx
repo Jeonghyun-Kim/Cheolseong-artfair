@@ -80,7 +80,6 @@ export default function PosterContactScreen({ match }: ContactProps) {
     <div className="App contactRoot">
       <IconButton
         id="backIcon"
-        className="fixed"
         onClick={() => history.goBack()}
       >
         <ArrowBackIcon fontSize="large" />
