@@ -15,7 +15,7 @@ import info from './summaryInfo.json';
 
 const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
 
-const idxMap = [-1, 53, 57, 89, 188, 197, -2];
+const idxMap = [-1, 53, 119, 89, 126, 197, -2];
 
 interface MotionState {
   touchStartX: number;
@@ -89,8 +89,6 @@ export default function SummaryScreen() {
       case 27:
         if (onDetail) {
           setOnDetail(false);
-        } else {
-          history.push('/list');
         }
         break;
       case 32:

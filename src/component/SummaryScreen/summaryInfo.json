@@ -8,12 +8,12 @@
     "src": "2017_15.jpg"
   },
   {
-    "year": 2017,
-    "id": 20,
-    "width": 162,
-    "height": 112,
-    "price": 1500,
-    "src": "2017_20.jpg"
+    "year": 2013,
+    "id": 5,
+    "width": 50,
+    "height": 50,
+    "price": 200,
+    "src": "2013_5.gif"
   },
   {
     "year": 2016,
@@ -24,12 +24,12 @@
     "src": "2016_32.jpg"
   },
   {
-    "year": 2005,
-    "id": 4,
-    "width": 145,
-    "height": 145,
-    "price": 1500,
-    "src": "2005_4.jpg"
+    "year": 2012,
+    "id": 2,
+    "width": 130,
+    "height": 150,
+    "price": "sold out",
+    "src": "2012_2.jpg"
   },
   {
     "year": 2004,
