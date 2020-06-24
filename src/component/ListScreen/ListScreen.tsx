@@ -22,7 +22,8 @@ import info from '../../info.json';
 
 import useWindowSize from '../useWindowSize';
 
-const ItemList = React.lazy(() => import('../ItemList/ItemList'));
+// const ItemList = React.lazy(() => import('../ItemList/ItemList'));
+import ItemList from '../ItemList/ItemList';
 
 const YEAR_MIN = 2004;
 const YEAR_MAX = 2020;
@@ -215,9 +216,9 @@ export default function ListScreen() {
     <div className="listRoot">
       <Typography id="paitingNumber" className="unselectable">작품 개수: {idxMap.length}개</Typography>
       <div className="listContainer">
-        <React.Suspense fallback={<>Loading</>}>
-          <ItemList indexMap={idxMap} windowSize={[innerWidth, innerHeight]} />
-        </React.Suspense>
+        {/* <React.Suspense fallback={<>Loading</>}> */}
+        <ItemList indexMap={idxMap} windowSize={[innerWidth, innerHeight]} />
+        {/* </React.Suspense> */}
         <ScrollRestoration />
       </div>
       <IconButton
