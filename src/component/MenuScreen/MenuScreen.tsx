@@ -55,6 +55,14 @@ export default function MenuScreen() {
         style={{
           filter: `blur(${onAbout ? 10 : 0}px)`,
         }}
+        role="button"
+        tabIndex={0}
+        onClick={() => {
+          if (onAbout) {
+            setOnAbout(false);
+          }
+        }}
+        onKeyDown={() => {}}
       >
         {innerWidth < 1000 ? (
           <div className="mobileMenuContainer">
@@ -63,7 +71,9 @@ export default function MenuScreen() {
               tabIndex={0}
               className="mobileMenuItem"
               onClick={() => {
-                setTimeout(() => history.push('/list'), 0);
+                if (!onAbout) {
+                  setTimeout(() => history.push('/list'), 0);
+                }
               }}
               onKeyDown={() => {}}
             >
@@ -79,7 +89,9 @@ export default function MenuScreen() {
               tabIndex={0}
               className="mobileMenuItem"
               onClick={() => {
-                setTimeout(() => history.push('/story'), 0);
+                if (!onAbout) {
+                  setTimeout(() => history.push('/story'), 0);
+                }
               }}
               onKeyDown={() => {}}
             >
@@ -95,7 +107,9 @@ export default function MenuScreen() {
               tabIndex={0}
               className="mobileMenuItem"
               onClick={() => {
-                setTimeout(() => history.push('/comments'), 0);
+                if (!onAbout) {
+                  setTimeout(() => history.push('/comments'), 0);
+                }
               }}
               onKeyDown={() => {}}
             >
@@ -111,10 +125,12 @@ export default function MenuScreen() {
               tabIndex={0}
               className="mobileMenuItem"
               onClick={() => {
-                window.open(
-                  'https://gformanalytics.com/form.php?ga_id=UA-168932005-1](https://www.googletagmanager.com/gtag/js?id=UA-168932005-1)&form_id=1FAIpQLSe71tn0suGW1SYIujzi5oJdTQsJp1nbCKK7RtvxIJgDAyNv1g',
-                  '_blank',
-                );
+                if (!onAbout) {
+                  window.open(
+                    'https://gformanalytics.com/form.php?ga_id=UA-168932005-1](https://www.googletagmanager.com/gtag/js?id=UA-168932005-1)&form_id=1FAIpQLSe71tn0suGW1SYIujzi5oJdTQsJp1nbCKK7RtvxIJgDAyNv1g',
+                    '_blank',
+                  );
+                }
               }}
               onKeyDown={() => {}}
             >
@@ -147,7 +163,9 @@ export default function MenuScreen() {
               tabIndex={0}
               className="desktopMenuItem"
               onClick={() => {
-                setTimeout(() => history.push('/list'), 0);
+                if (!onAbout) {
+                  setTimeout(() => history.push('/list'), 0);
+                }
               }}
               onKeyDown={() => {}}
             >
@@ -171,7 +189,9 @@ export default function MenuScreen() {
               tabIndex={0}
               className="desktopMenuItem"
               onClick={() => {
-                setTimeout(() => history.push('/story'), 0);
+                if (!onAbout) {
+                  setTimeout(() => history.push('/story'), 0);
+                }
               }}
               onKeyDown={() => {}}
             >
@@ -195,7 +215,9 @@ export default function MenuScreen() {
               tabIndex={0}
               className="desktopMenuItem"
               onClick={() => {
-                setTimeout(() => history.push('/comments'), 0);
+                if (!onAbout) {
+                  setTimeout(() => history.push('/comments'), 0);
+                }
               }}
               onKeyDown={() => {}}
             >
@@ -219,10 +241,12 @@ export default function MenuScreen() {
               tabIndex={0}
               className="desktopMenuItem"
               onClick={() => {
-                window.open(
-                  'https://gformanalytics.com/form.php?ga_id=UA-168932005-1](https://www.googletagmanager.com/gtag/js?id=UA-168932005-1)&form_id=1FAIpQLSe71tn0suGW1SYIujzi5oJdTQsJp1nbCKK7RtvxIJgDAyNv1g',
-                  '_blank',
-                );
+                if (!onAbout) {
+                  window.open(
+                    'https://gformanalytics.com/form.php?ga_id=UA-168932005-1](https://www.googletagmanager.com/gtag/js?id=UA-168932005-1)&form_id=1FAIpQLSe71tn0suGW1SYIujzi5oJdTQsJp1nbCKK7RtvxIJgDAyNv1g',
+                    '_blank',
+                  );
+                }
               }}
               onKeyDown={() => {}}
             >
