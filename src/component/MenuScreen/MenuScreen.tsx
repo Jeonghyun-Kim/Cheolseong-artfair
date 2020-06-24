@@ -45,7 +45,7 @@ export default function MenuScreen() {
               tabIndex={0}
               className="mobileMenuItem"
               onClick={() => {
-                setTimeout(() => history.go(0), 0);
+                setTimeout(() => history.push('/story'), 0);
               }}
               onKeyDown={() => {}}
             >
@@ -139,7 +139,7 @@ export default function MenuScreen() {
               tabIndex={0}
               className="desktopMenuItem"
               onClick={() => {
-                setTimeout(() => history.go(0), 0);
+                setTimeout(() => history.push('/story'), 0);
               }}
               onKeyDown={() => {}}
             >
