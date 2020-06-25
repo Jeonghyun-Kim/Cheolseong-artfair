@@ -16,7 +16,7 @@ $breakpoint: 700px;
   min-height: fit-content;
   width: 90%;
   max-width: 900px;
-  margin: 60px 0;
+  transition: 1s ease;
   filter: brightness(0.9);
 
   @media (min-width: 601px) and (min-height: 601px) {
@@ -29,8 +29,8 @@ $breakpoint: 700px;
 
   #close {
     position: absolute; 
-    right: 0;
-    top: -60px;
+    right: -10px;
+    top: 20px;
     color: rgba(149, 148, 160, 0.664);
     transition: 1s ease;
   }
@@ -38,6 +38,8 @@ $breakpoint: 700px;
 
 .menuRoot {
   height: 100%;
+
+  transition: 1s ease;
 }
 
 .bgImage {
