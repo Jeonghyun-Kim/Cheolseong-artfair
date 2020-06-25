@@ -10,8 +10,7 @@ export default function StoryScreen() {
   const history = useHistory();
 
   const videoOpts: Options = {
-    height: '540',
-    width: '960',
+    width: '60%',
     playerVars: {
       autoplay: 0,
     },
@@ -27,7 +26,12 @@ export default function StoryScreen() {
         <ArrowBackIcon fontSize="large" />
       </IconButton>
       <div className="storyContainer">
-        <YouTube videoId="p8yPxEGx7oM" opts={videoOpts} onReady={() => {}} />
+        <div id="videoPlayer">
+          <YouTube videoId="p8yPxEGx7oM" opts={videoOpts} onReady={() => {}} />
+        </div>
+        <div className="quote">
+          <img alt="quote" src={`${process.env.PUBLIC_URL}/letters/quote.png`} />
+        </div>
       </div>
     </div>
   );
