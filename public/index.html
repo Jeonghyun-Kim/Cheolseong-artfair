@@ -40,4 +40,16 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script type="text/javascript">
+    function isIE() {
+      var isIE11 = navigator.userAgent.indexOf(".NET CLR") > -1;      
+      var isIE11orLess = isIE11 || navigator.appVersion.indexOf("MSIE") != -1;
+      return isIE11orLess;
+    }
+    if (isIE()) {
+      var newDiv = document.createElement("div");
+      newDiv.innerHTML = "<h2>onDisplay는 IE 브라우저를 지원하지 않습니다.<br />크롬 브라우저를 사용해주세요.</h2>";
+      document.getElementById("root").appendChild(newDiv);
+    }
+  </script>
 </html>
