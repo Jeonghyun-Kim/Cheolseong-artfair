@@ -40,6 +40,13 @@ export default function SummaryScreen() {
 
   const ref = React.useRef<HTMLDivElement | null>(null);
 
+  React.useEffect(() => {
+    idxMap.slice(1, MAX_INDEX).forEach((idx) => {
+      const img = new Image();
+      img.src = `${STORAGE_URL_MD}/${info[idx].src}`;
+    });
+  }, [MAX_INDEX]);
+
   const focusSet = () => {
     if (ref.current) {
       ref.current.focus();
