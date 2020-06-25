@@ -186,6 +186,7 @@ export default function SummaryScreen() {
         role="button"
         style={{
           filter: `brightness(${onDetail ? 0.8 : 1}) blur(${onDetail ? 10 : 0}px)`,
+          overflow: index === MAX_INDEX ? 'auto' : 'hidden',
         }}
         className="viewingRoom"
         onClick={() => setOnDetail(false)}

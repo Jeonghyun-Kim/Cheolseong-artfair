@@ -11,19 +11,18 @@ import './StoryScreen.scss';
 export default function StoryScreen() {
   const history = useHistory();
 
-  const handleScrollToTop = () => {
-    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-  };
-
   const videoOpts: Options = {
-    width: '60%',
     playerVars: {
       autoplay: 0,
     },
   };
 
+  const handleScrollToTop = () => {
+    window.scroll({ left: 0, top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <div className="App unselectable">
+    <div className="unselectable storyApp">
       <IconButton
         id="backIcon"
         onClick={() => history.push('/')}

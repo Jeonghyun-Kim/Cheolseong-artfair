@@ -1,16 +1,30 @@
-.storyContainer {
-  width: 100%;
+.storyApp {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  width: 100%;
+  // height: 100%;
+  margin: 0 auto;
+  position: relative;
+  background-image: url('/wallpaper.jpg');
+  background-repeat: repeat;
+  overflow-x: hidden;
+  overflow-y: auto;
+  #backIcon {
+    @media (min-width: 1130px) {
+      position: fixed !important;
+    }
+  }
+}
+
+.storyContainer {
   width: calc(min(960px, 90%));
+  position: relative;
 
   #videoPlayer {
     max-height: fit-content;
 
     iframe {
       display: flex;
-      align-self: center;
       width: calc(min(960px, 90vw));
       height: calc(min(540px, 51vw));
       margin: 60px auto;
@@ -18,7 +32,7 @@
   }
 
   .quote {
-    margin: 100px 0;
+    margin: 100px auto;
     width: 90%;
 
     @media (max-width: 600px) {
@@ -31,8 +45,6 @@
   }
 
   .artistNote {
-    display: flex;
-    flex-direction: column;
     margin-bottom: 100px;
     z-index: 5;
     width: 100%;
