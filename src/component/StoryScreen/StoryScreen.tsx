@@ -44,6 +44,9 @@ export default function StoryScreen() {
           <img alt="quote" src={`${process.env.PUBLIC_URL}/letters/quote.png`} />
         </div>
         <div className="artistNote">
+          <Typography variant="h4" className="title">
+            작가의 말
+          </Typography>
           <Typography variant="body1" component="p">
             내 그림에는 채워지지 않은 빈 공간, 즉 餘白이 많다.
             {' '}
@@ -70,6 +73,9 @@ export default function StoryScreen() {
             여백이라는 확연한 공간에 자신만의 사유와 미학을 채우며 주체성을 회복하고,
             {' '}
             오늘날을 살아가는 고단함을 잠시 내려놓고 자신의 심연을 들여다볼 수 있기를 소망한다.
+          </Typography>
+          <Typography variant="body2" component="p" align="right" className="artistName">
+            작가 김철성
           </Typography>
         </div>
       </div>
