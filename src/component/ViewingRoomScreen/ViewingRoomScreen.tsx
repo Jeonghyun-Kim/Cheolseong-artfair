@@ -68,6 +68,13 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
     focusSet();
   }, []);
 
+  React.useEffect(() => {
+    idxMap.slice(Math.max(index - 2, 0), Math.min(index + 3, MAX_INDEX)).forEach((idx) => {
+      const img = new Image();
+      img.src = `${STORAGE_URL_MD}/${info[idx].src}`;
+    });
+  }, [MAX_INDEX, idxMap, index]);
+
   const handleLeft = React.useCallback(() => {
     if (index !== 0) {
       if (onDetail) {
