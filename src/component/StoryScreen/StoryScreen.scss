@@ -47,17 +47,15 @@
   .artistNote {
     margin-bottom: 100px;
     z-index: 5;
-    width: calc(100% - 50px);
+    width: 100%;
     min-height: fit-content;
     box-shadow: 0 19px 38px rgba(0,0,0,0.80), 0 15px 12px rgba(0,0,0,0.66);
     background: #fff;
     border-radius: 4px;
     filter: brightness(0.9);
-    padding: 35px 25px;
 
-    @media (max-width: 600px) {
-      margin-top: 50px;
-      width: 90%;
+    .paddingBox {
+      padding: 35px;
     }
 
     .title {
@@ -77,6 +75,10 @@
         font-size: 1rem;
         line-height: 2rem;
       }
+    }
+
+    @media (max-width: 600px) {
+      margin-top: 50px;
     }
   }
 }
