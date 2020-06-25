@@ -18,10 +18,11 @@ import StoryScreen from './component/StoryScreen/StoryScreen';
 import ConfigContext from './ConfigContext';
 
 import './common.scss';
+import info from './info.json';
 
 export default function AppRouter() {
   const [idxMap, setIdxMap] = React.useState<number[]>(
-    (new Array(200)).fill(undefined).map((_, idx) => idx),
+    (new Array(info.length)).fill(undefined).map((_, idx) => idx),
   );
 
   React.useEffect(() => {
