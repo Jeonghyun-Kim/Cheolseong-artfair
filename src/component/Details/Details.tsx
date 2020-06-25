@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,6 +11,7 @@ import Brightness1Icon from '@material-ui/icons/Brightness1';
 
 import './Details.scss';
 import info from '../../info.json';
+import DEFINES from '../../defines';
 
 import useWindowSize from '../useWindowSize';
 
@@ -93,15 +95,22 @@ export default function Details({ idx, src }:
           )}
           <div className="grow" />
           <CopyToClipboard
-            text={`https://kay.airygall.com/viewing-room/${idx}`}
+            text={`${DEFINES.DOMAIN}/viewing-room/${idx}`}
             onCopy={handleAlert}
           >
             <Button size="small" color="primary">
-              Share
+              공유
             </Button>
           </CopyToClipboard>
-          <Button size="small" color="primary" href="https://forms.gle/NLBHc8GgPDwZrPwK7" target="_blank">
-            Contact
+          <Button size="small" color="primary">
+            <Link to={`/contact/${idx}`} className="buttonLink">
+              작품문의
+            </Link>
+          </Button>
+          <Button size="small" color="primary">
+            <Link to={`/poster/${idx}`} className="buttonLink">
+              출력본문의
+            </Link>
           </Button>
         </CardActions>
       </div>

@@ -2,26 +2,68 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { faEdit, faImage } from '@fortawesome/free-regular-svg-icons';
+import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faUsers, faLandmark } from '@fortawesome/free-solid-svg-icons';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import SvgIcon from '@material-ui/core/SvgIcon';
+
+import { ReactComponent as LogoIcon } from './logo_icon.svg';
 
 import './MenuScreen.scss';
 
 import menus from './menus.json';
 
+import About from '../About/About';
 import useWindowSize from '../useWindowSize';
 
 export default function MenuScreen() {
+  const [onAbout, setOnAbout] = React.useState<boolean>(false);
   const [innerWidth] = useWindowSize();
   const history = useHistory();
 
   return (
-    <>
-      <div className="bgImage" />
-      <div className="App menuRoot unselectable">
-        <div className="menuTitle">
-          <h2>Decorum{innerWidth < 1000 ? <br /> : ' - '}신, 인간, 자연의 어울림</h2>
-        </div>
+    <div
+      className="menuScreenRoot"
+      style={{
+        overflowY: onAbout ? 'auto' : 'hidden',
+      }}
+    >
+      <div
+        id="aboutDiv"
+        className="unselectable"
+        style={{
+          opacity: onAbout ? 1 : 0,
+          zIndex: onAbout ? 10 : -1,
+        }}
+      >
+        <About />
+        <IconButton
+          id="close"
+          onClick={() => setOnAbout(false)}
+          disabled={!onAbout}
+          style={{
+            opacity: onAbout ? 1 : 0,
+            zIndex: onAbout ? 5 : -1,
+          }}
+        >
+          <CloseIcon fontSize="large" />
+        </IconButton>
+      </div>
+      <div
+        className="App menuRoot unselectable"
+        style={{
+          filter: `blur(${onAbout ? 10 : 0}px)`,
+        }}
+        role="button"
+        tabIndex={0}
+        onClick={() => {
+          if (onAbout) {
+            setOnAbout(false);
+          }
+        }}
+        onKeyDown={() => {}}
+      >
         {innerWidth < 1000 ? (
           <div className="mobileMenuContainer">
             <div
@@ -29,7 +71,9 @@ export default function MenuScreen() {
               tabIndex={0}
               className="mobileMenuItem"
               onClick={() => {
-                setTimeout(() => history.push('/list'), 0);
+                if (!onAbout) {
+                  setTimeout(() => history.push('/list'), 0);
+                }
               }}
               onKeyDown={() => {}}
             >
@@ -45,7 +89,9 @@ export default function MenuScreen() {
               tabIndex={0}
               className="mobileMenuItem"
               onClick={() => {
-                setTimeout(() => history.go(0), 0);
+                if (!onAbout) {
+                  setTimeout(() => history.push('/story'), 0);
+                }
               }}
               onKeyDown={() => {}}
             >
@@ -61,7 +107,9 @@ export default function MenuScreen() {
               tabIndex={0}
               className="mobileMenuItem"
               onClick={() => {
-                setTimeout(() => history.push('/comments'), 0);
+                if (!onAbout) {
+                  setTimeout(() => history.push('/comments'), 0);
+                }
               }}
               onKeyDown={() => {}}
             >
@@ -77,12 +125,17 @@ export default function MenuScreen() {
               tabIndex={0}
               className="mobileMenuItem"
               onClick={() => {
-                setTimeout(() => history.go(0), 0);
+                if (!onAbout) {
+                  window.open(
+                    'https://gformanalytics.com/form.php?ga_id=UA-168932005-1](https://www.googletagmanager.com/gtag/js?id=UA-168932005-1)&form_id=1FAIpQLSe71tn0suGW1SYIujzi5oJdTQsJp1nbCKK7RtvxIJgDAyNv1g',
+                    '_blank',
+                  );
+                }
               }}
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
-                <FontAwesomeIcon icon={faImage} />
+                <FontAwesomeIcon icon={faEdit} />
               </div>
               <div className="title">
                 {menus[3].title}
@@ -92,13 +145,11 @@ export default function MenuScreen() {
               role="button"
               tabIndex={0}
               className="mobileMenuItem"
-              onClick={() => {
-                setTimeout(() => history.push('/list'), 0);
-              }}
+              onClick={() => setOnAbout(true)}
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
-                <FontAwesomeIcon icon={faEdit} />
+                <SvgIcon component={LogoIcon} viewBox="0 0 233 233" />
               </div>
               <div className="title">
                 {menus[4].title}
@@ -112,7 +163,9 @@ export default function MenuScreen() {
               tabIndex={0}
               className="desktopMenuItem"
               onClick={() => {
-                setTimeout(() => history.push('/list'), 0);
+                if (!onAbout) {
+                  setTimeout(() => history.push('/list'), 0);
+                }
               }}
               onKeyDown={() => {}}
             >
@@ -136,7 +189,9 @@ export default function MenuScreen() {
               tabIndex={0}
               className="desktopMenuItem"
               onClick={() => {
-                setTimeout(() => history.go(0), 0);
+                if (!onAbout) {
+                  setTimeout(() => history.push('/story'), 0);
+                }
               }}
               onKeyDown={() => {}}
             >
@@ -160,7 +215,9 @@ export default function MenuScreen() {
               tabIndex={0}
               className="desktopMenuItem"
               onClick={() => {
-                setTimeout(() => history.push('/comments'), 0);
+                if (!onAbout) {
+                  setTimeout(() => history.push('/comments'), 0);
+                }
               }}
               onKeyDown={() => {}}
             >
@@ -184,12 +241,17 @@ export default function MenuScreen() {
               tabIndex={0}
               className="desktopMenuItem"
               onClick={() => {
-                setTimeout(() => history.go(0), 0);
+                if (!onAbout) {
+                  window.open(
+                    'https://gformanalytics.com/form.php?ga_id=UA-168932005-1](https://www.googletagmanager.com/gtag/js?id=UA-168932005-1)&form_id=1FAIpQLSe71tn0suGW1SYIujzi5oJdTQsJp1nbCKK7RtvxIJgDAyNv1g',
+                    '_blank',
+                  );
+                }
               }}
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
-                <FontAwesomeIcon icon={faImage} />
+                <FontAwesomeIcon icon={faEdit} />
               </div>
               <div className="title">
                 {menus[3].title.split('\n').map((line, idx) => (
@@ -207,13 +269,11 @@ export default function MenuScreen() {
               role="button"
               tabIndex={0}
               className="desktopMenuItem"
-              onClick={() => {
-                setTimeout(() => history.push('/list'), 0);
-              }}
+              onClick={() => setOnAbout(true)}
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
-                <FontAwesomeIcon icon={faEdit} />
+                <SvgIcon component={LogoIcon} viewBox="0 0 233 233" />
               </div>
               <div className="title">
                 {menus[4].title.split('\n').map((line, idx) => (
@@ -230,6 +290,6 @@ export default function MenuScreen() {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

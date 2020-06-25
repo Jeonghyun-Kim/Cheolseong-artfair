@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import UpIcon from '@material-ui/icons/ArrowUpward';
 import {
   createStyles, fade, Theme, makeStyles,
 } from '@material-ui/core/styles';
@@ -23,7 +24,6 @@ import KeyIcon from '@material-ui/icons/VpnKeyOutlined';
 import './CommentScreen.scss';
 
 const SERVER_URL = 'https://api.airygall.com';
-// const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 class Comment {
   constructor(name: string, content: string) {
@@ -116,7 +116,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     backgroundColor: 'white',
   },
   commentList: {
-    marginTop: '10ch',
+    // marginTop: '10ch',
   },
   commentItem: {
     borderBottom: 'solid 1px #eee',
@@ -220,15 +220,7 @@ const CommentItem = ({ comment, setAlert, onRefresh }: {
     <>
       <ListItem className={classes.commentItem}>
         <Grid container spacing={1}>
-          <Grid item container direction="column" justify="space-between" xs={10} className={classes.contentBox}>
-            <Grid item>
-              <Typography variant="subtitle1">{comment.content}</Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="caption">{comment.createdAt}</Typography>
-            </Grid>
-          </Grid>
-          <Grid item container xs={2} direction="column" justify="space-between">
+          <Grid item container xs={3} direction="column" justify="space-between">
             <Grid item>
               <Typography variant="subtitle2" className={classes.name}>{comment.name}</Typography>
             </Grid>
@@ -243,6 +235,14 @@ const CommentItem = ({ comment, setAlert, onRefresh }: {
                   <DeleteIcon />
                 </IconButton>
               </Grid>
+            </Grid>
+          </Grid>
+          <Grid item container direction="column" justify="space-between" xs={9} className={classes.contentBox}>
+            <Grid item>
+              <Typography variant="subtitle1">{comment.content}</Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="caption">{comment.createdAt}</Typography>
             </Grid>
           </Grid>
         </Grid>
@@ -378,6 +378,7 @@ const CommentEditor = ({ comment, setAlert, onRefresh }: {
   );
 };
 
+
 export default function CommentScreen() {
   const [name, setName] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
@@ -477,10 +478,20 @@ export default function CommentScreen() {
     }
   };
 
+  const handleScrollToTop = () => {
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+  };
+
   return (
     <div
       className="commentRoot"
     >
+      <IconButton
+        id="upIcon"
+        onClick={() => handleScrollToTop()}
+      >
+        <UpIcon fontSize="small" />
+      </IconButton>
       {/* <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
@@ -521,7 +532,8 @@ export default function CommentScreen() {
 
       <IconButton
         id="backIcon"
-        onClick={() => history.push('/list')}
+        className="backButton"
+        onClick={() => history.push('/')}
       >
         <ArrowBackIcon fontSize="large" />
       </IconButton>
@@ -540,19 +552,7 @@ export default function CommentScreen() {
         )}
         <Paper className={classes.commentList}>
           <List dense>
-            {isLoading ? (
-              <Typography>Loading...</Typography>
-            ) : (
-              comments.map((comment) => (
-                <CommentItem
-                  comment={comment}
-                  setAlert={setRes}
-                  onRefresh={fetchData}
-                  key={comment.id}
-                />
-              ))
-            )}
-            <ListItem className={classes.topMargin}>
+            <ListItem className={`${classes.topMargin} insertSection`}>
               <form className={classes.grow}>
                 <Grid container className={classes.bottomMargin}>
                   <Grid item xs={12} sm={4} md>
@@ -583,7 +583,7 @@ export default function CommentScreen() {
                   placeholder="감상평을 남겨주세요!"
                   multiline
                   fullWidth
-                  variant="standard"
+                  variant="outlined"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                 />
@@ -602,6 +602,18 @@ export default function CommentScreen() {
                 </Grid>
               </form>
             </ListItem>
+            {isLoading ? (
+              <Typography>Loading...</Typography>
+            ) : (
+              comments.map((comment) => (
+                <CommentItem
+                  comment={comment}
+                  setAlert={setRes}
+                  onRefresh={fetchData}
+                  key={comment.id}
+                />
+              ))
+            )}
           </List>
         </Paper>
       </div>

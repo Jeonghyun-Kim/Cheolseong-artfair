@@ -10,6 +10,17 @@ $iconColor: azure !global;
   display: flex;
   justify-content: center;
   overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.listHeader {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+}
+
+.fixed {
+  position: fixed !important;
 }
 
 .unselectable {
@@ -23,9 +34,14 @@ $iconColor: azure !global;
 
 #paitingNumber {
   position: absolute;
-  left: 30px;
+  left: 50%;
   top: 40px;
+  transform: translate(-50%, 0);
   color: $iconColor;
+
+  @media (max-width: 600px) {
+    top: 20px;
+  }
 }
 
 #onSaleText {
@@ -37,6 +53,10 @@ $iconColor: azure !global;
   width: 100%;
   max-width: 1700px;
   padding: 100px 50px;
+
+  @media (max-width: 600px) {
+    padding: 50px 0px;
+  }
 }
 
 .iconContainer {
@@ -49,12 +69,34 @@ $iconColor: azure !global;
   }
 }
 
+.badgeContainer {
+  position: relative;
+
+  svg {
+    position: absolute;
+    right: -5px;
+    top: -30px;
+    color: rgba($color: #cc1717, $alpha: 0.9);
+
+    circle {
+      @media (max-width: 600px) {
+        r: 8px;
+      }
+    }
+  }
+}
+
 #sortIcon {
   position: absolute;
   right: 80px;
   top: 10px;
   color: $iconColor;
   z-index: 99;
+
+  @media (max-width: 600px) {
+    right: 40px;
+    top: 5px;
+  }
 }
 
 #filterIcon {
@@ -63,6 +105,11 @@ $iconColor: azure !global;
   top: 10px;
   color: $iconColor;
   z-index: 99;
+
+  @media (max-width: 600px) {
+    right: 5px;
+    top: 5px;
+  }
 }
 
 #upIcon {
@@ -74,26 +121,32 @@ $iconColor: azure !global;
   border-radius: 100px;
   background-color: #827385;
   z-index: 99;
+
+  @media (max-width: 600px) {
+    bottom: 15px;
+    right: 15px;
+    padding: 5px;
+  }
 }
 
-#sortBadge {
-  position: absolute;
-  right: 85px;
-  top: 16px;
-  color: #aa0000;
-}
+// #sortBadge {
+//   position: absolute;
+//   right: 85px;
+//   top: 16px;
+//   color: #aa0000;
+// }
 
-#filterBadge {
-  position: absolute;
-  right: 20px;
-  top: 16px;
-  color: #aa0000;
-}
+// #filterBadge {
+//   position: absolute;
+//   right: 20px;
+//   top: 16px;
+//   color: #aa0000;
+// }
 
 #sort-menu {
   #switchContainer {
     border: none !important;
-    // width: 200px;
+    min-width: 200px;
     margin: 10px 20px;
   }
 }

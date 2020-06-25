@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 
-import './ContactScreen.scss';
+import './PosterContactScreen.scss';
 
 import info from '../../info.json';
 import DEFINES from '../../defines';
@@ -20,7 +20,7 @@ const API_URL = 'https://api.airygall.com';
 
 interface ContactProps extends RouteComponentProps<{ idx: string }> {}
 
-export default function ContactScreen({ match }: ContactProps) {
+export default function PosterContactScreen({ match }: ContactProps) {
   const [name, setName] = React.useState<string>('');
   const [email, setEmail] = React.useState<string>('');
   const [phone, setPhone] = React.useState<string>('');
@@ -62,7 +62,7 @@ export default function ContactScreen({ match }: ContactProps) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          index: match.params.idx, name, email, phone, content, subscription,
+          index: match.params.idx, name, email, phone, content: `PRINTING!! ${content}`, subscription,
         }),
       }).then(async (response) => {
         if (response.ok) {
@@ -87,21 +87,19 @@ export default function ContactScreen({ match }: ContactProps) {
       <div className="contactContainer">
         <Paper variant="elevation" className="contactPaper">
           <Grid item xs={12} sm={6} md={5} id="infoSection">
-            <Grid container className="imageBox">
+            <Grid container>
               <Grid item xs={5} className="image">
                 <img
                   alt="paintingImage"
                   src={`${DEFINES.STORAGE_URL_XS}/${info[idx].year}_${info[idx].id}.jpg`}
                 />
               </Grid>
-              <Grid item xs={7} className="title">
+              <Grid item xs={7} container direction="column" className="title">
                 <Typography variant="h5">Decorum</Typography>
                 <Typography variant="body1">{info[idx].year} - {info[idx].id}</Typography>
+                <div className="grow" />
                 <div className="caption">
                   <Typography variant="body2">{info[idx].width}x{info[idx].height}cm</Typography>
-                  <Typography variant="body2">
-                    {info[idx].price === 'sold out' ? 'SOLD OUT' : `${info[idx].price}만원`}
-                  </Typography>
                 </div>
               </Grid>
             </Grid>
@@ -141,15 +139,19 @@ export default function ContactScreen({ match }: ContactProps) {
             </div>
           </Grid>
           <Grid item xs={12} sm={6} md={7} id="contentSection">
-            <Typography variant="h6" id="helperText">
-              이 작품에 관심이 있으신가요?
+            <Typography variant="h6" id="helperText" className="poster">
+              다양한 사이즈의 캔버스 프린팅 제작이 가능합니다.
               <br />
-              작가님께 문의를 남겨주세요.
+              자유롭게 문의해주세요.
             </Typography>
             <form>
               <div className="content">
                 <TextField
-                  label="내용"
+                  placeholder={`ex)
+
+작품과 동일한 크기의 캔버스 프린팅을 구매하고 싶어요.
+
+A4용지와 비슷한 크기의 캔버스 프린팅을 액자에 담아 구매하고 싶어요.`}
                   variant="outlined"
                   color="primary"
                   multiline

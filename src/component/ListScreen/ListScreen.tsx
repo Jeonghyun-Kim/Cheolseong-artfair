@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import Popover from '@material-ui/core/Popover';
 import Switch from '@material-ui/core/Switch';
@@ -9,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
 import UpIcon from '@material-ui/icons/ArrowUpward';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter, faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -20,7 +22,8 @@ import info from '../../info.json';
 
 import useWindowSize from '../useWindowSize';
 
-const ItemList = React.lazy(() => import('../ItemList/ItemList'));
+// const ItemList = React.lazy(() => import('../ItemList/ItemList'));
+import ItemList from '../ItemList/ItemList';
 
 const YEAR_MIN = 2004;
 const YEAR_MAX = 2020;
@@ -74,6 +77,7 @@ export default function ListScreen() {
   const [sortAnchorEl, setSortAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const [innerWidth, innerHeight] = useWindowSize();
+  const history = useHistory();
 
   React.useEffect(() => {
     const sessionConfig = sessionStorage.getItem('@config');
@@ -212,11 +216,18 @@ export default function ListScreen() {
     <div className="listRoot">
       <Typography id="paitingNumber" className="unselectable">작품 개수: {idxMap.length}개</Typography>
       <div className="listContainer">
-        <React.Suspense fallback={<>Loading</>}>
-          <ItemList indexMap={idxMap} windowSize={[innerWidth, innerHeight]} />
-        </React.Suspense>
+        {/* <React.Suspense fallback={<>Loading</>}> */}
+        <ItemList indexMap={idxMap} windowSize={[innerWidth, innerHeight]} />
+        {/* </React.Suspense> */}
         <ScrollRestoration />
       </div>
+      <IconButton
+        id="backIcon"
+        className="fixed"
+        onClick={() => history.push('/')}
+      >
+        <ArrowBackIcon fontSize="large" />
+      </IconButton>
       {/* Scroll To Top Icon */}
       <IconButton
         id="upIcon"
@@ -225,9 +236,6 @@ export default function ListScreen() {
         <UpIcon fontSize="small" />
       </IconButton>
       {/* Sort Menu Button */}
-      {!(JSON.stringify(storedSortConfig) === JSON.stringify(defaultSortConfig)) && (
-        <Brightness1Icon fontSize="small" id="sortBadge" />
-      )}
       <IconButton
         id="sortIcon"
         aria-controls="sort-menu"
@@ -241,6 +249,11 @@ export default function ListScreen() {
             style={{ margin: innerWidth < 1000 ? '5px' : '10px' }}
           />
           <div className="iconTitle">정렬</div>
+        </div>
+        <div className="badgeContainer">
+          {!(JSON.stringify(storedSortConfig) === JSON.stringify(defaultSortConfig)) && (
+            <Brightness1Icon fontSize="small" id="sortBadge" />
+          )}
         </div>
       </IconButton>
       {/* Sort Menu Popup */}
@@ -274,9 +287,10 @@ export default function ListScreen() {
               />
             </Grid>
             <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography align="center" variant="body2">연도 순</Typography>
+              <Typography align="center" variant="body2">최신순</Typography>
             </Grid>
-            <Grid item xs>
+            <Grid item xs />
+            <Grid item>
               <Switch
                 color="primary"
                 disabled={!(sortConfig.useSort === 'year')}
@@ -287,8 +301,9 @@ export default function ListScreen() {
                 })}
               />
             </Grid>
+            <Grid item xs />
             <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography align="center" variant="body2">연도 역순</Typography>
+              <Typography align="center" variant="body2">오래된순</Typography>
             </Grid>
           </Grid>
         </div>
@@ -308,9 +323,10 @@ export default function ListScreen() {
               />
             </Grid>
             <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography align="center" variant="body2">가격 순</Typography>
+              <Typography align="center" variant="body2">낮은가격순</Typography>
             </Grid>
-            <Grid item xs>
+            <Grid item xs />
+            <Grid item>
               <Switch
                 color="primary"
                 disabled={!(sortConfig.useSort === 'price')}
@@ -321,17 +337,14 @@ export default function ListScreen() {
                 })}
               />
             </Grid>
+            <Grid item xs />
             <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography align="center" variant="body2">가격 역순</Typography>
+              <Typography align="center" variant="body2">높은가격순</Typography>
             </Grid>
           </Grid>
         </div>
       </Popover>
       {/* Filter Menu Button */}
-      {!(JSON.stringify(storedConfig.yearRange) === JSON.stringify(defaultConfig.yearRange)
-        && !storedConfig.onSaleOnly) && (
-        <Brightness1Icon fontSize="small" id="filterBadge" />
-      )}
       <IconButton
         id="filterIcon"
         aria-controls="filter-menu"
@@ -345,6 +358,12 @@ export default function ListScreen() {
             style={{ margin: innerWidth < 1000 ? '5px' : '10px' }}
           />
           <div className="iconTitle">검색</div>
+        </div>
+        <div className="badgeContainer">
+          {!(JSON.stringify(storedConfig.yearRange) === JSON.stringify(defaultConfig.yearRange)
+            && !storedConfig.onSaleOnly) && (
+            <Brightness1Icon fontSize="small" id="filterBadge" />
+          )}
         </div>
       </IconButton>
       {/* Filter Menu Popup */}

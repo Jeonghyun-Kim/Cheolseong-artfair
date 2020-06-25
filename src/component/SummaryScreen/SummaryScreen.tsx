@@ -3,21 +3,18 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import CloseIcon from '@material-ui/icons/Close';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
-import { useHistory, RouteComponentProps } from 'react-router-dom';
-
-import './ViewingRoomScreen.scss';
 
 import ViewingRoom from '../ViewingRoom/ViewingRoom';
 import Details from '../Details/Details';
-import ConfigContext from '../../ConfigContext';
+import MenuScreen from '../MenuScreen/MenuScreen';
+import IntroScreen from '../IntroScreen/IntroScreen';
 
 import info from '../../info.json';
 
 const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
-// const STORAGE_URL_SM = 'https://d1mqeykb8ywbm3.cloudfront.net';
-// const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
+
+const idxMap = [-1, 53, 119, 89, 126, 197, -2];
 
 interface MotionState {
   touchStartX: number;
@@ -33,30 +30,15 @@ const defaultMotionState = {
   moveTo: 'null',
 };
 
-const defaultFlag = {
-  first: false,
-  last: false,
-};
-
 const swipeThreshold = 100;
 
-interface ViewingRoomProps extends RouteComponentProps<{ idx: string }> {}
-
-export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
-  const { idxMap } = React.useContext(ConfigContext);
+export default function SummaryScreen() {
   const MAX_INDEX = idxMap.length - 1;
   const [index, setIndex] = React.useState<number>(0);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [motionState, setMotionState] = React.useState<MotionState>(defaultMotionState);
-  const [flag, setFlag] = React.useState<{ first: boolean, last: boolean }>(defaultFlag);
-
-  const history = useHistory();
 
   const ref = React.useRef<HTMLDivElement | null>(null);
-
-  React.useEffect(() => {
-    setIndex(idxMap.findIndex((element: number) => element === Number(match.params.idx)));
-  }, [idxMap, match.params.idx, setIndex]);
 
   const focusSet = () => {
     if (ref.current) {
@@ -66,44 +48,41 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
 
   React.useEffect(() => {
     focusSet();
+    const exIndex = sessionStorage.getItem('@index');
+    if (exIndex) {
+      setIndex(JSON.parse(exIndex));
+    }
   }, []);
 
   const handleLeft = React.useCallback(() => {
     if (index !== 0) {
       if (onDetail) {
         setOnDetail(false);
-        setTimeout(() => history.push(`/viewing-room/${idxMap[index - 1]}`), 700);
+        setTimeout(() => setIndex(index - 1), 700);
       } else {
-        setTimeout(() => history.push(`/viewing-room/${idxMap[index - 1]}`), 10);
+        setTimeout(() => setIndex(index - 1), 10);
       }
-    } else {
-      setFlag({
-        ...flag,
-        first: true,
-      });
-      setTimeout(() => setFlag(defaultFlag), 1500);
+      sessionStorage.setItem('@index', JSON.stringify(index - 1));
     }
-  }, [idxMap, index, history, onDetail, flag]);
+  }, [index, onDetail]);
 
   const handleRight = React.useCallback(() => {
     if (index !== MAX_INDEX) {
       if (onDetail) {
         setOnDetail(false);
-        setTimeout(() => history.push(`/viewing-room/${idxMap[index + 1]}`), 700);
+        setTimeout(() => setIndex(index + 1), 700);
       } else {
-        setTimeout(() => history.push(`/viewing-room/${idxMap[index + 1]}`), 10);
+        setTimeout(() => setIndex(index + 1), 10);
       }
-    } else {
-      setFlag({
-        ...flag,
-        last: true,
-      });
-      setTimeout(() => setFlag(defaultFlag), 1500);
+      sessionStorage.setItem('@index', JSON.stringify(index + 1));
     }
-  }, [idxMap, MAX_INDEX, index, history, onDetail, flag]);
+  }, [MAX_INDEX, index, onDetail]);
 
   const toggleDetail = () => {
-    setOnDetail(!onDetail);
+    if (index !== 0 && index !== MAX_INDEX) {
+      setOnDetail(!onDetail);
+      sessionStorage.setItem('@index', JSON.stringify(index));
+    }
   };
 
   const handleKeydown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -111,8 +90,6 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       case 27:
         if (onDetail) {
           setOnDetail(false);
-        } else {
-          history.push('/list');
         }
         break;
       case 32:
@@ -130,14 +107,14 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   };
 
   const handleMotion = {
-    start: React.useCallback((clientX: number) => {
+    start: (clientX: number) => {
       setMotionState({
         ...motionState,
         touchStartX: clientX,
         beingTouched: true,
       });
-    }, [motionState]),
-    move: React.useCallback((clientX: number) => {
+    },
+    move: (clientX: number) => {
       if (motionState.beingTouched) {
         const deltaX = clientX - motionState.touchStartX;
         if (deltaX < -swipeThreshold) {
@@ -158,8 +135,8 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
           });
         }
       }
-    }, [motionState]),
-    end: React.useCallback(() => {
+    },
+    end: () => {
       if (motionState.beingTouched && !motionState.moved && !onDetail) {
         handleRight();
       } else if (motionState.beingTouched && motionState.moved) {
@@ -175,7 +152,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         }
       }
       setMotionState(defaultMotionState);
-    }, [motionState, handleLeft, handleRight, onDetail]),
+    },
   };
 
   const handleSwipe = {
@@ -197,31 +174,6 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   return (
     <div className="App">
       <div
-        className="alertFirstLast"
-        style={{
-          opacity: flag.first ? 1 : 0,
-          zIndex: flag.first ? 90 : -1,
-        }}
-      >
-        <p>첫번째 그림입니다.</p>
-      </div>
-      <div
-        className="alertFirstLast"
-        style={{
-          opacity: flag.last ? 1 : 0,
-          zIndex: flag.last ? 90 : -1,
-        }}
-      >
-        <p>마지막 그림입니다.</p>
-      </div>
-      <IconButton
-        id="backIcon"
-        onClick={() => history.push('/list')}
-        disabled={onDetail}
-      >
-        <ArrowBackIcon fontSize="large" />
-      </IconButton>
-      <div
         ref={ref}
         tabIndex={0}
         role="button"
@@ -235,25 +187,38 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         onTouchMove={handleSwipe.touchMove}
         onTouchEnd={() => handleSwipe.touchEnd()}
       >
-        <ViewingRoom
-          idx={idxMap[index]}
-          src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
-        />
+        {(index === 0 || index === MAX_INDEX) ? (
+          <>
+            {index === 0 ? (
+              <IntroScreen />
+            ) : (
+              <MenuScreen />
+            )}
+          </>
+        ) : (
+          <ViewingRoom
+            idx={idxMap[index]}
+            src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
+          />
+        )}
       </div>
-      <div
-        style={{
-          opacity: onDetail ? 1 : 0,
-          zIndex: onDetail ? 100 : -1,
-        }}
-        className="detailScreen"
-      >
-        <Details
-          idx={idxMap[index]}
-          src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
-        />
-      </div>
+      {index !== 0 && index !== MAX_INDEX && (
+        <div
+          style={{
+            opacity: onDetail ? 1 : 0,
+            zIndex: onDetail ? 100 : -1,
+          }}
+          className="detailScreen"
+        >
+          <Details
+            idx={idxMap[index]}
+            src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
+          />
+        </div>
+      )}
       <IconButton
         id="arrowLeft"
+        className="fixed"
         onClick={handleLeft}
         disabled={index === 0}
         style={{
@@ -264,18 +229,21 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       </IconButton>
       <IconButton
         id="arrowRight"
+        className="fixed"
         onClick={handleRight}
         disabled={index === MAX_INDEX}
         style={{ color: index === MAX_INDEX ? '#222' : 'rgba(149, 148, 160, 0.664)' }}
       >
         <ArrowForwardIosIcon fontSize="large" />
       </IconButton>
-      <IconButton
-        id="moreIcon"
-        onClick={toggleDetail}
-      >
-        <AssignmentIcon fontSize="large" />
-      </IconButton>
+      {index !== 0 && index !== MAX_INDEX && (
+        <IconButton
+          id="moreIcon"
+          onClick={toggleDetail}
+        >
+          <AssignmentIcon fontSize="large" />
+        </IconButton>
+      )}
       <IconButton
         id="closeIcon"
         onClick={() => setOnDetail(false)}

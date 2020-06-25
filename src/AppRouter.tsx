@@ -10,10 +10,14 @@ import CommentScreen from './component/CommentScreen/CommentScreen';
 import ViewingRoomScreen from './component/ViewingRoomScreen/ViewingRoomScreen';
 import IntroScreen from './component/IntroScreen/IntroScreen';
 import ListScreen from './component/ListScreen/ListScreen';
-import MenuScreen from './component/MenuScreen/MenuScreen';
-// import ContactScreen from './component/ContactScreen/ContactScreen';
+import ContactScreen from './component/ContactScreen/ContactScreen';
+import SummaryScreen from './component/SummaryScreen/SummaryScreen';
+import PosterContactScreen from './component/PosterContactScreen/PosterContactScreen';
+import StoryScreen from './component/StoryScreen/StoryScreen';
 
 import ConfigContext from './ConfigContext';
+
+import './common.scss';
 
 export default function AppRouter() {
   const [idxMap, setIdxMap] = React.useState<number[]>(
@@ -33,17 +37,19 @@ export default function AppRouter() {
         value={{ idxMap, setIdxMap }}
       >
         <Switch>
-          <Route exact path="/menu" component={MenuScreen} />
+          <Route exact path="/" component={SummaryScreen} />
           <Route path="/intro" component={IntroScreen} />
           <Route path="/list" component={ListScreen} />
+          <Route path="/story" component={StoryScreen} />
           <Route path="/comments" component={CommentScreen} />
-          {/* <Route path="/contact/:idx" component={ContactScreen} /> */}
+          <Route path="/poster/:idx" component={PosterContactScreen} />
+          <Route path="/contact/:idx" component={ContactScreen} />
           <Route path="/viewing-room/:idx" component={ViewingRoomScreen} />
           <Route path="/viewing-room">
             <Redirect to="/viewing-room/0" />
           </Route>
           <Route path="/*">
-            <Redirect to="/list" />
+            <Redirect to="/" />
           </Route>
         </Switch>
       </ConfigContext.Provider>

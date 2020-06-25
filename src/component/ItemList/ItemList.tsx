@@ -59,7 +59,7 @@ export default function ItemList({ indexMap, windowSize }:
         ),
       );
       sessionStorage.setItem('@items', JSON.stringify(items));
-    }, 1000);
+    }, 0);
   };
 
   return (

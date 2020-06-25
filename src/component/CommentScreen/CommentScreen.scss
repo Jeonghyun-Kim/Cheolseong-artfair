@@ -7,20 +7,45 @@
   display: flex;
   justify-content: center;
   overflow-x: hidden;
+  overflow-y: auto;
+  @media (max-width: 600px) {
+    h6, span {
+      font-size: 0.85rem;
+    }
+  }
+
+  .backButton {
+    @media (min-width: 601px) {
+      position: fixed !important;
+    }
+  }
+}
+
+.insertSection {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px !important;
 }
 
 .commentContainer {
   max-width: 800px;
-  margin: 50px 30px;
+  margin: 80px 30px;
   position: relative;
+
+  @media (max-width: 600px) {
+    margin: 80px 0;
+  }
 }
 
 .alert {
-  display: block;
   padding: 10px 20px !important;
-  position: absolute;
+  max-width: 80%;
+  width: fit-content;
+  position: fixed;
   left: 50%;
-  top: 0;
-  transform: translate(-50%, 0);
+  top: 10%;
+  transform: translate(-50%, -50%);
   transition: 1s ease;
+  border: 1px solid rgba($color: #bdbdbd, $alpha: 1.0);
+  z-index: 2;
+  // background-color: rgba($color: #000000, $alpha: 1.0);
 }
