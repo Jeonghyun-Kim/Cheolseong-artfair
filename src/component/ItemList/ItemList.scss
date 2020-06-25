@@ -13,8 +13,9 @@
 }
 
 .singleLineListImage {
-  box-shadow: 1px 7px 10px 0px rgba(0, 0, 0, 1);
+  display: block;
   margin: auto;
+  box-shadow: 1px 7px 10px 0px rgba(0, 0, 0, 1);
   filter: brightness(0.8);
 
   &:hover {
