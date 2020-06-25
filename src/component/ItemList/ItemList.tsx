@@ -12,12 +12,14 @@ const imageSize = 350;
 const margin = [30, 80];
 const breakRatio = 1.5;
 
-const NUM_PAGE = 20;
+const NUM_PAGE = 5;
 
 export default function ItemList({ indexMap, windowSize }:
 { indexMap: number[], windowSize: [number, number] }) {
   const [items, setItems] = React.useState<number[]>(
-    indexMap.slice(0, Math.min(NUM_PAGE, indexMap.length) - 1),
+    sessionStorage.getItem('@items')
+      ? JSON.parse(sessionStorage.getItem('@items') as string)
+      : indexMap.slice(0, Math.min(NUM_PAGE, indexMap.length) - 1),
   );
   const [hasMore, setHasMore] = React.useState<boolean>(NUM_PAGE < indexMap.length);
   const [innerWidth] = windowSize;
@@ -30,16 +32,16 @@ export default function ItemList({ indexMap, windowSize }:
     }
   }, [items, indexMap]);
 
-  React.useEffect(() => {
-    setItems(indexMap.slice(0, Math.min(NUM_PAGE, indexMap.length) - 1));
-  }, [indexMap]);
+  // React.useEffect(() => {
+  //   setItems(indexMap.slice(0, Math.min(NUM_PAGE, indexMap.length) - 1));
+  // }, [indexMap]);
 
-  React.useEffect(() => {
-    const storedItems = sessionStorage.getItem('@items');
-    if (storedItems) {
-      setItems(JSON.parse(storedItems));
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   const storedItems = sessionStorage.getItem('@items');
+  //   if (storedItems) {
+  //     setItems(JSON.parse(storedItems));
+  //   }
+  // }, []);
 
   const handleMove = (value: number) => {
     sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
@@ -47,6 +49,7 @@ export default function ItemList({ indexMap, windowSize }:
   };
 
   const getMoreData = () => {
+    sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
     if (items.length === indexMap.length) {
       setHasMore(false);
       return;

@@ -96,11 +96,9 @@ export default function ListScreen() {
 
   const handleScrollToTop = () => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-    sessionStorage.setItem('@scrollY', '0');
   };
 
   const handleSortMenuOpen = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    sessionStorage.setItem('@scrollY', '0');
     setSortAnchorEl(event.currentTarget);
   };
 
@@ -111,7 +109,6 @@ export default function ListScreen() {
   };
 
   const handleFilterMenuOpen = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    sessionStorage.setItem('@scrollY', '0');
     setFilterAnchorEl(event.currentTarget);
   };
 
@@ -205,7 +202,7 @@ export default function ListScreen() {
       const storedScrollY = sessionStorage.getItem('@scrollY');
 
       if (storedScrollY) {
-        window.scroll({ top: JSON.parse(storedScrollY), left: 0 });
+        setTimeout(() => window.scroll({ top: JSON.parse(storedScrollY), left: 0 }), 0);
       }
     }, []);
 
@@ -214,17 +211,18 @@ export default function ListScreen() {
 
   return (
     <div className="listRoot">
+      <ScrollRestoration />
       <Typography id="paitingNumber" className="unselectable">작품 개수: {idxMap.length}개</Typography>
       <div className="listContainer">
-        {/* <React.Suspense fallback={<>Loading</>}> */}
         <ItemList indexMap={idxMap} windowSize={[innerWidth, innerHeight]} />
-        {/* </React.Suspense> */}
-        <ScrollRestoration />
       </div>
       <IconButton
         id="backIcon"
         className="fixed"
-        onClick={() => history.push('/')}
+        onClick={() => {
+          sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
+          history.push('/');
+        }}
       >
         <ArrowBackIcon fontSize="large" />
       </IconButton>
