@@ -47,9 +47,12 @@
       return isIE11orLess;
     }
     if (isIE()) {
-      var newDiv = document.createElement("div");
-      newDiv.innerHTML = "<h2>onDisplay는 IE 브라우저를 지원하지 않습니다.<br />크롬 브라우저를 사용해주세요.</h2>";
-      document.getElementById("root").appendChild(newDiv);
+      var title = document.createElement("div");
+      title.innerHTML = "<h2>onDisplay는 IE 브라우저를 지원하지 않습니다.<br />크롬 브라우저를 사용해주세요.</h2>";
+      var helper = document.createElement("div");
+      helper.innerHTML = "<a href=\"https://www.google.com/chrome/\" style=\"font-size: 1.5em;\" target=\"_blank\">크롬 설치하기</a>"
+      document.getElementById("root").appendChild(title);
+      document.getElementById("root").appendChild(helper);
     }
   </script>
 </html>
