@@ -19,7 +19,7 @@ export default function ItemList({ indexMap, windowSize }:
   const [items, setItems] = React.useState<number[]>(
     sessionStorage.getItem('@items')
       ? JSON.parse(sessionStorage.getItem('@items') as string)
-      : indexMap.slice(0, Math.min(NUM_PAGE, indexMap.length) - 1),
+      : indexMap.slice(0, Math.min(NUM_PAGE * 3, indexMap.length) - 1),
   );
   const [hasMore, setHasMore] = React.useState<boolean>(NUM_PAGE < indexMap.length);
   const [innerWidth] = windowSize;
@@ -49,7 +49,6 @@ export default function ItemList({ indexMap, windowSize }:
   };
 
   const getMoreData = () => {
-    sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
     if (items.length === indexMap.length) {
       setHasMore(false);
       return;
@@ -110,11 +109,9 @@ export default function ItemList({ indexMap, windowSize }:
                         handleMove(value);
                       }
                     }}
+                    className="singleLineListImage"
                     style={{
-                      boxShadow: '1px 7px 10px 0px rgba(0, 0, 0, 1)',
                       borderRadius: info[value].src === '2013_5.gif' ? 999 : 2,
-                      display: 'block',
-                      margin: 'auto',
                     }}
                   />
                 </div>

@@ -16,9 +16,8 @@ $breakpoint: 700px;
   min-height: fit-content;
   width: 90%;
   max-width: 900px;
-  transition: 1s ease;
   margin: 60px 0;
-  filter: brightness(0.8);
+  filter: brightness(0.9);
 
   @media (min-width: 601px) and (min-height: 601px) {
     top: 50%;
@@ -38,7 +37,6 @@ $breakpoint: 700px;
 }
 
 .menuRoot {
-  transition: 1s ease;
   height: 100%;
 }
 
@@ -106,7 +104,7 @@ $breakpoint: 700px;
   align-items: center;
   flex-wrap: wrap;
   max-width: 1500px !important;
-  filter: brightness(0.8);
+  filter: brightness(0.9);
 }
 
 .mobileMenuItem {
@@ -163,7 +161,6 @@ $breakpoint: 700px;
   align-items: center;
 
   &:hover {
-    // opacity: 0.6;
     cursor: pointer;
 
     width: 260px;
