@@ -148,7 +148,6 @@ export default function PosterContactScreen({ match }: ContactProps) {
               <div className="content">
                 <TextField
                   placeholder={`ex)
-
 작품과 동일한 크기의 캔버스 프린팅을 구매하고 싶어요.
 
 A4용지와 비슷한 크기의 캔버스 프린팅을 액자에 담아 구매하고 싶어요.`}
