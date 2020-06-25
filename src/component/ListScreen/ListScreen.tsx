@@ -76,7 +76,7 @@ export default function ListScreen() {
   const [filterAnchorEl, setFilterAnchorEl] = React.useState<null | HTMLElement>(null);
   const [sortAnchorEl, setSortAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  const [innerWidth, innerHeight] = useWindowSize();
+  const [innerWidth] = useWindowSize();
   const history = useHistory();
 
   React.useEffect(() => {
@@ -197,12 +197,13 @@ export default function ListScreen() {
     setIdxMap(map);
   }, [storedSortConfig, storedConfig, setIdxMap]);
 
-  const ScrollRestoration = () => {
+  const ScrollRetoration = () => {
     React.useEffect(() => {
       const storedScrollY = sessionStorage.getItem('@scrollY');
 
       if (storedScrollY) {
-        setTimeout(() => window.scroll({ top: JSON.parse(storedScrollY), left: 0 }), 0);
+        setTimeout(() => window.scrollTo({ top: JSON.parse(storedScrollY), left: 0 }), 0);
+        sessionStorage.removeItem('@scrollY');
       }
     }, []);
 
@@ -210,11 +211,13 @@ export default function ListScreen() {
   };
 
   return (
-    <div className="listRoot">
-      <ScrollRestoration />
+    <div className="listRoot" id="listRoot">
+      <ScrollRetoration />
       <Typography id="paitingNumber" className="unselectable">작품 개수: {idxMap.length}개</Typography>
       <div className="listContainer">
-        <ItemList indexMap={idxMap} windowSize={[innerWidth, innerHeight]} />
+        <ItemList
+          indexMap={idxMap}
+        />
       </div>
       <IconButton
         id="backIcon"
@@ -285,7 +288,7 @@ export default function ListScreen() {
               />
             </Grid>
             <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography align="center" variant="body2">최신순</Typography>
+              <Typography align="center" variant="body2">오래된순</Typography>
             </Grid>
             <Grid item xs />
             <Grid item>
@@ -301,7 +304,7 @@ export default function ListScreen() {
             </Grid>
             <Grid item xs />
             <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography align="center" variant="body2">오래된순</Typography>
+              <Typography align="center" variant="body2">최신순</Typography>
             </Grid>
           </Grid>
         </div>

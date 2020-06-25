@@ -7,6 +7,8 @@ import './ItemList.scss';
 
 import info from '../../info.json';
 
+import useWindowSize from '../useWindowSize';
+
 const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
 const imageSize = 350;
 const margin = [30, 80];
@@ -14,15 +16,16 @@ const breakRatio = 1.5;
 
 const NUM_PAGE = 5;
 
-export default function ItemList({ indexMap, windowSize }:
-{ indexMap: number[], windowSize: [number, number] }) {
+export default function ItemList({ indexMap }:{
+  indexMap: number[],
+}) {
   const [items, setItems] = React.useState<number[]>(
     sessionStorage.getItem('@items')
       ? JSON.parse(sessionStorage.getItem('@items') as string)
-      : indexMap.slice(0, Math.min(NUM_PAGE * 3, indexMap.length) - 1),
+      : indexMap.slice(0, Math.min(NUM_PAGE, indexMap.length) - 1),
   );
   const [hasMore, setHasMore] = React.useState<boolean>(NUM_PAGE < indexMap.length);
-  const [innerWidth] = windowSize;
+  const [innerWidth] = useWindowSize();
 
   const history = useHistory();
 
@@ -32,9 +35,10 @@ export default function ItemList({ indexMap, windowSize }:
     }
   }, [items, indexMap]);
 
-  // React.useEffect(() => {
-  //   setItems(indexMap.slice(0, Math.min(NUM_PAGE, indexMap.length) - 1));
-  // }, [indexMap]);
+  React.useEffect(() => {
+    setItems(indexMap.slice(0, Math.min(NUM_PAGE, indexMap.length) - 1));
+    sessionStorage.removeItem('@items');
+  }, [indexMap]);
 
   // React.useEffect(() => {
   //   const storedItems = sessionStorage.getItem('@items');
@@ -45,7 +49,7 @@ export default function ItemList({ indexMap, windowSize }:
 
   const handleMove = (value: number) => {
     sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
-    history.push(`/viewing-room/${value}`);
+    setTimeout(() => history.push(`/viewing-room/${value}`), 10);
   };
 
   const getMoreData = () => {
@@ -64,25 +68,27 @@ export default function ItemList({ indexMap, windowSize }:
     }, 0);
   };
 
+  const Loader = () => (
+    <div
+      style={{ width: '100%', height: '150px', position: 'relative' }}
+    >
+      <img
+        alt="spinner"
+        src={`${process.env.PUBLIC_URL}/Spinner.svg`}
+        id="loadingIcon"
+        width="100px"
+      />
+    </div>
+  );
+
   return (
     <div className="itemContainer unselectable">
       <InfiniteScroll
         dataLength={items.length}
         next={getMoreData}
         hasMore={hasMore}
-        scrollThreshold="400px"
-        loader={(
-          <div
-            style={{ width: '100%', height: '150px', position: 'relative' }}
-          >
-            <img
-              alt="spinner"
-              src={`${process.env.PUBLIC_URL}/Spinner.svg`}
-              id="loadingIcon"
-              width="100px"
-            />
-          </div>
-        )}
+        scrollThreshold="50px"
+        loader={Loader}
       >
         {items.map((value) => {
           const isSingleLine = innerWidth - 150 < (imageSize + margin[0]) * 2;
