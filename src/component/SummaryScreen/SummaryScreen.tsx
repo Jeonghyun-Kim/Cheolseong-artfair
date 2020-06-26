@@ -257,7 +257,10 @@ export default function SummaryScreen() {
       <IconButton
         id="arrowLeft"
         className="fixed"
-        onClick={handleLeft}
+        onClick={() => {
+          handleLeft();
+          setTimeout(() => focusSet(), 10);
+        }}
         style={{
           display: index === 0 ? 'none' : '',
         }}
@@ -267,7 +270,10 @@ export default function SummaryScreen() {
       <IconButton
         id="arrowRight"
         className="fixed"
-        onClick={handleRight}
+        onClick={() => {
+          handleRight();
+          setTimeout(() => focusSet(), 10);
+        }}
         disabled={index === MAX_INDEX}
         style={{
           display: index === MAX_INDEX ? 'none' : '',
@@ -278,14 +284,20 @@ export default function SummaryScreen() {
       {index !== 0 && index !== MAX_INDEX && (
         <IconButton
           id="moreIcon"
-          onClick={toggleDetail}
+          onClick={() => {
+            toggleDetail();
+            setTimeout(() => focusSet(), 10);
+          }}
         >
           <AssignmentIcon fontSize="large" />
         </IconButton>
       )}
       <IconButton
         id="closeIcon"
-        onClick={() => setOnDetail(false)}
+        onClick={() => {
+          setOnDetail(false);
+          setTimeout(() => focusSet(), 10);
+        }}
         disabled={!onDetail}
         style={{ opacity: onDetail ? 1 : 0 }}
       >
