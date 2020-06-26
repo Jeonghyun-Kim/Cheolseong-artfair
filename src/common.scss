@@ -65,6 +65,7 @@ div {
 #arrowLeft {
   position: absolute;
   z-index: 1;
+  color: $iconColor;
   @media (min-width: 701px) {
     left: 0;
     top: 50%;
@@ -80,6 +81,7 @@ div {
 #arrowRight {
   position: absolute;
   z-index: 1;
+  color: $iconColor;
   @media (min-width: 701px) {
     right: 0;
     top: 50%;

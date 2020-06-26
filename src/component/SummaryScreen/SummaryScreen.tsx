@@ -18,6 +18,7 @@ const idxMap = [-1, 53, 119, 89, 126, 197, -2];
 
 interface MotionState {
   touchStartX: number;
+  touchStartY: number;
   moved: boolean;
   beingTouched: boolean;
   moveTo: string;
@@ -25,12 +26,16 @@ interface MotionState {
 
 const defaultMotionState = {
   touchStartX: 0,
+  touchStartY: 0,
   moved: false,
   beingTouched: false,
   moveTo: 'null',
 };
 
-const swipeThreshold = 100;
+const swipeThreshold = {
+  x: 100,
+  y: 100,
+};
 
 export default function SummaryScreen() {
   const MAX_INDEX = idxMap.length - 1;
@@ -114,63 +119,77 @@ export default function SummaryScreen() {
   };
 
   const handleMotion = {
-    start: (clientX: number) => {
+    start: React.useCallback((touchStartX: number, touchStartY: number) => {
       setMotionState({
         ...motionState,
-        touchStartX: clientX,
+        touchStartX,
+        touchStartY,
         beingTouched: true,
       });
-    },
-    move: (clientX: number) => {
+    }, [motionState]),
+    move: React.useCallback((clientX: number, clientY: number) => {
       if (motionState.beingTouched) {
         const deltaX = clientX - motionState.touchStartX;
-        if (deltaX < -swipeThreshold) {
+        const deltaY = clientY - motionState.touchStartY;
+        if (deltaY < -swipeThreshold.y) {
+          setMotionState({
+            ...motionState,
+            moveTo: 'up',
+            moved: true,
+          });
+        } else if (deltaX < -swipeThreshold.x) {
           setMotionState({
             ...motionState,
             moveTo: 'right',
+            moved: true,
           });
-        } else if (deltaX > swipeThreshold) {
+        } else if (deltaX > swipeThreshold.x) {
           setMotionState({
             ...motionState,
             moveTo: 'left',
+            moved: true,
           });
         } else {
           setMotionState({
             ...motionState,
             moveTo: 'null',
-            moved: true,
           });
         }
       }
-    },
-    end: () => {
+    }, [motionState]),
+    end: React.useCallback(() => {
       if (motionState.beingTouched && !motionState.moved && !onDetail) {
-        handleRight();
+        setTimeout(() => handleRight(), 0);
       } else if (motionState.beingTouched && motionState.moved) {
         switch (motionState.moveTo) {
+          case 'up':
+            if (!onDetail && index !== 0 && index !== MAX_INDEX) {
+              setOnDetail(true);
+            }
+            break;
           case 'right':
-            handleRight();
+            setTimeout(() => handleRight(), 0);
             break;
           case 'left':
-            handleLeft();
+            setTimeout(() => handleLeft(), 0);
             break;
           default:
             break;
         }
       }
       setMotionState(defaultMotionState);
-    },
+    }, [motionState, handleLeft, handleRight, onDetail, index, MAX_INDEX]),
   };
 
   const handleSwipe = {
     touchStart: (event: React.TouchEvent<HTMLDivElement>) => {
       if (event.touches.length === 1) {
-        handleMotion.start(event.targetTouches[0].clientX);
+        handleMotion.start(event.targetTouches[0].clientX, event.targetTouches[0].clientY);
       }
     },
     touchMove: (event: React.TouchEvent<HTMLDivElement>) => {
       if (event.touches.length === 1) {
-        handleMotion.move(event.targetTouches[0].clientX);
+        handleMotion.move(event.targetTouches[0].clientX, event.targetTouches[0].clientY);
       }
     },
     touchEnd: () => {
@@ -228,9 +247,8 @@ export default function SummaryScreen() {
         id="arrowLeft"
         className="fixed"
         onClick={handleLeft}
-        disabled={index === 0}
         style={{
-          color: index === 0 ? '#222' : 'rgba(149, 148, 160, 0.664)',
+          display: index === 0 ? 'none' : '',
         }}
       >
         <ArrowBackIosIcon fontSize="large" />
@@ -240,7 +258,9 @@ export default function SummaryScreen() {
         className="fixed"
         onClick={handleRight}
         disabled={index === MAX_INDEX}
-        style={{ color: index === MAX_INDEX ? '#222' : 'rgba(149, 148, 160, 0.664)' }}
+        style={{
+          display: index === MAX_INDEX ? 'none' : '',
+        }}
       >
         <ArrowForwardIosIcon fontSize="large" />
       </IconButton>
