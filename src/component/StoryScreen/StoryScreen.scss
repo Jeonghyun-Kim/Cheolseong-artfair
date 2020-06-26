@@ -1,3 +1,5 @@
+$borderRadius: 20px !global;
+
 .storyApp {
   display: flex;
   justify-content: center;
@@ -28,6 +30,7 @@
       width: calc(min(960px, 90vw));
       height: calc(min(540px, 51vw));
       margin: 60px auto;
+      border-radius: $borderRadius;
     }
   }
 
@@ -51,7 +54,7 @@
     min-height: fit-content;
     box-shadow: 0 19px 38px rgba(0,0,0,0.80), 0 15px 12px rgba(0,0,0,0.66);
     background: #fff;
-    border-radius: 4px;
+    border-radius: $borderRadius;
     filter: brightness(0.9);
 
     .paddingBox {
@@ -73,7 +76,7 @@
 
       @media (max-width: 600px) {
         font-size: 1rem;
-        line-height: 2rem;
+        line-height: 1.6rem;
       }
     }
 

@@ -30,7 +30,14 @@ export default function StoryScreen() {
       </IconButton>
       <div className="storyContainer">
         <div id="videoPlayer">
-          <iframe frameBorder="0" title="Decorum Intro" width="640" height="360" src="https://www.youtube.com/embed/p8yPxEGx7oM?autoplay=0&amp;" />
+          <iframe
+            frameBorder="0"
+            allowFullScreen
+            title="Decorum Intro"
+            width="640"
+            height="360"
+            src="https://www.youtube.com/embed/p8yPxEGx7oM?autoplay=0&amp;enablejsapi=1"
+          />
         </div>
         <div className="quote">
           <img alt="quote" src={`${process.env.PUBLIC_URL}/letters/quote.png`} />

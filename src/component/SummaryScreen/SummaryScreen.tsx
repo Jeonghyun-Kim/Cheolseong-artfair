@@ -272,11 +272,13 @@ export default function SummaryScreen() {
                 onClick={() => {
                   setSeenGuide(true);
                   sessionStorage.setItem('@seenGuide', 'true');
+                  setTimeout(() => focusSet(), 10);
                 }}
                 onKeyDown={(e) => {
                   if (e.keyCode !== 122) {
                     setSeenGuide(true);
                     sessionStorage.setItem('@seenGuide', 'true');
+                    setTimeout(() => focusSet(), 10);
                   }
                 }}
               >
@@ -309,8 +311,8 @@ export default function SummaryScreen() {
             sessionStorage.setItem('@seenGuide', 'true');
           } else {
             handleLeft();
-            setTimeout(() => focusSet(), 10);
           }
+          setTimeout(() => focusSet(), 10);
         }}
         style={{
           display: index === 0 ? 'none' : '',
@@ -327,8 +329,8 @@ export default function SummaryScreen() {
             sessionStorage.setItem('@seenGuide', 'true');
           } else {
             handleRight();
-            setTimeout(() => focusSet(), 10);
           }
+          setTimeout(() => focusSet(), 10);
         }}
         disabled={index === MAX_INDEX}
         style={{
@@ -346,8 +348,8 @@ export default function SummaryScreen() {
               sessionStorage.setItem('@seenGuide', 'true');
             } else {
               toggleDetail();
-              setTimeout(() => focusSet(), 10);
             }
+            setTimeout(() => focusSet(), 10);
           }}
         >
           <AssignmentIcon fontSize="large" />
