@@ -27,8 +27,8 @@ $borderRadius: 20px !global;
 
     iframe {
       display: flex;
-      width: calc(min(960px, 90vw));
-      height: calc(min(540px, 51vw));
+      width: calc(min(960px, 100%));
+      height: calc(min(540px, 49vw));
       margin: 60px auto;
       border-radius: $borderRadius;
     }
@@ -40,6 +40,7 @@ $borderRadius: 20px !global;
 
     @media (max-width: 600px) {
       margin: 0 auto;
+      width: 100%;
     }
 
     img {
@@ -59,6 +60,10 @@ $borderRadius: 20px !global;
 
     .paddingBox {
       padding: 35px;
+
+      @media (max-width: 600px) {
+        padding: 25px;
+      }
     }
 
     .title {
