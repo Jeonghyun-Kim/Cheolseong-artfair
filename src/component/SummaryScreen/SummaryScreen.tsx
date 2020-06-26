@@ -12,6 +12,8 @@ import IntroScreen from '../IntroScreen/IntroScreen';
 
 import info from '../../info.json';
 
+import './SummaryScreen.scss';
+
 const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
 
 const idxMap = [-1, 53, 119, 89, 126, 197, -2];
@@ -44,6 +46,9 @@ export default function SummaryScreen() {
   const [index, setIndex] = React.useState<number>(0);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [motionState, setMotionState] = React.useState<MotionState>(defaultMotionState);
+  const [seenGuide, setSeenGuide] = React.useState<boolean>(
+    JSON.parse(sessionStorage.getItem('@seenGuide') ?? 'false'),
+  );
 
   const ref = React.useRef<HTMLDivElement | null>(null);
 
@@ -100,23 +105,30 @@ export default function SummaryScreen() {
   };
 
   const handleKeydown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    switch (event.keyCode) {
-      case 27:
-        if (onDetail) {
-          setOnDetail(false);
-        }
-        break;
-      case 32:
-        toggleDetail();
-        break;
-      case 37:
-        handleLeft();
-        break;
-      case 39:
-        handleRight();
-        break;
-      default:
-        break;
+    if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+      if (event.keyCode !== 122) {
+        setSeenGuide(true);
+        sessionStorage.setItem('@seenGuide', 'true');
+      }
+    } else {
+      switch (event.keyCode) {
+        case 27:
+          if (onDetail) {
+            setOnDetail(false);
+          }
+          break;
+        case 32:
+          toggleDetail();
+          break;
+        case 37:
+          handleLeft();
+          break;
+        case 39:
+          handleRight();
+          break;
+        default:
+          break;
+      }
     }
   };
 
@@ -199,7 +211,12 @@ export default function SummaryScreen() {
       }
     },
     touchEnd: () => {
-      handleMotion.end();
+      if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+        setSeenGuide(true);
+        sessionStorage.setItem('@seenGuide', 'true');
+      } else {
+        handleMotion.end();
+      }
     },
   };
 
@@ -208,6 +225,7 @@ export default function SummaryScreen() {
       className="App"
       style={{
         height: index !== MAX_INDEX ? '100%' : '100vh',
+        backgroundImage: 'none',
       }}
     >
       <div
@@ -215,7 +233,6 @@ export default function SummaryScreen() {
         tabIndex={0}
         role="button"
         style={{
-          filter: `brightness(${onDetail ? 0.8 : 1}) blur(${onDetail ? 10 : 0}px)`,
           overflow: index === MAX_INDEX ? 'auto' : 'hidden',
         }}
         className="viewingRoom"
@@ -234,10 +251,39 @@ export default function SummaryScreen() {
             )}
           </>
         ) : (
-          <ViewingRoom
-            idx={idxMap[index]}
-            src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
-          />
+          <>
+            <div
+              id="viewingroomDiv"
+              style={{
+                filter: `blur(${seenGuide && !onDetail ? 0 : 8}px)`,
+                transform: `scale(${seenGuide && !onDetail ? 1 : 1.1})`,
+              }}
+            >
+              <ViewingRoom
+                idx={idxMap[index]}
+                src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
+              />
+            </div>
+            {!seenGuide && (
+              <div
+                className="guide"
+                role="button"
+                tabIndex={0}
+                onClick={() => {
+                  setSeenGuide(true);
+                  sessionStorage.setItem('@seenGuide', 'true');
+                }}
+                onKeyDown={(e) => {
+                  if (e.keyCode !== 122) {
+                    setSeenGuide(true);
+                    sessionStorage.setItem('@seenGuide', 'true');
+                  }
+                }}
+              >
+                <div className="guideBackground" />
+              </div>
+            )}
+          </>
         )}
       </div>
       {index !== 0 && index !== MAX_INDEX && (
@@ -258,8 +304,13 @@ export default function SummaryScreen() {
         id="arrowLeft"
         className="fixed"
         onClick={() => {
-          handleLeft();
-          setTimeout(() => focusSet(), 10);
+          if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+            setSeenGuide(true);
+            sessionStorage.setItem('@seenGuide', 'true');
+          } else {
+            handleLeft();
+            setTimeout(() => focusSet(), 10);
+          }
         }}
         style={{
           display: index === 0 ? 'none' : '',
@@ -271,8 +322,13 @@ export default function SummaryScreen() {
         id="arrowRight"
         className="fixed"
         onClick={() => {
-          handleRight();
-          setTimeout(() => focusSet(), 10);
+          if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+            setSeenGuide(true);
+            sessionStorage.setItem('@seenGuide', 'true');
+          } else {
+            handleRight();
+            setTimeout(() => focusSet(), 10);
+          }
         }}
         disabled={index === MAX_INDEX}
         style={{
@@ -285,8 +341,13 @@ export default function SummaryScreen() {
         <IconButton
           id="moreIcon"
           onClick={() => {
-            toggleDetail();
-            setTimeout(() => focusSet(), 10);
+            if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+              setSeenGuide(true);
+              sessionStorage.setItem('@seenGuide', 'true');
+            } else {
+              toggleDetail();
+              setTimeout(() => focusSet(), 10);
+            }
           }}
         >
           <AssignmentIcon fontSize="large" />
