@@ -34,7 +34,7 @@ const defaultMotionState = {
 
 const swipeThreshold = {
   x: 100,
-  y: 100,
+  y: 200,
 };
 
 export default function SummaryScreen() {
@@ -131,19 +131,19 @@ export default function SummaryScreen() {
       if (motionState.beingTouched) {
         const deltaX = clientX - motionState.touchStartX;
         const deltaY = clientY - motionState.touchStartY;
-        if (deltaY < -swipeThreshold.y) {
+        if (deltaY < -(swipeThreshold.y / 2) && Math.abs(deltaX) < swipeThreshold.x) {
           setMotionState({
             ...motionState,
             moveTo: 'up',
             moved: true,
           });
-        } else if (deltaX < -swipeThreshold.x) {
+        } else if (deltaX < -swipeThreshold.x && Math.abs(deltaY) < swipeThreshold.y) {
           setMotionState({
             ...motionState,
             moveTo: 'right',
             moved: true,
           });
-        } else if (deltaX > swipeThreshold.x) {
+        } else if (deltaX > swipeThreshold.x && Math.abs(deltaY) < swipeThreshold.y) {
           setMotionState({
             ...motionState,
             moveTo: 'left',
@@ -153,6 +153,7 @@ export default function SummaryScreen() {
           setMotionState({
             ...motionState,
             moveTo: 'null',
+            moved: true,
           });
         }
       }
