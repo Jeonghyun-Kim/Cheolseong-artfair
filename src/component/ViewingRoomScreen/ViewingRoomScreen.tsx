@@ -25,6 +25,7 @@ interface MotionState {
   moved: boolean;
   beingTouched: boolean;
   moveTo: string;
+  isMultiTouch: boolean;
 }
 
 const defaultMotionState = {
@@ -33,6 +34,7 @@ const defaultMotionState = {
   moved: false,
   beingTouched: false,
   moveTo: 'null',
+  isMultiTouch: true,
 };
 
 const defaultFlag = {
@@ -148,6 +150,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
         touchStartX,
         touchStartY,
         beingTouched: true,
+        isMultiTouch: false,
       });
     }, [motionState]),
     move: React.useCallback((clientX: number, clientY: number) => {
@@ -182,27 +185,29 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       }
     }, [motionState]),
     end: React.useCallback(() => {
-      if (motionState.beingTouched && !motionState.moved && !onDetail) {
-        setTimeout(() => handleRight(), 0);
-      } else if (motionState.beingTouched && motionState.moved) {
-        switch (motionState.moveTo) {
-          case 'up':
-            if (!onDetail) {
-              setOnDetail(true);
-            }
-            break;
-          case 'right':
-            setTimeout(() => handleRight(), 0);
-            break;
-          case 'left':
-            setTimeout(() => handleLeft(), 0);
-            break;
-          default:
-            break;
+      if (!motionState.isMultiTouch) {
+        if (motionState.beingTouched && !motionState.moved && !onDetail) {
+          setTimeout(() => handleRight(), 0);
+        } else if (motionState.beingTouched && motionState.moved) {
+          switch (motionState.moveTo) {
+            case 'up':
+              if (!onDetail && index !== 0 && index !== MAX_INDEX) {
+                setOnDetail(true);
+              }
+              break;
+            case 'right':
+              setTimeout(() => handleRight(), 0);
+              break;
+            case 'left':
+              setTimeout(() => handleLeft(), 0);
+              break;
+            default:
+              break;
+          }
         }
       }
       setMotionState(defaultMotionState);
-    }, [motionState, handleLeft, handleRight, onDetail]),
+    }, [motionState, handleLeft, handleRight, onDetail, index, MAX_INDEX]),
   };
 
   const handleSwipe = {
@@ -243,6 +248,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       </div>
       <IconButton
         id="backIcon"
+        className="fieed"
         onClick={() => history.push('/list')}
         disabled={onDetail}
       >

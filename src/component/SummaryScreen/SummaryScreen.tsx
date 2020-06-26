@@ -22,6 +22,7 @@ interface MotionState {
   moved: boolean;
   beingTouched: boolean;
   moveTo: string;
+  isMultiTouch: boolean;
 }
 
 const defaultMotionState = {
@@ -30,6 +31,7 @@ const defaultMotionState = {
   moved: false,
   beingTouched: false,
   moveTo: 'null',
+  isMultiTouch: true,
 };
 
 const swipeThreshold = {
@@ -125,6 +127,7 @@ export default function SummaryScreen() {
         touchStartX,
         touchStartY,
         beingTouched: true,
+        isMultiTouch: false,
       });
     }, [motionState]),
     move: React.useCallback((clientX: number, clientY: number) => {
@@ -159,23 +162,25 @@ export default function SummaryScreen() {
       }
     }, [motionState]),
     end: React.useCallback(() => {
-      if (motionState.beingTouched && !motionState.moved && !onDetail) {
-        setTimeout(() => handleRight(), 0);
-      } else if (motionState.beingTouched && motionState.moved) {
-        switch (motionState.moveTo) {
-          case 'up':
-            if (!onDetail && index !== 0 && index !== MAX_INDEX) {
-              setOnDetail(true);
-            }
-            break;
-          case 'right':
-            setTimeout(() => handleRight(), 0);
-            break;
-          case 'left':
-            setTimeout(() => handleLeft(), 0);
-            break;
-          default:
-            break;
+      if (!motionState.isMultiTouch) {
+        if (motionState.beingTouched && !motionState.moved && !onDetail) {
+          setTimeout(() => handleRight(), 0);
+        } else if (motionState.beingTouched && motionState.moved) {
+          switch (motionState.moveTo) {
+            case 'up':
+              if (!onDetail && index !== 0 && index !== MAX_INDEX) {
+                setOnDetail(true);
+              }
+              break;
+            case 'right':
+              setTimeout(() => handleRight(), 0);
+              break;
+            case 'left':
+              setTimeout(() => handleLeft(), 0);
+              break;
+            default:
+              break;
+          }
         }
       }
       setMotionState(defaultMotionState);
@@ -199,7 +204,12 @@ export default function SummaryScreen() {
   };
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        height: index !== MAX_INDEX ? '100%' : '100vh',
+      }}
+    >
       <div
         ref={ref}
         tabIndex={0}
