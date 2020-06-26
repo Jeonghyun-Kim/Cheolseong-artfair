@@ -35,7 +35,7 @@ export default function StoryScreen() {
         <div className="quote">
           <img alt="quote" src={`${process.env.PUBLIC_URL}/letters/quote.png`} />
         </div>
-        <div className="artistNote">
+        <div className="introduction">
           <div className="paddingBox">
             <Typography variant="h4" className="title">
               작가의 말

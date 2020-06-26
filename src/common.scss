@@ -36,6 +36,10 @@ $iconMarginSmall: 5px !global;
   flex-grow: 1;
 }
 
+div {
+  outline-color: transparent;
+}
+
 .unselectable {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -67,9 +71,9 @@ $iconMarginSmall: 5px !global;
     transform: translate(0, -50%);
   }
   @media (max-width: 700px) {
-    // left: 30%;
-    // bottom: 10px;
-    display: none;
+    left: 10px;
+    bottom: 10px;
+    // display: none;
   }
 }
 
