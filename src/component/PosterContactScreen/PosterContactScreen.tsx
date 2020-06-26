@@ -142,7 +142,7 @@ export default function PosterContactScreen({ match }: ContactProps) {
             <Typography variant="h6" id="helperText" className="poster">
               다양한 사이즈의 캔버스 프린팅 제작이 가능합니다.
               <br />
-              자유롭게 문의해주세요.
+              자유롭게 문의해주세요. *
             </Typography>
             <form>
               <div className="content">

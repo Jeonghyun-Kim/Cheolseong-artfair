@@ -144,12 +144,12 @@ export default function ContactScreen({ match }: ContactProps) {
             <Typography variant="h6" id="helperText">
               이 작품에 관심이 있으신가요?
               <br />
-              작가님께 문의를 남겨주세요.
+              작가님께 문의를 남겨주세요. *
             </Typography>
             <form>
               <div className="content">
                 <TextField
-                  label="내용"
+                  placeholder="안녕하세요, 작품 구입에 관심이 있어요."
                   variant="outlined"
                   color="primary"
                   multiline
