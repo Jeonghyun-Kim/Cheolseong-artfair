@@ -1,6 +1,5 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import YouTube, { Options } from 'react-youtube';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -10,12 +9,6 @@ import './StoryScreen.scss';
 
 export default function StoryScreen() {
   const history = useHistory();
-
-  const videoOpts: Options = {
-    playerVars: {
-      autoplay: 0,
-    },
-  };
 
   const handleScrollToTop = () => {
     window.scroll({ left: 0, top: 0, behavior: 'smooth' });
@@ -37,7 +30,7 @@ export default function StoryScreen() {
       </IconButton>
       <div className="storyContainer">
         <div id="videoPlayer">
-          <YouTube videoId="p8yPxEGx7oM" opts={videoOpts} onReady={() => {}} />
+          <iframe frameBorder="0" allowFullScreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="640" height="360" src="https://www.youtube.com/embed/p8yPxEGx7oM?autoplay=0&amp;enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1" id="widget2" />
         </div>
         <div className="quote">
           <img alt="quote" src={`${process.env.PUBLIC_URL}/letters/quote.png`} />
