@@ -11,10 +11,9 @@ import MenuScreen from '../MenuScreen/MenuScreen';
 import IntroScreen from '../IntroScreen/IntroScreen';
 
 import info from '../../info.json';
+import DEFINES from '../../defines';
 
 import './SummaryScreen.scss';
-
-const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
 
 const idxMap = [-1, 53, 119, 89, 126, 197, -2];
 
@@ -55,7 +54,7 @@ export default function SummaryScreen() {
   React.useEffect(() => {
     idxMap.slice(1, MAX_INDEX).forEach((idx) => {
       const img = new Image();
-      img.src = `${STORAGE_URL_MD}/${info[idx].src}`;
+      img.src = `${DEFINES.STORAGE_URL_MD}/${info[idx].src}`;
     });
   }, [MAX_INDEX]);
 
@@ -261,7 +260,7 @@ export default function SummaryScreen() {
             >
               <ViewingRoom
                 idx={idxMap[index]}
-                src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
+                src={`${DEFINES.STORAGE_URL_MD}/${info[idxMap[index]].src}`}
               />
             </div>
             {!seenGuide && (
@@ -298,7 +297,7 @@ export default function SummaryScreen() {
         >
           <Details
             idx={idxMap[index]}
-            src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
+            src={`${DEFINES.STORAGE_URL_MD}/${info[idxMap[index]].src}`}
           />
         </div>
       )}

@@ -14,10 +14,7 @@ import Details from '../Details/Details';
 import ConfigContext from '../../ConfigContext';
 
 import info from '../../info.json';
-
-const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
-// const STORAGE_URL_SM = 'https://d1mqeykb8ywbm3.cloudfront.net';
-// const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
+import DEFINES from '../../defines';
 
 interface MotionState {
   touchStartX: number;
@@ -78,7 +75,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   React.useEffect(() => {
     idxMap.slice(Math.max(index - 2, 0), Math.min(index + 3, MAX_INDEX)).forEach((idx) => {
       const img = new Image();
-      img.src = `${STORAGE_URL_MD}/${info[idx].src}`;
+      img.src = `${DEFINES.STORAGE_URL_MD}/${info[idx].src}`;
     });
   }, [MAX_INDEX, idxMap, index]);
 
@@ -270,7 +267,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       >
         <ViewingRoom
           idx={idxMap[index]}
-          src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
+          src={`${DEFINES.STORAGE_URL_MD}/${info[idxMap[index]].src}`}
         />
       </div>
       <div
@@ -282,7 +279,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       >
         <Details
           idx={idxMap[index]}
-          src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
+          src={`${DEFINES.STORAGE_URL_MD}/${info[idxMap[index]].src}`}
         />
       </div>
       <IconButton

@@ -6,10 +6,10 @@ import { useHistory } from 'react-router-dom';
 import './ItemList.scss';
 
 import info from '../../info.json';
+import DEFINES from '../../defines';
 
 import useWindowSize from '../useWindowSize';
 
-const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
 const imageSize = 350;
 const margin = [30, 80];
 const breakRatio = 1.5;
@@ -105,7 +105,7 @@ export default function ItemList({ indexMap }:{
                 }}
               >
                 <img
-                  src={`${STORAGE_URL_XS}/${info[value].src}`}
+                  src={`${DEFINES.STORAGE_URL_XS}/${info[value].src}`}
                   alt={`${info[value].src.split('.')[0]}`}
                   width={imageRatio < 1 ? 'auto' : '100%'}
                   height={imageRatio < 1 ? Math.min(innerWidth - 100, imageSize) : 'auto'}
@@ -133,7 +133,7 @@ export default function ItemList({ indexMap }:{
               >
                 {imageRatio > breakRatio ? (
                   <img
-                    src={`${STORAGE_URL_XS}/${info[value].src}`}
+                    src={`${DEFINES.STORAGE_URL_XS}/${info[value].src}`}
                     alt={`${info[value].src.split('.')[0]}`}
                     width={imageRatio > 2 ? '100%' : 'auto'}
                     height={imageRatio > 2 ? 'auto' : '100%'}
@@ -148,7 +148,7 @@ export default function ItemList({ indexMap }:{
                   />
                 ) : (
                   <img
-                    src={`${STORAGE_URL_XS}/${info[value].src}`}
+                    src={`${DEFINES.STORAGE_URL_XS}/${info[value].src}`}
                     alt={`${info[value].src.split('.')[0]}`}
                     width={imageRatio > 1 ? '100%' : 'auto'}
                     height={imageRatio > 1 ? 'auto' : '100%'}

@@ -16,7 +16,6 @@ import DEFINES from '../../defines';
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PHONE_REGEX = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/;
-const API_URL = 'https://api.airygall.com';
 
 interface ContactProps extends RouteComponentProps<{ idx: string }> {}
 
@@ -56,7 +55,7 @@ export default function ContactScreen({ match }: ContactProps) {
         setAlert('휴대폰 번호가 올바르지 않습니다.');
         return;
       }
-      fetch(`${API_URL}/contact`, {
+      fetch(`${DEFINES.API_URL}/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
