@@ -23,7 +23,7 @@ import KeyIcon from '@material-ui/icons/VpnKeyOutlined';
 
 import './CommentScreen.scss';
 
-const SERVER_URL = 'https://api.airygall.com';
+import DEFINES from '../../defines';
 
 class Comment {
   constructor(name: string, content: string) {
@@ -189,7 +189,7 @@ const CommentItem = ({ comment, setAlert, onRefresh }: {
       setAlert('비밀번호를 입력해주세요.');
       setTimeout(() => setAlert(''), 3000);
     } else {
-      fetch(`${SERVER_URL}/comment`, {
+      fetch(`${DEFINES.API_URL}/comment`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -291,7 +291,7 @@ const CommentEditor = ({ comment, setAlert, onRefresh }: {
       setAlert('모든 칸을 채워주세요!');
       setTimeout(() => setAlert(''), 3000);
     } else {
-      fetch(`${SERVER_URL}/comment`, {
+      fetch(`${DEFINES.API_URL}/comment`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -393,7 +393,7 @@ export default function CommentScreen() {
 
   const fetchData = () => {
     setLoading(true);
-    fetch(`${SERVER_URL}/comments`, {
+    fetch(`${DEFINES.API_URL}/comments`, {
       method: 'GET',
     }).then((response) => response.json())
       .then((json) => {
@@ -449,7 +449,7 @@ export default function CommentScreen() {
       setRes('이름은 20자를 넘을 수 없습니다.');
       setTimeout(() => setRes(''), 3000);
     } else {
-      fetch(`${SERVER_URL}/comment`, {
+      fetch(`${DEFINES.API_URL}/comment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

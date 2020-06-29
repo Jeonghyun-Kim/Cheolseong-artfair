@@ -16,7 +16,6 @@ import DEFINES from '../../defines';
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PHONE_REGEX = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/;
-const API_URL = 'https://api.airygall.com';
 
 interface ContactProps extends RouteComponentProps<{ idx: string }> {}
 
@@ -56,7 +55,7 @@ export default function PosterContactScreen({ match }: ContactProps) {
         setAlert('휴대폰 번호가 올바르지 않습니다.');
         return;
       }
-      fetch(`${API_URL}/contact`, {
+      fetch(`${DEFINES.API_URL}/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -142,13 +141,12 @@ export default function PosterContactScreen({ match }: ContactProps) {
             <Typography variant="h6" id="helperText" className="poster">
               다양한 사이즈의 캔버스 프린팅 제작이 가능합니다.
               <br />
-              자유롭게 문의해주세요.
+              자유롭게 문의해주세요. *
             </Typography>
             <form>
               <div className="content">
                 <TextField
                   placeholder={`ex)
-
 작품과 동일한 크기의 캔버스 프린팅을 구매하고 싶어요.
 
 A4용지와 비슷한 크기의 캔버스 프린팅을 액자에 담아 구매하고 싶어요.`}

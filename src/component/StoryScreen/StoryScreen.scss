@@ -1,0 +1,92 @@
+$borderRadius: 20px !global;
+
+.storyApp {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  // height: 100%;
+  margin: 0 auto;
+  position: relative;
+  background-image: url('/wallpaper.jpg');
+  background-repeat: repeat;
+  overflow-x: hidden;
+  overflow-y: auto;
+  #backIcon {
+    @media (min-width: 1130px) {
+      position: fixed !important;
+    }
+  }
+}
+
+.storyContainer {
+  width: calc(min(960px, 90%));
+  position: relative;
+
+  #videoPlayer {
+    max-height: fit-content;
+
+    iframe {
+      display: flex;
+      width: calc(min(960px, 100%));
+      height: calc(min(540px, 49vw));
+      margin: 60px auto;
+      border-radius: $borderRadius;
+    }
+  }
+
+  .quote {
+    margin: 100px auto;
+    width: 90%;
+
+    @media (max-width: 600px) {
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .introduction {
+    margin-bottom: 100px;
+    z-index: 5;
+    width: 100%;
+    min-height: fit-content;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.80), 0 15px 12px rgba(0,0,0,0.66);
+    background: #fff;
+    border-radius: $borderRadius;
+    filter: brightness(0.9);
+
+    .paddingBox {
+      padding: 35px;
+
+      @media (max-width: 600px) {
+        padding: 25px;
+      }
+    }
+
+    .title {
+      margin-bottom: 30px;
+    }
+
+    .artistName {
+      margin-top: 30px;
+      font-weight: bolder;
+    }
+
+    p {
+      font-size: 1.3rem;
+      line-height: 2.5rem;
+
+      @media (max-width: 600px) {
+        font-size: 1rem;
+        line-height: 1.6rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      margin-top: 50px;
+    }
+  }
+}

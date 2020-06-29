@@ -1,0 +1,38 @@
+.viewingRoom {
+  #viewingroomDiv {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-image: url('/wallpaper.jpg');
+    transition: 0.7s ease;
+  }
+
+  .guide {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    background-color: rgba($color: #000000, $alpha: 0.75);
+
+    :hover {
+      cursor: pointer;
+    }
+
+    .guideBackground {
+      width: 100%;
+      height: 100%;
+      background-image: url('/guide_desktop.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-blend-mode: soft-light;
+
+      @media (max-width: 700px) {
+        background-image: url('/guide_mobile.png');
+      }
+    }
+  }
+}

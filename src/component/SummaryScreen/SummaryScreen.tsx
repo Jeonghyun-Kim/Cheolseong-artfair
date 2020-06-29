@@ -11,34 +11,52 @@ import MenuScreen from '../MenuScreen/MenuScreen';
 import IntroScreen from '../IntroScreen/IntroScreen';
 
 import info from '../../info.json';
+import DEFINES from '../../defines';
 
-const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
+import './SummaryScreen.scss';
 
 const idxMap = [-1, 53, 119, 89, 126, 197, -2];
 
 interface MotionState {
   touchStartX: number;
+  touchStartY: number;
   moved: boolean;
   beingTouched: boolean;
   moveTo: string;
+  isMultiTouch: boolean;
 }
 
 const defaultMotionState = {
   touchStartX: 0,
+  touchStartY: 0,
   moved: false,
   beingTouched: false,
   moveTo: 'null',
+  isMultiTouch: true,
 };
 
-const swipeThreshold = 100;
+const swipeThreshold = {
+  x: 100,
+  y: 200,
+};
 
 export default function SummaryScreen() {
   const MAX_INDEX = idxMap.length - 1;
   const [index, setIndex] = React.useState<number>(0);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
   const [motionState, setMotionState] = React.useState<MotionState>(defaultMotionState);
+  const [seenGuide, setSeenGuide] = React.useState<boolean>(
+    JSON.parse(sessionStorage.getItem('@seenGuide') ?? 'false'),
+  );
 
   const ref = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    idxMap.slice(1, MAX_INDEX).forEach((idx) => {
+      const img = new Image();
+      img.src = `${DEFINES.STORAGE_URL_MD}/${info[idx].src}`;
+    });
+  }, [MAX_INDEX]);
 
   const focusSet = () => {
     if (ref.current) {
@@ -86,46 +104,64 @@ export default function SummaryScreen() {
   };
 
   const handleKeydown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    switch (event.keyCode) {
-      case 27:
-        if (onDetail) {
-          setOnDetail(false);
-        }
-        break;
-      case 32:
-        toggleDetail();
-        break;
-      case 37:
-        handleLeft();
-        break;
-      case 39:
-        handleRight();
-        break;
-      default:
-        break;
+    if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+      if (event.keyCode !== 122) {
+        setSeenGuide(true);
+        sessionStorage.setItem('@seenGuide', 'true');
+      }
+    } else {
+      switch (event.keyCode) {
+        case 27:
+          if (onDetail) {
+            setOnDetail(false);
+          }
+          break;
+        case 32:
+          toggleDetail();
+          break;
+        case 37:
+          handleLeft();
+          break;
+        case 39:
+          handleRight();
+          break;
+        default:
+          break;
+      }
     }
   };
 
   const handleMotion = {
-    start: (clientX: number) => {
+    start: React.useCallback((touchStartX: number, touchStartY: number) => {
       setMotionState({
         ...motionState,
-        touchStartX: clientX,
+        touchStartX,
+        touchStartY,
         beingTouched: true,
+        isMultiTouch: false,
       });
-    },
-    move: (clientX: number) => {
+    }, [motionState]),
+    move: React.useCallback((clientX: number, clientY: number) => {
       if (motionState.beingTouched) {
         const deltaX = clientX - motionState.touchStartX;
-        if (deltaX < -swipeThreshold) {
+        const deltaY = clientY - motionState.touchStartY;
+        if (deltaY < -(swipeThreshold.y / 2) && Math.abs(deltaX) < swipeThreshold.x) {
+          setMotionState({
+            ...motionState,
+            moveTo: 'up',
+            moved: true,
+          });
+        } else if (deltaX < -swipeThreshold.x && Math.abs(deltaY) < swipeThreshold.y) {
           setMotionState({
             ...motionState,
             moveTo: 'right',
+            moved: true,
           });
-        } else if (deltaX > swipeThreshold) {
+        } else if (deltaX > swipeThreshold.x && Math.abs(deltaY) < swipeThreshold.y) {
           setMotionState({
             ...motionState,
             moveTo: 'left',
+            moved: true,
           });
         } else {
           setMotionState({
@@ -135,50 +171,68 @@ export default function SummaryScreen() {
           });
         }
       }
-    },
-    end: () => {
-      if (motionState.beingTouched && !motionState.moved && !onDetail) {
-        handleRight();
-      } else if (motionState.beingTouched && motionState.moved) {
-        switch (motionState.moveTo) {
-          case 'right':
-            handleRight();
-            break;
-          case 'left':
-            handleLeft();
-            break;
-          default:
-            break;
+    }, [motionState]),
+    end: React.useCallback(() => {
+      if (!motionState.isMultiTouch) {
+        if (motionState.beingTouched && !motionState.moved && !onDetail) {
+          setTimeout(() => handleRight(), 0);
+        } else if (motionState.beingTouched && motionState.moved) {
+          switch (motionState.moveTo) {
+            case 'up':
+              if (!onDetail && index !== 0 && index !== MAX_INDEX) {
+                setOnDetail(true);
+              }
+              break;
+            case 'right':
+              setTimeout(() => handleRight(), 0);
+              break;
+            case 'left':
+              setTimeout(() => handleLeft(), 0);
+              break;
+            default:
+              break;
+          }
         }
       }
       setMotionState(defaultMotionState);
-    },
+    }, [motionState, handleLeft, handleRight, onDetail, index, MAX_INDEX]),
   };
 
   const handleSwipe = {
     touchStart: (event: React.TouchEvent<HTMLDivElement>) => {
       if (event.touches.length === 1) {
-        handleMotion.start(event.targetTouches[0].clientX);
+        handleMotion.start(event.targetTouches[0].clientX, event.targetTouches[0].clientY);
       }
     },
     touchMove: (event: React.TouchEvent<HTMLDivElement>) => {
       if (event.touches.length === 1) {
-        handleMotion.move(event.targetTouches[0].clientX);
+        handleMotion.move(event.targetTouches[0].clientX, event.targetTouches[0].clientY);
       }
     },
     touchEnd: () => {
-      handleMotion.end();
+      if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+        setSeenGuide(true);
+        sessionStorage.setItem('@seenGuide', 'true');
+      } else {
+        handleMotion.end();
+      }
     },
   };
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        height: index !== MAX_INDEX ? '100%' : '100vh',
+        backgroundImage: 'none',
+      }}
+    >
       <div
         ref={ref}
         tabIndex={0}
         role="button"
         style={{
-          filter: `brightness(${onDetail ? 0.8 : 1}) blur(${onDetail ? 10 : 0}px)`,
+          overflow: index === MAX_INDEX ? 'auto' : 'hidden',
         }}
         className="viewingRoom"
         onClick={() => setOnDetail(false)}
@@ -196,10 +250,41 @@ export default function SummaryScreen() {
             )}
           </>
         ) : (
-          <ViewingRoom
-            idx={idxMap[index]}
-            src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
-          />
+          <>
+            <div
+              id="viewingroomDiv"
+              style={{
+                filter: `blur(${seenGuide && !onDetail ? 0 : 8}px)`,
+                transform: `scale(${seenGuide && !onDetail ? 1 : 1.1})`,
+              }}
+            >
+              <ViewingRoom
+                idx={idxMap[index]}
+                src={`${DEFINES.STORAGE_URL_MD}/${info[idxMap[index]].src}`}
+              />
+            </div>
+            {!seenGuide && (
+              <div
+                className="guide"
+                role="button"
+                tabIndex={0}
+                onClick={() => {
+                  setSeenGuide(true);
+                  sessionStorage.setItem('@seenGuide', 'true');
+                  setTimeout(() => focusSet(), 10);
+                }}
+                onKeyDown={(e) => {
+                  if (e.keyCode !== 122) {
+                    setSeenGuide(true);
+                    sessionStorage.setItem('@seenGuide', 'true');
+                    setTimeout(() => focusSet(), 10);
+                  }
+                }}
+              >
+                <div className="guideBackground" />
+              </div>
+            )}
+          </>
         )}
       </div>
       {index !== 0 && index !== MAX_INDEX && (
@@ -212,17 +297,24 @@ export default function SummaryScreen() {
         >
           <Details
             idx={idxMap[index]}
-            src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
+            src={`${DEFINES.STORAGE_URL_MD}/${info[idxMap[index]].src}`}
           />
         </div>
       )}
       <IconButton
         id="arrowLeft"
         className="fixed"
-        onClick={handleLeft}
-        disabled={index === 0}
+        onClick={() => {
+          if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+            setSeenGuide(true);
+            sessionStorage.setItem('@seenGuide', 'true');
+          } else {
+            handleLeft();
+          }
+          setTimeout(() => focusSet(), 10);
+        }}
         style={{
-          color: index === 0 ? '#222' : 'rgba(149, 148, 160, 0.664)',
+          display: index === 0 ? 'none' : '',
         }}
       >
         <ArrowBackIosIcon fontSize="large" />
@@ -230,23 +322,44 @@ export default function SummaryScreen() {
       <IconButton
         id="arrowRight"
         className="fixed"
-        onClick={handleRight}
+        onClick={() => {
+          if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+            setSeenGuide(true);
+            sessionStorage.setItem('@seenGuide', 'true');
+          } else {
+            handleRight();
+          }
+          setTimeout(() => focusSet(), 10);
+        }}
         disabled={index === MAX_INDEX}
-        style={{ color: index === MAX_INDEX ? '#222' : 'rgba(149, 148, 160, 0.664)' }}
+        style={{
+          display: index === MAX_INDEX ? 'none' : '',
+        }}
       >
         <ArrowForwardIosIcon fontSize="large" />
       </IconButton>
       {index !== 0 && index !== MAX_INDEX && (
         <IconButton
           id="moreIcon"
-          onClick={toggleDetail}
+          onClick={() => {
+            if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+              setSeenGuide(true);
+              sessionStorage.setItem('@seenGuide', 'true');
+            } else {
+              toggleDetail();
+            }
+            setTimeout(() => focusSet(), 10);
+          }}
         >
           <AssignmentIcon fontSize="large" />
         </IconButton>
       )}
       <IconButton
         id="closeIcon"
-        onClick={() => setOnDetail(false)}
+        onClick={() => {
+          setOnDetail(false);
+          setTimeout(() => focusSet(), 10);
+        }}
         disabled={!onDetail}
         style={{ opacity: onDetail ? 1 : 0 }}
       >

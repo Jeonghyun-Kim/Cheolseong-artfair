@@ -17,8 +17,7 @@ $breakpoint: 700px;
   width: 90%;
   max-width: 900px;
   transition: 1s ease;
-  margin: 60px 0;
-  filter: brightness(0.8);
+  filter: brightness(0.9);
 
   @media (min-width: 601px) and (min-height: 601px) {
     top: 50%;
@@ -30,16 +29,17 @@ $breakpoint: 700px;
 
   #close {
     position: absolute; 
-    right: 0;
-    top: -60px;
+    right: -10px;
+    top: 20px;
     color: rgba(149, 148, 160, 0.664);
     transition: 1s ease;
   }
 }
 
 .menuRoot {
-  transition: 1s ease;
   height: 100%;
+
+  transition: 1s ease;
 }
 
 .bgImage {
@@ -106,7 +106,7 @@ $breakpoint: 700px;
   align-items: center;
   flex-wrap: wrap;
   max-width: 1500px !important;
-  filter: brightness(0.8);
+  filter: brightness(0.9);
 }
 
 .mobileMenuItem {
@@ -151,8 +151,8 @@ $breakpoint: 700px;
   height: 320px;
   display: flex;
   flex-direction: column;
-  margin: 30px 15px 30px 0;
   padding: 15px 8px;
+  margin: 30px 10px;
   border: 1px solid $menuColor;
   background-color: $menuColor;
   border-radius: 5px;
@@ -163,13 +163,12 @@ $breakpoint: 700px;
   align-items: center;
 
   &:hover {
-    // opacity: 0.6;
     cursor: pointer;
 
     width: 260px;
     height: 360px;
 
-    margin-bottom: 50px;
+    margin: 30px 0 50px 0;
   }
 
   .menuIcon {

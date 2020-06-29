@@ -8,7 +8,6 @@ $iconMarginSmall: 5px !global;
   justify-content: center;
   width: 100%;
   height: 100%;
-  min-height: fit-content;
   margin: 0 auto;
   position: relative;
   background-image: url('/wallpaper.jpg');
@@ -25,12 +24,20 @@ $iconMarginSmall: 5px !global;
   height: 100px;
 }
 
+#spacing50 {
+  height: 20px;
+}
+
 #spacing20 {
   height: 20px;
 }
 
 .grow {
   flex-grow: 1;
+}
+
+div {
+  outline-color: transparent;
 }
 
 .unselectable {
@@ -58,21 +65,23 @@ $iconMarginSmall: 5px !global;
 #arrowLeft {
   position: absolute;
   z-index: 1;
+  color: $iconColor;
   @media (min-width: 701px) {
     left: 0;
     top: 50%;
     transform: translate(0, -50%);
   }
   @media (max-width: 700px) {
-    // left: 30%;
-    // bottom: 10px;
-    display: none;
+    left: 10px;
+    bottom: 10px;
+    // display: none;
   }
 }
 
 #arrowRight {
   position: absolute;
   z-index: 1;
+  color: $iconColor;
   @media (min-width: 701px) {
     right: 0;
     top: 50%;
@@ -95,4 +104,21 @@ $iconMarginSmall: 5px !global;
   }
   color: $iconColor;
   transition: $delay;
+}
+
+#upIcon {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  color: azure;
+  border-radius: 100px;
+  background-color: #827385;
+  z-index: 99;
+
+  @media (max-width: 600px) {
+    bottom: 15px;
+    right: 15px;
+    padding: 5px;
+  }
 }

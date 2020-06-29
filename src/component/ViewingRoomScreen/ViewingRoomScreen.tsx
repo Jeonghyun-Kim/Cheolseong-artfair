@@ -14,23 +14,24 @@ import Details from '../Details/Details';
 import ConfigContext from '../../ConfigContext';
 
 import info from '../../info.json';
-
-const STORAGE_URL_MD = 'https://d3upf6md31d3of.cloudfront.net';
-// const STORAGE_URL_SM = 'https://d1mqeykb8ywbm3.cloudfront.net';
-// const STORAGE_URL_XS = 'https://dly1k4se6h02w.cloudfront.net';
+import DEFINES from '../../defines';
 
 interface MotionState {
   touchStartX: number;
+  touchStartY: number;
   moved: boolean;
   beingTouched: boolean;
   moveTo: string;
+  isMultiTouch: boolean;
 }
 
 const defaultMotionState = {
   touchStartX: 0,
+  touchStartY: 0,
   moved: false,
   beingTouched: false,
   moveTo: 'null',
+  isMultiTouch: true,
 };
 
 const defaultFlag = {
@@ -38,7 +39,10 @@ const defaultFlag = {
   last: false,
 };
 
-const swipeThreshold = 100;
+const swipeThreshold = {
+  x: 100,
+  y: 200,
+};
 
 interface ViewingRoomProps extends RouteComponentProps<{ idx: string }> {}
 
@@ -67,6 +71,13 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   React.useEffect(() => {
     focusSet();
   }, []);
+
+  React.useEffect(() => {
+    idxMap.slice(Math.max(index - 2, 0), Math.min(index + 3, MAX_INDEX)).forEach((idx) => {
+      const img = new Image();
+      img.src = `${DEFINES.STORAGE_URL_MD}/${info[idx].src}`;
+    });
+  }, [MAX_INDEX, idxMap, index]);
 
   const handleLeft = React.useCallback(() => {
     if (index !== 0) {
@@ -130,25 +141,36 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   };
 
   const handleMotion = {
-    start: React.useCallback((clientX: number) => {
+    start: React.useCallback((touchStartX: number, touchStartY: number) => {
       setMotionState({
         ...motionState,
-        touchStartX: clientX,
+        touchStartX,
+        touchStartY,
         beingTouched: true,
+        isMultiTouch: false,
       });
     }, [motionState]),
-    move: React.useCallback((clientX: number) => {
+    move: React.useCallback((clientX: number, clientY: number) => {
       if (motionState.beingTouched) {
         const deltaX = clientX - motionState.touchStartX;
-        if (deltaX < -swipeThreshold) {
+        const deltaY = clientY - motionState.touchStartY;
+        if (deltaY < -(swipeThreshold.y / 2) && Math.abs(deltaX) < swipeThreshold.x) {
+          setMotionState({
+            ...motionState,
+            moveTo: 'up',
+            moved: true,
+          });
+        } else if (deltaX < -swipeThreshold.x && Math.abs(deltaY) < swipeThreshold.y) {
           setMotionState({
             ...motionState,
             moveTo: 'right',
+            moved: true,
           });
-        } else if (deltaX > swipeThreshold) {
+        } else if (deltaX > swipeThreshold.x && Math.abs(deltaY) < swipeThreshold.y) {
           setMotionState({
             ...motionState,
             moveTo: 'left',
+            moved: true,
           });
         } else {
           setMotionState({
@@ -160,33 +182,40 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       }
     }, [motionState]),
     end: React.useCallback(() => {
-      if (motionState.beingTouched && !motionState.moved && !onDetail) {
-        handleRight();
-      } else if (motionState.beingTouched && motionState.moved) {
-        switch (motionState.moveTo) {
-          case 'right':
-            handleRight();
-            break;
-          case 'left':
-            handleLeft();
-            break;
-          default:
-            break;
+      if (!motionState.isMultiTouch) {
+        if (motionState.beingTouched && !motionState.moved && !onDetail) {
+          setTimeout(() => handleRight(), 0);
+        } else if (motionState.beingTouched && motionState.moved) {
+          switch (motionState.moveTo) {
+            case 'up':
+              if (!onDetail && index !== 0 && index !== MAX_INDEX) {
+                setOnDetail(true);
+              }
+              break;
+            case 'right':
+              setTimeout(() => handleRight(), 0);
+              break;
+            case 'left':
+              setTimeout(() => handleLeft(), 0);
+              break;
+            default:
+              break;
+          }
         }
       }
       setMotionState(defaultMotionState);
-    }, [motionState, handleLeft, handleRight, onDetail]),
+    }, [motionState, handleLeft, handleRight, onDetail, index, MAX_INDEX]),
   };
 
   const handleSwipe = {
     touchStart: (event: React.TouchEvent<HTMLDivElement>) => {
       if (event.touches.length === 1) {
-        handleMotion.start(event.targetTouches[0].clientX);
+        handleMotion.start(event.targetTouches[0].clientX, event.targetTouches[0].clientY);
       }
     },
     touchMove: (event: React.TouchEvent<HTMLDivElement>) => {
       if (event.touches.length === 1) {
-        handleMotion.move(event.targetTouches[0].clientX);
+        handleMotion.move(event.targetTouches[0].clientX, event.targetTouches[0].clientY);
       }
     },
     touchEnd: () => {
@@ -216,6 +245,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       </div>
       <IconButton
         id="backIcon"
+        className="fieed"
         onClick={() => history.push('/list')}
         disabled={onDetail}
       >
@@ -237,7 +267,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       >
         <ViewingRoom
           idx={idxMap[index]}
-          src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
+          src={`${DEFINES.STORAGE_URL_MD}/${info[idxMap[index]].src}`}
         />
       </div>
       <div
@@ -249,36 +279,51 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       >
         <Details
           idx={idxMap[index]}
-          src={`${STORAGE_URL_MD}/${info[idxMap[index]].src}`}
+          src={`${DEFINES.STORAGE_URL_MD}/${info[idxMap[index]].src}`}
         />
       </div>
       <IconButton
         id="arrowLeft"
-        onClick={handleLeft}
-        disabled={index === 0}
+        className="fixed"
+        onClick={() => {
+          handleLeft();
+          setTimeout(() => focusSet(), 10);
+        }}
         style={{
-          color: index === 0 ? '#222' : 'rgba(149, 148, 160, 0.664)',
+          display: index === 0 ? 'none' : '',
         }}
       >
         <ArrowBackIosIcon fontSize="large" />
       </IconButton>
       <IconButton
         id="arrowRight"
-        onClick={handleRight}
+        className="fixed"
+        onClick={() => {
+          handleRight();
+          setTimeout(() => focusSet(), 10);
+        }}
         disabled={index === MAX_INDEX}
-        style={{ color: index === MAX_INDEX ? '#222' : 'rgba(149, 148, 160, 0.664)' }}
+        style={{
+          display: index === MAX_INDEX ? 'none' : '',
+        }}
       >
         <ArrowForwardIosIcon fontSize="large" />
       </IconButton>
       <IconButton
         id="moreIcon"
-        onClick={toggleDetail}
+        onClick={() => {
+          toggleDetail();
+          setTimeout(() => focusSet(), 10);
+        }}
       >
         <AssignmentIcon fontSize="large" />
       </IconButton>
       <IconButton
         id="closeIcon"
-        onClick={() => setOnDetail(false)}
+        onClick={() => {
+          setOnDetail(false);
+          setTimeout(() => focusSet(), 10);
+        }}
         disabled={!onDetail}
         style={{ opacity: onDetail ? 1 : 0 }}
       >
