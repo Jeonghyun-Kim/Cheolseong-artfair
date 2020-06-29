@@ -129,6 +129,7 @@ export default function SummaryScreen() {
           break;
       }
     }
+    setTimeout(() => focusSet(), 10);
   };
 
   const handleMotion = {
@@ -221,10 +222,9 @@ export default function SummaryScreen() {
 
   return (
     <div
-      className="App"
+      className="summaryApp"
       style={{
         height: index !== MAX_INDEX ? '100%' : '100vh',
-        backgroundImage: 'none',
       }}
     >
       <div

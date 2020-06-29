@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
-import { ReactComponent as LogoIcon } from './logo_icon.svg';
+import { ReactComponent as LogoIcon } from './onDisplay_logo.svg';
 
 import './MenuScreen.scss';
 
@@ -54,6 +54,7 @@ export default function MenuScreen() {
         className="App menuRoot unselectable"
         style={{
           filter: `blur(${onAbout ? 10 : 0}px)`,
+          transform: `scale(${onAbout ? 1.1 : 1})`,
         }}
         role="button"
         tabIndex={0}
@@ -149,7 +150,7 @@ export default function MenuScreen() {
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
-                <SvgIcon component={LogoIcon} viewBox="0 0 233 233" />
+                <SvgIcon component={LogoIcon} viewBox="0 0 67 67" />
               </div>
               <div className="title">
                 {menus[4].title}
@@ -273,7 +274,7 @@ export default function MenuScreen() {
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
-                <SvgIcon component={LogoIcon} viewBox="0 0 233 233" />
+                <SvgIcon component={LogoIcon} viewBox="0 0 67 67" />
               </div>
               <div className="title">
                 {menus[4].title.split('\n').map((line, idx) => (

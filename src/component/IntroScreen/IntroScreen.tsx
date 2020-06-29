@@ -37,7 +37,7 @@ export default function IntroScreen() {
         <img
           alt="logo_letter"
           className="logo"
-          src={`${process.env.PUBLIC_URL}/letters/logo_letter.png`}
+          src={`${process.env.PUBLIC_URL}/onDisplay_logo_white.png`}
         />
       </div>
       <img
