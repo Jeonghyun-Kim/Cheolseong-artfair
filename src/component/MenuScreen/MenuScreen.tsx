@@ -17,8 +17,8 @@ import menus from './menus.json';
 import About from '../About/About';
 import useWindowSize from '../useWindowSize';
 
-export default function MenuScreen() {
-  const [onAbout, setOnAbout] = React.useState<boolean>(false);
+export default function MenuScreen({ onAbout, setOnAbout }:
+{ onAbout: boolean, setOnAbout: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [innerWidth] = useWindowSize();
   const history = useHistory();
 

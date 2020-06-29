@@ -44,6 +44,7 @@ export default function SummaryScreen() {
   const MAX_INDEX = idxMap.length - 1;
   const [index, setIndex] = React.useState<number>(0);
   const [onDetail, setOnDetail] = React.useState<boolean>(false);
+  const [onAbout, setOnAbout] = React.useState<boolean>(false);
   const [motionState, setMotionState] = React.useState<MotionState>(defaultMotionState);
   const [seenGuide, setSeenGuide] = React.useState<boolean>(
     JSON.parse(sessionStorage.getItem('@seenGuide') ?? 'false'),
@@ -77,12 +78,15 @@ export default function SummaryScreen() {
       if (onDetail) {
         setOnDetail(false);
         setTimeout(() => setIndex(index - 1), 700);
+      } else if (onAbout) {
+        setOnAbout(false);
+        setTimeout(() => setIndex(index - 1), 1000);
       } else {
         setTimeout(() => setIndex(index - 1), 10);
       }
       sessionStorage.setItem('@index', JSON.stringify(index - 1));
     }
-  }, [index, onDetail]);
+  }, [index, onDetail, onAbout]);
 
   const handleRight = React.useCallback(() => {
     if (index !== MAX_INDEX) {
@@ -99,7 +103,6 @@ export default function SummaryScreen() {
   const toggleDetail = () => {
     if (index !== 0 && index !== MAX_INDEX) {
       setOnDetail(!onDetail);
-      sessionStorage.setItem('@index', JSON.stringify(index));
     }
   };
 
@@ -109,11 +112,16 @@ export default function SummaryScreen() {
         setSeenGuide(true);
         sessionStorage.setItem('@seenGuide', 'true');
       }
+    } else if (index === MAX_INDEX && event.keyCode === 32) {
+      setOnAbout(!onAbout);
     } else {
       switch (event.keyCode) {
         case 27:
           if (onDetail) {
             setOnDetail(false);
+          }
+          if (onAbout) {
+            setOnAbout(false);
           }
           break;
         case 32:
@@ -235,7 +243,10 @@ export default function SummaryScreen() {
           overflow: index === MAX_INDEX ? 'auto' : 'hidden',
         }}
         className="viewingRoom"
-        onClick={() => setOnDetail(false)}
+        onClick={() => {
+          setOnDetail(false);
+          setTimeout(() => focusSet(), 10);
+        }}
         onKeyDown={handleKeydown}
         onTouchStart={handleSwipe.touchStart}
         onTouchMove={handleSwipe.touchMove}
@@ -246,7 +257,7 @@ export default function SummaryScreen() {
             {index === 0 ? (
               <IntroScreen />
             ) : (
-              <MenuScreen />
+              <MenuScreen onAbout={onAbout} setOnAbout={setOnAbout} />
             )}
           </>
         ) : (
@@ -314,7 +325,7 @@ export default function SummaryScreen() {
           setTimeout(() => focusSet(), 10);
         }}
         style={{
-          display: index === 0 ? 'none' : '',
+          display: index === 0 || onAbout ? 'none' : '',
         }}
       >
         <ArrowBackIosIcon fontSize="large" />
