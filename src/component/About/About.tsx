@@ -17,7 +17,7 @@ export default function About() {
         ) : (
           <img alt="onDisplay로고" src={`${process.env.PUBLIC_URL}/logo_desktop.png`} />
         )} */}
-        <img alt="onDisplay로고" src={`${process.env.PUBLIC_URL}/onDisplay_logo_black.png`} />
+        <img alt="onDisplay로고" src={`${process.env.PUBLIC_URL}/onDisplay_logo_bk.png`} />
       </div>
       <div className="explanation">
         <Typography>
