@@ -4,19 +4,10 @@ import Typography from '@material-ui/core/Typography';
 
 import './About.scss';
 
-// import useWindowSize from '../useWindowSize';
-
 export default function About() {
-  // const [innerWidth] = useWindowSize();
-
   return (
     <Paper variant="elevation" className="aboutPaper">
       <div className="logoImage">
-        {/* {innerWidth < 600 ? (
-          <img alt="onDisplay로고" src={`${process.env.PUBLIC_URL}/logo_mobile.png`} />
-        ) : (
-          <img alt="onDisplay로고" src={`${process.env.PUBLIC_URL}/logo_desktop.png`} />
-        )} */}
         <img alt="onDisplay로고" src={`${process.env.PUBLIC_URL}/onDisplay_logo_bk.png`} />
       </div>
       <div className="explanation">
