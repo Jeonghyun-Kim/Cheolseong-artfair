@@ -5,13 +5,19 @@
   background-image: url('/wallpaper.jpg');
   background-repeat: repeat;
   background-size: cover;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   .canvasContainter {
     margin: 0 auto;
     background-color: white;
     width: 500px;
     height: 200px;
-    max-width: 90%;
+
+    @media screen and (max-width: 600px) {
+      width: 90vw;
+      height: 32vw;
+    }
     
     .sigCanvas {
       width: 100%;
@@ -20,10 +26,13 @@
   }
 
   .controlArea {
-    margin: 20px auto;
+    margin: 0 auto;
     width: 500px;
-    max-width: 90%;
-    min-height: fit-content;
+    height: 50px;
+
+    @media screen and (max-width: 600px) {
+      width: 90vw;
+    }
 
     button#sigClear {
       float: left;
@@ -31,6 +40,20 @@
 
     button#sigSubmit {
       float: right;
+    }
+  }
+
+  .sigRes {
+    background-color: white;
+    width: 500px;
+    height: 300px;
+    max-width: 90%;
+    overflow-y: auto;
+    overflow-x: auto;
+    margin: 0 auto;
+
+    @media screen and (max-width: 600px) {
+      width: 90vw;
     }
   }
 }

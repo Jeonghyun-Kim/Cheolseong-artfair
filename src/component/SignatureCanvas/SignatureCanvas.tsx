@@ -10,13 +10,14 @@ export default function SignatureCanvas() {
   const handleClear = () => {
     if (canvasRef.current) {
       canvasRef.current.clear();
+      setRes('');
     }
   };
 
   const handleSubmit = () => {
     if (canvasRef.current) {
       if (canvasRef.current.isEmpty()) {
-        // TODO: alert error
+        setRes('먼저 서명을 해주세요!');
       } else {
         setRes(JSON.stringify(canvasRef.current.toData()));
       }
@@ -25,6 +26,7 @@ export default function SignatureCanvas() {
 
   return (
     <div className="signatureRoot">
+      <div id="spacing100" />
       <div className="canvasContainter">
         <SignaturePad
           // penColor="black"
@@ -34,17 +36,16 @@ export default function SignatureCanvas() {
           }}
         />
       </div>
+      <div id="spacing20" />
       <div className="controlArea">
         <button id="sigClear" type="button" onClick={() => handleClear()}>CLEAR!</button>
         <button id="sigSubmit" type="button" onClick={() => handleSubmit()}>SUBMIT!</button>
       </div>
-      <div
-        style={{
-          backgroundColor: 'white', width: 500, height: 300, overflowY: 'auto', margin: '100px auto',
-        }}
-      >
+      <div id="spacing20" />
+      <div className="sigRes">
         {res}
       </div>
+      <div id="spacing50" />
     </div>
   );
 }
