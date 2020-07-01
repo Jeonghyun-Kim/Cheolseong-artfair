@@ -14,13 +14,17 @@ export default function SignatureCanvas() {
     }
   };
 
-  const handleSubmit = () => {
+  const handleDrawEnd = () => {
     if (canvasRef.current) {
-      if (canvasRef.current.isEmpty()) {
-        setRes('먼저 서명을 해주세요!');
-      } else {
-        setRes(JSON.stringify(canvasRef.current.toData()));
+      if (!canvasRef.current.isEmpty()) {
+        setRes(canvasRef.current.toDataURL());
       }
+    }
+  };
+
+  const handleSubmit = () => {
+    if (res) {
+      // TODO: FETCH TO SERVER
     }
   };
 
@@ -34,6 +38,7 @@ export default function SignatureCanvas() {
           canvasProps={{
             className: 'sigCanvas',
           }}
+          onEnd={() => handleDrawEnd()}
         />
       </div>
       <div id="spacing20" />
@@ -43,7 +48,9 @@ export default function SignatureCanvas() {
       </div>
       <div id="spacing20" />
       <div className="sigRes">
-        {res}
+        {res && (
+          <img src={res} alt="sig" />
+        )}
       </div>
       <div id="spacing50" />
     </div>
