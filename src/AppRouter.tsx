@@ -6,7 +6,6 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import CommentScreen from './component/CommentScreen/CommentScreen';
 import ViewingRoomScreen from './component/ViewingRoomScreen/ViewingRoomScreen';
 import IntroScreen from './component/IntroScreen/IntroScreen';
 import ListScreen from './component/ListScreen/ListScreen';
@@ -42,7 +41,6 @@ export default function AppRouter() {
           <Route path="/intro" component={IntroScreen} />
           <Route path="/list" component={ListScreen} />
           <Route path="/story" component={StoryScreen} />
-          <Route path="/comments" component={CommentScreen} />
           <Route path="/poster/:idx" component={PosterContactScreen} />
           <Route path="/contact/:idx" component={ContactScreen} />
           <Route path="/viewing-room/:idx" component={ViewingRoomScreen} />

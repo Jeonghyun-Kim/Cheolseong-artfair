@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
-import { faUsers, faLandmark } from '@fortawesome/free-solid-svg-icons';
+import { faLandmark } from '@fortawesome/free-solid-svg-icons';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import SvgIcon from '@material-ui/core/SvgIcon';
@@ -109,24 +109,6 @@ export default function MenuScreen({ onAbout, setOnAbout }:
               className="mobileMenuItem"
               onClick={() => {
                 if (!onAbout) {
-                  setTimeout(() => history.push('/comments'), 0);
-                }
-              }}
-              onKeyDown={() => {}}
-            >
-              <div className="menuIcon">
-                <FontAwesomeIcon icon={faUsers} />
-              </div>
-              <div className="title">
-                {menus[2].title}
-              </div>
-            </div>
-            <div
-              role="button"
-              tabIndex={0}
-              className="mobileMenuItem"
-              onClick={() => {
-                if (!onAbout) {
                   window.open(
                     'https://gformanalytics.com/form.php?ga_id=UA-168932005-1](https://www.googletagmanager.com/gtag/js?id=UA-168932005-1)&form_id=1FAIpQLSe71tn0suGW1SYIujzi5oJdTQsJp1nbCKK7RtvxIJgDAyNv1g',
                     '_blank',
@@ -139,7 +121,7 @@ export default function MenuScreen({ onAbout, setOnAbout }:
                 <FontAwesomeIcon icon={faEdit} />
               </div>
               <div className="title">
-                {menus[3].title}
+                {menus[2].title}
               </div>
             </div>
             <div
@@ -153,7 +135,7 @@ export default function MenuScreen({ onAbout, setOnAbout }:
                 <SvgIcon component={LogoIcon} viewBox="0 -20 110 110" />
               </div>
               <div className="title">
-                {menus[4].title}
+                {menus[3].title}
               </div>
             </div>
           </div>
@@ -217,13 +199,16 @@ export default function MenuScreen({ onAbout, setOnAbout }:
               className="desktopMenuItem"
               onClick={() => {
                 if (!onAbout) {
-                  setTimeout(() => history.push('/comments'), 0);
+                  window.open(
+                    'https://gformanalytics.com/form.php?ga_id=UA-168932005-1](https://www.googletagmanager.com/gtag/js?id=UA-168932005-1)&form_id=1FAIpQLSe71tn0suGW1SYIujzi5oJdTQsJp1nbCKK7RtvxIJgDAyNv1g',
+                    '_blank',
+                  );
                 }
               }}
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
-                <FontAwesomeIcon icon={faUsers} />
+                <FontAwesomeIcon icon={faEdit} />
               </div>
               <div className="title">
                 {menus[2].title.split('\n').map((line, idx) => (
@@ -241,18 +226,11 @@ export default function MenuScreen({ onAbout, setOnAbout }:
               role="button"
               tabIndex={0}
               className="desktopMenuItem"
-              onClick={() => {
-                if (!onAbout) {
-                  window.open(
-                    'https://gformanalytics.com/form.php?ga_id=UA-168932005-1](https://www.googletagmanager.com/gtag/js?id=UA-168932005-1)&form_id=1FAIpQLSe71tn0suGW1SYIujzi5oJdTQsJp1nbCKK7RtvxIJgDAyNv1g',
-                    '_blank',
-                  );
-                }
-              }}
+              onClick={() => setOnAbout(true)}
               onKeyDown={() => {}}
             >
               <div className="menuIcon">
-                <FontAwesomeIcon icon={faEdit} />
+                <SvgIcon component={LogoIcon} viewBox="0 -20 110 110" />
               </div>
               <div className="title">
                 {menus[3].title.split('\n').map((line, idx) => (
@@ -263,28 +241,6 @@ export default function MenuScreen({ onAbout, setOnAbout }:
               <div className="content">
                 <div className="grow" />
                 {menus[3].content}
-                <div className="grow" />
-              </div>
-            </div>
-            <div
-              role="button"
-              tabIndex={0}
-              className="desktopMenuItem"
-              onClick={() => setOnAbout(true)}
-              onKeyDown={() => {}}
-            >
-              <div className="menuIcon">
-                <SvgIcon component={LogoIcon} viewBox="0 -20 110 110" />
-              </div>
-              <div className="title">
-                {menus[4].title.split('\n').map((line, idx) => (
-                  <span key={idx.toString()}>{line}<br /></span>
-                ))}
-              </div>
-              <div className="divider" />
-              <div className="content">
-                <div className="grow" />
-                {menus[4].content}
                 <div className="grow" />
               </div>
             </div>
