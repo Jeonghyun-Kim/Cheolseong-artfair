@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import Popover from '@material-ui/core/Popover';
 import Switch from '@material-ui/core/Switch';
@@ -219,16 +219,20 @@ export default function ListScreen() {
           indexMap={idxMap}
         />
       </div>
-      <IconButton
-        id="backIcon"
-        className="fixed"
-        onClick={() => {
-          // sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
-          history.push('/');
-        }}
+      <Link
+        to="/"
       >
-        <ArrowBackIcon fontSize="large" />
-      </IconButton>
+        <IconButton
+          id="backIcon"
+          className="fixed"
+          // onClick={() => {
+          //   // sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
+          //   history.push('/');
+          // }}
+        >
+          <ArrowBackIcon fontSize="large" />
+        </IconButton>
+      </Link>
       {/* Scroll To Top Icon */}
       <IconButton
         id="upIcon"
