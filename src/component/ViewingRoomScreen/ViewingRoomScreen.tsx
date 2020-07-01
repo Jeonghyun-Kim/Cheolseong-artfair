@@ -246,7 +246,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       </div>
       <Link
         to={`/list#${idxMap[index]}`}
-        scroll={(el) => el.scrollIntoView({ block: 'end' })}
+        scroll={(el) => el.scrollIntoView({ block: 'center' })}
       >
         <IconButton
           id="backIcon"
