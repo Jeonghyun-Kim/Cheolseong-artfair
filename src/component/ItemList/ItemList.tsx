@@ -48,7 +48,7 @@ export default function ItemList({ indexMap }:{
   // }, []);
 
   const handleMove = (value: number) => {
-    sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
+    // sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
     setTimeout(() => history.push(`/viewing-room/${value}`), 10);
   };
 
@@ -95,7 +95,7 @@ export default function ItemList({ indexMap }:{
         const imageRatio = info[value].width / info[value].height;
 
         return (
-          <div id="mapping" key={value}>
+          <div id={`${value}`} key={value}>
             {isSingleLine ? (
               <div
                 style={{

@@ -197,22 +197,22 @@ export default function ListScreen() {
     setIdxMap(map);
   }, [storedSortConfig, storedConfig, setIdxMap]);
 
-  const ScrollRetoration = () => {
-    React.useEffect(() => {
-      const storedScrollY = sessionStorage.getItem('@scrollY');
+  // const ScrollRetoration = () => {
+  //   React.useEffect(() => {
+  //     const storedScrollY = sessionStorage.getItem('@scrollY');
 
-      if (storedScrollY) {
-        setTimeout(() => window.scrollTo({ top: JSON.parse(storedScrollY), left: 0 }), 0);
-        sessionStorage.removeItem('@scrollY');
-      }
-    }, []);
+  //     if (storedScrollY) {
+  //       setTimeout(() => window.scrollTo({ top: JSON.parse(storedScrollY), left: 0 }), 0);
+  //       sessionStorage.removeItem('@scrollY');
+  //     }
+  //   }, []);
 
-    return <></>;
-  };
+  //   return <></>;
+  // };
 
   return (
     <div className="listRoot" id="listRoot">
-      <ScrollRetoration />
+      {/* <ScrollRetoration /> */}
       <Typography id="paitingNumber" className="unselectable">작품 개수: {idxMap.length}개</Typography>
       <div className="listContainer">
         <ItemList
@@ -223,7 +223,7 @@ export default function ListScreen() {
         id="backIcon"
         className="fixed"
         onClick={() => {
-          sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
+          // sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
           history.push('/');
         }}
       >

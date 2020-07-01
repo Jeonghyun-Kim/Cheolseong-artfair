@@ -6,6 +6,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
 import { useHistory, RouteComponentProps } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 
 import './ViewingRoomScreen.scss';
 
@@ -224,7 +225,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   };
 
   return (
-    <div className="App">
+    <div className="App" style={{ overflowY: 'hidden' }}>
       <div
         className="alertFirstLast"
         style={{
@@ -243,14 +244,19 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       >
         <p>마지막 그림입니다.</p>
       </div>
-      <IconButton
-        id="backIcon"
-        className="fieed"
-        onClick={() => history.push('/list')}
-        disabled={onDetail}
+      <Link
+        to={`/list#${idxMap[index]}`}
+        scroll={(el) => el.scrollIntoView({ block: 'end' })}
       >
-        <ArrowBackIcon fontSize="large" />
-      </IconButton>
+        <IconButton
+          id="backIcon"
+          className="fieed"
+          // onClick={() => history.push(`/list#${idxMap[index]}`)}
+          disabled={onDetail}
+        >
+          <ArrowBackIcon fontSize="large" />
+        </IconButton>
+      </Link>
       <div
         ref={ref}
         tabIndex={0}
