@@ -3,9 +3,31 @@ import SignaturePad from 'react-signature-canvas';
 
 import './SignatureCanvas.scss';
 
+import DEFINES from '../../defines';
+
+interface SignatureData {
+  url: string;
+}
+
 export default function SignatureCanvas() {
   const canvasRef = React.useRef<SignaturePad | null>(null);
+  const [signs, setSigns] = React.useState<SignatureData[]>([]);
   const [res, setRes] = React.useState<string>('');
+  const [error, setError] = React.useState<string | null>(null);
+
+  const refreshData = () => {
+    fetch(`${DEFINES.API_URL}/signatures`, {
+      method: 'GET',
+    }).then((response) => response.json())
+      .then((resJson) => {
+        setSigns(resJson.signatures);
+      })
+      .catch((err) => setError(JSON.stringify(err)));
+  };
+
+  React.useEffect(() => {
+    refreshData();
+  }, []);
 
   const handleClear = () => {
     if (canvasRef.current) {
@@ -24,7 +46,18 @@ export default function SignatureCanvas() {
 
   const handleSubmit = () => {
     if (res) {
-      // TODO: FETCH TO SERVER
+      fetch(res)
+        .then((response) => response.blob())
+        .then((blob) => {
+          const formData = new FormData();
+          formData.append('signature', blob, 'signature.png');
+          fetch(`${DEFINES.API_URL}/signature`, {
+            method: 'POST',
+            body: formData,
+          }).then(() => {
+            refreshData();
+          }).catch((err) => setError(JSON.stringify(err)));
+        });
     }
   };
 
