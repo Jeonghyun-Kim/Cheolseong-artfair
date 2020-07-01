@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import Popover from '@material-ui/core/Popover';
 import Switch from '@material-ui/core/Switch';
@@ -77,7 +77,6 @@ export default function ListScreen() {
   const [sortAnchorEl, setSortAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const [innerWidth] = useWindowSize();
-  const history = useHistory();
 
   React.useEffect(() => {
     const sessionConfig = sessionStorage.getItem('@config');

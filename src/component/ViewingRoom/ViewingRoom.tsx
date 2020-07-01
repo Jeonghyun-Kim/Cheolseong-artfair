@@ -50,12 +50,14 @@ export default function ViewingRoom({ idx, src }:
             alt="lantern"
             src={`${process.env.PUBLIC_URL}/lantern${innerWidth < 1000 ? '_small' : ' (1)'}.png`}
             height={innerHeight}
+            draggable="false"
             className="lanternPortrait"
           />
           <img
             alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
             src={src}
             className="imagePortrait"
+            draggable="false"
             style={{ borderRadius: info[idx].src === '2013_5.gif' ? 999 : 2 }}
           />
         </>
@@ -77,6 +79,7 @@ export default function ViewingRoom({ idx, src }:
                 width={isLandscape[0] ? '200%' : 'auto'}
                 height={isLandscape[0] ? 'auto' : `${180 * imageRatio}%`}
                 className="lantern full"
+                draggable="false"
                 style={{
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
@@ -87,6 +90,7 @@ export default function ViewingRoom({ idx, src }:
                 alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
                 src={src}
                 className="painting"
+                draggable="false"
                 style={{ borderRadius: info[idx].src === '2013_5.gif' ? 999 : 2 }}
               />
             </>

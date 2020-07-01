@@ -15,12 +15,14 @@ export default function IntroScreen() {
         <div className="title">
           <img
             alt="introTitle"
+            draggable="false"
             src={`${process.env.PUBLIC_URL}/letters/title.png`}
           />
         </div>
         <div className="decorum">
           <img
             alt="introDecorum"
+            draggable="false"
             src={`${process.env.PUBLIC_URL}/letters/decorum.png`}
           />
         </div>
@@ -30,6 +32,7 @@ export default function IntroScreen() {
         <div className="date">
           <img
             alt="introDate"
+            draggable="false"
             src={`${process.env.PUBLIC_URL}/letters/date.png`}
           />
         </div>
@@ -37,23 +40,27 @@ export default function IntroScreen() {
         <img
           alt="logo_letter"
           className="logo"
+          draggable="false"
           src={`${process.env.PUBLIC_URL}/onDisplay_logo_w.png`}
         />
       </div>
       <img
         alt="lantern"
+        draggable="false"
         src={`${process.env.PUBLIC_URL}/lantern (1).png`}
         className="introLantern"
       />
       {innerWidth < 700 ? (
         <img
           alt="Decorum 2020-6"
+          draggable="false"
           src={`${DEFINES.STORAGE_URL_MD}/2020_6.jpg`}
           className="introImage mobile"
         />
       ) : (
         <img
           alt="Decorum 2016-12"
+          draggable="false"
           src={`${DEFINES.STORAGE_URL_MD}/2016_12.jpg`}
           className="introImage desktop"
         />
