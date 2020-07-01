@@ -40,7 +40,7 @@ export default function SignatureCanvas() {
       </div>
       <div
         style={{
-          backgroundColor: 'white', width: 500, minHeight: 300, margin: '100px auto',
+          backgroundColor: 'white', width: 500, height: 300, overflowY: 'auto', margin: '100px auto',
         }}
       >
         {res}
