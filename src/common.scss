@@ -11,9 +11,22 @@ $iconMarginSmall: 5px !global;
   margin: 0 auto;
   position: relative;
   background-image: url('/wallpaper.jpg');
+  // background-color: rgba($color: #141414, $alpha: 1.0);
   background-repeat: repeat;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.gridContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.gridItem {
+  margin: 0;
+  box-sizing: border-box;
 }
 
 #spacing200 {

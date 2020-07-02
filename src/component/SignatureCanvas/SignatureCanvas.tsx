@@ -64,26 +64,27 @@ export default function SignatureCanvas() {
   return (
     <div className="signatureRoot">
       <div id="spacing100" />
-      <div className="canvasContainter">
-        <SignaturePad
-          // penColor="black"
-          ref={canvasRef}
-          canvasProps={{
-            className: 'sigCanvas',
-          }}
-          onEnd={() => handleDrawEnd()}
-        />
-      </div>
-      <div id="spacing20" />
-      <div className="controlArea">
-        <button id="sigClear" type="button" onClick={() => handleClear()}>CLEAR!</button>
-        <button id="sigSubmit" type="button" onClick={() => handleSubmit()}>SUBMIT!</button>
-      </div>
-      <div id="spacing20" />
-      <div className="sigRes">
-        {res && (
-          <img src={res} alt="sig" />
-        )}
+      <div className="gridContainer">
+        <div>
+          <div className="canvasContainter">
+            <SignaturePad
+              ref={canvasRef}
+              canvasProps={{
+                className: 'sigCanvas',
+              }}
+              onEnd={() => handleDrawEnd()}
+            />
+          </div>
+          <div className="controlArea">
+            <button id="sigClear" type="button" onClick={() => handleClear()}>CLEAR!</button>
+            <button id="sigSubmit" type="button" onClick={() => handleSubmit()}>SUBMIT!</button>
+          </div>
+        </div>
+        <div className="sigRes">
+          {res && (
+            <img src={res} alt="sig" />
+          )}
+        </div>
       </div>
       <div id="spacing50" />
     </div>
