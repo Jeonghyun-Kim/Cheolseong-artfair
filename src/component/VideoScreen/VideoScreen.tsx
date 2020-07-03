@@ -8,9 +8,10 @@ export default function VideoScreen() {
       <div id="videoPlayer">
         <iframe
           frameBorder="0"
+          allow="autoplay; encrypted-media"
           allowFullScreen
           title="Decorum Intro"
-          src="https://www.youtube.com/embed/p8yPxEGx7oM?autoplay=0&amp;enablejsapi=1"
+          src="https://www.youtube.com/embed/p8yPxEGx7oM?autoplay=1&amp;origin=https://ondisplay.co.kr/&amp;enablejsapi=1"
         />
       </div>
       <div className="quote">
