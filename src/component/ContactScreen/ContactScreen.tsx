@@ -76,7 +76,7 @@ export default function ContactScreen({ match }: ContactProps) {
   };
 
   return (
-    <div className="App contactRoot">
+    <div className="App contactRoot background">
       <IconButton
         id="backIcon"
         onClick={() => history.goBack()}
