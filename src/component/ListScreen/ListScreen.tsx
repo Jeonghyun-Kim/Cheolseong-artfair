@@ -21,7 +21,7 @@ import info from '../../info.json';
 import useWindowSize from '../useWindowSize';
 
 // const ItemList = React.lazy(() => import('../ItemList/ItemList'));
-import ItemList from '../ItemList/ItemList';
+import ItemList from './ItemList/ItemList';
 
 import Logo from '../Logo/Logo';
 

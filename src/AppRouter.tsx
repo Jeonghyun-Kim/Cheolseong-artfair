@@ -12,7 +12,7 @@ import ListScreen from './component/ListScreen/ListScreen';
 import ContactScreen from './component/ContactScreen/ContactScreen';
 import SummaryScreen from './component/SummaryScreen/SummaryScreen';
 import PosterContactScreen from './component/PosterContactScreen/PosterContactScreen';
-import ArtistHistory from './component/StoryScreen/ArtistHistory';
+import ArtistHistory from './component/ArtistHistory/ArtistHistory';
 
 import ConfigContext from './ConfigContext';
 

@@ -5,10 +5,10 @@ import { useHistory } from 'react-router-dom';
 
 import './ItemList.scss';
 
-import info from '../../info.json';
-import DEFINES from '../../defines';
+import info from '../../../info.json';
+import DEFINES from '../../../defines';
 
-import useWindowSize from '../useWindowSize';
+import useWindowSize from '../../useWindowSize';
 
 const imageSize = 350;
 const margin = [30, 80];
