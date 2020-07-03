@@ -8,14 +8,19 @@
       "type": "image/x-icon"
     },
     {
-      "src": "./onDisplayLogo/logo301.png",
+      "src": "./onDisplayLogo/logo.png",
       "type": "image/png",
-      "sizes": "301x301"
+      "sizes": "901x901"
     },
     {
       "src": "./onDisplayLogo/logo601.png",
       "type": "image/png",
       "sizes": "601x601"
+    },
+    {
+      "src": "./onDisplayLogo/logo301.png",
+      "type": "image/png",
+      "sizes": "301x301"
     }
   ],
   "start_url": ".",
