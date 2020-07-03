@@ -119,7 +119,7 @@ div {
     right: $iconMarginSmall;
     top: $iconMarginSmall;
   }
-  color: $iconColor;
+  color: rgba($color: #d4d4d4, $alpha: 1.0);
   transition: $delay;
 }
 
