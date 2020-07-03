@@ -230,7 +230,7 @@ export default function SummaryScreen() {
 
   return (
     <div
-      className="summaryApp"
+      className="summaryApp background"
       style={{
         height: index !== MAX_INDEX ? '100%' : '100vh',
       }}
@@ -264,6 +264,7 @@ export default function SummaryScreen() {
           <>
             <div
               id="viewingroomDiv"
+              className="background"
               style={{
                 filter: `blur(${seenGuide && !onDetail ? 0 : 8}px)`,
                 transform: `scale(${seenGuide && !onDetail ? 1 : 1.1})`,

@@ -225,7 +225,7 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
   };
 
   return (
-    <div className="App" style={{ overflowY: 'hidden' }}>
+    <div className="App background" style={{ overflowY: 'hidden' }}>
       <div
         className="alertFirstLast"
         style={{
