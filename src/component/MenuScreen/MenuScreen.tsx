@@ -88,7 +88,7 @@ export default function MenuScreen({ onAbout, setOnAbout }:
             className="mobileMenuItem"
             onClick={() => {
               if (!onAbout) {
-                setTimeout(() => history.push('/story'), 0);
+                setTimeout(() => history.push('/history'), 0);
               }
             }}
             onKeyDown={() => {}}
@@ -169,7 +169,7 @@ export default function MenuScreen({ onAbout, setOnAbout }:
             className="desktopMenuItem"
             onClick={() => {
               if (!onAbout) {
-                setTimeout(() => history.push('/story'), 0);
+                setTimeout(() => history.push('/history'), 0);
               }
             }}
             onKeyDown={() => {}}

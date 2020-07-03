@@ -1,10 +1,11 @@
 $borderRadius: 20px !global;
+$breakPoint: 700px !global;
 
-.storyApp {
+.historyApp {
   display: flex;
   justify-content: center;
   width: 100%;
-  // height: 100%;
+  min-height: 100%;
   margin: 0 auto;
   position: relative;
   overflow-x: hidden;
@@ -16,34 +17,13 @@ $borderRadius: 20px !global;
   }
 }
 
-.storyContainer {
+.historyContainer {
   width: calc(min(960px, 90%));
   position: relative;
+  padding-top: 100px;
 
-  #videoPlayer {
-    max-height: fit-content;
-
-    iframe {
-      display: flex;
-      width: calc(min(960px, 100%));
-      height: calc(min(540px, 49vw));
-      margin: 60px auto;
-      border-radius: $borderRadius;
-    }
-  }
-
-  .quote {
-    margin: 100px auto;
-    width: 90%;
-
-    @media (max-width: 600px) {
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    img {
-      width: 100%;
-    }
+  @media (max-width: $breakPoint) {
+    padding-top: 30px;
   }
 
   .introduction {
@@ -58,10 +38,6 @@ $borderRadius: 20px !global;
 
     .paddingBox {
       padding: 35px;
-
-      @media (max-width: 600px) {
-        padding: 25px;
-      }
     }
 
     .title {
@@ -77,13 +53,13 @@ $borderRadius: 20px !global;
       font-size: 1.3rem;
       line-height: 2.5rem;
 
-      @media (max-width: 600px) {
+      @media (max-width: $breakPoint) {
         font-size: 1rem;
         line-height: 1.6rem;
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: $breakPoint) {
       margin-top: 50px;
     }
   }

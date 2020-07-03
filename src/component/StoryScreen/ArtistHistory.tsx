@@ -3,17 +3,17 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import UpIcon from '@material-ui/icons/ArrowUpward';
 
-import './StoryScreen.scss';
+import './ArtistHistory.scss';
 
 import Logo from '../Logo/Logo';
 
-export default function StoryScreen() {
+export default function ArtistHistory() {
   const handleScrollToTop = () => {
     window.scroll({ left: 0, top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="unselectable storyApp background">
+    <div className="unselectable historyApp background">
       <Logo />
       <IconButton
         id="upIcon"
@@ -21,20 +21,7 @@ export default function StoryScreen() {
       >
         <UpIcon fontSize="small" />
       </IconButton>
-      <div className="storyContainer">
-        <div id="videoPlayer">
-          <iframe
-            frameBorder="0"
-            allowFullScreen
-            title="Decorum Intro"
-            width="640"
-            height="360"
-            src="https://www.youtube.com/embed/p8yPxEGx7oM?autoplay=0&amp;enablejsapi=1"
-          />
-        </div>
-        <div className="quote">
-          <img alt="quote" src={`${process.env.PUBLIC_URL}/letters/quote.png`} />
-        </div>
+      <div className="historyContainer">
         <div className="introduction">
           <div className="paddingBox">
             <Typography variant="h4" className="title">

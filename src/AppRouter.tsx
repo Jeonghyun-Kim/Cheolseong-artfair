@@ -12,7 +12,7 @@ import ListScreen from './component/ListScreen/ListScreen';
 import ContactScreen from './component/ContactScreen/ContactScreen';
 import SummaryScreen from './component/SummaryScreen/SummaryScreen';
 import PosterContactScreen from './component/PosterContactScreen/PosterContactScreen';
-import StoryScreen from './component/StoryScreen/StoryScreen';
+import ArtistHistory from './component/StoryScreen/ArtistHistory';
 
 import ConfigContext from './ConfigContext';
 
@@ -40,7 +40,7 @@ export default function AppRouter() {
           <Route exact path="/" component={SummaryScreen} />
           <Route path="/intro" component={IntroScreen} />
           <Route path="/list" component={ListScreen} />
-          <Route path="/story" component={StoryScreen} />
+          <Route path="/history" component={ArtistHistory} />
           <Route path="/poster/:idx" component={PosterContactScreen} />
           <Route path="/contact/:idx" component={ContactScreen} />
           <Route path="/viewing-room/:idx" component={ViewingRoomScreen} />
