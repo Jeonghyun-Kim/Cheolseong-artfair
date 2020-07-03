@@ -8,7 +8,7 @@ export default function About() {
   return (
     <Paper variant="elevation" className="aboutPaper">
       <div className="logoImage">
-        <img alt="onDisplay로고" src={`${process.env.PUBLIC_URL}/onDisplay_logo_bk.png`} />
+        <img alt="onDisplay로고" src={`${process.env.PUBLIC_URL}/onDisplayLogo/onDisplay_logo_bk.png`} />
       </div>
       <div className="explanation">
         <Typography>

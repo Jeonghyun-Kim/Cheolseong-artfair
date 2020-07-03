@@ -13,6 +13,7 @@ export default function IntroScreen() {
 
   return (
     <div className="introApp unselectable">
+      <Logo />
       <div className="introLetters">
         <div className="title">
           <img
@@ -32,11 +33,11 @@ export default function IntroScreen() {
       <div className="footer">
         <div className="introGuide">
           <picture>
-            <source media="(max-width: 500px) and (orientation: portrait)" srcSet={`${process.env.PUBLIC_URL}/touch_to_start.png`} />
-            <source media="(max-height: 500px) and (orientation: landscape)" srcSet={`${process.env.PUBLIC_URL}/touch_to_start.png`} />
+            <source media="(max-width: 500px) and (orientation: portrait)" srcSet={`${process.env.PUBLIC_URL}/letters/touch_to_start.png`} />
+            <source media="(max-height: 500px) and (orientation: landscape)" srcSet={`${process.env.PUBLIC_URL}/letters/touch_to_start.png`} />
             <img
               alt="startGuide"
-              src={`${process.env.PUBLIC_URL}/click_to_start.png`}
+              src={`${process.env.PUBLIC_URL}/letters/click_to_start.png`}
             />
           </picture>
         </div>
@@ -48,7 +49,6 @@ export default function IntroScreen() {
           />
         </div>
       </div>
-      <Logo />
       <img
         alt="lantern"
         draggable="false"

@@ -9,7 +9,7 @@ export default function Logo() {
       <div className="logoComponent">
         <img
           alt="logoImage"
-          src={`${process.env.PUBLIC_URL}/onDisplay_logo_w.png`}
+          src={`${process.env.PUBLIC_URL}/onDisplayLogo/onDisplay_logo_w.png`}
         />
       </div>
     </Link>
