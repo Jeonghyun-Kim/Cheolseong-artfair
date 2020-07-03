@@ -198,8 +198,229 @@ export default function ListScreen() {
 
   return (
     <div className="listRoot background" id="listRoot">
-      <Logo />
-      <Typography id="paitingNumber" className="unselectable">작품 개수: {idxMap.length}개</Typography>
+      <div className="stickyBar">
+        <Logo />
+        <Typography id="paitingNumber" className="unselectable">작품 개수: {idxMap.length}개</Typography>
+        {/* Sort Menu Button */}
+        <IconButton
+          id="sortIcon"
+          aria-controls="sort-menu"
+          aria-haspopup="true"
+          onClick={handleSortMenuOpen}
+        >
+          <div className="iconContainer">
+            <FontAwesomeIcon
+              icon={faSortAmountDown}
+              size={innerWidth < 700 ? 'xs' : '1x'}
+              style={{ margin: innerWidth < 700 ? '5px' : '10px' }}
+            />
+            <div className="iconTitle">정렬</div>
+          </div>
+          <div className="badgeContainer">
+            {!(JSON.stringify(storedSortConfig) === JSON.stringify(defaultSortConfig)) && (
+              <Brightness1Icon fontSize="small" id="sortBadge" />
+            )}
+          </div>
+        </IconButton>
+        {/* Sort Menu Popup */}
+        <Popover
+          id="sort-menu"
+          className="unselectable"
+          anchorEl={sortAnchorEl}
+          open={Boolean(sortAnchorEl)}
+          onClose={handleSortMenuClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+        >
+          <div id="switchContainer">
+            <Grid container>
+              <Grid item>
+                <Radio
+                  value="year"
+                  color="primary"
+                  checked={sortConfig.useSort === 'year'}
+                  onChange={(e) => setSortConfig({
+                    ...sortConfig,
+                    useSort: e.target.value,
+                    priceSort: defaultSortConfig.priceSort,
+                  })}
+                />
+              </Grid>
+              <Grid item style={{ display: 'flex', alignItems: 'center' }}>
+                <Typography align="center" variant="body2">오래된순</Typography>
+              </Grid>
+              <Grid item xs />
+              <Grid item>
+                <Switch
+                  color="primary"
+                  disabled={!(sortConfig.useSort === 'year')}
+                  checked={sortConfig.yearSort}
+                  onChange={(e) => setSortConfig({
+                    ...sortConfig,
+                    yearSort: e.target.checked,
+                  })}
+                />
+              </Grid>
+              <Grid item xs />
+              <Grid item style={{ display: 'flex', alignItems: 'center' }}>
+                <Typography align="center" variant="body2">최신순</Typography>
+              </Grid>
+            </Grid>
+          </div>
+          <div id="divider" />
+          <div id="switchContainer">
+            <Grid container>
+              <Grid item>
+                <Radio
+                  value="price"
+                  color="primary"
+                  checked={sortConfig.useSort === 'price'}
+                  onChange={(e) => setSortConfig({
+                    ...sortConfig,
+                    useSort: e.target.value,
+                    yearSort: defaultSortConfig.yearSort,
+                  })}
+                />
+              </Grid>
+              <Grid item style={{ display: 'flex', alignItems: 'center' }}>
+                <Typography align="center" variant="body2">낮은가격순</Typography>
+              </Grid>
+              <Grid item xs />
+              <Grid item>
+                <Switch
+                  color="primary"
+                  disabled={!(sortConfig.useSort === 'price')}
+                  checked={sortConfig.priceSort}
+                  onChange={(e) => setSortConfig({
+                    ...sortConfig,
+                    priceSort: e.target.checked,
+                  })}
+                />
+              </Grid>
+              <Grid item xs />
+              <Grid item style={{ display: 'flex', alignItems: 'center' }}>
+                <Typography align="center" variant="body2">높은가격순</Typography>
+              </Grid>
+            </Grid>
+          </div>
+        </Popover>
+        {/* Filter Menu Button */}
+        <IconButton
+          id="filterIcon"
+          aria-controls="filter-menu"
+          aria-haspopup="true"
+          onClick={handleFilterMenuOpen}
+        >
+          <div className="iconContainer">
+            <FontAwesomeIcon
+              icon={faFilter}
+              size={innerWidth < 700 ? 'xs' : '1x'}
+              style={{ margin: innerWidth < 700 ? '5px' : '10px' }}
+            />
+            <div className="iconTitle">검색</div>
+          </div>
+          <div className="badgeContainer">
+            {!(JSON.stringify(storedConfig.yearRange) === JSON.stringify(defaultConfig.yearRange)
+              && !storedConfig.onSaleOnly) && (
+              <Brightness1Icon fontSize="small" id="filterBadge" />
+            )}
+          </div>
+        </IconButton>
+        {/* Filter Menu Popup */}
+        <Popover
+          id="filter-menu"
+          className="unselectable"
+          anchorEl={filterAnchorEl}
+          open={Boolean(filterAnchorEl)}
+          onClose={handleFilterMenuClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        >
+          <div id="sliderContainer">
+            <Typography variant="body2">연도</Typography>
+            <Slider
+              value={config.yearRange}
+              min={YEAR_MIN}
+              max={YEAR_MAX}
+              onChange={(_e, newValue) => setConfig({
+                ...config,
+                yearRange: newValue as [number, number],
+              })}
+              valueLabelDisplay="auto"
+              aria-labelledby="yearRangeSlider"
+            />
+            <Grid container>
+              <Grid item>
+                {config.yearRange[0]}년
+              </Grid>
+              <Grid item xs>
+                <Typography align="center">~</Typography>
+              </Grid>
+              <Grid item>
+                {config.yearRange[1]}년
+              </Grid>
+            </Grid>
+          </div>
+          <div>
+            <div id="divider" />
+          </div>
+          <Grid container id="checkBoxContainer">
+            <Grid item xs container direction="column" justify="center">
+              <Typography variant="h6" id="onSaleText">판매 중인 작품만</Typography>
+            </Grid>
+            <Grid item>
+              <Checkbox
+                checked={config.onSaleOnly}
+                color="primary"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfig({
+                  ...config,
+                  onSaleOnly: e.target.checked,
+                })}
+              />
+            </Grid>
+          </Grid>
+          <div id="divider" />
+          <div id="sliderContainer">
+            <Typography variant="body2">가격</Typography>
+            <Slider
+              value={config.priceRange}
+              min={PRICE_MIN}
+              max={PRICE_MAX}
+              scale={(x) => PRICE_UNIT * x}
+              disabled={!config.onSaleOnly}
+              onChange={(_e, newValue) => setConfig({
+                ...config,
+                priceRange: newValue as [number, number],
+              })}
+              valueLabelDisplay="auto"
+              aria-labelledby="priceRangeSlider"
+            />
+            <Grid container>
+              <Grid item>
+                {config.priceRange[0] ? `${config.priceRange[0] * PRICE_UNIT}만원` : '0원'}
+              </Grid>
+              <Grid item xs>
+                <Typography align="center">~</Typography>
+              </Grid>
+              <Grid item>
+                {config.priceRange[1] * 50}만원
+              </Grid>
+            </Grid>
+          </div>
+        </Popover>
+      </div>
       <div className="listContainer">
         <ItemList
           indexMap={idxMap}
@@ -212,225 +433,6 @@ export default function ListScreen() {
       >
         <UpIcon fontSize="small" />
       </IconButton>
-      {/* Sort Menu Button */}
-      <IconButton
-        id="sortIcon"
-        aria-controls="sort-menu"
-        aria-haspopup="true"
-        onClick={handleSortMenuOpen}
-      >
-        <div className="iconContainer">
-          <FontAwesomeIcon
-            icon={faSortAmountDown}
-            size={innerWidth < 1000 ? 'xs' : '1x'}
-            style={{ margin: innerWidth < 1000 ? '5px' : '10px' }}
-          />
-          <div className="iconTitle">정렬</div>
-        </div>
-        <div className="badgeContainer">
-          {!(JSON.stringify(storedSortConfig) === JSON.stringify(defaultSortConfig)) && (
-            <Brightness1Icon fontSize="small" id="sortBadge" />
-          )}
-        </div>
-      </IconButton>
-      {/* Sort Menu Popup */}
-      <Popover
-        id="sort-menu"
-        className="unselectable"
-        anchorEl={sortAnchorEl}
-        open={Boolean(sortAnchorEl)}
-        onClose={handleSortMenuClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-      >
-        <div id="switchContainer">
-          <Grid container>
-            <Grid item>
-              <Radio
-                value="year"
-                color="primary"
-                checked={sortConfig.useSort === 'year'}
-                onChange={(e) => setSortConfig({
-                  ...sortConfig,
-                  useSort: e.target.value,
-                  priceSort: defaultSortConfig.priceSort,
-                })}
-              />
-            </Grid>
-            <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography align="center" variant="body2">오래된순</Typography>
-            </Grid>
-            <Grid item xs />
-            <Grid item>
-              <Switch
-                color="primary"
-                disabled={!(sortConfig.useSort === 'year')}
-                checked={sortConfig.yearSort}
-                onChange={(e) => setSortConfig({
-                  ...sortConfig,
-                  yearSort: e.target.checked,
-                })}
-              />
-            </Grid>
-            <Grid item xs />
-            <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography align="center" variant="body2">최신순</Typography>
-            </Grid>
-          </Grid>
-        </div>
-        <div id="divider" />
-        <div id="switchContainer">
-          <Grid container>
-            <Grid item>
-              <Radio
-                value="price"
-                color="primary"
-                checked={sortConfig.useSort === 'price'}
-                onChange={(e) => setSortConfig({
-                  ...sortConfig,
-                  useSort: e.target.value,
-                  yearSort: defaultSortConfig.yearSort,
-                })}
-              />
-            </Grid>
-            <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography align="center" variant="body2">낮은가격순</Typography>
-            </Grid>
-            <Grid item xs />
-            <Grid item>
-              <Switch
-                color="primary"
-                disabled={!(sortConfig.useSort === 'price')}
-                checked={sortConfig.priceSort}
-                onChange={(e) => setSortConfig({
-                  ...sortConfig,
-                  priceSort: e.target.checked,
-                })}
-              />
-            </Grid>
-            <Grid item xs />
-            <Grid item style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography align="center" variant="body2">높은가격순</Typography>
-            </Grid>
-          </Grid>
-        </div>
-      </Popover>
-      {/* Filter Menu Button */}
-      <IconButton
-        id="filterIcon"
-        aria-controls="filter-menu"
-        aria-haspopup="true"
-        onClick={handleFilterMenuOpen}
-      >
-        <div className="iconContainer">
-          <FontAwesomeIcon
-            icon={faFilter}
-            size={innerWidth < 1000 ? 'xs' : '1x'}
-            style={{ margin: innerWidth < 1000 ? '5px' : '10px' }}
-          />
-          <div className="iconTitle">검색</div>
-        </div>
-        <div className="badgeContainer">
-          {!(JSON.stringify(storedConfig.yearRange) === JSON.stringify(defaultConfig.yearRange)
-            && !storedConfig.onSaleOnly) && (
-            <Brightness1Icon fontSize="small" id="filterBadge" />
-          )}
-        </div>
-      </IconButton>
-      {/* Filter Menu Popup */}
-      <Popover
-        id="filter-menu"
-        className="unselectable"
-        anchorEl={filterAnchorEl}
-        open={Boolean(filterAnchorEl)}
-        onClose={handleFilterMenuClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-      >
-        <div id="sliderContainer">
-          <Typography variant="body2">연도</Typography>
-          <Slider
-            value={config.yearRange}
-            min={YEAR_MIN}
-            max={YEAR_MAX}
-            onChange={(_e, newValue) => setConfig({
-              ...config,
-              yearRange: newValue as [number, number],
-            })}
-            valueLabelDisplay="auto"
-            aria-labelledby="yearRangeSlider"
-          />
-          <Grid container>
-            <Grid item>
-              {config.yearRange[0]}년
-            </Grid>
-            <Grid item xs>
-              <Typography align="center">~</Typography>
-            </Grid>
-            <Grid item>
-              {config.yearRange[1]}년
-            </Grid>
-          </Grid>
-        </div>
-        <div>
-          <div id="divider" />
-        </div>
-        <Grid container id="checkBoxContainer">
-          <Grid item xs container direction="column" justify="center">
-            <Typography variant="h6" id="onSaleText">판매 중인 작품만</Typography>
-          </Grid>
-          <Grid item>
-            <Checkbox
-              checked={config.onSaleOnly}
-              color="primary"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfig({
-                ...config,
-                onSaleOnly: e.target.checked,
-              })}
-            />
-          </Grid>
-        </Grid>
-        <div id="divider" />
-        <div id="sliderContainer">
-          <Typography variant="body2">가격</Typography>
-          <Slider
-            value={config.priceRange}
-            min={PRICE_MIN}
-            max={PRICE_MAX}
-            scale={(x) => PRICE_UNIT * x}
-            disabled={!config.onSaleOnly}
-            onChange={(_e, newValue) => setConfig({
-              ...config,
-              priceRange: newValue as [number, number],
-            })}
-            valueLabelDisplay="auto"
-            aria-labelledby="priceRangeSlider"
-          />
-          <Grid container>
-            <Grid item>
-              {config.priceRange[0] ? `${config.priceRange[0] * PRICE_UNIT}만원` : '0원'}
-            </Grid>
-            <Grid item xs>
-              <Typography align="center">~</Typography>
-            </Grid>
-            <Grid item>
-              {config.priceRange[1] * 50}만원
-            </Grid>
-          </Grid>
-        </div>
-      </Popover>
     </div>
   );
 }
