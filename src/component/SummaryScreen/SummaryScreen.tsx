@@ -280,12 +280,7 @@ export default function SummaryScreen() {
   };
 
   return (
-    <div
-      className="summaryApp background"
-      style={{
-        height: index !== MAX_INDEX ? '100%' : '100vh',
-      }}
-    >
+    <div className="summaryApp background">
       <div
         ref={ref}
         tabIndex={0}
