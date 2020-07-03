@@ -6,6 +6,8 @@ import useWindowSize from '../useWindowSize';
 
 import DEFINES from '../../defines';
 
+import Logo from '../Logo/Logo';
+
 export default function IntroScreen() {
   const [innerWidth] = useWindowSize();
 
@@ -46,13 +48,7 @@ export default function IntroScreen() {
           />
         </div>
       </div>
-      <div className="logo">
-        <img
-          alt="logo_letter"
-          draggable="false"
-          src={`${process.env.PUBLIC_URL}/onDisplay_logo_w.png`}
-        />
-      </div>
+      <Logo />
       <img
         alt="lantern"
         draggable="false"

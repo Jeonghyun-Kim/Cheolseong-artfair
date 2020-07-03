@@ -2,9 +2,12 @@ import React from 'react';
 
 import './VideoScreen.scss';
 
+import Logo from '../Logo/Logo';
+
 export default function VideoScreen() {
   return (
     <div className="videoContainer">
+      <Logo />
       <div id="videoPlayer">
         <iframe
           frameBorder="0"

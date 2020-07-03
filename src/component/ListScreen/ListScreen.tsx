@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import Popover from '@material-ui/core/Popover';
 import Switch from '@material-ui/core/Switch';
@@ -10,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
 import UpIcon from '@material-ui/icons/ArrowUpward';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter, faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -24,6 +22,8 @@ import useWindowSize from '../useWindowSize';
 
 // const ItemList = React.lazy(() => import('../ItemList/ItemList'));
 import ItemList from '../ItemList/ItemList';
+
+import Logo from '../Logo/Logo';
 
 const YEAR_MIN = 2004;
 const YEAR_MAX = 2020;
@@ -196,42 +196,15 @@ export default function ListScreen() {
     setIdxMap(map);
   }, [storedSortConfig, storedConfig, setIdxMap]);
 
-  // const ScrollRetoration = () => {
-  //   React.useEffect(() => {
-  //     const storedScrollY = sessionStorage.getItem('@scrollY');
-
-  //     if (storedScrollY) {
-  //       setTimeout(() => window.scrollTo({ top: JSON.parse(storedScrollY), left: 0 }), 0);
-  //       sessionStorage.removeItem('@scrollY');
-  //     }
-  //   }, []);
-
-  //   return <></>;
-  // };
-
   return (
     <div className="listRoot background" id="listRoot">
-      {/* <ScrollRetoration /> */}
+      <Logo />
       <Typography id="paitingNumber" className="unselectable">작품 개수: {idxMap.length}개</Typography>
       <div className="listContainer">
         <ItemList
           indexMap={idxMap}
         />
       </div>
-      <Link
-        to="/"
-      >
-        <IconButton
-          id="backIcon"
-          className="fixed"
-          // onClick={() => {
-          //   // sessionStorage.setItem('@scrollY', JSON.stringify(window.pageYOffset));
-          //   history.push('/');
-          // }}
-        >
-          <ArrowBackIcon fontSize="large" />
-        </IconButton>
-      </Link>
       {/* Scroll To Top Icon */}
       <IconButton
         id="upIcon"

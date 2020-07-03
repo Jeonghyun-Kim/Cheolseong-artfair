@@ -15,6 +15,7 @@ import './MenuScreen.scss';
 import menus from './menus.json';
 
 import About from '../About/About';
+import Logo from '../Logo/Logo';
 
 export default function MenuScreen({ onAbout, setOnAbout }:
 { onAbout: boolean, setOnAbout: React.Dispatch<React.SetStateAction<boolean>> }) {
@@ -63,6 +64,7 @@ export default function MenuScreen({ onAbout, setOnAbout }:
         }}
         onKeyDown={() => {}}
       >
+        <Logo />
         <div className="mobileMenuContainer">
           <div
             role="button"

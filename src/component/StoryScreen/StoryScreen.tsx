@@ -1,27 +1,20 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import UpIcon from '@material-ui/icons/ArrowUpward';
 
 import './StoryScreen.scss';
 
-export default function StoryScreen() {
-  const history = useHistory();
+import Logo from '../Logo/Logo';
 
+export default function StoryScreen() {
   const handleScrollToTop = () => {
     window.scroll({ left: 0, top: 0, behavior: 'smooth' });
   };
 
   return (
     <div className="unselectable storyApp background">
-      <IconButton
-        id="backIcon"
-        onClick={() => history.push('/')}
-      >
-        <ArrowBackIcon fontSize="large" />
-      </IconButton>
+      <Logo />
       <IconButton
         id="upIcon"
         onClick={() => handleScrollToTop()}

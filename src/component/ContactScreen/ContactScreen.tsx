@@ -3,16 +3,18 @@ import { RouteComponentProps, useHistory } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 import './ContactScreen.scss';
 
 import info from '../../info.json';
 import DEFINES from '../../defines';
+
+import Logo from '../Logo/Logo';
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PHONE_REGEX = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/;
@@ -86,14 +88,15 @@ export default function ContactScreen({ match }: ContactProps) {
 
   return (
     <div className="App contactRoot background">
-      <IconButton
-        id="backIcon"
-        onClick={() => history.goBack()}
-      >
-        <ArrowBackIcon fontSize="large" />
-      </IconButton>
+      <Logo />
       <div className="contactContainer">
         <Paper variant="elevation" className="contactPaper">
+          <IconButton
+            id="contactClose"
+            onClick={() => history.goBack()}
+          >
+            <CloseIcon fontSize="large" />
+          </IconButton>
           <Grid item xs={12} sm={6} md={5} id="infoSection">
             <Grid container className="imageBox">
               <Grid item xs={5} className="image">

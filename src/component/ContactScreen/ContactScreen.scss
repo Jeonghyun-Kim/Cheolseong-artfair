@@ -9,7 +9,15 @@
   width: 90%;
   max-width: 900px;
 
+  #contactClose {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 100;
+  }
+
   .contactPaper {
+    position: relative;
     margin: 60px 0;
     width: 100%;
     display: flex;
