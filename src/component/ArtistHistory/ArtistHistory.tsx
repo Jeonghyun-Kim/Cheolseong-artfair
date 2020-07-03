@@ -6,6 +6,7 @@ import UpIcon from '@material-ui/icons/ArrowUpward';
 import './ArtistHistory.scss';
 
 import Logo from '../Logo/Logo';
+import Review from './Review/Review';
 
 export default function ArtistHistory() {
   const handleScrollToTop = () => {
@@ -59,6 +60,7 @@ export default function ArtistHistory() {
             </Typography>
           </div>
         </div>
+        <Review />
       </div>
     </div>
   );

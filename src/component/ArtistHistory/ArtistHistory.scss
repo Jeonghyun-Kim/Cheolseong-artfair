@@ -20,7 +20,7 @@ $breakPoint: 700px !global;
 .historyContainer {
   width: calc(min(960px, 90%));
   position: relative;
-  padding-top: 100px;
+  padding: 100px 0;
 
   @media (max-width: $breakPoint) {
     padding-top: 30px;
@@ -36,19 +36,6 @@ $breakPoint: 700px !global;
     border-radius: $borderRadius;
     filter: brightness(0.9);
 
-    .paddingBox {
-      padding: 35px;
-    }
-
-    .title {
-      margin-bottom: 30px;
-    }
-
-    .artistName {
-      margin-top: 30px;
-      font-weight: bolder;
-    }
-
     p {
       font-size: 1.3rem;
       line-height: 2.5rem;
@@ -61,6 +48,19 @@ $breakPoint: 700px !global;
 
     @media (max-width: $breakPoint) {
       margin-top: 50px;
+    }
+
+    .paddingBox {
+      padding: 35px;
+    }
+
+    .title {
+      margin-bottom: 30px;
+    }
+
+    .artistName {
+      margin-top: 30px;
+      font-weight: bolder;
     }
   }
 }
