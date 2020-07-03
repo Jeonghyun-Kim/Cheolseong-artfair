@@ -2,8 +2,42 @@ $delay: 0.7s ease !global;
 $iconColor: azure !global;
 
 .introApp {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  max-height: 100% !important;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+
+  .logo {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    width: 100px;
+    z-index: 100;
+
+    @media screen and (max-width: 700px) and (orientation: portrait) {
+      left: 20px;
+      top: 20px;
+      width: 65px;
+    }
+  
+    @media screen and (max-height: 700px) and (orientation: landscape) {
+      left: 20px;
+      top: 20px;
+      width: 65px;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+  }
+
   .mobile {
     top: 50%;
     max-height: 80%;
@@ -17,7 +51,6 @@ $iconColor: azure !global;
     max-width: calc(75% - 120px);
     transform: translate(-50%, -50%);
   }
-  overflow-y: hidden !important;
 }
 
 .introLetters {
@@ -29,9 +62,12 @@ $iconColor: azure !global;
   max-height: 60%;
   max-width: 1000px;
   width: 100vw;
+  height: fit-content;
+  padding-top: calc(min(20%, 180px));
 
   img {
     max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
   }
 
@@ -43,8 +79,12 @@ $iconColor: azure !global;
     width: 90%;
   }
 
-  @media (max-height: 500px) {
-    transform: translate(0, -50px);
+  @media screen and (max-width: 700px) and (orientation: portrait) {
+    padding-top: 120px;
+  }
+
+  @media screen and (max-height: 700px) and (orientation: landscape) {
+    padding-top: 30px;
 
     .title {
       width: 30%;
@@ -61,6 +101,7 @@ $iconColor: azure !global;
   position: absolute;
   bottom: 30px;
   width: 50%;
+  height: fit-content;
   max-width: 400px;
   display: flex;
   flex-direction: column;
@@ -69,25 +110,56 @@ $iconColor: azure !global;
 
   img {
     max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
+  }
+
+  .introGuide {
+    width: 80%;
+    height: fit-content;
+    padding-bottom: 60px;
+    text-align: center;
+
+    opacity: 0.75;
   }
 
   .date {
     width: 100%;
+    height: fit-content;
+    text-align: center;
   }
 
-  .logo {
-    width: 80%;
+  // .logo {
+  //   width: 40%;
+  //   height: fit-content;
+  //   text-align: center;
+  // }
+
+  @media screen and (max-width: 500px) and (orientation: portrait) {
+    .introGuide {
+      padding-bottom: 100px;
+    }
   }
 
-  @media (max-height: 500px) {
+  @media screen and (max-height: 500px) and (orientation: landscape) {
+    bottom: 0;
+
+    .introGuide {
+      width: 50%;
+      padding-bottom: 30px;
+    }
+
     .date {
       width: 70%;
-      transform: translate(0, -50%);
     }
   
-    .logo {
-      width: 60%;
+    // .logo {
+    //   width: 30%;
+    //   height: 50px;
+    // }
+
+    .spacing {
+      display: none;
     }
   }
 }

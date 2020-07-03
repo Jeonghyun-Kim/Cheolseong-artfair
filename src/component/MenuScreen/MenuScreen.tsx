@@ -129,7 +129,7 @@ export default function MenuScreen({ onAbout, setOnAbout }:
             onKeyDown={() => {}}
           >
             <div className="menuIcon">
-              <SvgIcon component={LogoIcon} viewBox="0 -20 110 110" />
+              <SvgIcon component={LogoIcon} viewBox="0 0 303 303" />
             </div>
             <div className="title">
               {menus[3].title}
@@ -226,7 +226,7 @@ export default function MenuScreen({ onAbout, setOnAbout }:
             onKeyDown={() => {}}
           >
             <div className="menuIcon">
-              <SvgIcon component={LogoIcon} viewBox="0 -20 110 110" />
+              <SvgIcon component={LogoIcon} viewBox="0 0 303 303" />
             </div>
             <div className="title">
               {menus[3].title.split('\n').map((line, idx) => (

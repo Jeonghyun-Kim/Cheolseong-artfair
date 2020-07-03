@@ -10,7 +10,7 @@ export default function IntroScreen() {
   const [innerWidth] = useWindowSize();
 
   return (
-    <div className="App introApp unselectable">
+    <div className="introApp unselectable">
       <div className="introLetters">
         <div className="title">
           <img
@@ -26,9 +26,18 @@ export default function IntroScreen() {
             src={`${process.env.PUBLIC_URL}/letters/decorum.png`}
           />
         </div>
-        <div id="spacing200" />
       </div>
       <div className="footer">
+        <div className="introGuide">
+          <picture>
+            <source media="(max-width: 500px) and (orientation: portrait)" srcSet={`${process.env.PUBLIC_URL}/touch_to_start.png`} />
+            <source media="(max-height: 500px) and (orientation: landscape)" srcSet={`${process.env.PUBLIC_URL}/touch_to_start.png`} />
+            <img
+              alt="startGuide"
+              src={`${process.env.PUBLIC_URL}/click_to_start.png`}
+            />
+          </picture>
+        </div>
         <div className="date">
           <img
             alt="introDate"
@@ -36,10 +45,10 @@ export default function IntroScreen() {
             src={`${process.env.PUBLIC_URL}/letters/date.png`}
           />
         </div>
-        <div id="spacing20" />
+      </div>
+      <div className="logo">
         <img
           alt="logo_letter"
-          className="logo"
           draggable="false"
           src={`${process.env.PUBLIC_URL}/onDisplay_logo_w.png`}
         />
