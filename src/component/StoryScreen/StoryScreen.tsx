@@ -15,7 +15,7 @@ export default function StoryScreen() {
   };
 
   return (
-    <div className="unselectable storyApp">
+    <div className="unselectable storyApp background">
       <IconButton
         id="backIcon"
         onClick={() => history.push('/')}
