@@ -1,9 +1,11 @@
+$paintingBrightness: 0.85 !global;
+
 .listImage {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  filter: brightness(0.8);
+  filter: brightness($paintingBrightness);
 
   box-shadow: 1px 7px 10px 0px rgba(0, 0, 0, 1);
 
@@ -16,7 +18,7 @@
   display: block;
   margin: auto;
   box-shadow: 1px 7px 10px 0px rgba(0, 0, 0, 1);
-  filter: brightness(0.8);
+  filter: brightness(0$paintingBrightness);
 
   &:hover {
     cursor: pointer;

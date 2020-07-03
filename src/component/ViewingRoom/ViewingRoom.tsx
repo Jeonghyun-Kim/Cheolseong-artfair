@@ -9,7 +9,6 @@ export default function ViewingRoom({ idx, src }:
 { idx: number, src: string }) {
   const [isLandscape, setLandscape] = React.useState<boolean[] | null>(null);
   const [maxSize, setMaxSize] = React.useState<string[]>(['calc(80% - 120px)', 'calc(80% - 200px)']);
-  const [lanternOpacities, setLanternOpacities] = React.useState<number[] | null>(null);
   const refContainer = React.useRef<HTMLDivElement | null>(null);
 
   const [innerWidth, innerHeight] = useWindowSize();
@@ -28,19 +27,6 @@ export default function ViewingRoom({ idx, src }:
       setMaxSize(['calc(60% - 120px)', '60%']);
     }
   }, [innerWidth]);
-
-  React.useEffect(() => {
-    if (refContainer.current && isLandscape !== null) {
-      const containerWidth = refContainer.current.clientWidth;
-      const lanternHalfWidth = isLandscape[0]
-        ? refContainer.current.clientWidth
-        : refContainer.current.clientHeight * imageRatio;
-      setLanternOpacities([
-        (containerWidth / lanternHalfWidth) ** 0.5 * 0.8,
-        (containerWidth / (lanternHalfWidth * 2)) ** 0.5,
-      ]);
-    }
-  }, [imageRatio, isLandscape]);
 
   return (
     <div className="viewingRoomRootContainer unselectable">
@@ -78,7 +64,7 @@ export default function ViewingRoom({ idx, src }:
             }}
             className="maximumContainer"
           >
-            {isLandscape !== null && lanternOpacities && (
+            {isLandscape !== null && (
             <>
               <img
                 alt="lantern"
@@ -90,7 +76,6 @@ export default function ViewingRoom({ idx, src }:
                 style={{
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
-                  // opacity: lanternOpacities[1],
                   opacity: 0.75,
                 }}
               />
@@ -104,7 +89,6 @@ export default function ViewingRoom({ idx, src }:
                 style={{
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
-                  // opacity: lanternOpacities[1],
                   opacity: 0.75,
                 }}
               />
