@@ -3,7 +3,6 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import CloseIcon from '@material-ui/icons/Close';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
 import { useHistory, RouteComponentProps } from 'react-router-dom';
 import { HashLink as Link } from 'react-router-hash-link';
@@ -224,6 +223,13 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
     },
   };
 
+  const handleClose = () => {
+    if (onDetail) {
+      setOnDetail(false);
+      setTimeout(() => focusSet(), 10);
+    }
+  };
+
   return (
     <div className="App background" style={{ overflowY: 'hidden' }}>
       <div
@@ -244,19 +250,6 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       >
         <p>마지막 그림입니다.</p>
       </div>
-      <Link
-        to={`/list#${idxMap[index]}`}
-        scroll={(el) => el.scrollIntoView({ block: 'center' })}
-      >
-        <IconButton
-          id="backIcon"
-          className="fieed"
-          // onClick={() => history.push(`/list#${idxMap[index]}`)}
-          disabled={onDetail}
-        >
-          <ArrowBackIcon fontSize="large" />
-        </IconButton>
-      </Link>
       <div
         ref={ref}
         tabIndex={0}
@@ -326,15 +319,25 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
       </IconButton>
       <IconButton
         id="closeIcon"
-        onClick={() => {
-          setOnDetail(false);
-          setTimeout(() => focusSet(), 10);
-        }}
+        onClick={() => handleClose()}
         disabled={!onDetail}
         style={{ opacity: onDetail ? 1 : 0 }}
       >
         <CloseIcon fontSize="large" />
       </IconButton>
+      <Link
+        to={`/list#${idxMap[index]}`}
+        scroll={(el) => el.scrollIntoView({ block: 'center' })}
+      >
+        <IconButton
+          id="closeIcon"
+          onClick={() => handleClose()}
+          disabled={onDetail}
+          style={{ opacity: !onDetail ? 1 : 0 }}
+        >
+          <CloseIcon fontSize="large" />
+        </IconButton>
+      </Link>
     </div>
   );
 }

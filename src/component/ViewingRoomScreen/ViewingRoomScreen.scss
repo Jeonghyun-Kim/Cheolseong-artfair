@@ -35,7 +35,7 @@ $iconMarginSmall: 5px !global;
 }
 
 #moreIcon {
-  position: fixed;
+  position: absolute;
   right: $iconMargin;
   bottom: $iconMargin;
   @media (max-width: 700px) {
