@@ -37,7 +37,7 @@ export default function MenuScreen({ onAbout, setOnAbout }:
       >
         <About />
         <IconButton
-          id="close"
+          id="menuClose"
           onClick={() => setOnAbout(false)}
           disabled={!onAbout}
           style={{
@@ -49,10 +49,10 @@ export default function MenuScreen({ onAbout, setOnAbout }:
         </IconButton>
       </div>
       <div
-        className="App menuRoot unselectable background"
+        className="menuRoot unselectable background"
         style={{
           filter: `blur(${onAbout ? 10 : 0}px)`,
-          transform: `scale(${onAbout ? 1.1 : 1})`,
+          // transform: `scale(${onAbout ? 1.1 : 1})`,
         }}
         role="button"
         tabIndex={0}
