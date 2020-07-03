@@ -49,7 +49,7 @@ export default function MenuScreen({ onAbout, setOnAbout }:
         </IconButton>
       </div>
       <div
-        className="App menuRoot unselectable"
+        className="App menuRoot unselectable background"
         style={{
           filter: `blur(${onAbout ? 10 : 0}px)`,
           transform: `scale(${onAbout ? 1.1 : 1})`,

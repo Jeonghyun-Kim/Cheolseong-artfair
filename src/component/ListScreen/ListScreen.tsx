@@ -210,7 +210,7 @@ export default function ListScreen() {
   // };
 
   return (
-    <div className="listRoot" id="listRoot">
+    <div className="listRoot background" id="listRoot">
       {/* <ScrollRetoration /> */}
       <Typography id="paitingNumber" className="unselectable">작품 개수: {idxMap.length}개</Typography>
       <div className="listContainer">

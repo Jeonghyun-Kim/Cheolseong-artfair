@@ -10,11 +10,15 @@ $iconMarginSmall: 5px !global;
   height: 100%;
   margin: 0 auto;
   position: relative;
-  background-image: url('/wallpaper.jpg');
-  // background-color: rgba($color: #141414, $alpha: 1.0);
-  background-repeat: repeat;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.background {
+  background-color: rgba($color: #181714, $alpha: 1.0);
+  background-image: url("https://www.transparenttextures.com/patterns/redox-02.png");
+  background-repeat: repeat;
+  // background-blend-mode: soft-light;
 }
 
 .gridContainer {
