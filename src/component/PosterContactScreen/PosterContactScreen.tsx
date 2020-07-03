@@ -25,6 +25,7 @@ export default function PosterContactScreen({ match }: ContactProps) {
   const [phone, setPhone] = React.useState<string>('');
   const [content, setContent] = React.useState<string>('');
   const [subscription, setSubscription] = React.useState<boolean>(true);
+  const [agreed, setAgreed] = React.useState<boolean>(false);
   const [alert, setAlert] = React.useState<string>('');
 
   const history = useHistory();
@@ -35,6 +36,10 @@ export default function PosterContactScreen({ match }: ContactProps) {
     e.preventDefault();
 
     if (name && email && content) {
+      if (!agreed) {
+        setAlert('개인정보의 수집 및 활용 동의는 필수입니다.');
+        return;
+      }
       if (!EMAIL_REGEX.test(email)) {
         setAlert('이메일 주소가 올바르지 않습니다.');
         return;
@@ -49,6 +54,10 @@ export default function PosterContactScreen({ match }: ContactProps) {
       }
       if (content.length < 3) {
         setAlert('내용은 3글자 이상 입력해주세요.');
+        return;
+      }
+      if (content.length > 300) {
+        setAlert('내용은 300글자 이하로 입력해주세요.');
         return;
       }
       if (phone.length > 10) {
@@ -106,6 +115,8 @@ export default function PosterContactScreen({ match }: ContactProps) {
             <div className="textInput">
               <div>이름 *</div>
               <TextField
+                required
+                name="name"
                 placeholder="필수"
                 variant="standard"
                 color="primary"
@@ -117,6 +128,9 @@ export default function PosterContactScreen({ match }: ContactProps) {
             <div className="textInput">
               <div>이메일 *</div>
               <TextField
+                required
+                name="email"
+                type="email"
                 placeholder="필수"
                 variant="standard"
                 color="primary"
@@ -128,6 +142,8 @@ export default function PosterContactScreen({ match }: ContactProps) {
             <div className="textInput">
               <div>휴대전화</div>
               <TextField
+                type="tel"
+                name="tel"
                 placeholder="(예: 01012345678)"
                 variant="standard"
                 color="primary"
@@ -135,6 +151,32 @@ export default function PosterContactScreen({ match }: ContactProps) {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
+            </div>
+            <div className="checkbox unselectable">
+              <Checkbox
+                required
+                color="default"
+                checked={agreed}
+                onChange={(e) => {
+                  setAgreed(e.target.checked);
+                }}
+              />
+              <span>개인정보의 수집 및 활용 동의 (필수)</span>
+            </div>
+            <div className="checkbox unselectable">
+              <Checkbox
+                color="default"
+                checked={subscription}
+                onChange={(e) => {
+                  setSubscription(e.target.checked);
+                }}
+              />
+              <span>onDisplay의 다른 전시 소식을 받아볼래요.(선택)</span>
+            </div>
+            <div className="seeMoreButton">
+              <a href={`${DEFINES.API_URL}/privacy_agreement.pdf`} rel="noopener noreferrer" target="_blank">
+                <span>자세히 보기</span>
+              </a>
             </div>
           </Grid>
           <Grid item xs={12} sm={6} md={7} id="contentSection">
@@ -144,7 +186,7 @@ export default function PosterContactScreen({ match }: ContactProps) {
               자유롭게 문의해주세요. *
             </Typography>
             <form>
-              <div className="content">
+              <div className="posterContent">
                 <TextField
                   placeholder={`ex)
 작품과 동일한 크기의 캔버스 프린팅을 구매하고 싶어요.
@@ -158,27 +200,24 @@ A4용지와 비슷한 크기의 캔버스 프린팅을 액자에 담아 구매�
                   onChange={(e) => setContent(e.target.value)}
                 />
               </div>
-              <div className="subscriptionCheckbox">
-                <Checkbox
-                  color="default"
-                  checked={subscription}
-                  onChange={(e) => {
-                    setSubscription(e.target.checked);
-                  }}
-                />
-                <span>onDisplay의 다른 전시 소식을 받아볼래요.</span>
-              </div>
-              <div id="alert">
-                {alert}
-              </div>
-              <div className="submit">
-                <Button
-                  type="submit"
-                  variant="contained"
-                  onClick={handleSubmit}
-                >
-                  제출
-                </Button>
+              <div>
+                <div id="alert">
+                  <span className="red">
+                    {alert}
+                  </span>
+                  <span className="length" style={{ color: content.length > 300 ? '#e40d0d' : 'black' }}>
+                    {content.length}/300
+                  </span>
+                </div>
+                <div className="submit">
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    onClick={handleSubmit}
+                  >
+                    제출
+                  </Button>
+                </div>
               </div>
             </form>
           </Grid>
