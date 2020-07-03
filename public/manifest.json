@@ -1,6 +1,6 @@
 {
   "short_name": "onDisplay",
-  "name": "online exhibition",
+  "name": "언택트 시대의 온라인 전시회",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,12 +8,12 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo301.png",
+      "src": "./onDisplayLogo/logo301.png",
       "type": "image/png",
       "sizes": "301x301"
     },
     {
-      "src": "logo601.png",
+      "src": "./onDisplayLogo/logo601.png",
       "type": "image/png",
       "sizes": "601x601"
     }

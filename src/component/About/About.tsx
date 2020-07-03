@@ -44,10 +44,10 @@ export default function About() {
       </div>
       <div className="subLogoImages">
         <div id="subLogoImage1">
-          <img alt="문화체육관광부로고" src={`${process.env.PUBLIC_URL}/sub_logo_1.png`} />
+          <img alt="문화체육관광부로고" src={`${process.env.PUBLIC_URL}/subLogo/sub_logo_1.png`} />
         </div>
         <div id="subLogoImage2">
-          <img alt="예술경영지원센터로고" src={`${process.env.PUBLIC_URL}/sub_logo_2.png`} />
+          <img alt="예술경영지원센터로고" src={`${process.env.PUBLIC_URL}/subLogo/sub_logo_2.png`} />
         </div>
       </div>
     </Paper>

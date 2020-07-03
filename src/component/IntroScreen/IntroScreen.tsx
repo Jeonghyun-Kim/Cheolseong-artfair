@@ -52,7 +52,7 @@ export default function IntroScreen() {
       <img
         alt="lantern"
         draggable="false"
-        src={`${process.env.PUBLIC_URL}/lantern (1).png`}
+        src={`${process.env.PUBLIC_URL}/lantern.png`}
         className="introLantern"
       />
       {innerWidth < 700 ? (

@@ -34,14 +34,14 @@ export default function ViewingRoom({ idx, src }:
         <>
           <img
             alt="lantern"
-            src={`${process.env.PUBLIC_URL}/lantern (1).png`}
+            src={`${process.env.PUBLIC_URL}/lantern.png`}
             height={innerHeight}
             draggable="false"
             className="lanternPortrait"
           />
           <img
             alt="lantern"
-            src={`${process.env.PUBLIC_URL}/lantern (1).png`}
+            src={`${process.env.PUBLIC_URL}/lantern.png`}
             height={innerHeight}
             draggable="false"
             className="lanternPortrait"
@@ -68,7 +68,7 @@ export default function ViewingRoom({ idx, src }:
             <>
               <img
                 alt="lantern"
-                src={`${process.env.PUBLIC_URL}/lantern (1).png`}
+                src={`${process.env.PUBLIC_URL}/lantern.png`}
                 width={isLandscape[0] ? '200%' : 'auto'}
                 height={isLandscape[0] ? 'auto' : `${180 * imageRatio}%`}
                 className="lantern full"
@@ -81,7 +81,7 @@ export default function ViewingRoom({ idx, src }:
               />
               <img
                 alt="lantern"
-                src={`${process.env.PUBLIC_URL}/lantern (1).png`}
+                src={`${process.env.PUBLIC_URL}/lantern.png`}
                 width={isLandscape[0] ? '200%' : 'auto'}
                 height={isLandscape[0] ? 'auto' : `${180 * imageRatio}%`}
                 className="lantern full"
