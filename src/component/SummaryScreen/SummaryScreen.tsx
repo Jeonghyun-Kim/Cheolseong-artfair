@@ -289,11 +289,8 @@ export default function SummaryScreen() {
       <div
         ref={ref}
         tabIndex={0}
+        className="pagenator"
         role="button"
-        style={{
-          overflow: index === MAX_INDEX ? 'auto' : 'hidden',
-        }}
-        className="viewingRoom"
         onClick={() => {
           setOnDetail(false);
           setTimeout(() => focusSet(), 10);
@@ -321,7 +318,6 @@ export default function SummaryScreen() {
       )}
       <IconButton
         id="arrowLeft"
-        className="fixed"
         onClick={() => {
           if (!seenGuide && index !== 0 && index < MAX_INDEX - 1) {
             setSeenGuide(true);
@@ -339,7 +335,6 @@ export default function SummaryScreen() {
       </IconButton>
       <IconButton
         id="arrowRight"
-        className="fixed"
         onClick={() => {
           if (!seenGuide && index !== 0 && index < MAX_INDEX - 1) {
             setSeenGuide(true);
