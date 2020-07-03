@@ -9,13 +9,14 @@ import ViewingRoom from '../ViewingRoom/ViewingRoom';
 import Details from '../Details/Details';
 import MenuScreen from '../MenuScreen/MenuScreen';
 import IntroScreen from '../IntroScreen/IntroScreen';
+import VideoScreen from '../VideoScreen/VideoScreen';
 
 import info from '../../info.json';
 import DEFINES from '../../defines';
 
 import './SummaryScreen.scss';
 
-const idxMap = [-1, 53, 119, 89, 126, 197, -2];
+const idxMap = [-1, 53, 119, 89, 126, 197, -2, -3];
 
 interface MotionState {
   touchStartX: number;
@@ -53,7 +54,7 @@ export default function SummaryScreen() {
   const ref = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
-    idxMap.slice(1, MAX_INDEX).forEach((idx) => {
+    idxMap.slice(1, MAX_INDEX - 1).forEach((idx) => {
       const img = new Image();
       img.src = `${DEFINES.STORAGE_URL_MD}/${info[idx].src}`;
     });
@@ -101,13 +102,13 @@ export default function SummaryScreen() {
   }, [MAX_INDEX, index, onDetail]);
 
   const toggleDetail = () => {
-    if (index !== 0 && index !== MAX_INDEX) {
+    if (index !== 0 && index < MAX_INDEX - 1) {
       setOnDetail(!onDetail);
     }
   };
 
   const handleKeydown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+    if (!seenGuide && index !== 0 && index < MAX_INDEX - 1) {
       if (event.keyCode !== 122) {
         setSeenGuide(true);
         sessionStorage.setItem('@seenGuide', 'true');
@@ -188,7 +189,7 @@ export default function SummaryScreen() {
         } else if (motionState.beingTouched && motionState.moved) {
           switch (motionState.moveTo) {
             case 'up':
-              if (!onDetail && index !== 0 && index !== MAX_INDEX) {
+              if (!onDetail && index !== 0 && index < MAX_INDEX - 1) {
                 setOnDetail(true);
               }
               break;
@@ -219,7 +220,7 @@ export default function SummaryScreen() {
       }
     },
     touchEnd: () => {
-      if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+      if (!seenGuide && index !== 0 && index < MAX_INDEX - 1) {
         setSeenGuide(true);
         sessionStorage.setItem('@seenGuide', 'true');
       } else {
@@ -228,39 +229,16 @@ export default function SummaryScreen() {
     },
   };
 
-  return (
-    <div
-      className="summaryApp background"
-      style={{
-        height: index !== MAX_INDEX ? '100%' : '100vh',
-      }}
-    >
-      <div
-        ref={ref}
-        tabIndex={0}
-        role="button"
-        style={{
-          overflow: index === MAX_INDEX ? 'auto' : 'hidden',
-        }}
-        className="viewingRoom"
-        onClick={() => {
-          setOnDetail(false);
-          setTimeout(() => focusSet(), 10);
-        }}
-        onKeyDown={handleKeydown}
-        onTouchStart={handleSwipe.touchStart}
-        onTouchMove={handleSwipe.touchMove}
-        onTouchEnd={() => handleSwipe.touchEnd()}
-      >
-        {(index === 0 || index === MAX_INDEX) ? (
-          <>
-            {index === 0 ? (
-              <IntroScreen />
-            ) : (
-              <MenuScreen onAbout={onAbout} setOnAbout={setOnAbout} />
-            )}
-          </>
-        ) : (
+  const renderSwitch = () => {
+    switch (index) {
+      case 0:
+        return <IntroScreen />;
+      case MAX_INDEX - 1:
+        return <VideoScreen />;
+      case MAX_INDEX:
+        return <MenuScreen onAbout={onAbout} setOnAbout={setOnAbout} />;
+      default:
+        return (
           <>
             <div
               id="viewingroomDiv"
@@ -297,9 +275,37 @@ export default function SummaryScreen() {
               </div>
             )}
           </>
-        )}
+        );
+    }
+  };
+
+  return (
+    <div
+      className="summaryApp background"
+      style={{
+        height: index !== MAX_INDEX ? '100%' : '100vh',
+      }}
+    >
+      <div
+        ref={ref}
+        tabIndex={0}
+        role="button"
+        style={{
+          overflow: index === MAX_INDEX ? 'auto' : 'hidden',
+        }}
+        className="viewingRoom"
+        onClick={() => {
+          setOnDetail(false);
+          setTimeout(() => focusSet(), 10);
+        }}
+        onKeyDown={handleKeydown}
+        onTouchStart={handleSwipe.touchStart}
+        onTouchMove={handleSwipe.touchMove}
+        onTouchEnd={() => handleSwipe.touchEnd()}
+      >
+        {renderSwitch()}
       </div>
-      {index !== 0 && index !== MAX_INDEX && (
+      {index !== 0 && index < MAX_INDEX - 1 && (
         <div
           style={{
             opacity: onDetail ? 1 : 0,
@@ -317,7 +323,7 @@ export default function SummaryScreen() {
         id="arrowLeft"
         className="fixed"
         onClick={() => {
-          if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+          if (!seenGuide && index !== 0 && index < MAX_INDEX - 1) {
             setSeenGuide(true);
             sessionStorage.setItem('@seenGuide', 'true');
           } else {
@@ -335,7 +341,7 @@ export default function SummaryScreen() {
         id="arrowRight"
         className="fixed"
         onClick={() => {
-          if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+          if (!seenGuide && index !== 0 && index < MAX_INDEX - 1) {
             setSeenGuide(true);
             sessionStorage.setItem('@seenGuide', 'true');
           } else {
@@ -350,11 +356,11 @@ export default function SummaryScreen() {
       >
         <ArrowForwardIosIcon fontSize="large" />
       </IconButton>
-      {index !== 0 && index !== MAX_INDEX && (
+      {index !== 0 && index < MAX_INDEX - 1 && (
         <IconButton
           id="moreIcon"
           onClick={() => {
-            if (!seenGuide && index !== 0 && index !== MAX_INDEX) {
+            if (!seenGuide && index !== 0 && index < MAX_INDEX - 1) {
               setSeenGuide(true);
               sessionStorage.setItem('@seenGuide', 'true');
             } else {

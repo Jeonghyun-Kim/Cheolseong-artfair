@@ -1,0 +1,50 @@
+$borderRadius: 20px !global;
+
+.videoContainer {
+  width: 100%;
+  height: 100%;
+
+  #videoPlayer {
+    margin: 0 auto;
+    padding: 30px 0;
+    width: fit-content;
+
+    iframe {
+      width: calc(107vh - 107px);
+      height: calc(60vh - 60px);
+      border-radius: $borderRadius;
+    }
+  }
+
+  .quote {
+    margin: 0 auto;
+    width: 107vh;
+    max-width: 90%;
+    text-align: center;
+
+    img {
+      height: calc(40vh - 40px);
+      max-width: 100%;
+      object-fit: contain;
+    }
+  }
+}
+  
+@media screen and (max-width: 700px) {
+  .videoContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    #videoPlayer {
+      iframe {
+        width: 100vw;
+        height: 56vw;
+        border-radius: 0px;
+      }
+    }
+  }
+}
