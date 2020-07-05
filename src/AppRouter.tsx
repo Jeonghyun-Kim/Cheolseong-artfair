@@ -13,6 +13,7 @@ import ContactScreen from './component/ContactScreen/ContactScreen';
 import SummaryScreen from './component/SummaryScreen/SummaryScreen';
 import PosterContactScreen from './component/PosterContactScreen/PosterContactScreen';
 import ArtistHistory from './component/ArtistHistory/ArtistHistory';
+import SignatureCanvas from './component/SignatureCanvas/SignatureCanvas';
 
 import ConfigContext from './ConfigContext';
 
@@ -41,6 +42,7 @@ export default function AppRouter() {
           <Route path="/intro" component={IntroScreen} />
           <Route path="/list" component={ListScreen} />
           <Route path="/history" component={ArtistHistory} />
+          <Route path="/guest" component={SignatureCanvas} />
           <Route path="/poster/:idx" component={PosterContactScreen} />
           <Route path="/contact/:idx" component={ContactScreen} />
           <Route path="/viewing-room/:idx" component={ViewingRoomScreen} />

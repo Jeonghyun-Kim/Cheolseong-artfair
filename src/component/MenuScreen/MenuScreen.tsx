@@ -106,10 +106,7 @@ export default function MenuScreen({ onAbout, setOnAbout }:
             className="mobileMenuItem"
             onClick={() => {
               if (!onAbout) {
-                window.open(
-                  'https://gformanalytics.com/form.php?ga_id=UA-168932005-1](https://www.googletagmanager.com/gtag/js?id=UA-168932005-1)&form_id=1FAIpQLSe71tn0suGW1SYIujzi5oJdTQsJp1nbCKK7RtvxIJgDAyNv1g',
-                  '_blank',
-                );
+                setTimeout(() => history.push('/guest'), 0);
               }
             }}
             onKeyDown={() => {}}
@@ -195,10 +192,7 @@ export default function MenuScreen({ onAbout, setOnAbout }:
             className="desktopMenuItem"
             onClick={() => {
               if (!onAbout) {
-                window.open(
-                  'https://gformanalytics.com/form.php?ga_id=UA-168932005-1](https://www.googletagmanager.com/gtag/js?id=UA-168932005-1)&form_id=1FAIpQLSe71tn0suGW1SYIujzi5oJdTQsJp1nbCKK7RtvxIJgDAyNv1g',
-                  '_blank',
-                );
+                setTimeout(() => history.push('/guest'), 0);
               }
             }}
             onKeyDown={() => {}}
