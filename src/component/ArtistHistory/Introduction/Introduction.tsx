@@ -16,7 +16,7 @@ export default function Introduction() {
         {' '}
         절제되고 정제된 형과 색, 그리고 무심코 배치된 여백의 화면구성은 채우기보다는 비움을 향해 나아가고 있는 것이다.
       </Typography>
-      <div id="spacing50" />
+      <br />
       <Typography variant="body1" component="p">
         오늘날의 세상은 빠르게 변하고 있으며, 물질과 속도를 우선시하는 가치관이 팽배하다.
         {' '}
@@ -24,7 +24,7 @@ export default function Introduction() {
         {' '}
         더 귀한 것은 외부에 있다고 여기게 되었다, 자신의 내면에서 들려오는 소리에 귀 기울일 여유가 없어진 것이다.
       </Typography>
-      <div id="spacing50" />
+      <br />
       <Typography variant="body1" component="p">
         나는 그림을 통해 보이는 것과 더불어 보이지 않은 것조차 보이도록 하고 싶다.
         {' '}

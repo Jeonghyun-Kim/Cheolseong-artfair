@@ -46,13 +46,24 @@ $breakPoint: 700px !global;
     padding: 35px;
   }
 
+  // p {
+  //   font-size: 1.3rem;
+  //   line-height: 2.5rem;
+
+  //   @media (max-width: $breakPoint) {
+  //     font-size: 1rem;
+  //     line-height: 1.6rem;
+  //   }
+  // }
+  
   p {
-    font-size: 1.3rem;
-    line-height: 2.5rem;
+    font-size: 1rem;
+    line-height: 2rem;
+    text-indent: 15px;
 
     @media (max-width: $breakPoint) {
-      font-size: 1rem;
-      line-height: 1.6rem;
+      font-size: 0.8rem;
+      line-height: 1.3rem;
     }
   }
 
@@ -69,15 +80,15 @@ $breakPoint: 700px !global;
     // -webkit-transition: height 1s;
     // height: fit-content;
   
-    p {
-      font-size: 1rem;
-      line-height: 2rem;
+    // p {
+    //   font-size: 1rem;
+    //   line-height: 2rem;
   
-      @media (max-width: $breakPoint) {
-        font-size: 0.8rem;
-        line-height: 1.3rem;
-      }
-    }
+    //   @media (max-width: $breakPoint) {
+    //     font-size: 0.8rem;
+    //     line-height: 1.3rem;
+    //   }
+    // }
   
     #seeMoreButton {
       float: right;
