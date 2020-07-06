@@ -23,7 +23,7 @@ export default function ArtistHistory() {
         <UpIcon fontSize="small" />
       </IconButton>
       <div className="historyContainer">
-        <div className="introduction">
+        <div className="introduction paper">
           <div className="paddingBox">
             <Typography variant="h4" className="title">
               작가의 말
@@ -60,7 +60,11 @@ export default function ArtistHistory() {
             </Typography>
           </div>
         </div>
-        <Review />
+        <div className="paper review">
+          <div className="paddingBox">
+            <Review />
+          </div>
+        </div>
       </div>
     </div>
   );

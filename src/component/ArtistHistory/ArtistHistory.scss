@@ -24,43 +24,64 @@ $breakPoint: 700px !global;
 
   @media (max-width: $breakPoint) {
     padding-top: 30px;
+    margin-top: 50px;
+  }
+
+  .paper {
+    box-shadow: 0 19px 38px rgba(0,0,0,0.80), 0 15px 12px rgba(0,0,0,0.66);
+    background: #fff;
+    border-radius: $borderRadius;
+    z-index: 5;
+    width: 100%;
+    min-height: fit-content;
+    filter: brightness(0.9);
+  }
+
+  .title {
+    margin-bottom: 30px;
+  }
+
+  .paddingBox {
+    padding: 35px;
+  }
+
+  p {
+    font-size: 1.3rem;
+    line-height: 2.5rem;
+
+    @media (max-width: $breakPoint) {
+      font-size: 1rem;
+      line-height: 1.6rem;
+    }
   }
 
   .introduction {
     margin-bottom: 100px;
-    z-index: 5;
-    width: 100%;
-    min-height: fit-content;
-    box-shadow: 0 19px 38px rgba(0,0,0,0.80), 0 15px 12px rgba(0,0,0,0.66);
-    background: #fff;
-    border-radius: $borderRadius;
-    filter: brightness(0.9);
-
-    p {
-      font-size: 1.3rem;
-      line-height: 2.5rem;
-
-      @media (max-width: $breakPoint) {
-        font-size: 1rem;
-        line-height: 1.6rem;
-      }
-    }
-
-    @media (max-width: $breakPoint) {
-      margin-top: 50px;
-    }
-
-    .paddingBox {
-      padding: 35px;
-    }
-
-    .title {
-      margin-bottom: 30px;
-    }
 
     .artistName {
       margin-top: 30px;
       font-weight: bolder;
     }
+  }
+}
+
+.review {
+  // padding-bottom: 20px;
+  // transition: height 1s;
+  // -webkit-transition: height 1s;
+  // height: fit-content;
+
+  p {
+    font-size: 1rem;
+    line-height: 2rem;
+
+    @media (max-width: $breakPoint) {
+      font-size: 0.8rem;
+      line-height: 1.3rem;
+    }
+  }
+
+  #seeMoreButton {
+    float: right;
   }
 }
