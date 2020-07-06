@@ -235,7 +235,7 @@ export default function SignatureCanvas() {
                 variant="outlined"
                 onClick={() => handleSubscribe()}
               >
-                소식 받아보기
+                onDisplay의 전시 소식 받아보기
               </Button>
             </div>
           </form>

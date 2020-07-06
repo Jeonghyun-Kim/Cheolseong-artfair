@@ -12,8 +12,8 @@ export default function About() {
       </div>
       <div className="explanation">
         <Typography>
-          onDisplay는 미술계와 협력하여 새로운 온라인 미술시장을 개척하는 소프트웨어 개발 전문가 팀입니다.
-          코로나 사태로 인해 예정되었던 전시가 취소되었거나 온라인 전시에 관심있는 작가와 갤러리의 자유로운 문의를 바랍니다.
+          onDisplay는 작가, 갤러리와 함께 포스트 코로나 시대의 새로운 미술 관람 문화를 선도하는 전문 IT 기업입니다.
+          코로나 사태로 인해 예정되었던 전시가 취소되었거나 온라인 전시에 관심있는 갤러리나 작가님께서는 자유롭게 문의해주세요.
         </Typography>
       </div>
       <div className="contactUs">
