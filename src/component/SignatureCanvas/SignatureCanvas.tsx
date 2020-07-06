@@ -45,6 +45,7 @@ export default function SignatureCanvas() {
     if (canvasRef.current) {
       canvasRef.current.clear();
       setRes('');
+      setContent('');
       setDrawingStarted(false);
     }
   };
@@ -106,11 +107,18 @@ export default function SignatureCanvas() {
             .then((resJson) => {
               if (resJson.error === 0) {
                 setError('성공적으로 등록되었습니다.');
+                setEmail('');
+                setSubscription(false);
+                setTimeout(() => setError(null), 3000);
+              } else if (resJson.error === 2) {
+                setError('이미 등록된 이메일입니다.');
+                setEmail('');
+                setSubscription(false);
                 setTimeout(() => setError(null), 3000);
               }
             })
-            .catch((err) => {
-              setError(JSON.stringify(err));
+            .catch(() => {
+              setError('서버 에러 발생. 잠시 후 다시 시도해주세요.');
               setTimeout(() => setError(null), 3000);
             })
             .finally(() => fetchCount());
@@ -123,7 +131,7 @@ export default function SignatureCanvas() {
         setTimeout(() => setError(null), 3000);
       }
     } else {
-      setError('');
+      setError('개인정보 동의는 필수입니다.');
       setTimeout(() => setError(null), 3000);
     }
   };
