@@ -2,8 +2,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
-import '../ArtistHistory.scss';
-
 export default function Review() {
   const [seeMore, setSeeMore] = React.useState<boolean>(false);
 
