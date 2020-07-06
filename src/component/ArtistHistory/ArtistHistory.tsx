@@ -16,7 +16,9 @@ export default function ArtistHistory() {
 
   return (
     <div className="unselectable historyApp background">
-      <Logo />
+      <div className="stickyBar">
+        <Logo />
+      </div>
       <IconButton
         id="upIcon"
         onClick={() => handleScrollToTop()}
