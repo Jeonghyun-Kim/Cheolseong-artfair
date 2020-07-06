@@ -62,10 +62,6 @@ export default function PosterContactScreen({ match }: ContactProps) {
         setAlert('내용은 300글자 이하로 입력해주세요.');
         return;
       }
-      if (phone.length > 10) {
-        setAlert('휴대폰 번호가 올바르지 않습니다.');
-        return;
-      }
       fetch(`${DEFINES.API_URL}/contact`, {
         method: 'POST',
         headers: {
