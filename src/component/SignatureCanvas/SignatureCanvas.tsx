@@ -1,10 +1,13 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import SignaturePad from 'react-signature-canvas';
+import CountUp from 'react-countup';
+import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
-import CountUp from 'react-countup';
+import IconButton from '@material-ui/core/IconButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEraser } from '@fortawesome/free-solid-svg-icons';
 
 import './SignatureCanvas.scss';
 
@@ -134,7 +137,15 @@ export default function SignatureCanvas() {
         )}
         <Typography variant="h6" className="title">방명록</Typography>
         <div className="canvasContainter">
-          <button id="sigClear" type="button" onClick={() => handleClear()}>CLEAR!</button>
+          <IconButton
+            id="sigClear"
+            onClick={() => handleClear()}
+          >
+            <FontAwesomeIcon
+              icon={faEraser}
+              size="xs"
+            />
+          </IconButton>
           <SignaturePad
             ref={canvasRef}
             canvasProps={{
