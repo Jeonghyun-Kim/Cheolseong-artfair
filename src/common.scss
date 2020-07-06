@@ -48,6 +48,24 @@ $iconMarginSmall: 5px !global;
   }
 }
 
+.submit {
+  margin: 10px;
+
+  button {
+    display: block;
+    width: 100%;
+    background-color: rgba($color: #000000, $alpha: 1.0);
+    color: white;
+    font-size: 15px;
+    padding: 10px;
+    border: none;
+
+    &:hover {
+      background-color: rgba($color: #000000, $alpha: 0.7);
+    }
+  }
+}
+
 #spacing200 {
   height: 200px;
 }

@@ -26,7 +26,7 @@ export default function ContactScreen({ match }: ContactProps) {
   const [email, setEmail] = React.useState<string>('');
   const [phone, setPhone] = React.useState<string>('');
   const [content, setContent] = React.useState<string>('');
-  const [subscription, setSubscription] = React.useState<boolean>(true);
+  const [subscription, setSubscription] = React.useState<boolean>(false);
   const [agreed, setAgreed] = React.useState<boolean>(false);
   const [alert, setAlert] = React.useState<string>('');
 
@@ -154,6 +154,7 @@ export default function ContactScreen({ match }: ContactProps) {
                 fullWidth
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                inputProps={{ maxLength: 11 }}
               />
             </div>
             <div className="checkbox unselectable">
@@ -175,7 +176,7 @@ export default function ContactScreen({ match }: ContactProps) {
                   setSubscription(e.target.checked);
                 }}
               />
-              <span>onDisplay의 다른 전시 소식을 받아볼래요.(선택)</span>
+              <span>새로운 전시 등 onDisplay 소식을 받아볼래요. (선택)</span>
             </div>
             <div className="seeMoreButton">
               <a href={`${DEFINES.API_URL}/privacy_agreement.pdf`} rel="noopener noreferrer" target="_blank">
@@ -201,6 +202,7 @@ export default function ContactScreen({ match }: ContactProps) {
                     fullWidth
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
+                    inputProps={{ maxLength: 300 }}
                   />
                 </div>
                 <div>
@@ -208,7 +210,7 @@ export default function ContactScreen({ match }: ContactProps) {
                     <span className="red">
                       {alert}
                     </span>
-                    <span className="length" style={{ color: content.length > 300 ? '#e40d0d' : 'black' }}>
+                    <span className="length" style={{ color: content.length >= 300 ? '#e40d0d' : 'black' }}>
                       {content.length}/300
                     </span>
                   </div>
