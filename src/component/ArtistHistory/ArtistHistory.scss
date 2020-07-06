@@ -44,6 +44,10 @@ $breakPoint: 700px !global;
 
   .paddingBox {
     padding: 35px;
+
+    @media screen and (max-width: $breakPoint) {
+      padding: 25px;
+    }
   }
 
   // p {
@@ -63,7 +67,8 @@ $breakPoint: 700px !global;
 
     @media (max-width: $breakPoint) {
       font-size: 0.8rem;
-      line-height: 1.3rem;
+      line-height: 1.4rem;
+      text-indent: 10px;
     }
   }
 
@@ -97,7 +102,7 @@ $breakPoint: 700px !global;
 
   .history {
     .semiTitle {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
 
     ul {
@@ -106,6 +111,19 @@ $breakPoint: 700px !global;
 
       li {
         line-height: 2rem;
+      }
+    }
+  }
+
+  @media (max-width: $breakPoint) {
+    .semiTitle {
+      font-size: 0.8rem;
+    }
+
+    ul {
+      li {
+        font-size: 0.8rem;
+        line-height: 1.5rem;
       }
     }
   }

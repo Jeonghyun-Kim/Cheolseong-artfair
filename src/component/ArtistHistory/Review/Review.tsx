@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 export default function Review() {
   const [seeMore, setSeeMore] = React.useState<boolean>(false);
@@ -9,13 +10,14 @@ export default function Review() {
     <>
       <Typography variant="h5" className="title">
         자연에 반영된 초월적 실체 - 미술평론가 이선영
-        <button
+        <Button
           id="seeMoreButton"
+          color="default"
           type="button"
           onClick={() => setSeeMore(!seeMore)}
         >
           {seeMore ? '줄이기' : '더보기'}
-        </button>
+        </Button>
       </Typography>
       <Typography component="p">
         물과 돌, 수평선과 하늘, 여기에 때때로 풀이나 개구리같은 작은 동식물들이 가세하는 김철성의 작품은 평화롭다.
@@ -27,7 +29,7 @@ export default function Review() {
         돌만 있는 작품의 경우에는 전경만 가득 잡힌 경우다. 수평선 아래로 떠있는 풍경은 얇지만 또 다른 공간을 생성한다.
         대개 그 선 위에는 아스라이 멀리 있는 섬이나 대지가 떠있지만, 때로 자연으로부터 온 심상인 추상적인 풍경이 가득 펼쳐져 있기도 하다.
       </Typography>
-      {seeMore && (
+      {!seeMore ? ('...') : (
         <>
           <Typography component="p">
             이때 색과 형은 강해진다. 다른 부분에서 감추어지는 붓 터치가 강하게 드러난다.

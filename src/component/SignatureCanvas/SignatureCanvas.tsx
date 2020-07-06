@@ -18,6 +18,7 @@ import Logo from '../Logo/Logo';
 export default function SignatureCanvas() {
   const canvasRef = React.useRef<SignaturePad | null>(null);
   const [count, setCount] = React.useState<number | null>(null);
+  const [drawingStarted, setDrawingStarted] = React.useState<boolean>(false);
   const [res, setRes] = React.useState<string>('');
   const [subscription, setSubscription] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState<string>('');
@@ -42,7 +43,12 @@ export default function SignatureCanvas() {
     if (canvasRef.current) {
       canvasRef.current.clear();
       setRes('');
+      setDrawingStarted(false);
     }
+  };
+
+  const handleDrawStart = () => {
+    setDrawingStarted(true);
   };
 
   const handleDrawEnd = () => {
@@ -151,8 +157,22 @@ export default function SignatureCanvas() {
             canvasProps={{
               className: 'sigCanvas',
             }}
+            onBegin={() => handleDrawStart()}
             onEnd={() => handleDrawEnd()}
           />
+          <div
+            id="signPadPlaceHolder"
+            className="unselectable"
+            style={{
+              opacity: drawingStarted ? 0 : 1,
+            }}
+          >
+            <img
+              alt="signPad_place_hodler"
+              src={`${process.env.PUBLIC_URL}/signPadPlaceHolder.jpg`}
+              draggable={false}
+            />
+          </div>
           <div className="content inputPadding">
             <TextField
               name="content"
