@@ -29,15 +29,21 @@ export default function About() {
               <b>Email </b>
               <br />
               <b>Tel </b>
+              <br />
+              <b>Instagram</b>
             </Typography>
           </div>
           <div id="section2">
             <Typography id="content">
               박세정
               <br />
-              gogle.gallery@gmail.com
+              ondisplay.art@gmail.com
               <br />
               010-6317-1498
+              <br />
+              <a href="https://www.instagram.com/ondisplay.art" target="_blank" rel="noopener noreferrer">
+                <button type="button">ondisplay.art</button>
+              </a>
             </Typography>
           </div>
         </div>

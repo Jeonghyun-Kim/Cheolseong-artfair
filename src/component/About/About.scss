@@ -39,13 +39,34 @@
   .contactUs {
     #title {
       font-weight: bold;
+      margin-bottom: 15px;
     }
   
     .info {
       display: flex;
   
       #section1 {
-        width: 60px;
+        width: 120px;
+      }
+
+      #section2 {
+        a {
+          text-decoration: none;
+          color: inherit;
+
+          button {
+            font-size: 1rem;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 10px;
+            background-color: rgba($color: #f3f3f3, $alpha: 1.0);
+
+            &:hover {
+              cursor: pointer;
+              opacity: 0.7;
+            }
+          }
+        }
       }
     }
 
