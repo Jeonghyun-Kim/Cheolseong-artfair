@@ -6,7 +6,7 @@ import Logo from '../Logo/Logo';
 
 export default function VideoScreen() {
   return (
-    <div className="videoContainer">
+    <div className="videoContainer unselectable">
       <Logo />
       <div id="videoPlayer">
         <iframe
@@ -18,7 +18,11 @@ export default function VideoScreen() {
         />
       </div>
       <div className="quote">
-        <img alt="quote" src={`${process.env.PUBLIC_URL}/letters/quote.png`} />
+        <img
+          alt="quote"
+          src={`${process.env.PUBLIC_URL}/letters/quote.png`}
+          draggable={false}
+        />
       </div>
     </div>
   );

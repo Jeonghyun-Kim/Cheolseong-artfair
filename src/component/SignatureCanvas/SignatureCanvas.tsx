@@ -15,6 +15,8 @@ import DEFINES from '../../defines';
 
 import Logo from '../Logo/Logo';
 
+const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 export default function SignatureCanvas() {
   const canvasRef = React.useRef<SignaturePad | null>(null);
   const [count, setCount] = React.useState<number | null>(null);
@@ -93,24 +95,29 @@ export default function SignatureCanvas() {
   const handleSubscribe = () => {
     if (subscription) {
       if (email) {
-        fetch(`${DEFINES.API_URL}/subscription`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email }),
-        }).then((response) => response.json())
-          .then((resJson) => {
-            if (resJson.error === 0) {
-              setError('성공적으로 등록되었습니다.');
+        if (EMAIL_REGEX.test(email)) {
+          fetch(`${DEFINES.API_URL}/subscription`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+          }).then((response) => response.json())
+            .then((resJson) => {
+              if (resJson.error === 0) {
+                setError('성공적으로 등록되었습니다.');
+                setTimeout(() => setError(null), 3000);
+              }
+            })
+            .catch((err) => {
+              setError(JSON.stringify(err));
               setTimeout(() => setError(null), 3000);
-            }
-          })
-          .catch((err) => {
-            setError(JSON.stringify(err));
-            setTimeout(() => setError(null), 3000);
-          })
-          .finally(() => fetchCount());
+            })
+            .finally(() => fetchCount());
+        } else {
+          setError('올바른 이메일 주소가 아닙니다.');
+          setTimeout(() => setError(null), 3000);
+        }
       } else {
         setError('이메일을 먼저 입력해주세요!');
         setTimeout(() => setError(null), 3000);

@@ -46,7 +46,7 @@ export default function ContactScreen({ match }: ContactProps) {
         setAlert('이메일 주소가 올바르지 않습니다.');
         return;
       }
-      if (!PHONE_REGEX.test(phone)) {
+      if (phone && !PHONE_REGEX.test(phone)) {
         setAlert('휴대폰 번호가 올바르지 않습니다.');
         return;
       }
