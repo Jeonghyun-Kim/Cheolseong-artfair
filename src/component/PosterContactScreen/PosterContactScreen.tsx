@@ -17,7 +17,6 @@ import DEFINES from '../../defines';
 import Logo from '../Logo/Logo';
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const PHONE_REGEX = /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/;
 
 interface ContactProps extends RouteComponentProps<{ idx: string }> {}
 
@@ -44,10 +43,6 @@ export default function PosterContactScreen({ match }: ContactProps) {
       }
       if (!EMAIL_REGEX.test(email)) {
         setAlert('이메일 주소가 올바르지 않습니다.');
-        return;
-      }
-      if (phone && !PHONE_REGEX.test(phone)) {
-        setAlert('휴대폰 번호가 올바르지 않습니다.');
         return;
       }
       if (name.length < 2) {
@@ -149,7 +144,7 @@ export default function PosterContactScreen({ match }: ContactProps) {
                 fullWidth
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                inputProps={{ maxLength: 11 }}
+                inputProps={{ maxLength: 13 }}
               />
             </div>
             <div className="checkbox unselectable">
