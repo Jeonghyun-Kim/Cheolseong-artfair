@@ -1,10 +1,12 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
+  Router,
   Switch,
   Route,
   Redirect,
 } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import withTracker from './withTracker';
 
 import ViewingRoomScreen from './component/ViewingRoomScreen/ViewingRoomScreen';
 import IntroScreen from './component/IntroScreen/IntroScreen';
@@ -32,20 +34,22 @@ export default function AppRouter() {
     }
   }, []);
 
+  const history = createBrowserHistory();
+
   return (
-    <Router>
+    <Router history={history}>
       <ConfigContext.Provider
         value={{ idxMap, setIdxMap }}
       >
         <Switch>
-          <Route exact path="/" component={SummaryScreen} />
-          <Route path="/intro" component={IntroScreen} />
-          <Route path="/list" component={ListScreen} />
-          <Route path="/history" component={ArtistHistory} />
-          <Route path="/guest" component={SignatureCanvas} />
-          <Route path="/poster/:idx" component={PosterContactScreen} />
-          <Route path="/contact/:idx" component={ContactScreen} />
-          <Route path="/viewing-room/:idx" component={ViewingRoomScreen} />
+          <Route exact path="/" component={withTracker(SummaryScreen)} />
+          <Route path="/intro" component={withTracker(IntroScreen)} />
+          <Route path="/list" component={withTracker(ListScreen)} />
+          <Route path="/history" component={withTracker(ArtistHistory)} />
+          <Route path="/guest" component={withTracker(SignatureCanvas)} />
+          <Route path="/poster/:idx" component={withTracker(PosterContactScreen)} />
+          <Route path="/contact/:idx" component={withTracker(ContactScreen)} />
+          <Route path="/viewing-room/:idx" component={withTracker(ViewingRoomScreen)} />
           <Route path="/viewing-room">
             <Redirect to="/viewing-room/0" />
           </Route>
