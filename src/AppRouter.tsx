@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   // BrowserRouter as Router,
-  Router,
+  BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+// import { createBrowserHistory } from 'history';
 import withTracker from './withTracker';
 
 import ViewingRoomScreen from './component/ViewingRoomScreen/ViewingRoomScreen';
@@ -28,7 +28,7 @@ export default function AppRouter() {
     (new Array(info.length)).fill(undefined).map((_, idx) => idx),
   );
 
-  const history = createBrowserHistory();
+  // const history = createBrowserHistory();
 
   React.useEffect(() => {
     const storedIdx = sessionStorage.getItem('@idxMap');
@@ -38,7 +38,7 @@ export default function AppRouter() {
   }, []);
 
   return (
-    <Router history={history}>
+    <Router>
       <ConfigContext.Provider
         value={{ idxMap, setIdxMap }}
       >
