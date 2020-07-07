@@ -342,6 +342,7 @@ export default function SummaryScreen() {
         disabled={index === MAX_INDEX}
         style={{
           display: index === MAX_INDEX ? 'none' : '',
+          color: index === MAX_INDEX - 1 ? 'white' : 'rgba(149, 148, 160, 0.664)',
         }}
       >
         <ArrowForwardIosIcon fontSize="large" />

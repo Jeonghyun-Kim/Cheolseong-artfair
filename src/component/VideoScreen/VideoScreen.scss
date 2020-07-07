@@ -15,7 +15,7 @@ $borderRadius: 20px !global;
       height: calc(60vh - 60px);
       border-radius: $borderRadius;
 
-      @media screen and (max-width: 800px) {
+      @media screen and (max-width: 800px) and (orientation: portrait) {
         width: 100vw;
         height: 56vw;
       }
