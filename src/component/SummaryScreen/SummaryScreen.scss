@@ -58,3 +58,12 @@
     display: none;
   }
 }
+
+#progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  height: 5px;
+  transition: .7s ease;
+}
