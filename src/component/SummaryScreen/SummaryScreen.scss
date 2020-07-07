@@ -50,7 +50,11 @@
 #arrowRightMobile {
   position: absolute;
   z-index: 1;
-  color: rgba(149, 148, 160, 0.664);
+  color: rgba(250, 250, 250, 1);
   right: 10px;
   bottom: 10px;
+  
+  @media (min-width: 701px) {
+    display: none;
+  }
 }
