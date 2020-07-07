@@ -346,6 +346,22 @@ export default function SummaryScreen() {
       >
         <ArrowForwardIosIcon fontSize="large" />
       </IconButton>
+      {index === MAX_INDEX - 1 && (
+        <IconButton
+          id="arrowRightMobile"
+          onClick={() => {
+            if (!seenGuide && index !== 0 && index < MAX_INDEX - 1) {
+              setSeenGuide(true);
+              sessionStorage.setItem('@seenGuide', 'true');
+            } else {
+              handleRight();
+            }
+            setTimeout(() => focusSet(), 10);
+          }}
+        >
+          <ArrowForwardIosIcon fontSize="large" />
+        </IconButton>
+      )}
       {index !== 0 && index < MAX_INDEX - 1 && (
         <IconButton
           id="moreIcon"
