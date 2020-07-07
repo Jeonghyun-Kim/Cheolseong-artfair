@@ -84,7 +84,7 @@ export default function PosterContactScreen({ match }: ContactProps) {
         <Paper variant="elevation" className="contactPaper">
           <IconButton
             id="contactClose"
-            onClick={() => history.back()}
+            onClick={() => history.goBack()}
           >
             <CloseIcon fontSize="large" />
           </IconButton>

@@ -45,7 +45,7 @@ export default function AppRouter() {
         <Switch>
           <Route exact path="/" component={withTracker(SummaryScreen)} />
           <Route path="/intro" component={withTracker(IntroScreen)} />
-          <Route path="/list" component={withTracker(ListScreen)} />
+          <Route path="/list" component={ListScreen} />
           <Route path="/history" component={withTracker(ArtistHistory)} />
           <Route path="/guest" component={withTracker(SignatureCanvas)} />
           <Route path="/poster/:idx" component={withTracker(PosterContactScreen)} />
