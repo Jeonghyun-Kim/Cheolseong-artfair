@@ -88,7 +88,7 @@ export default function SignatureCanvas() {
             .finally(() => fetchCount());
         });
     } else {
-      setError('먼저 방명록을 작성해주세요.');
+      setError('먼저 방명록에 이름을 그려주세요.');
       setTimeout(() => setError(null), 3000);
     }
   };
