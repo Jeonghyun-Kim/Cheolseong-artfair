@@ -84,7 +84,7 @@ export default function ContactScreen({ match }: ContactProps) {
         <Paper variant="elevation" className="contactPaper">
           <IconButton
             id="contactClose"
-            onClick={() => history.goBack()}
+            onClick={() => history.back()}
           >
             <CloseIcon fontSize="large" />
           </IconButton>

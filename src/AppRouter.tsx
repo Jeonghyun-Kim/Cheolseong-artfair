@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  // BrowserRouter as Router,
   Router,
   Switch,
   Route,
@@ -27,14 +28,14 @@ export default function AppRouter() {
     (new Array(info.length)).fill(undefined).map((_, idx) => idx),
   );
 
+  const history = createBrowserHistory();
+
   React.useEffect(() => {
     const storedIdx = sessionStorage.getItem('@idxMap');
     if (storedIdx) {
       setIdxMap(JSON.parse(storedIdx));
     }
   }, []);
-
-  const history = createBrowserHistory();
 
   return (
     <Router history={history}>
