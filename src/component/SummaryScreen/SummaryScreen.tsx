@@ -389,6 +389,12 @@ export default function SummaryScreen() {
       >
         <CloseIcon fontSize="large" />
       </IconButton>
+      <div
+        id="progressBar"
+        style={{
+          width: `${(100 / idxMap.length) * (index + 1)}vw`,
+        }}
+      />
     </div>
   );
 }
