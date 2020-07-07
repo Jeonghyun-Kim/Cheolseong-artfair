@@ -25,6 +25,7 @@ export default function History() {
         <li>한국교원대학교 미술교육과 박사과정 졸업</li>
         <li>한국교원대학교 미술교육과 석사과정 졸업</li>
         <li>서울교육대학교 미술교육과 졸업</li>
+        <li>대일외국어고등학교 불어과 졸업</li>
       </ul>
       <Typography variant="h5" className="semiTitle">
         교육자 경력

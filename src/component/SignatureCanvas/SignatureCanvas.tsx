@@ -187,6 +187,7 @@ export default function SignatureCanvas() {
               src={`${process.env.PUBLIC_URL}/signPadPlaceHolder.jpg`}
               draggable={false}
             />
+            <Typography align="center">여기에 그려주세요.</Typography>
           </div>
           <div className="content inputPadding">
             <TextField

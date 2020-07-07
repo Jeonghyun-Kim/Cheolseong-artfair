@@ -102,7 +102,7 @@
         position: absolute;
         top: 0;
         left: 50%;
-        transform: translate(-50%, 40px);
+        transform: translate(-50%, 20%);
         width: calc(min(225px, 45vw));
         height: calc(min(90px, 18vw));
         z-index: 0;
@@ -111,6 +111,15 @@
           width: 100%;
           height: auto;
           object-fit: contain;
+        }
+
+        p {
+          margin-top: 20px;
+          opacity: 0.5;
+  
+          @media screen and (max-width: 700px) {
+            margin-top: 10px;
+          }
         }
       }
 
