@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 
 import ViewingRoomScreen from './component/ViewingRoomScreen/ViewingRoomScreen';
-import IntroScreen from './component/IntroScreen/IntroScreen';
 import ListScreen from './component/ListScreen/ListScreen';
 import ContactScreen from './component/ContactScreen/ContactScreen';
 import SummaryScreen from './component/SummaryScreen/SummaryScreen';
@@ -39,7 +38,6 @@ export default function AppRouter() {
       >
         <Switch>
           <Route exact path="/" component={SummaryScreen} />
-          <Route path="/intro" component={IntroScreen} />
           <Route path="/list" component={ListScreen} />
           <Route path="/history" component={ArtistHistory} />
           <Route path="/guest" component={SignatureCanvas} />

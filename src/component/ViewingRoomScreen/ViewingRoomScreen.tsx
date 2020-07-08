@@ -79,6 +79,10 @@ export default function ViewingRoomScreen({ match }: ViewingRoomProps) {
     });
   }, [MAX_INDEX, idxMap, index]);
 
+  React.useEffect(() => {
+    fetch(`${DEFINES.API_URL}/hitcount/viewingroom`);
+  }, []);
+
   const handleLeft = React.useCallback(() => {
     if (index !== 0) {
       if (onDetail) {

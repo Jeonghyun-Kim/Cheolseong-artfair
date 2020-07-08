@@ -37,9 +37,15 @@ export default function SignatureCanvas() {
         }
       });
   };
+
   React.useEffect(() => {
     fetchCount();
   }, []);
+
+  React.useEffect(() => {
+    fetch(`${DEFINES.API_URL}/hitcount/guest`);
+  }, []);
+
 
   const handleClear = () => {
     if (canvasRef.current) {

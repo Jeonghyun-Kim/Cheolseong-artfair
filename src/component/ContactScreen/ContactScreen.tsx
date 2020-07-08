@@ -77,6 +77,10 @@ export default function ContactScreen({ match }: ContactProps) {
     }
   };
 
+  React.useEffect(() => {
+    fetch(`${DEFINES.API_URL}/hitcount/contact/${idx}`);
+  }, [idx]);
+
   return (
     <div className="App contactRoot background">
       <Logo />

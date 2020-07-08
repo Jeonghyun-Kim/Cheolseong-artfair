@@ -24,6 +24,7 @@ import useWindowSize from '../useWindowSize';
 import ItemList from './ItemList/ItemList';
 
 import Logo from '../Logo/Logo';
+import DEFINES from '../../defines';
 
 const YEAR_MIN = 2004;
 const YEAR_MAX = 2020;
@@ -91,6 +92,10 @@ export default function ListScreen() {
       setStoredSortConfig(JSON.parse(sessionSortConfig));
       setSortConfig(JSON.parse(sessionSortConfig));
     }
+  }, []);
+
+  React.useEffect(() => {
+    fetch(`${DEFINES.API_URL}/hitcount/list`);
   }, []);
 
   const handleScrollToTop = () => {

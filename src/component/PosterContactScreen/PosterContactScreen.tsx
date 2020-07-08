@@ -77,6 +77,11 @@ export default function PosterContactScreen({ match }: ContactProps) {
     }
   };
 
+  React.useEffect(() => {
+    fetch(`${DEFINES.API_URL}/hitcount/poster/${idx}`);
+  }, [idx]);
+
+
   return (
     <div className="App contactRoot background">
       <Logo />
