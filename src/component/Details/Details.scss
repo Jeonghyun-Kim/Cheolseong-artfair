@@ -10,6 +10,10 @@
     height: 250px;
   }
 
+  @media screen and (max-width: 700px) and (orientation: portrait) {
+    max-height: calc(100vh - 150px);
+  }
+
   .imgBackground {
     background-color: #ddd;
     display: flex;
@@ -21,10 +25,13 @@
       height: 100%;
     }
 
+    @media screen and (max-width: 700px) and (orientation: portrait) {
+      height: 200px;
+    }
+
     .cardImage {
       max-width: 100%;
-      max-height: 100%;
-      max-height: 350px;
+      max-height: calc(min(100%, 350px));
       border-width: 1px;
       object-fit: contain;
   
