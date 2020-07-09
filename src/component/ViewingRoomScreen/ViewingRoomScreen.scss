@@ -26,7 +26,7 @@ $iconMarginSmall: 5px !global;
 
 .detailScreen {
   width: calc(min(530px, 90vw));
-  transition: $delay;
+  transition: opacity $delay, z-index $delay;
   z-index: 100;
   position: absolute;
   left: 50%;
