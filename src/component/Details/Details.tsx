@@ -13,12 +13,9 @@ import './Details.scss';
 import info from '../../info.json';
 import DEFINES from '../../defines';
 
-import useWindowSize from '../useWindowSize';
-
 export default function Details({ idx, src }:
 { idx: number, src: string }) {
   const [alert, setAlert] = React.useState<string | null>(null);
-  const [innerWidth, innerHeight] = useWindowSize();
 
   const handleAlert = () => {
     setAlert('주소가 클립보드에 복사되었습니다.');
@@ -26,36 +23,16 @@ export default function Details({ idx, src }:
   };
 
   return (
-    <Card
-      className="cardRoot"
-      style={{
-        width: Math.min(innerWidth - 100, 800),
-        height: innerHeight < 500 ? innerHeight - 100 : 'auto',
-        flexDirection: (innerWidth < 1000) && (innerHeight < 700) && (innerWidth > innerHeight) ? 'row' : 'column',
-      }}
-    >
+    <Card className="cardRoot">
       <div className="imgBackground">
-        {(innerWidth < 1000) && (innerHeight < 700) && (innerWidth > innerHeight) ? (
-          <img
-            alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
-            src={src}
-            className="cardImage"
-            style={{
-              borderRadius: info[idx].src === '2013_5.gif' ? 999 : 2,
-              maxHeight: '100%',
-            }}
-          />
-        ) : (
-          <img
-            alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
-            src={src}
-            className="cardImage"
-            style={{
-              borderRadius: info[idx].src === '2013_5.gif' ? 999 : 2,
-              maxHeight: innerHeight - 370,
-            }}
-          />
-        )}
+        <img
+          alt={`Decorum ${info[idx].year} - ${info[idx].id}`}
+          src={src}
+          className="cardImage"
+          style={{
+            borderRadius: info[idx].src === '2013_5.gif' ? 999 : 2,
+          }}
+        />
       </div>
       <div className="cardContent">
         <CardContent style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>

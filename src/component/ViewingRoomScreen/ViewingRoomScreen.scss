@@ -25,7 +25,7 @@ $iconMarginSmall: 5px !global;
 }
 
 .detailScreen {
-  max-width: 520px;
+  width: calc(min(530px, 90vw));
   transition: $delay;
   z-index: 100;
   position: absolute;
