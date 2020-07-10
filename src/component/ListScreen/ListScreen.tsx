@@ -31,7 +31,7 @@ const YEAR_MAX = 2020;
 
 const PRICE_UNIT = 50;
 const PRICE_MIN = 0 / PRICE_UNIT;
-const PRICE_MAX = 1800 / PRICE_UNIT;
+const PRICE_MAX = 2400 / PRICE_UNIT;
 
 interface Information {
   year: number;
