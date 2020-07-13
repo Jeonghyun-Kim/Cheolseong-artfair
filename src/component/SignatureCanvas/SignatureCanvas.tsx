@@ -9,6 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEraser } from '@fortawesome/free-solid-svg-icons';
 
+import { useTranslation } from 'react-i18next';
+
 import './SignatureCanvas.scss';
 
 import DEFINES from '../../defines';
@@ -27,6 +29,8 @@ export default function SignatureCanvas() {
   const [content, setContent] = React.useState<string>('');
   const [error, setError] = React.useState<string | null>(null);
 
+  const { t } = useTranslation();
+
   const fetchCount = () => {
     fetch(`${DEFINES.API_URL}/signatures`, {
       method: 'GET',
@@ -42,9 +46,9 @@ export default function SignatureCanvas() {
     fetchCount();
   }, []);
 
-  React.useEffect(() => {
-    fetch(`${DEFINES.API_URL}/hitcount/guest`);
-  }, []);
+  // React.useEffect(() => {
+  //   fetch(`${DEFINES.API_URL}/hitcount/guest`);
+  // }, []);
 
 
   const handleClear = () => {
@@ -83,7 +87,7 @@ export default function SignatureCanvas() {
             .then((resJson) => {
               if (resJson.error === 0) {
                 handleClear();
-                setError('성공적으로 등록되었습니다.');
+                setError(t('alert.successfully_registered'));
                 setTimeout(() => setError(null), 3000);
               }
             })
@@ -94,7 +98,7 @@ export default function SignatureCanvas() {
             .finally(() => fetchCount());
         });
     } else {
-      setError('먼저 방명록에 이름을 그려주세요.');
+      setError(t('alert.draw_first'));
       setTimeout(() => setError(null), 3000);
     }
   };
@@ -112,32 +116,32 @@ export default function SignatureCanvas() {
           }).then((response) => response.json())
             .then((resJson) => {
               if (resJson.error === 0) {
-                setError('성공적으로 등록되었습니다.');
+                setError(t('alert.successfully_registered'));
                 setEmail('');
                 setSubscription(false);
                 setTimeout(() => setError(null), 3000);
               } else if (resJson.error === 2) {
-                setError('이미 등록된 이메일입니다.');
+                setError(t('alert.already_subscribed'));
                 setEmail('');
                 setSubscription(false);
                 setTimeout(() => setError(null), 3000);
               }
             })
             .catch(() => {
-              setError('서버 에러 발생. 잠시 후 다시 시도해주세요.');
+              setError(t('alert.internal_server_error'));
               setTimeout(() => setError(null), 3000);
             })
             .finally(() => fetchCount());
         } else {
-          setError('올바른 이메일 주소가 아닙니다.');
+          setError(t('alert.inappropriate_email'));
           setTimeout(() => setError(null), 3000);
         }
       } else {
-        setError('이메일을 먼저 입력해주세요!');
+        setError(t('alert.enter_email_first'));
         setTimeout(() => setError(null), 3000);
       }
     } else {
-      setError('개인정보 동의는 필수입니다.');
+      setError(t('alert.privacy_policy_required'));
       setTimeout(() => setError(null), 3000);
     }
   };
@@ -148,13 +152,13 @@ export default function SignatureCanvas() {
       <div className="gridContainer">
         {count !== null && (
           <div className="counter">
-            <div>지금까지</div>
+            <div>{t('visitors_book.by_now')}</div>
             <CountUp
               end={count + 50}
               duration={2}
               separator=","
             />
-            <div>명 참여</div>
+            <div>{t('visitors_book.participated')}</div>
           </div>
         )}
         {error && (
@@ -162,7 +166,7 @@ export default function SignatureCanvas() {
             {error}
           </div>
         )}
-        <Typography variant="h6" className="title">방명록</Typography>
+        <Typography variant="h6" className="title">{t('visitors_book.title')}</Typography>
         <div className="canvasContainter">
           <IconButton
             id="sigClear"
@@ -193,7 +197,7 @@ export default function SignatureCanvas() {
               src={`${process.env.PUBLIC_URL}/signPadPlaceHolder.jpg`}
               draggable={false}
             />
-            <Typography align="center">여기에 그려주세요.</Typography>
+            <Typography align="center">{t('visitors_book.placeholder')}</Typography>
           </div>
           <div className="content inputPadding">
             <TextField
@@ -202,7 +206,7 @@ export default function SignatureCanvas() {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               variant="outlined"
-              placeholder="onDisplay 또는 작가님께 하고 싶은 말을 남겨주세요. (선택)"
+              placeholder={t('visitors_book.text_placeholder')}
               multiline
               fullWidth
               inputProps={{ maxLength: 300 }}
@@ -219,7 +223,7 @@ export default function SignatureCanvas() {
               variant="outlined"
               onClick={() => handleSubmit()}
             >
-              제출
+              {t('submit')}
             </Button>
           </div>
         </div>
@@ -245,11 +249,11 @@ export default function SignatureCanvas() {
                   setSubscription(e.target.checked);
                 }}
               />
-              <span>홍보 &middot; 마케팅을 위한 개인정보 수집 &middot; 활용에 동의합니다.</span>
+              <span>{t('visitors_book.agreement')}</span>
             </div>
             <div className="seeMoreButton">
               <a href={`${DEFINES.API_URL}/privacy_agreement.pdf`} rel="noopener noreferrer" target="_blank">
-                <span>자세히 보기</span>
+                <span>{t('privacy_policy')}</span>
               </a>
             </div>
             <div className="submit">
@@ -257,7 +261,7 @@ export default function SignatureCanvas() {
                 variant="outlined"
                 onClick={() => handleSubscribe()}
               >
-                onDisplay의 전시 소식 받아보기
+                {t('visitors_book.keep_updated')}
               </Button>
             </div>
           </form>

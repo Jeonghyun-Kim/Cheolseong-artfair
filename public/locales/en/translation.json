@@ -1,0 +1,67 @@
+{
+  "language": "Languages",
+  "alert": {
+    "successfully_registered": "Successfully registered.",
+    "draw_first": "Please draw your name in canvas first.",
+    "already_subscribed": "You already subscribed us.",
+    "internal_server_error": "Internal Server Error. Please try later.",
+    "inappropriate_email": "Check your email address.",
+    "enter_email_first": "Please enter your email.",
+    "privacy_policy_required": "Privacy Policy Agreement is required.",
+    "name_length_larger_than_2": "Enter 2 or more letters for your name.",
+    "content_length_larger_than_3": "Enter 3 or more letters for the content.",
+    "content_length_smaller_than_300": "Enter 300 or less letters for the content.",
+    "check_network_status": "Please check your network status.",
+    "fill_all_required": "Please fill the all required blanks."
+  },
+  "submit": "submit",
+  "privacy_policy": "Privacy Policy",
+  "sort": "sort",
+  "filter": "filter",
+  "currency": "KRW",
+  "name": "name",
+  "email": "email",
+  "phone": "phone",
+  "required": "required",
+  "ex": "ex: +1-000-000-0000",
+  "introduction": {
+    "title": "Artist’s thought",
+    "p1": "My artwork includes considerable amount of white space. It isn’t a simple vacancy nor the simple description of visual information but rather the trace of our thoughts that stays there and leaves. Along with the spatial composition of the white, shape and color have been refined but understated in order to resonate with the meaning of the emptiness.",
+    "p2": "The world changes fast; capitalism and hastiness become more and more predominant. Instead of an undefined feelings of inner growth, people tend to pursue the result and efficiency. We’re not relaxed enough anymore to listen back to the sound of our inner self.",
+    "p3": "I’m guiding the audience into the things that we cannot see through those we can. I hope the audience to consciously fill up the white space with their thoughts, recover their subjectivity, and have some relaxed time or manner to look deep inside their inner self.",
+    "name": "Cheolseong Kim"
+  },
+  "visitors_book": {
+    "by_now": "TOTAL",
+    "participated": "PARTICIPATED",
+    "title": "Visitors Book",
+    "placeholder": "Please draw your name here.",
+    "text_placeholder": "Please leave your comments for the artist. (optional)",
+    "agreement": "I agree with Privacy Policy for marketing purposes.",
+    "keep_updated": "Keep me updated about future exhibitions."
+  },
+  "about": {
+    "explanation": "onDisplay is the IT company that leads the new culture of exhibition and appreciation of the post-COVID-19 era along with artists and art galleries. Please contact us if interested in opening an online exhibition with onDisplay. We support every artist affected by COVID-19.",
+    "representative": "CEO ",
+    "psj": "Simon Park"
+  },
+  "detail": {
+    "copied_to_clipboard": "Addr구ess copied to clipboard.",
+    "share": "share",
+    "contact": "contact",
+    "printing": "printing"
+  },
+  "contact": {
+    "privacy_policy_agreement": "I agree with Privacy Policy. (required)",
+    "keep_me_updated": "Keep me updated about future exhibitions. (optional)",
+    "title1": "Are you interested in purchasing this artwork?",
+    "title2": "Please leave a note to the artist. *",
+    "placeholder": "Hi, I’m really interested in purchasing this artwork. I want to take a look at the artwork before making the decision. Would you mind if I visit your studio?",
+    "printing": {
+      "title1": "We provide canvas printings of various sizes.",
+      "title2": "Please leave a note of your request. *",
+      "placeholder1": "I want to purchase the printing with the size of the original artwork.",
+      "placeholder2": "I want to purchase the printing with a size of A4, in the frame."  
+    }
+  }
+}

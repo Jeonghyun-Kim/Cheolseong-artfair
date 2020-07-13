@@ -13,6 +13,7 @@ import SummaryScreen from './component/SummaryScreen/SummaryScreen';
 import PosterContactScreen from './component/PosterContactScreen/PosterContactScreen';
 import ArtistHistory from './component/ArtistHistory/ArtistHistory';
 import SignatureCanvas from './component/SignatureCanvas/SignatureCanvas';
+import LanguageScreen from './component/LanguageScreen/LanguageScreen';
 
 import ConfigContext from './ConfigContext';
 
@@ -38,6 +39,7 @@ export default function AppRouter() {
       >
         <Switch>
           <Route exact path="/" component={SummaryScreen} />
+          <Route path="/languages" component={LanguageScreen} />
           <Route path="/list" component={ListScreen} />
           <Route path="/history" component={ArtistHistory} />
           <Route path="/guest" component={SignatureCanvas} />

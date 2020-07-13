@@ -12,6 +12,8 @@ import UpIcon from '@material-ui/icons/ArrowUpward';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter, faSortAmountDown } from '@fortawesome/free-solid-svg-icons';
 
+import { useTranslation } from 'react-i18next';
+
 import './ListScreen.scss';
 
 import ConfigContext from '../../ConfigContext';
@@ -24,7 +26,7 @@ import useWindowSize from '../useWindowSize';
 import ItemList from './ItemList/ItemList';
 
 import Logo from '../Logo/Logo';
-import DEFINES from '../../defines';
+// import DEFINES from '../../defines';
 
 const YEAR_MIN = 2004;
 const YEAR_MAX = 2020;
@@ -79,6 +81,8 @@ export default function ListScreen() {
 
   const [innerWidth] = useWindowSize();
 
+  const { t, i18n } = useTranslation();
+
   React.useEffect(() => {
     const sessionConfig = sessionStorage.getItem('@config');
     const sessionSortConfig = sessionStorage.getItem('@sortConfig');
@@ -94,9 +98,9 @@ export default function ListScreen() {
     }
   }, []);
 
-  React.useEffect(() => {
-    fetch(`${DEFINES.API_URL}/hitcount/list`);
-  }, []);
+  // React.useEffect(() => {
+  //   fetch(`${DEFINES.API_URL}/hitcount/list`);
+  // }, []);
 
   const handleScrollToTop = () => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
@@ -205,7 +209,11 @@ export default function ListScreen() {
     <div className="listRoot background" id="listRoot">
       <div className="stickyBar">
         <Logo />
-        <Typography id="paitingNumber" className="unselectable">작품 개수: {idxMap.length}개</Typography>
+        <Typography id="paitingNumber" className="unselectable">
+          {i18n.language === 'ko'
+            ? `작품 개수: ${idxMap.length}개`
+            : `# of artworks: ${idxMap.length}`}
+        </Typography>
         {/* Sort Menu Button */}
         <IconButton
           id="sortIcon"
@@ -219,7 +227,7 @@ export default function ListScreen() {
               size={innerWidth < 700 ? 'xs' : '1x'}
               style={{ margin: innerWidth < 700 ? '5px' : '10px' }}
             />
-            <div className="iconTitle">정렬</div>
+            <div className="iconTitle">{t('sort')}</div>
           </div>
           <div className="badgeContainer">
             {!(JSON.stringify(storedSortConfig) === JSON.stringify(defaultSortConfig)) && (
@@ -328,7 +336,7 @@ export default function ListScreen() {
               size={innerWidth < 700 ? 'xs' : '1x'}
               style={{ margin: innerWidth < 700 ? '5px' : '10px' }}
             />
-            <div className="iconTitle">검색</div>
+            <div className="iconTitle">{t('filter')}</div>
           </div>
           <div className="badgeContainer">
             {!(JSON.stringify(storedConfig.yearRange) === JSON.stringify(defaultConfig.yearRange)

@@ -7,18 +7,23 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
+import { useTranslation } from 'react-i18next';
+
 import { ReactComponent as LogoIcon } from './onDisplay_logo.svg';
 
 import './MenuScreen.scss';
 
 import menus from './menus.json';
+import menus_en from './menus_en.json';
 
 import About from '../About/About';
 import Logo from '../Logo/Logo';
+import LanguagesButton from '../LanguagesButton/LanguagesButton';
 
 export default function MenuScreen({ onAbout, setOnAbout }:
 { onAbout: boolean, setOnAbout: React.Dispatch<React.SetStateAction<boolean>> }) {
   const history = useHistory();
+  const { i18n } = useTranslation();
 
   return (
     <div
@@ -63,6 +68,7 @@ export default function MenuScreen({ onAbout, setOnAbout }:
         onKeyDown={() => {}}
       >
         <Logo />
+        <LanguagesButton />
         <div className="mobileMenuContainer">
           <div
             role="button"
@@ -79,7 +85,9 @@ export default function MenuScreen({ onAbout, setOnAbout }:
               <FontAwesomeIcon icon={faLandmark} />
             </div>
             <div className="title">
-              {menus[0].title}
+              {i18n.language === 'ko'
+                ? menus[0].title
+                : menus_en[0].title}
             </div>
           </div>
           <div
@@ -97,7 +105,9 @@ export default function MenuScreen({ onAbout, setOnAbout }:
               <FontAwesomeIcon icon={faUserGraduate} />
             </div>
             <div className="title">
-              {menus[1].title}
+              {i18n.language === 'ko'
+                ? menus[1].title
+                : menus_en[1].title}
             </div>
           </div>
           <div
@@ -115,7 +125,9 @@ export default function MenuScreen({ onAbout, setOnAbout }:
               <FontAwesomeIcon icon={faEdit} />
             </div>
             <div className="title">
-              {menus[2].title}
+              {i18n.language === 'ko'
+                ? menus[2].title
+                : menus_en[2].title}
             </div>
           </div>
           <div
@@ -129,7 +141,9 @@ export default function MenuScreen({ onAbout, setOnAbout }:
               <SvgIcon component={LogoIcon} viewBox="0 0 303 303" />
             </div>
             <div className="title">
-              {menus[3].title}
+              {i18n.language === 'ko'
+                ? menus[3].title
+                : menus_en[3].title}
             </div>
           </div>
         </div>
@@ -149,14 +163,16 @@ export default function MenuScreen({ onAbout, setOnAbout }:
               <FontAwesomeIcon icon={faLandmark} />
             </div>
             <div className="title">
-              {menus[0].title.split('\n').map((line, idx) => (
-                <span key={idx.toString()}>{line}<br /></span>
-              ))}
+              {i18n.language === 'ko'
+                ? menus[0].title
+                : menus_en[0].title}
             </div>
             <div className="divider" />
             <div className="content">
               <div className="grow" />
-              {menus[0].content}
+              {i18n.language === 'ko'
+                ? menus[0].content
+                : menus_en[0].content}
               <div className="grow" />
             </div>
           </div>
@@ -175,14 +191,16 @@ export default function MenuScreen({ onAbout, setOnAbout }:
               <FontAwesomeIcon icon={faUserGraduate} />
             </div>
             <div className="title">
-              {menus[1].title.split('\n').map((line, idx) => (
-                <span key={idx.toString()}>{line}<br /></span>
-              ))}
+              {i18n.language === 'ko'
+                ? menus[1].title
+                : menus_en[1].title}
             </div>
             <div className="divider" />
             <div className="content">
               <div className="grow" />
-              {menus[1].content}
+              {i18n.language === 'ko'
+                ? menus[1].content
+                : menus_en[1].content}
               <div className="grow" />
             </div>
           </div>
@@ -201,14 +219,16 @@ export default function MenuScreen({ onAbout, setOnAbout }:
               <FontAwesomeIcon icon={faEdit} />
             </div>
             <div className="title">
-              {menus[2].title.split('\n').map((line, idx) => (
-                <span key={idx.toString()}>{line}<br /></span>
-              ))}
+              {i18n.language === 'ko'
+                ? menus[2].title
+                : menus_en[2].title}
             </div>
             <div className="divider" />
             <div className="content">
               <div className="grow" />
-              {menus[2].content}
+              {i18n.language === 'ko'
+                ? menus[2].content
+                : menus_en[2].content}
               <div className="grow" />
             </div>
           </div>
@@ -223,14 +243,16 @@ export default function MenuScreen({ onAbout, setOnAbout }:
               <SvgIcon component={LogoIcon} viewBox="0 0 303 303" />
             </div>
             <div className="title">
-              {menus[3].title.split('\n').map((line, idx) => (
-                <span key={idx.toString()}>{line}<br /></span>
-              ))}
+              {i18n.language === 'ko'
+                ? menus[3].title
+                : menus_en[3].title}
             </div>
             <div className="divider" />
             <div className="content">
               <div className="grow" />
-              {menus[3].content}
+              {i18n.language === 'ko'
+                ? menus[3].content
+                : menus_en[3].content}
               <div className="grow" />
             </div>
           </div>

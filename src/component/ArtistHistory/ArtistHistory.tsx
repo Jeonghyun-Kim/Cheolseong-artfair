@@ -9,16 +9,16 @@ import Introduction from './Introduction/Introduction';
 import Review from './Review/Review';
 import History from './History/History';
 
-import DEFINES from '../../defines';
+// import DEFINES from '../../defines';
 
 export default function ArtistHistory() {
   const handleScrollToTop = () => {
     window.scroll({ left: 0, top: 0, behavior: 'smooth' });
   };
 
-  React.useEffect(() => {
-    fetch(`${DEFINES.API_URL}/hitcount/history`);
-  }, []);
+  // React.useEffect(() => {
+  //   fetch(`${DEFINES.API_URL}/hitcount/history`);
+  // }, []);
 
   return (
     <div className="unselectable historyApp background">

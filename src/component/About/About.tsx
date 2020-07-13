@@ -2,9 +2,13 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
+import { useTranslation } from 'react-i18next';
+
 import './About.scss';
 
 export default function About() {
+  const { t } = useTranslation();
+
   return (
     <Paper variant="elevation" className="aboutPaper">
       <div className="logoImage">
@@ -12,8 +16,7 @@ export default function About() {
       </div>
       <div className="explanation">
         <Typography>
-          onDisplay는 작가, 갤러리와 함께 포스트 코로나 시대의 새로운 미술 관람 문화를 선도하는 전문 IT 기업입니다.
-          코로나 사태로 인해 예정되었던 전시가 취소되었거나 온라인 전시에 관심있는 갤러리나 작가님께서는 자유롭게 문의해주세요.
+          {t('about.explanation')}
         </Typography>
       </div>
       <div className="contactUs">
@@ -24,7 +27,7 @@ export default function About() {
           <br />
           <div id="section1">
             <Typography id="content">
-              <b>대표 </b>
+              <b>{t('about.representative')}</b>
               <br />
               <b>Email </b>
               <br />
@@ -35,7 +38,7 @@ export default function About() {
           </div>
           <div id="section2">
             <Typography id="content">
-              박세정
+              {t('about.psj')}
               <br />
               ondisplay.art@gmail.com
               <br />

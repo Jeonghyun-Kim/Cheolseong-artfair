@@ -7,6 +7,7 @@ import useWindowSize from '../useWindowSize';
 import DEFINES from '../../defines';
 
 import Logo from '../Logo/Logo';
+import LanguagesButton from '../LanguagesButton/LanguagesButton';
 
 export default function IntroScreen() {
   const [innerWidth] = useWindowSize();
@@ -14,6 +15,7 @@ export default function IntroScreen() {
   return (
     <div className="introApp unselectable">
       <Logo />
+      <LanguagesButton />
       <div className="introLetters">
         <div className="title">
           <img

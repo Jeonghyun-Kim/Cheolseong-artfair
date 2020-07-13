@@ -74,9 +74,9 @@ export default function SummaryScreen() {
     }
   }, []);
 
-  React.useEffect(() => {
-    fetch(`${DEFINES.API_URL}/hitcount/main/${index}`);
-  }, [index]);
+  // React.useEffect(() => {
+  //   fetch(`${DEFINES.API_URL}/hitcount/main/${index}`);
+  // }, [index]);
 
   const handleLeft = React.useCallback(() => {
     if (index !== 0) {
