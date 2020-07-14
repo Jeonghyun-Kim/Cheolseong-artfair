@@ -9,6 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
 
+import { useTranslation } from 'react-i18next';
+
 import './Details.scss';
 import info from '../../info.json';
 import DEFINES from '../../defines';
@@ -17,8 +19,10 @@ export default function Details({ idx, src }:
 { idx: number, src: string }) {
   const [alert, setAlert] = React.useState<string | null>(null);
 
+  const { t } = useTranslation();
+
   const handleAlert = () => {
-    setAlert('주소가 클립보드에 복사되었습니다.');
+    setAlert(t('detail.copied_to_clipboard'));
     setTimeout(() => setAlert(null), 3000);
   };
 
@@ -60,7 +64,7 @@ export default function Details({ idx, src }:
                   ? (
                     'SOLD OUT'
                   ) : (
-                    `${info[idx].price} 만원`
+                    `${(Number(info[idx].price) * 10000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} ${t('currency')}`
                   )}
               </Typography>
             </Grid>
@@ -76,17 +80,17 @@ export default function Details({ idx, src }:
             onCopy={handleAlert}
           >
             <Button size="small" color="primary">
-              공유
+              {t('detail.share')}
             </Button>
           </CopyToClipboard>
           <Button size="small" color="primary">
             <Link to={`/contact/${idx}`} className="buttonLink">
-              작품문의
+              {t('detail.contact')}
             </Link>
           </Button>
           <Button size="small" color="primary">
             <Link to={`/poster/${idx}`} className="buttonLink">
-              출력본문의
+              {t('detail.printing')}
             </Link>
           </Button>
         </CardActions>

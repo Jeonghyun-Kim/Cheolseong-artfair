@@ -11,6 +11,12 @@ $iconColor: azure !global;
   overflow-y: auto;
 }
 
+#checkBoxContainer {
+  span {
+    padding: 3px;
+  }
+}
+
 .listHeader {
   position: absolute;
   width: 100%;
@@ -44,7 +50,6 @@ $iconColor: azure !global;
 
 #onSaleText {
   font-size: medium;
-  margin-left: 20px;
 }
 
 .listContainer {
@@ -125,10 +130,16 @@ $iconColor: azure !global;
 // }
 
 #sort-menu {
-  #switchContainer {
-    border: none !important;
-    min-width: 200px;
-    margin: 10px 20px;
+  // #switchContainer {
+  //   border: none !important;
+  //   min-width: 200px;
+  //   margin: 10px 20px;
+  // }
+  button {
+    font: inherit;
+    padding: 5px 20px;
+    border: none;
+    outline-color: transparent;
   }
 }
 

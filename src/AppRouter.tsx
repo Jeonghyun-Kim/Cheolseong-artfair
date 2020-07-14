@@ -13,11 +13,13 @@ import SummaryScreen from './component/SummaryScreen/SummaryScreen';
 import PosterContactScreen from './component/PosterContactScreen/PosterContactScreen';
 import ArtistHistory from './component/ArtistHistory/ArtistHistory';
 import SignatureCanvas from './component/SignatureCanvas/SignatureCanvas';
+import LanguageScreen from './component/LanguageScreen/LanguageScreen';
 
 import ConfigContext from './ConfigContext';
 
 import './common.scss';
 import info from './info.json';
+// import LoadingScreen from './component/LoadingScreen/LoadingScreen';
 
 export default function AppRouter() {
   const [idxMap, setIdxMap] = React.useState<number[]>(
@@ -38,6 +40,8 @@ export default function AppRouter() {
       >
         <Switch>
           <Route exact path="/" component={SummaryScreen} />
+          {/* <Route path="/loading" component={LoadingScreen} /> */}
+          <Route path="/languages" component={LanguageScreen} />
           <Route path="/list" component={ListScreen} />
           <Route path="/history" component={ArtistHistory} />
           <Route path="/guest" component={SignatureCanvas} />

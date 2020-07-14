@@ -9,6 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
+import { useTranslation } from 'react-i18next';
+
 import './PosterContactScreen.scss';
 
 import info from '../../info.json';
@@ -29,32 +31,43 @@ export default function PosterContactScreen({ match }: ContactProps) {
   const [agreed, setAgreed] = React.useState<boolean>(false);
   const [alert, setAlert] = React.useState<string>('');
 
+  const { t } = useTranslation();
+
   const history = useHistory();
 
   const idx = Number(match.params.idx);
+
+  const setDefault = () => {
+    setName('');
+    setEmail('');
+    setPhone('');
+    setContent('');
+    setSubscription(false);
+    setAgreed(false);
+  };
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement | MouseEvent>) => {
     e.preventDefault();
 
     if (name && email && content) {
       if (!agreed) {
-        setAlert('개인정보의 수집 및 활용 동의는 필수입니다.');
+        setAlert(t('alert.privacy_policy_required'));
         return;
       }
       if (!EMAIL_REGEX.test(email)) {
-        setAlert('이메일 주소가 올바르지 않습니다.');
+        setAlert(t('alert.inappropriate_email'));
         return;
       }
       if (name.length < 2) {
-        setAlert('이름은 2글자 이상 입력해주세요.');
+        setAlert(t('alert.name_length_larger_than_2'));
         return;
       }
       if (content.length < 3) {
-        setAlert('내용은 3글자 이상 입력해주세요.');
+        setAlert(t('alert.content_length_larger_than_3'));
         return;
       }
       if (content.length > 300) {
-        setAlert('내용은 300글자 이하로 입력해주세요.');
+        setAlert(t('alert.content_length_smaller_than_300'));
         return;
       }
       fetch(`${DEFINES.API_URL}/contact`, {
@@ -67,13 +80,14 @@ export default function PosterContactScreen({ match }: ContactProps) {
         }),
       }).then(async (response) => {
         if (response.ok) {
-          setAlert('성공적으로 등록되었습니다. 입력하신 이메일/휴대전화로 연락 드릴게요.');
+          setAlert(t('alert.successfully_registered'));
+          setDefault();
         } else {
-          setAlert('데이터베이스 에러. 전화 문의 바랍니다. 010-6317-1498');
+          setAlert(t('alert.internal_server_error'));
         }
-      }).catch(() => setAlert('네트워크 연결 상태를 확인하세요.'));
+      }).catch(() => setAlert(t('alert.check_network_status')));
     } else {
-      setAlert('필수 입력칸을 모두 채워주세요!');
+      setAlert(t('alert.fill_all_required'));
     }
   };
 
@@ -112,11 +126,11 @@ export default function PosterContactScreen({ match }: ContactProps) {
             </Grid>
             <div id="divider" />
             <div className="textInput">
-              <div>이름 *</div>
+              <div>{t('name')} *</div>
               <TextField
                 required
                 name="name"
-                placeholder="필수"
+                placeholder={t('required')}
                 variant="standard"
                 color="primary"
                 fullWidth
@@ -125,12 +139,12 @@ export default function PosterContactScreen({ match }: ContactProps) {
               />
             </div>
             <div className="textInput">
-              <div>이메일 *</div>
+              <div>{t('email')} *</div>
               <TextField
                 required
                 name="email"
                 type="email"
-                placeholder="필수"
+                placeholder={t('required')}
                 variant="standard"
                 color="primary"
                 fullWidth
@@ -139,17 +153,17 @@ export default function PosterContactScreen({ match }: ContactProps) {
               />
             </div>
             <div className="textInput">
-              <div>휴대전화</div>
+              <div>{t('phone')}</div>
               <TextField
                 type="tel"
                 name="tel"
-                placeholder="(예: 01012345678)"
+                placeholder={`(${t('ex')})`}
                 variant="standard"
                 color="primary"
                 fullWidth
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                inputProps={{ maxLength: 13 }}
+                inputProps={{ maxLength: 20 }}
               />
             </div>
             <div className="checkbox unselectable">
@@ -161,7 +175,7 @@ export default function PosterContactScreen({ match }: ContactProps) {
                   setAgreed(e.target.checked);
                 }}
               />
-              <span>개인정보의 수집 및 활용 동의 (필수)</span>
+              <span>{t('contact.privacy_policy_agreement')}</span>
             </div>
             <div className="checkbox unselectable">
               <Checkbox
@@ -171,27 +185,27 @@ export default function PosterContactScreen({ match }: ContactProps) {
                   setSubscription(e.target.checked);
                 }}
               />
-              <span>새로운 전시 등 onDisplay 소식을 받아볼래요. (선택)</span>
+              <span>{t('contact.keep_me_updated')}</span>
             </div>
             <div className="seeMoreButton">
               <a href={`${DEFINES.API_URL}/privacy_agreement.pdf`} rel="noopener noreferrer" target="_blank">
-                <span>자세히 보기</span>
+                <span>{t('privacy_policy')}</span>
               </a>
             </div>
           </Grid>
           <Grid item xs={12} sm={6} md={7} id="contentSection">
             <Typography variant="h6" id="helperText" className="poster">
-              다양한 사이즈의 캔버스 프린팅 제작이 가능합니다.
+              {t('contact.printing.title1')}
               <br />
-              자유롭게 문의해주세요. *
+              {t('contact.printing.title2')}
             </Typography>
             <form>
               <div className="posterContent">
                 <TextField
                   placeholder={`ex)
-작품과 동일한 크기의 캔버스 프린팅을 구매하고 싶어요.
+${t('contact.printing.placeholder1')}
 
-A4용지와 비슷한 크기의 캔버스 프린팅을 액자에 담아 구매하고 싶어요.`}
+${t('contact.printing.placeholder2')}`}
                   variant="outlined"
                   color="primary"
                   multiline
@@ -216,7 +230,7 @@ A4용지와 비슷한 크기의 캔버스 프린팅을 액자에 담아 구매�
                     variant="contained"
                     onClick={handleSubmit}
                   >
-                    제출
+                    {t('submit')}
                   </Button>
                 </div>
               </div>

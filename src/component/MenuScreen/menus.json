@@ -2,25 +2,21 @@
   {
     "key": 1,
     "title": "전시장",
-    "icon": ["fas", "landmark"],
     "content": "작가님께서 '어울림'이라는 주제로 16년간 그리신 총 199편의 작품을 감상하세요."
   },
   {
     "key": 2,
     "title": "김철성 작가",
-    "icon": ["fas", "user-graduate"],
     "content": "김철성 작가님에 대해 궁금하신가요? 작가의 말, 평론, 경력을 통해 더 알아보세요."
   },
   {
     "key": 3,
     "title": "방명록",
-    "icon": ["far", "edit"],
     "content": "방명록 적어주시는 것도 잊지 않으실거죠? 다음 전시 소식도 받아볼 수 있습니다."
   },
   {
     "key": 4,
     "title": "onDisplay",
-    "icon": ["far", "image"],
     "content": "onDisplay는 포스트 코로나 시대의 새로운 미술 관람 문화를 제시합니다."
   }
 ]

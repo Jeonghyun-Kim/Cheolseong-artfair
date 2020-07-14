@@ -5,11 +5,14 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 
+import { useTranslation } from 'react-i18next';
+
 import ViewingRoom from '../ViewingRoom/ViewingRoom';
 import Details from '../Details/Details';
 import MenuScreen from '../MenuScreen/MenuScreen';
 import IntroScreen from '../IntroScreen/IntroScreen';
 import VideoScreen from '../VideoScreen/VideoScreen';
+import LanguageButton from '../LanguagesButton/LanguagesButton';
 
 import info from '../../info.json';
 import DEFINES from '../../defines';
@@ -52,6 +55,8 @@ export default function SummaryScreen() {
   );
 
   const ref = React.useRef<HTMLDivElement | null>(null);
+
+  const { i18n } = useTranslation();
 
   React.useEffect(() => {
     idxMap.slice(1, MAX_INDEX - 1).forEach((idx) => {
@@ -275,7 +280,11 @@ export default function SummaryScreen() {
                   }
                 }}
               >
-                <div className="guideBackground" />
+                {i18n.language === 'ko' ? (
+                  <div className="guideBackground" />
+                ) : (
+                  <div className="guideBackground english" />
+                )}
               </div>
             )}
           </>
@@ -285,6 +294,9 @@ export default function SummaryScreen() {
 
   return (
     <div className="summaryApp background">
+      {(index === 0 || index === MAX_INDEX) && (
+        <LanguageButton />
+      )}
       <div
         ref={ref}
         tabIndex={0}
