@@ -52,6 +52,10 @@ $iconColor: azure !global;
     width: 90%;
     display: flex;
     justify-content: center;
+
+    img {
+      width: 100%;
+    }
   }
 
   @media screen and (max-width: 700px) and (orientation: portrait) {
