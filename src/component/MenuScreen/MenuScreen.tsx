@@ -18,7 +18,6 @@ import menus_en from './menus_en.json';
 
 import About from '../About/About';
 import Logo from '../Logo/Logo';
-import LanguagesButton from '../LanguagesButton/LanguagesButton';
 
 export default function MenuScreen({ onAbout, setOnAbout }:
 { onAbout: boolean, setOnAbout: React.Dispatch<React.SetStateAction<boolean>> }) {
@@ -68,7 +67,6 @@ export default function MenuScreen({ onAbout, setOnAbout }:
         onKeyDown={() => {}}
       >
         <Logo />
-        <LanguagesButton />
         <div className="mobileMenuContainer">
           <div
             role="button"

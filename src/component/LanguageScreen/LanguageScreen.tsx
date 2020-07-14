@@ -14,7 +14,7 @@ export default function LanguageScreen() {
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
-    history.goBack();
+    setTimeout(() => history.push('/'), 0);
   };
 
   return (

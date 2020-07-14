@@ -29,7 +29,6 @@ $iconColor: azure !global;
 .introLetters {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
   z-index: 10;
   max-height: 60%;
@@ -38,8 +37,12 @@ $iconColor: azure !global;
   height: fit-content;
   padding-top: calc(min(20%, 180px));
 
+  @media screen and (max-width: 700px) and (orientation: portrait) {
+    height: 18%;
+  }
+
   img {
-    max-width: 100%;
+    width: 100%;
     max-height: 100%;
     object-fit: contain;
   }
@@ -52,10 +55,6 @@ $iconColor: azure !global;
     width: 90%;
     display: flex;
     justify-content: center;
-
-    img {
-      width: 100%;
-    }
   }
 
   @media screen and (max-width: 700px) and (orientation: portrait) {

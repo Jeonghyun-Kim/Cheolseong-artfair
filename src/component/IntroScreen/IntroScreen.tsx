@@ -9,7 +9,6 @@ import useWindowSize from '../useWindowSize';
 import DEFINES from '../../defines';
 
 import Logo from '../Logo/Logo';
-import LanguagesButton from '../LanguagesButton/LanguagesButton';
 
 export default function IntroScreen() {
   const [innerWidth] = useWindowSize();
@@ -18,7 +17,6 @@ export default function IntroScreen() {
   return (
     <div className="introApp unselectable">
       <Logo />
-      <LanguagesButton />
       <div className="introLetters">
         <div className="title">
           {i18n.language === 'ko'
@@ -49,6 +47,7 @@ export default function IntroScreen() {
                 alt="introDecorum"
                 draggable="false"
                 src={`${process.env.PUBLIC_URL}/letters/en/decorum.png`}
+                style={{ transform: 'scale(0.85)' }}
               />
             )}
         </div>

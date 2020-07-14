@@ -19,6 +19,7 @@ import ConfigContext from './ConfigContext';
 
 import './common.scss';
 import info from './info.json';
+// import LoadingScreen from './component/LoadingScreen/LoadingScreen';
 
 export default function AppRouter() {
   const [idxMap, setIdxMap] = React.useState<number[]>(
@@ -39,6 +40,7 @@ export default function AppRouter() {
       >
         <Switch>
           <Route exact path="/" component={SummaryScreen} />
+          {/* <Route path="/loading" component={LoadingScreen} /> */}
           <Route path="/languages" component={LanguageScreen} />
           <Route path="/list" component={ListScreen} />
           <Route path="/history" component={ArtistHistory} />

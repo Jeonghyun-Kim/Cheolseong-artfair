@@ -1,0 +1,17 @@
+.loadingApp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &.background {
+    background-color: rgba($color: #181714, $alpha: 1.0);
+    background-image: url("https://www.transparenttextures.com/patterns/redox-02.png");
+    background-repeat: repeat;
+  }
+}

@@ -4,6 +4,7 @@ import smoothscroll from 'smoothscroll-polyfill';
 
 import './index.scss';
 import AppRouter from './AppRouter';
+import LoadingScreen from './component/LoadingScreen/LoadingScreen';
 
 import './i18n';
 
@@ -12,7 +13,7 @@ smoothscroll.polyfill();
 
 ReactDOM.render(
   <React.StrictMode>
-    <React.Suspense fallback="loading">
+    <React.Suspense fallback={LoadingScreen}>
       <AppRouter />
     </React.Suspense>
   </React.StrictMode>,

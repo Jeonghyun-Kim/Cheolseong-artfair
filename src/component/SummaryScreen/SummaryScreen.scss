@@ -34,14 +34,22 @@
     .guideBackground {
       width: 100%;
       height: 100%;
-      background-image: url('/letters/guide_desktop.png');
+      background-image: url('/letters/ko/guide_desktop.png');
       background-position: center;
       background-repeat: no-repeat;
       background-size: contain;
       background-blend-mode: soft-light;
   
       @media (max-width: 700px) {
-        background-image: url('/letters/guide_mobile.png');
+        background-image: url('/letters/ko/guide_mobile.png');
+      }
+
+      &.english {
+        background-image: url('/letters/en/guide_desktop.png');
+
+        @media (max-width: 700px) {
+          background-image: url('/letters/en/guide_mobile.png');
+        }
       }
     }
   }
