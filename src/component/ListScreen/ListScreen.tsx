@@ -1,8 +1,8 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import Popover from '@material-ui/core/Popover';
-import Switch from '@material-ui/core/Switch';
-import Radio from '@material-ui/core/Radio';
+// import Switch from '@material-ui/core/Switch';
+// import Radio from '@material-ui/core/Radio';
 import Slider from '@material-ui/core/Slider';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
@@ -59,12 +59,14 @@ interface MySortInterface {
   yearSort: boolean;
   priceSort: boolean;
   useSort: string;
+  sortIndex: number;
 }
 
 const defaultSortConfig = {
   yearSort: true,
   priceSort: false,
   useSort: 'year',
+  sortIndex: 0,
 };
 
 export default function ListScreen() {
@@ -244,14 +246,14 @@ export default function ListScreen() {
           onClose={handleSortMenuClose}
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'right',
+            horizontal: 'left',
           }}
           transformOrigin={{
             vertical: 'top',
             horizontal: 'center',
           }}
         >
-          <div id="switchContainer">
+          {/* <div id="switchContainer">
             <Grid container>
               <Grid item>
                 <Radio
@@ -321,7 +323,80 @@ export default function ListScreen() {
                 <Typography align="center" variant="body2">높은가격순</Typography>
               </Grid>
             </Grid>
-          </div>
+          </div> */}
+          <Grid container direction="column">
+            <button
+              type="button"
+              onClick={() => {
+                setSortConfig({
+                  yearSort: true,
+                  priceSort: defaultSortConfig.priceSort,
+                  useSort: 'year',
+                  sortIndex: 0,
+                });
+              }}
+              style={{
+                backgroundColor: sortConfig.sortIndex === 0 ? '#3f51b5' : 'white',
+                color: sortConfig.sortIndex === 0 ? 'white' : 'black',
+              }}
+            >
+              {t('list.sort_year_1')}
+            </button>
+            <div id="divider" />
+            <button
+              type="button"
+              onClick={() => {
+                setSortConfig({
+                  yearSort: false,
+                  priceSort: defaultSortConfig.priceSort,
+                  useSort: 'year',
+                  sortIndex: 1,
+                });
+              }}
+              style={{
+                backgroundColor: sortConfig.sortIndex === 1 ? '#3f51b5' : 'white',
+                color: sortConfig.sortIndex === 1 ? 'white' : 'black',
+              }}
+            >
+              {t('list.sort_year_2')}
+            </button>
+            <div id="divider" />
+            <button
+              type="button"
+              onClick={() => {
+                setSortConfig({
+                  yearSort: defaultSortConfig.yearSort,
+                  priceSort: false,
+                  useSort: 'price',
+                  sortIndex: 2,
+                });
+              }}
+              style={{
+                backgroundColor: sortConfig.sortIndex === 2 ? '#3f51b5' : 'white',
+                color: sortConfig.sortIndex === 2 ? 'white' : 'black',
+              }}
+            >
+              {t('list.sort_price_1')}
+            </button>
+            <div id="divider" />
+            <button
+              type="button"
+              onClick={() => {
+                setSortConfig({
+                  yearSort: defaultSortConfig.yearSort,
+                  priceSort: true,
+                  useSort: 'price',
+                  sortIndex: 3,
+                });
+              }}
+              style={{
+                backgroundColor: sortConfig.sortIndex === 3 ? '#3f51b5' : 'white',
+                color: sortConfig.sortIndex === 3 ? 'white' : 'black',
+              }}
+            >
+              {t('list.sort_price_2')}
+            </button>
+          </Grid>
         </Popover>
         {/* Filter Menu Button */}
         <IconButton
@@ -389,23 +464,22 @@ export default function ListScreen() {
           <div>
             <div id="divider" />
           </div>
-          <Grid container id="checkBoxContainer">
-            <Grid item xs container direction="column" justify="center">
-              <Typography variant="h6" id="onSaleText">{t('only_for_sale')}</Typography>
-            </Grid>
-            <Grid item>
-              <Checkbox
-                checked={config.onSaleOnly}
-                color="primary"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfig({
-                  ...config,
-                  onSaleOnly: e.target.checked,
-                })}
-              />
-            </Grid>
-          </Grid>
-          <div id="divider" />
           <div id="sliderContainer">
+            <Grid container id="checkBoxContainer">
+              <Grid item xs container direction="column" justify="center">
+                <Typography variant="h6" align="right" id="onSaleText">{t('list.only_for_sale')}</Typography>
+              </Grid>
+              <Grid item>
+                <Checkbox
+                  checked={config.onSaleOnly}
+                  color="primary"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfig({
+                    ...config,
+                    onSaleOnly: e.target.checked,
+                  })}
+                />
+              </Grid>
+            </Grid>
             <Typography variant="body2">{t('price')}</Typography>
             <Slider
               value={config.priceRange}

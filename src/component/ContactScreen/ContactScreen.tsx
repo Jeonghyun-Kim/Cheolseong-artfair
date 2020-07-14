@@ -37,6 +37,15 @@ export default function ContactScreen({ match }: ContactProps) {
 
   const idx = Number(match.params.idx);
 
+  const setDefault = () => {
+    setName('');
+    setEmail('');
+    setPhone('');
+    setContent('');
+    setSubscription(false);
+    setAgreed(false);
+  };
+
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement | MouseEvent>) => {
     e.preventDefault();
 
@@ -72,6 +81,7 @@ export default function ContactScreen({ match }: ContactProps) {
       }).then(async (response) => {
         if (response.ok) {
           setAlert(t('alert.successfully_registered'));
+          setDefault();
         } else {
           setAlert(t('alert.internal_server_error'));
         }
@@ -154,7 +164,7 @@ export default function ContactScreen({ match }: ContactProps) {
                 fullWidth
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                inputProps={{ maxLength: 13 }}
+                inputProps={{ maxLength: 20 }}
               />
             </div>
             <div className="checkbox unselectable">

@@ -89,6 +89,10 @@
     "p16": "The life for a religious human is consistent with the life of superman model, the archetypes. This life expects the primitive holiness to appear because only the archetypes are realistic. In Kim’s work, faith about the absolute reality does exist, which is in conflict with the secular world consisting of non-realities. Kim’s work also shows that there is a common ground between the idea that some objects or behaviors become realistic only when they imitate or repeat one archetype and the realistic perspective. Religious and artistic humans repeat primitive behaviors, that is, reiterate the creative activities which turn chaos into cosmos. The art is to repeat this moment and eventually to repeat and reproduce it. Kim’s work contains the ancient aesthetic topic, the human’s imitating of God’s work. It also expresses a sense of ultimate reality by reproducing nature and this is a retrogressive work about the absurd phase of modern view of history, which is newness for newness and destruction for destruction."
   },
   "list": {
-    "only_for_sale": "only for sale"
+    "only_for_sale": "only for sale",
+    "sort_year_1": "date: new to old",
+    "sort_year_2": "date: old to new",
+    "sort_price_1": "price: low to high",
+    "sort_price_2": "price: high to low"
   }
 }

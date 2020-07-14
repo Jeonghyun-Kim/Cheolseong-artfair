@@ -55,7 +55,6 @@ export default function SignatureCanvas() {
     if (canvasRef.current) {
       canvasRef.current.clear();
       setRes('');
-      setContent('');
       setDrawingStarted(false);
     }
   };
@@ -87,6 +86,7 @@ export default function SignatureCanvas() {
             .then((resJson) => {
               if (resJson.error === 0) {
                 handleClear();
+                setContent('');
                 setError(t('alert.successfully_registered'));
                 setTimeout(() => setError(null), 3000);
               }
