@@ -46,9 +46,9 @@ export default function SignatureCanvas() {
     fetchCount();
   }, []);
 
-  // React.useEffect(() => {
-  //   fetch(`${DEFINES.API_URL}/hitcount/guest`);
-  // }, []);
+  React.useEffect(() => {
+    fetch(`${DEFINES.API_URL}/hitcount/guest`);
+  }, []);
 
 
   const handleClear = () => {

@@ -26,7 +26,7 @@ import useWindowSize from '../useWindowSize';
 import ItemList from './ItemList/ItemList';
 
 import Logo from '../Logo/Logo';
-// import DEFINES from '../../defines';
+import DEFINES from '../../defines';
 
 const YEAR_MIN = 2004;
 const YEAR_MAX = 2020;
@@ -100,9 +100,9 @@ export default function ListScreen() {
     }
   }, []);
 
-  // React.useEffect(() => {
-  //   fetch(`${DEFINES.API_URL}/hitcount/list`);
-  // }, []);
+  React.useEffect(() => {
+    fetch(`${DEFINES.API_URL}/hitcount/list`);
+  }, []);
 
   const handleScrollToTop = () => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
