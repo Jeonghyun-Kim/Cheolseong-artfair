@@ -7,6 +7,18 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 // have a look at the Quick start guide
 // for passing in lng and translations on init
 
+import translationEn from './locales/translation.en.json';
+import translationKo from './locales/translation.ko.json';
+
+const resources = {
+  en: {
+    translation: translationEn,
+  },
+  ko: {
+    translation: translationKo,
+  },
+};
+
 i18n
   // load translation using http -> see /public/locales (i.e. https://github.com/i18next/react-i18next/tree/master/example/react/public/locales)
   // learn more: https://github.com/i18next/i18next-http-backend
@@ -20,6 +32,7 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     lng: 'ko',
+    resources,
     // fallbackLng: 'ko',
     debug: true,
     interpolation: {
