@@ -362,7 +362,7 @@ export default function ListScreen() {
           }}
         >
           <div id="sliderContainer">
-            <Typography variant="body2">연도</Typography>
+            <Typography variant="body2">{t('year')}</Typography>
             <Slider
               value={config.yearRange}
               min={YEAR_MIN}
@@ -376,13 +376,13 @@ export default function ListScreen() {
             />
             <Grid container>
               <Grid item>
-                {config.yearRange[0]}년
+                {config.yearRange[0]}
               </Grid>
               <Grid item xs>
                 <Typography align="center">~</Typography>
               </Grid>
               <Grid item>
-                {config.yearRange[1]}년
+                {config.yearRange[1]}
               </Grid>
             </Grid>
           </div>
@@ -391,7 +391,7 @@ export default function ListScreen() {
           </div>
           <Grid container id="checkBoxContainer">
             <Grid item xs container direction="column" justify="center">
-              <Typography variant="h6" id="onSaleText">판매 중인 작품만</Typography>
+              <Typography variant="h6" id="onSaleText">{t('only_for_sale')}</Typography>
             </Grid>
             <Grid item>
               <Checkbox
@@ -406,12 +406,12 @@ export default function ListScreen() {
           </Grid>
           <div id="divider" />
           <div id="sliderContainer">
-            <Typography variant="body2">가격</Typography>
+            <Typography variant="body2">{t('price')}</Typography>
             <Slider
               value={config.priceRange}
               min={PRICE_MIN}
               max={PRICE_MAX}
-              scale={(x) => PRICE_UNIT * x}
+              scale={(x) => (i18n.language === 'ko' ? PRICE_UNIT * x : (PRICE_UNIT / 100) * x)}
               disabled={!config.onSaleOnly}
               onChange={(_e, newValue) => setConfig({
                 ...config,
@@ -422,13 +422,24 @@ export default function ListScreen() {
             />
             <Grid container>
               <Grid item>
-                {config.priceRange[0] ? `${config.priceRange[0] * PRICE_UNIT}만원` : '0원'}
+                {i18n.language === 'ko'
+                  ? (
+                    <>
+                      {config.priceRange[0] ? `${config.priceRange[0] * PRICE_UNIT}만원` : '0원'}
+                    </>
+                  ) : (
+                    <>
+                      {config.priceRange[0] ? `${config.priceRange[0] * (PRICE_UNIT / 100)}M KRW` : '0 KRW'}
+                    </>
+                  )}
               </Grid>
               <Grid item xs>
                 <Typography align="center">~</Typography>
               </Grid>
               <Grid item>
-                {config.priceRange[1] * 50}만원
+                {i18n.language === 'ko'
+                  ? `${config.priceRange[1] * PRICE_UNIT}만원`
+                  : `${config.priceRange[1] * (PRICE_UNIT / 100)}M KRW`}
               </Grid>
             </Grid>
           </div>
