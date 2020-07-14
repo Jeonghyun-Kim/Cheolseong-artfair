@@ -28,6 +28,13 @@ export default function LanguageScreen() {
         <button type="button" onClick={() => changeLanguage('en')}>
           <Typography variant="h6">English</Typography>
         </button>
+        <Typography variant="h4">{t('in_progress')}</Typography>
+        {/* <button type="button" onClick={() => changeLanguage('ko')}> */}
+        <Typography variant="h6">简体中文</Typography>
+        {/* </button> */}
+        {/* <button type="button" onClick={() => changeLanguage('en')}> */}
+        <Typography variant="h6">Español</Typography>
+        {/* </button> */}
       </div>
     </div>
   );

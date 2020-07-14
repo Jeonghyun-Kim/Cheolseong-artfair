@@ -1,5 +1,6 @@
 {
   "language": "언어",
+  "in_progress": "작업중",
   "alert": {
     "successfully_registered": "성공적으로 등록되었습니다.",
     "draw_first": "먼저 방명록에 이름을 그려주세요.",

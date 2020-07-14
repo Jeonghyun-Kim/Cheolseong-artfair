@@ -1,10 +1,13 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import './VideoScreen.scss';
 
 import Logo from '../Logo/Logo';
 
 export default function VideoScreen() {
+  const { i18n } = useTranslation();
+
   return (
     <div className="videoContainer unselectable">
       <Logo />
@@ -18,11 +21,20 @@ export default function VideoScreen() {
         />
       </div>
       <div className="quote">
-        <img
-          alt="quote"
-          src={`${process.env.PUBLIC_URL}/letters/quote.png`}
-          draggable={false}
-        />
+        {i18n.language === 'ko'
+          ? (
+            <img
+              alt="quote"
+              src={`${process.env.PUBLIC_URL}/letters/ko/quote.png`}
+              draggable={false}
+            />
+          ) : (
+            <img
+              alt="quote"
+              src={`${process.env.PUBLIC_URL}/letters/en/quote.png`}
+              draggable={false}
+            />
+          )}
       </div>
     </div>
   );

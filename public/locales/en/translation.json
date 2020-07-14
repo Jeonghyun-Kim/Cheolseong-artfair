@@ -1,5 +1,6 @@
 {
   "language": "Languages",
+  "in_progress": "In Progress",
   "alert": {
     "successfully_registered": "Successfully registered.",
     "draw_first": "Please draw your name in canvas first.",

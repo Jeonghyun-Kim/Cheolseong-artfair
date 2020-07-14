@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import './IntroScreen.scss';
 
 import useWindowSize from '../useWindowSize';
@@ -11,6 +13,7 @@ import LanguagesButton from '../LanguagesButton/LanguagesButton';
 
 export default function IntroScreen() {
   const [innerWidth] = useWindowSize();
+  const { i18n } = useTranslation();
 
   return (
     <div className="introApp unselectable">
@@ -18,30 +21,60 @@ export default function IntroScreen() {
       <LanguagesButton />
       <div className="introLetters">
         <div className="title">
-          <img
-            alt="introTitle"
-            draggable="false"
-            src={`${process.env.PUBLIC_URL}/letters/title.png`}
-          />
+          {i18n.language === 'ko'
+            ? (
+              <img
+                alt="introTitle"
+                draggable="false"
+                src={`${process.env.PUBLIC_URL}/letters/ko/title.png`}
+              />
+            ) : (
+              <img
+                alt="introTitle"
+                draggable="false"
+                src={`${process.env.PUBLIC_URL}/letters/en/title.png`}
+              />
+            )}
         </div>
         <div className="decorum">
-          <img
-            alt="introDecorum"
-            draggable="false"
-            src={`${process.env.PUBLIC_URL}/letters/decorum.png`}
-          />
+          {i18n.language === 'ko'
+            ? (
+              <img
+                alt="introDecorum"
+                draggable="false"
+                src={`${process.env.PUBLIC_URL}/letters/ko/decorum.png`}
+              />
+            ) : (
+              <img
+                alt="introDecorum"
+                draggable="false"
+                src={`${process.env.PUBLIC_URL}/letters/en/decorum.png`}
+              />
+            )}
         </div>
       </div>
       <div className="footer">
         <div className="introGuide">
-          <picture>
-            <source media="(max-width: 500px) and (orientation: portrait)" srcSet={`${process.env.PUBLIC_URL}/letters/touch_to_start.png`} />
-            <source media="(max-height: 500px) and (orientation: landscape)" srcSet={`${process.env.PUBLIC_URL}/letters/touch_to_start.png`} />
-            <img
-              alt="startGuide"
-              src={`${process.env.PUBLIC_URL}/letters/click_to_start.png`}
-            />
-          </picture>
+          {i18n.language === 'ko'
+            ? (
+              <picture>
+                <source media="(max-width: 500px) and (orientation: portrait)" srcSet={`${process.env.PUBLIC_URL}/letters/ko/touch_to_start.png`} />
+                <source media="(max-height: 500px) and (orientation: landscape)" srcSet={`${process.env.PUBLIC_URL}/letters/ko/touch_to_start.png`} />
+                <img
+                  alt="startGuide"
+                  src={`${process.env.PUBLIC_URL}/letters/ko/click_to_start.png`}
+                />
+              </picture>
+            ) : (
+              <picture>
+                <source media="(max-width: 500px) and (orientation: portrait)" srcSet={`${process.env.PUBLIC_URL}/letters/en/touch_to_start.png`} />
+                <source media="(max-height: 500px) and (orientation: landscape)" srcSet={`${process.env.PUBLIC_URL}/letters/en/touch_to_start.png`} />
+                <img
+                  alt="startGuide"
+                  src={`${process.env.PUBLIC_URL}/letters/en/click_to_start.png`}
+                />
+              </picture>
+            )}
         </div>
         <div className="date">
           <img
