@@ -10,7 +10,7 @@ export default function MaintenanceScreen() {
   React.useEffect(() => {
     setTimeout(() => {
       window.location.href = REWRITE_URL;
-    }, 100)
+    }, 100);
   }, []);
 
   return (
