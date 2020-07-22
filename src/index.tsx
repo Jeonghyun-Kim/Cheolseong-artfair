@@ -9,7 +9,7 @@ import MaintenanceScreen from './component/MaintenanceScreen/MaintenanceScreen';
 
 import './i18n';
 
-const isOnAir = false;
+const isOnAir = true;
 
 // kick off the polyfill!
 smoothscroll.polyfill();
